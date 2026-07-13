@@ -1,0 +1,46 @@
+import { useEffect, useState } from "react";
+import Cursor from "./Cursor";
+import useHumanTyping from "../text-engine/useHumanTyping";
+
+export default function IntroScreen() {
+  const [typing, setTyping] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTyping(true);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const text = useHumanTyping(
+    typing ? "Sylvester's AI Lab" : ""
+  );
+
+  return (
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "rgba(2,6,23,0.94)",
+        backdropFilter: "blur(8px)",
+        zIndex: 999,
+      }}
+    >
+      <h1
+        style={{
+          color: "#E2E8F0",
+          fontSize: "72px",
+          fontWeight: 700,
+          letterSpacing: "-3px",
+        }}
+      >
+        {text}
+        <Cursor />
+      </h1>
+    </div>
+  );
+}

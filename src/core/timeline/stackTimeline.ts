@@ -1,0 +1,25 @@
+export const STACK = {
+
+DROP:1200,
+
+READ:2600,
+
+LIFT:350,
+
+EXIT:650,
+
+ADVANCE:700
+
+};
+
+export const totalDuration=
+
+STACK.DROP+
+
+STACK.READ+
+
+STACK.LIFT+
+
+STACK.EXIT+
+
+STACK.ADVANCE;

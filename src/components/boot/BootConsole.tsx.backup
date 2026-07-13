@@ -1,0 +1,36 @@
+import BootText from "./BootText";
+import BootLine from "./BootLine";
+
+export default function BootConsole() {
+  return (
+    <div
+      style={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 42,
+      }}
+    >
+      <BootText />
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: 18,
+          width: "100%",
+        }}
+      >
+        <BootLine text="Creative Motion" delay={5.1} />
+        <BootLine text="•" delay={5.5} />
+        <BootLine text="Artificial Intelligence" delay={5.9} />
+        <BootLine text="•" delay={6.3} />
+        <BootLine text="Cinematic Experiences" delay={6.7} />
+      </div>
+    </div>
+  );
+}

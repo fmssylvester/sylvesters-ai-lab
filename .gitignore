@@ -1,0 +1,49 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.env
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+pip-cache/
+
+# Generated renders / large media artifacts
+out/
+*.mp4
+*.wav
+*.mov
+*.mkv
+*.png.bak
+
+# Archives / misc dumps
+*.tar.gz
+*.tar
+ai-lab-src.tar.gz
+my-project.tar.gz
+.core_path
+
+# Local agent scratch
+.mimocode/

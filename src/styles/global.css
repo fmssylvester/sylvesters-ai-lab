@@ -1,0 +1,34 @@
+@import "./fontshare-fonts.css";
+
+:root {
+  --bg: #07080F;
+  --surface: #10141B;
+  --text: #FFFFFF;
+  --text-soft: #F1F5F9;
+  --muted: #94A3B8;
+  --primary: #60A5FA;
+  --accent: #60A5FA;
+  --cyan: #00D9FF;
+  --gold: #E7B84D;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,
+body,
+#root{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Switzer', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+body{
+  cursor:default;
+}

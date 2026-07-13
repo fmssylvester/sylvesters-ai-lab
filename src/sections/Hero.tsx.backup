@@ -1,0 +1,31 @@
+import CinematicStage from "../layout/CinematicStage";
+import GlassPanel from "../components/glass/GlassPanel";
+import GlassTypewriter from "../components/glass-text/GlassTypewriter";
+
+export default function Hero() {
+  return (
+    <CinematicStage>
+      <GlassPanel>
+        <div
+          style={{
+            width: "min(1250px,92vw)",
+            minHeight: "620px",
+
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+
+            padding: "80px",
+
+            boxSizing: "border-box",
+          }}
+        >
+          <GlassTypewriter
+            title="Sylvester's AI Lab"
+            subtitle="Artificial Intelligence • Creative Motion • Cinematic Experiences"
+          />
+        </div>
+      </GlassPanel>
+    </CinematicStage>
+  );
+}

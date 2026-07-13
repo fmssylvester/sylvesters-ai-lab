@@ -1,0 +1,46 @@
+{
+  "name": "sylvesters-ai-lab",
+  "version": "1.0.0",
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "eslint.config.js",
+  "scripts": {
+    "studio": "node ./node_modules/.bin/remotion preview src/index.ts --browser-executable=/data/data/com.termux/files/usr/bin/chromium-browser",
+    "render": "node ./node_modules/.bin/remotion render --browser-executable=/data/data/com.termux/files/usr/bin/chromium-browser",
+    "compositions": "node ./node_modules/.bin/remotion compositions --browser-executable=/data/data/com.termux/files/usr/bin/chromium-browser",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/jetbrains-mono": "^5.2.8",
+    "@fontsource/space-grotesk": "^5.2.10",
+    "@huggingface/inference": "^4.13.23",
+    "@remotion/cli": "^3.3.103",
+    "@remotion/gif": "^3.3.103",
+    "@remotion/lottie": "^3.3.103",
+    "@remotion/media-utils": "^3.3.103",
+    "@remotion/motion-blur": "^3.3.103",
+    "@remotion/paths": "^3.3.103",
+    "@remotion/player": "^3.3.103",
+    "@remotion/shapes": "^3.3.103",
+    "@remotion/three": "^3.3.103",
+    "framer-motion": "^12.42.2",
+    "remotion": "^3.3.103",
+    "undici": "^8.7.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true
+  },
+  "devDependencies": {
+    "@remotion/eslint-plugin": "^3.3.103",
+    "@vitejs/plugin-react": "^6.0.3",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
+    "typescript-eslint": "^8.63.0",
+    "vite": "^8.1.4"
+  }
+}

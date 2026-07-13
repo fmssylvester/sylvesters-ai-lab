@@ -1,0 +1,45 @@
+export const SCENE1 = {
+  TOTAL_FRAMES: 300,
+
+  STAGE1_CALM: {
+    START: 0,
+    END: 60,
+  },
+
+  STAGE2_INTRUSION: {
+    START: 60,
+    END: 105,
+    NOTIFICATION_ARRIVE: 75,
+    BROWSER_DIM: 80,
+  },
+
+  STAGE3_ESCALATION: {
+    START: 105,
+    END: 180,
+    TAB_1: 110,
+    TAB_2: 125,
+    TAB_3: 142,
+    TAB_4: 161,
+  },
+
+  STAGE4_CLUTTER: {
+    START: 180,
+    END: 240,
+  },
+
+  STAGE5_FREEZE: {
+    START: 240,
+    END: 300,
+    SPINNER_APPEAR: 245,
+    CURSOR_APPEAR: 255,
+    CURSOR_HESITATE: 270,
+    FREEZE: 275,
+    TEXT_FADE: 280,
+  },
+
+  TAB_ARRIVAL_INTERVAL: 17,
+  FAVICON_FADE_DURATION: 6,
+  LABEL_EASE_DURATION: 10,
+  HIGHLIGHT_DURATION: 12,
+  PAUSE_AFTER_TAB: 5,
+} as const;
