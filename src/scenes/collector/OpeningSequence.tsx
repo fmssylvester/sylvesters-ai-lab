@@ -23,9 +23,10 @@ const pad = (n: number) => String(n).padStart(3, "0");
 // 13 real brand logos → cycled to fill the 40-slot bookmark grid
 const LOGO_FILES = [
   "openai.svg", "anthropic.svg", "figma.svg", "notion.svg", "vercel.svg",
-  "canva.svg", "github.svg", "perplexity.svg", "zapier.svg", "n8n.svg",
+  "canva.png", "github.svg", "perplexity.svg", "zapier.svg", "n8n.svg",
   "googlegemini.svg", "adobephotoshop.svg", "make.svg",
 ];
+// Canva sourced as PNG (Wikimedia), Photoshop as SVG (Wikimedia).
 const BOOKMARKS = Array.from({ length: 40 }, (_, i) => LOGO_FILES[i % LOGO_FILES.length]);
 
 const ACT_ACCENT = [INK, GOLD, GOLD, RED];
@@ -41,8 +42,8 @@ function LogoChip({ file, dim, appearsAt }: { file: string; dim: boolean; appear
     <div
       style={{
         width: 58, height: 58, borderRadius: 13,
-        background: "rgba(255,255,255,0.05)",
-        border: dim ? "1px solid rgba(231,184,77,0.25)" : "1px solid rgba(255,255,255,0.1)",
+        background: dim ? "rgba(255,255,255,0.05)" : "rgba(244,246,250,0.95)",
+        border: dim ? "1px solid rgba(231,184,77,0.25)" : "1px solid rgba(0,0,0,0.06)",
         display: "flex", alignItems: "center", justifyContent: "center",
         transform: `scale(${scale})`,
         filter: dim ? "grayscale(1) brightness(0.55)" : "none",

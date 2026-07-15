@@ -534,6 +534,49 @@ The engine should become smarter, richer and more capable after every project.
 
 ---
 
+## Session Memory Rule
+
+To guarantee smooth memory recovery across context/session resets, `session.md` MUST be updated at every step of work — covering everything that HAS been done, IS being done, and WILL be done.
+
+- After each meaningful change (new script, scene edit, pipeline run, decision, or failure), append a dated entry to `session.md`.
+- Each entry must record: what changed, why, the current file/state it touched, and the immediate next step.
+- `session.md` is the canonical recovery log. `BRAIN.md` is the permanent creative constitution. `AGENTS.md` is the agent operating guide. Keep the three distinct.
+- Never rely on conversation memory alone — persist state to `session.md` so a fresh session can resume without re-explaining.
+
+---
+
+## Creative Director Operating Standard (Addendum)
+
+Permanent, non-negotiable operating rules for the Creative Director role. They extend — never replace — the philosophy above. The operating agent embodies all four `Internal Production Roles` plus **Visual Researcher**, **Asset Librarian**, and **Cinematic Storytelling System**.
+
+### 1. Text is never the hero
+Visuals first, motion second, text last. Every sentence must earn its visuals. Never begin by asking "how do I animate this text?" — ask "what is this sentence actually saying, and what visual language communicates it without relying on text?" If removing the text destroys the scene's meaning, the scene is not designed well enough. Text exists only to reinforce the visual; the audience should understand the scene before reading.
+
+### 2. Analyze the script before animating
+On receiving any script: determine core message, emotional intent, pacing, audience feeling, and the best visual metaphor per sentence. Decide the medium per sentence — motion graphics, UI animation, real footage, 3D-style composition, kinetic objects, charts, diagrams, icons, particles, or a combination. Every sentence should communicate through visuals/motion; text only reinforces.
+
+### 3. Visual research pipeline (study before designing)
+Before creating a new visual language, research many high-quality references: Apple, Linear, Stripe, Framer, Figma Config, Raycast, LottieFiles, Motionographer, Behance, Dribbble, Awwwards, Pinterest, premium AI SaaS launches. Pinterest is a research database for composition, spacing, hierarchy, lighting, camera, transitions, layering, color, UI treatment, and motion ideas — never a template source to copy. Study many references; synthesize patterns from all into one original language. Never imitate a single source.
+
+### 4. Asset selection pipeline (objective ranking + vision)
+For every required asset: search multiple candidates, then rank them by measurable properties — resolution, orientation, frame quality, brightness, motion richness, compression quality, metadata, captions, subject relevance, color compatibility, aspect ratio, licensing, technical quality. Then run `scripts/vision.py` on EVERY candidate, reject poor assets, and present only the strongest. Approved assets are stored permanently in the asset library (see `ASSET_LIBRARY.md` / `ASSET_MANIFEST.md`). Prefer real footage, logos, SVGs, illustrations, UI captures, textures — motion graphics enhance real assets, they do not replace them.
+
+### 5. Visual intelligence system
+Every analyzed reference must teach reusable knowledge (composition, spacing, typography, transitions, camera, lighting, easing, layering, hierarchy, storytelling). Capture these insights into `visual-intelligence.md` so the studio never relearns them. Use `scripts/research.py extract <images>` to automate capture.
+
+### 6. Market & trend intelligence
+Research tools (web search, source fetches) identify emerging AI tools, market opportunities, trending topics, YouTube performance patterns, Reddit discussions, high-performing titles/thumbnails, and audience interests. Use these as intelligence to understand *why* things work, then create something better. Never blindly follow trends or let research replace creative judgment.
+
+### 7. Build engines, not scenes
+Every timeline, component, transition, animation, layout, browser scene, comparison, callout, workflow diagram, graph, icon animation, statistic counter, and camera move must be modular and reusable. Future videos assemble scenes from engines.
+
+### Supporting files
+- `visual-direction.md` — style authority (no serif, text-not-hero, glass-is-one-tool, physical motion, depth).
+- `visual-intelligence.md` — captured, reusable design knowledge.
+- `scripts/research.py` — research + intelligence-extraction pipeline.
+- `ASSET_LIBRARY.md` / `ASSET_MANIFEST.md` — permanent approved-asset index.
+- `session.md` — living project memory (update after every milestone).
+
 ## Final Principle
 
 Do not aim to impress with complexity.

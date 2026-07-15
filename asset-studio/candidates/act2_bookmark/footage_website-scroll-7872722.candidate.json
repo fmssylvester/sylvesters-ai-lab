@@ -1,0 +1,33 @@
+{
+  "id": "footage_website-scroll-7872722",
+  "file": "/data/data/com.termux/files/home/ai-lab-internal/assets/footage/website-scroll-7872722.mp4",
+  "kind": "video",
+  "sourceRel": "footage/website-scroll-7872722.mp4",
+  "searchTerms": [
+    "browser tabs many",
+    "web browser screen",
+    "clicking bookmark"
+  ],
+  "text": "website-scroll-7872722.mp4 browser tabs many web browser screen clicking bookmark the 40th AI tool gets bookmarked without thought",
+  "beat": "act2_bookmark",
+  "score": {
+    "dimensions": {
+      "resolution": 8,
+      "frameRate": 7,
+      "compression": 8.5,
+      "orientation": 4,
+      "lighting": 9.569086190476192,
+      "camera": 7.5,
+      "colorPalette": 9,
+      "metadataRelevance": 10,
+      "subjectRelevance": 10,
+      "motionComplexity": 7,
+      "visualCleanliness": 10,
+      "brandSafety": 9,
+      "licensing": 10
+    },
+    "overall": 9.22,
+    "weighted": true,
+    "probe": true
+  }
+}

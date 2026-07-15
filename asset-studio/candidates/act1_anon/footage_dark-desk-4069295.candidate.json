@@ -1,0 +1,33 @@
+{
+  "id": "footage_dark-desk-4069295",
+  "file": "/data/data/com.termux/files/home/ai-lab-internal/assets/footage/dark-desk-4069295.mp4",
+  "kind": "video",
+  "sourceRel": "footage/dark-desk-4069295.mp4",
+  "searchTerms": [
+    "dark office desk",
+    "hands typing keyboard night",
+    "monitor glow"
+  ],
+  "text": "dark-desk-4069295.mp4 dark office desk hands typing keyboard night monitor glow a person endlessly acquiring tools they never master",
+  "beat": "act1_anon",
+  "score": {
+    "dimensions": {
+      "resolution": 10,
+      "frameRate": 7,
+      "compression": 8.5,
+      "orientation": 10,
+      "lighting": 1,
+      "camera": 7.5,
+      "colorPalette": 4,
+      "metadataRelevance": 10,
+      "subjectRelevance": 10,
+      "motionComplexity": 7,
+      "visualCleanliness": 1,
+      "brandSafety": 9,
+      "licensing": 10
+    },
+    "overall": 7.91,
+    "weighted": true,
+    "probe": true
+  }
+}

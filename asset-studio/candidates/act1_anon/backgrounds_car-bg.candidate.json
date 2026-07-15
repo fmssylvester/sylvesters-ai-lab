@@ -1,0 +1,33 @@
+{
+  "id": "backgrounds_car-bg",
+  "file": "/data/data/com.termux/files/home/ai-lab-internal/assets/backgrounds/car-bg.jpg",
+  "kind": "image",
+  "sourceRel": "backgrounds/car-bg.jpg",
+  "searchTerms": [
+    "dark office desk",
+    "hands typing keyboard night",
+    "monitor glow"
+  ],
+  "text": "car-bg.jpg dark office desk hands typing keyboard night monitor glow a person endlessly acquiring tools they never master",
+  "beat": "act1_anon",
+  "score": {
+    "dimensions": {
+      "resolution": 10,
+      "frameRate": 4,
+      "compression": 8.5,
+      "orientation": 10,
+      "lighting": 10,
+      "camera": 7.5,
+      "colorPalette": 9,
+      "metadataRelevance": 10,
+      "subjectRelevance": 10,
+      "motionComplexity": 7,
+      "visualCleanliness": 10,
+      "brandSafety": 9,
+      "licensing": 10
+    },
+    "overall": 9.33,
+    "weighted": true,
+    "probe": true
+  }
+}

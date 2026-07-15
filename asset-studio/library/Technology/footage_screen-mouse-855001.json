@@ -1,0 +1,38 @@
+{
+  "id": "footage_screen-mouse-855001",
+  "bankedAt": "2026-07-12T01:06:24.936Z",
+  "sourceRel": "asset-studio/library/Technology/footage_screen-mouse-855001.mp4",
+  "original": "footage/screen-mouse-855001.mp4",
+  "kind": "video",
+  "category": "Technology",
+  "tags": [
+    "dark",
+    "screen",
+    "cinematic",
+    "mouse",
+    "desk"
+  ],
+  "whyApproved": [
+    "dark cinematic look",
+    "smooth camera motion",
+    "premium lighting"
+  ],
+  "beat": "act1_anon",
+  "score": 8.83,
+  "scoreBreakdown": {
+    "resolution": 8,
+    "frameRate": 5,
+    "compression": 8.5,
+    "orientation": 10,
+    "lighting": 9.792265047619049,
+    "camera": 7.5,
+    "colorPalette": 9,
+    "metadataRelevance": 10,
+    "subjectRelevance": 10,
+    "motionComplexity": 7,
+    "visualCleanliness": 10,
+    "brandSafety": 9,
+    "licensing": 10
+  },
+  "license": "Pexels License (free commercial, no attribution)"
+}

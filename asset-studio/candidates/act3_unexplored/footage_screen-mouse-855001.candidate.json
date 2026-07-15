@@ -1,0 +1,33 @@
+{
+  "id": "footage_screen-mouse-855001",
+  "file": "/data/data/com.termux/files/home/ai-lab-internal/assets/footage/screen-mouse-855001.mp4",
+  "kind": "video",
+  "sourceRel": "footage/screen-mouse-855001.mp4",
+  "searchTerms": [
+    "many browser tabs",
+    "messy desktop",
+    "stacked screens"
+  ],
+  "text": "screen-mouse-855001.mp4 many browser tabs messy desktop stacked screens the last ten were never finished",
+  "beat": "act3_unexplored",
+  "score": {
+    "dimensions": {
+      "resolution": 8,
+      "frameRate": 5,
+      "compression": 8.5,
+      "orientation": 10,
+      "lighting": 9.792265047619049,
+      "camera": 7.5,
+      "colorPalette": 9,
+      "metadataRelevance": 10,
+      "subjectRelevance": 10,
+      "motionComplexity": 7,
+      "visualCleanliness": 10,
+      "brandSafety": 9,
+      "licensing": 10
+    },
+    "overall": 9.43,
+    "weighted": true,
+    "probe": true
+  }
+}

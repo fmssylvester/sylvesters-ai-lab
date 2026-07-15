@@ -47,8 +47,7 @@ def check_gemini(image_path, question):
     if not key:
         return None
     try:
-        with open(image_path, "rb") as f:
-            img_b64 = base64.b64encode(f.read()).decode()
+        # image bytes resolved by _img_ref (local file or remote URL)
         url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={key}"
         payload = {
             "contents": [{
@@ -71,8 +70,7 @@ def check_nvidia(image_path, question):
     if not key:
         return None
     try:
-        with open(image_path, "rb") as f:
-            img_b64 = base64.b64encode(f.read()).decode()
+        # image bytes resolved by _img_ref (local file or remote URL)
         model = os.environ.get("NVIDIA_MODEL", "meta/llama-3.2-11b-vision-instruct")
         payload = {
             "model": model,
@@ -80,7 +78,7 @@ def check_nvidia(image_path, question):
                 "role": "user",
                 "content": [
                     {"type": "text", "text": question},
-                    {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{img_b64}"}}
+                    {"type": "image_url", "image_url": _img_ref(image_path)}
                 ]
             }],
             "max_tokens": 1024,
@@ -97,13 +95,20 @@ def check_nvidia(image_path, question):
         return None
 
 
+def _img_ref(image_path):
+    if image_path.startswith("http://") or image_path.startswith("https://"):
+        return {"url": image_path}
+    with open(image_path, "rb") as f:
+        img_b64 = base64.b64encode(f.read()).decode()
+    return {"url": f"data:image/png;base64,{img_b64}"}
+
+
 def check_github(image_path, question):
     token = os.environ.get("GITHUB_MODELS_TOKEN")
     if not token:
         return None
     try:
-        with open(image_path, "rb") as f:
-            img_b64 = base64.b64encode(f.read()).decode()
+        # image bytes resolved by _img_ref (local file or remote URL)
         model = os.environ.get("GITHUB_MODEL", "openai/gpt-4o")
         payload = {
             "model": model,
@@ -111,7 +116,7 @@ def check_github(image_path, question):
                 "role": "user",
                 "content": [
                     {"type": "text", "text": question},
-                    {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{img_b64}"}}
+                    {"type": "image_url", "image_url": _img_ref(image_path)}
                 ]
             }],
             "max_tokens": 1024,
@@ -135,8 +140,7 @@ def check_cloudflare(image_path, question):
     if not token or not account:
         return None
     try:
-        with open(image_path, "rb") as f:
-            img_b64 = base64.b64encode(f.read()).decode()
+        # image bytes resolved by _img_ref (local file or remote URL)
         model = os.environ.get("CLOUDFLARE_MODEL", "@cf/meta/llama-3.2-11b-vision-instruct")
         payload = {"prompt": question, "image": f"data:image/png;base64,{img_b64}"}
         url = f"https://api.cloudflare.com/client/v4/accounts/{account}/ai/run/{model}"
@@ -159,15 +163,14 @@ def check_openrouter(image_path, question):
     if not key:
         return None
     try:
-        with open(image_path, "rb") as f:
-            img_b64 = base64.b64encode(f.read()).decode()
+        # image bytes resolved by _img_ref (local file or remote URL)
         payload = {
             "model": os.environ.get("OPENROUTER_MODEL", "google/gemma-4-26b-a4b-it:free"),
             "messages": [{
                 "role": "user",
                 "content": [
                     {"type": "text", "text": question},
-                    {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{img_b64}"}}
+                    {"type": "image_url", "image_url": _img_ref(image_path)}
                 ]
             }]
         }

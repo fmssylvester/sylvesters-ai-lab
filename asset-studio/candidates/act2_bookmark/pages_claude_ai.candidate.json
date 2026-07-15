@@ -1,0 +1,33 @@
+{
+  "id": "pages_claude_ai",
+  "file": "/data/data/com.termux/files/home/ai-lab-internal/assets/pages/claude_ai.png",
+  "kind": "image",
+  "sourceRel": "pages/claude_ai.png",
+  "searchTerms": [
+    "browser tabs many",
+    "web browser screen",
+    "clicking bookmark"
+  ],
+  "text": "claude_ai.png browser tabs many web browser screen clicking bookmark the 40th AI tool gets bookmarked without thought",
+  "beat": "act2_bookmark",
+  "score": {
+    "dimensions": {
+      "resolution": 2,
+      "frameRate": 4,
+      "compression": 8.5,
+      "orientation": 5,
+      "lighting": 1,
+      "camera": 7.5,
+      "colorPalette": 4,
+      "metadataRelevance": 10,
+      "subjectRelevance": 10,
+      "motionComplexity": 7,
+      "visualCleanliness": 1,
+      "brandSafety": 9,
+      "licensing": 10
+    },
+    "overall": 6.22,
+    "weighted": true,
+    "probe": true
+  }
+}

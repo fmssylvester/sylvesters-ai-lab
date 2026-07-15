@@ -1,0 +1,86 @@
+{
+  "beat": "act2_bookmark",
+  "source": "disk",
+  "ranking": [
+    {
+      "rank": 1,
+      "id": "footage_screen-mouse-855001",
+      "overall": 9.43,
+      "kind": "video",
+      "file": "/data/data/com.termux/files/home/ai-lab-internal/assets/footage/screen-mouse-855001.mp4",
+      "probe": true
+    },
+    {
+      "rank": 2,
+      "id": "backgrounds_car-bg",
+      "overall": 9.33,
+      "kind": "image",
+      "file": "/data/data/com.termux/files/home/ai-lab-internal/assets/backgrounds/car-bg.jpg",
+      "probe": true
+    },
+    {
+      "rank": 3,
+      "id": "footage_website-scroll-7872722",
+      "overall": 9.22,
+      "kind": "video",
+      "file": "/data/data/com.termux/files/home/ai-lab-internal/assets/footage/website-scroll-7872722.mp4",
+      "probe": true
+    },
+    {
+      "rank": 4,
+      "id": "footage_dark-desk-4069295",
+      "overall": 7.91,
+      "kind": "video",
+      "file": "/data/data/com.termux/files/home/ai-lab-internal/assets/footage/dark-desk-4069295.mp4",
+      "probe": true
+    },
+    {
+      "rank": 5,
+      "id": "backgrounds_pexels-18293808",
+      "overall": 6.22,
+      "kind": "image",
+      "file": "/data/data/com.termux/files/home/ai-lab-internal/assets/backgrounds/pexels-18293808.jpg",
+      "probe": true
+    },
+    {
+      "rank": 6,
+      "id": "backgrounds_pexels-34110027",
+      "overall": 6.22,
+      "kind": "image",
+      "file": "/data/data/com.termux/files/home/ai-lab-internal/assets/backgrounds/pexels-34110027.jpg",
+      "probe": true
+    },
+    {
+      "rank": 7,
+      "id": "pages_claude_ai",
+      "overall": 6.22,
+      "kind": "image",
+      "file": "/data/data/com.termux/files/home/ai-lab-internal/assets/pages/claude_ai.png",
+      "probe": true
+    },
+    {
+      "rank": 8,
+      "id": "pages_huggingface_co",
+      "overall": 6.22,
+      "kind": "image",
+      "file": "/data/data/com.termux/files/home/ai-lab-internal/assets/pages/huggingface_co.png",
+      "probe": true
+    },
+    {
+      "rank": 9,
+      "id": "pages_midjourney_com",
+      "overall": 6.22,
+      "kind": "image",
+      "file": "/data/data/com.termux/files/home/ai-lab-internal/assets/pages/midjourney_com.png",
+      "probe": true
+    },
+    {
+      "rank": 10,
+      "id": "pages_openai_com",
+      "overall": 6.22,
+      "kind": "image",
+      "file": "/data/data/com.termux/files/home/ai-lab-internal/assets/pages/openai_com.png",
+      "probe": true
+    }
+  ]
+}
