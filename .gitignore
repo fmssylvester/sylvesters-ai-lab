@@ -47,3 +47,9 @@ my-project.tar.gz
 
 # Local agent scratch
 .mimocode/
+
+# Pipeline secrets / generated artifacts
+youtube_token.json
+pipeline/youtube_token.json
+client_secrets.json
+pipeline/workspace/

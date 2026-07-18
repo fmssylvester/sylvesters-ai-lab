@@ -5,7 +5,7 @@
   "main": "eslint.config.js",
   "scripts": {
     "studio": "node ./node_modules/.bin/remotion preview src/index.ts --browser-executable=/data/data/com.termux/files/usr/bin/chromium-browser",
-    "render": "node ./node_modules/.bin/remotion render --browser-executable=/data/data/com.termux/files/usr/bin/chromium-browser",
+    "render": "node ./node_modules/.bin/remotion render",
     "compositions": "node ./node_modules/.bin/remotion compositions --browser-executable=/data/data/com.termux/files/usr/bin/chromium-browser",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

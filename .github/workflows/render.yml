@@ -1,0 +1,68 @@
+name: Render & Publish Episode
+
+# Runs the full free pipeline on GitHub's free Ubuntu runners (remote render):
+#   script (Gemini) -> voiceover (Edge TTS) -> Remotion render (batched)
+#   -> YouTube upload -> Telegram notify.
+# Trigger: Actions tab -> "Run workflow" (enter topic + privacy).
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: "Episode topic"
+        required: true
+        default: "GPT-5.6-Sol: Is This New AI Model Actually Worth the Switch?"
+      privacy:
+        description: "YouTube privacy status"
+        required: true
+        default: "private"
+        type: choice
+        options: [private, public, unlisted]
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install ffmpeg + Python deps
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python3 -m pip install -q edge-tts google-api-python-client google-auth-oauthlib google-auth python-dotenv
+
+      - name: Ensure Remotion browser (Chrome for Testing)
+        run: npx remotion browser ensure
+
+      - name: npm install (incl. framer-motion)
+        run: npm install && npm install framer-motion
+
+      - name: Write YouTube OAuth files from secrets
+        run: |
+          echo "${{ secrets.YOUTUBE_CLIENT_SECRETS }}" > client_secrets.json
+          mkdir -p pipeline
+          echo "${{ secrets.YOUTUBE_TOKEN }}" > pipeline/youtube_token.json
+        shell: bash
+
+      - name: Run pipeline
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          # Empty = let Remotion use the browser it ensured above.
+          REMOTION_BROWSER_EXECUTABLE: ""
+        run: python3 pipeline/pipeline.py "${{ github.event.inputs.topic }}" --privacy "${{ github.event.inputs.privacy }}"
+
+      - name: Upload video as artifact (fallback / review)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: episode
+          path: out/*.mp4
+          retention-days: 7

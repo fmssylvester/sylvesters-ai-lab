@@ -13,6 +13,8 @@ import { COLLECTOR } from './scenes/collector/collectorTimeline';
 import { GlassPoster, GamifiedBanner, DataFlowDashboard, PromptInputBar, VoiceBanner, OtpSheet, SwipeCard, FrostedPoster, AppNavMenu } from './components/ui-kit/UiKit';
 import { AgentWorkflow, ToolGrid, BeforeAfter } from './components/ui-kit/AutomationTemplates';
 import { ProblemSolution, StepTimeline, AgentActivityStream, CtaEndCard, LogoReveal } from './components/ui-kit/PremiumTemplates';
+import Episode from './scenes/episode/Episode';
+import episodeRuntime from './episodeRuntime.json';
 
 export const RemotionRoot = () => {
   return (
@@ -127,6 +129,24 @@ export const RemotionRoot = () => {
       <Composition id="AgentActivityStream" component={AgentActivityStream} durationInFrames={150} fps={30} width={1920} height={1080} />
       <Composition id="CtaEndCard" component={CtaEndCard} durationInFrames={120} fps={30} width={1920} height={1080} />
       <Composition id="LogoReveal" component={LogoReveal} durationInFrames={150} fps={30} width={1920} height={1080} />
+
+      {/* ── Pipeline-driven episode: consumes script.json + voiceover ── */}
+      <Composition
+        id="Episode"
+        component={Episode}
+        durationInFrames={episodeRuntime.durationInFrames}
+        fps={30}
+        width={1920}
+        height={1080}
+        defaultProps={{
+          title: episodeRuntime.title,
+          hook: episodeRuntime.hook,
+          sections: episodeRuntime.sections,
+          cta: episodeRuntime.cta,
+          audioSrc: episodeRuntime.audioSrc,
+          audioDurationInFrames: episodeRuntime.audioDurationInFrames,
+        }}
+      />
     </>
   );
 };

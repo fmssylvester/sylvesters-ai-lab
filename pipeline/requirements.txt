@@ -1,0 +1,7 @@
+google-genai
+google-api-python-client
+google-auth-oauthlib
+google-auth
+requests
+python-dotenv
+edge-tts
