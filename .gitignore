@@ -53,3 +53,4 @@ youtube_token.json
 pipeline/youtube_token.json
 client_secrets.json
 pipeline/workspace/
+secrets.txt
