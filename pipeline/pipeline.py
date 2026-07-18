@@ -48,7 +48,10 @@ def run(topic: str, privacy: str, notify: bool, voiceover_mode: str) -> None:
 
     # 1. Script
     if notify:
-        notifier.send_notification(f"Starting: *{topic}*")
+        try:
+            notifier.send_notification(f"Starting: *{topic}*")
+        except Exception as exc:
+            print(f"[warn] start notification failed: {exc}")
     script = script_generator.generate_script(topic, workspace)
 
     # 2. Voiceover (auto via Edge TTS, or pause for manual kikivoice.ai upload)
@@ -76,12 +79,16 @@ def run(topic: str, privacy: str, notify: bool, voiceover_mode: str) -> None:
 
     # 5. Notify
     print("\n-- Notify stage --")
-    if privacy == "public":
-        notifier.send_video_live(script.get("title", topic), video_id, youtube_url)
-    else:
-        notifier.send_notification(
-            f"Uploaded as *{privacy}*: [{script.get('title', topic)}]({youtube_url})"
-        )
+    if notify:
+        try:
+            if privacy == "public":
+                notifier.send_video_live(script.get("title", topic), video_id, youtube_url)
+            else:
+                notifier.send_notification(
+                    f"Uploaded as *{privacy}*: [{script.get('title', topic)}]({youtube_url})"
+                )
+        except Exception as exc:
+            print(f"[warn] notification failed: {exc}")
 
     print(f"\n✅ Done. Video ID: {video_id}\n   {youtube_url}\n")
 
