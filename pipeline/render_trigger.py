@@ -76,7 +76,9 @@ def _copy_voiceover(audio_path: Path, slug: str) -> str:
     return f"audio/{slug}/voiceover.mp3"
 
 
-def _write_runtime(slug: str, script: dict, audio_src: str, audio_frames: int) -> int:
+def _write_runtime(slug: str, script: dict, audio_src: str, audio_frames: int,
+                   enriched: dict | None = None) -> int:
+    sections = (enriched or {}).get("sections") or script.get("sections", [])
     total = INTRO_FRAMES + audio_frames + OUTRO_FRAMES
     runtime = {
         "durationInFrames": total,
@@ -84,23 +86,25 @@ def _write_runtime(slug: str, script: dict, audio_src: str, audio_frames: int) -
         "audioDurationInFrames": audio_frames,
         "title": script.get("title", slug),
         "hook": script.get("hook", ""),
-        "sections": script.get("sections", []),
+        "sections": sections,
         "cta": script.get("cta", ""),
     }
+    if enriched and "wordTimestamps" in enriched:
+        runtime["wordTimestamps"] = enriched["wordTimestamps"]
     (config.REMOTION_PROJECT_DIR / "src" / "episodeRuntime.json").write_text(
         json.dumps(runtime, indent=2, ensure_ascii=False), encoding="utf-8"
     )
     return total
 
 
-def render(topic_slug: str, audio_path: Path) -> Path:
+def render(topic_slug: str, audio_path: Path, enriched: dict | None = None) -> Path:
     """Run the Remotion render and return the path to the output mp4."""
     ws = config.WORKSPACE / topic_slug
     script = json.loads((ws / config.SCRIPT_JSON_REL).read_text(encoding="utf-8"))
 
     audio_src = _copy_voiceover(audio_path, topic_slug)
     audio_frames = _audio_frames(audio_path)
-    total = _write_runtime(topic_slug, script, audio_src, audio_frames)
+    total = _write_runtime(topic_slug, script, audio_src, audio_frames, enriched)
     print(f"[render] Audio {audio_frames} frames (~{audio_frames/FPS:.0f}s); "
           f"total {total} frames (~{total/FPS:.0f}s)")
 
@@ -108,14 +112,17 @@ def render(topic_slug: str, audio_path: Path) -> Path:
     out_path = config.REMOTION_OUT_DIR / out_name
     config.REMOTION_OUT_DIR.mkdir(parents=True, exist_ok=True)
 
+    sections = (enriched or {}).get("sections") or script.get("sections", [])
     props = {
         "title": script.get("title", topic_slug),
         "hook": script.get("hook", ""),
-        "sections": script.get("sections", []),
+        "sections": sections,
         "cta": script.get("cta", ""),
         "audioSrc": audio_src,
         "audioDurationInFrames": audio_frames,
     }
+    if enriched and "wordTimestamps" in enriched:
+        props["wordTimestamps"] = enriched["wordTimestamps"]
 
     cmd = [
         "npm", "run", "render", "--",
@@ -140,21 +147,24 @@ def render(topic_slug: str, audio_path: Path) -> Path:
 # ---------------------------------------------------------------------------
 # Batch rendering (resumable, crash-safe) + preview mode
 # ---------------------------------------------------------------------------
-def _prepare(slug: str, audio_path: Path):
+def _prepare(slug: str, audio_path: Path, enriched: dict | None = None):
     """Shared prep: load script, copy audio, write runtime, build props."""
     ws = config.WORKSPACE / slug
     script = json.loads((ws / config.SCRIPT_JSON_REL).read_text(encoding="utf-8"))
     audio_src = _copy_voiceover(audio_path, slug)
     audio_frames = _audio_frames(audio_path)
-    total = _write_runtime(slug, script, audio_src, audio_frames)
+    total = _write_runtime(slug, script, audio_src, audio_frames, enriched)
+    sections = (enriched or {}).get("sections") or script.get("sections", [])
     props = {
         "title": script.get("title", slug),
         "hook": script.get("hook", ""),
-        "sections": script.get("sections", []),
+        "sections": sections,
         "cta": script.get("cta", ""),
         "audioSrc": audio_src,
         "audioDurationInFrames": audio_frames,
     }
+    if enriched and "wordTimestamps" in enriched:
+        props["wordTimestamps"] = enriched["wordTimestamps"]
     return script, audio_frames, total, props
 
 
@@ -201,9 +211,9 @@ def _slice_audio(audio_path: Path, start: float, duration: float) -> Path:
     return out
 
 
-def _render_segments(slug: str, audio_path: Path, end_frame: int):
+def _render_segments(slug: str, audio_path: Path, end_frame: int, enriched: dict | None = None):
     """Render frame range [0, end_frame) as resumable batches; return seg list."""
-    _, _, total, props = _prepare(slug, audio_path)
+    _, _, total, props = _prepare(slug, audio_path, enriched)
     end_frame = min(end_frame, total)
     seg_dir = config.REMOTION_OUT_DIR / "segments" / slug
     seg_dir.mkdir(parents=True, exist_ok=True)
@@ -222,11 +232,12 @@ def _render_segments(slug: str, audio_path: Path, end_frame: int):
     return segments
 
 
-def render_preview(slug: str, audio_path: Path, seconds: float = 60) -> Path:
+def render_preview(slug: str, audio_path: Path, seconds: float = 60,
+                   enriched: dict | None = None) -> Path:
     """Render the first `seconds` of the episode (with audio) as a preview."""
     end_frame = int(seconds * FPS)
     print(f"[render] PREVIEW: first {seconds:.0f}s (~{end_frame} frames)")
-    segments = _render_segments(slug, audio_path, end_frame)
+    segments = _render_segments(slug, audio_path, end_frame, enriched)
     silent = _concat_segments(
         segments, config.REMOTION_OUT_DIR / f"{slug}_preview_silent.mp4")
     sliced = _slice_audio(audio_path, 0, end_frame / FPS)
@@ -235,12 +246,12 @@ def render_preview(slug: str, audio_path: Path, seconds: float = 60) -> Path:
     return final
 
 
-def render_batches(slug: str, audio_path: Path) -> Path:
+def render_batches(slug: str, audio_path: Path, enriched: dict | None = None) -> Path:
     """Render the full episode in resumable batches, concatenate, mux audio."""
-    _, _, total, _ = _prepare(slug, audio_path)
+    _, _, total, _ = _prepare(slug, audio_path, enriched)
     print(f"[render] FULL BATCH render: {total} frames in "
           f"{config.RENDER_BATCH_FRAMES}-frame segments")
-    segments = _render_segments(slug, audio_path, total)
+    segments = _render_segments(slug, audio_path, total, enriched)
     silent = _concat_segments(
         segments, config.REMOTION_OUT_DIR / f"{slug}_silent.mp4")
     final = _mux_audio(silent, audio_path)

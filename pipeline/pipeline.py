@@ -1,10 +1,18 @@
 """Master pipeline — runs the full Sylvester's AI Lab automation in sequence:
 
-  1. Script generator  (Gemini API) .............. writes script.json + .md
-  2. Wait for voiceover (manual, kikivoice.ai) .... PAUSES for audio file
-  3. Render trigger     (Remotion, local) ......... renders the mp4
-  4. Uploader           (YouTube Data API) ........ uploads the video
-  5. Notifier           (Telegram bot) ............ pings you when it's up
+   1. Script generator  (Gemini API) .............. writes script.json + .md
+   2. Voiceover          (Edge TTS) ................ narrated mp3
+   3. Word sync          (WhisperX)  ............... word_timestamps.json
+   4. Scene classifier   (Gemini API) ............. scene_plan.json
+   5. Asset resolver     .......................... brand logos per section
+   6. B-roll descriptor  (Gemini API) ............. broll_descriptions.json
+   7. Render trigger     (Remotion, batched) ...... renders the mp4
+   8. Uploader           (YouTube Data API) ....... uploads the video
+   9. Notifier           (Telegram bot) ........... pings you when it's up
+
+All enrichment is merged into episodeRuntime.json (and passed as --props) so
+the Episode composition receives word timestamps, scene plans, brand assets,
+and b-roll briefs.
 
 Usage:
     python pipeline.py "Best free AI video tools 2026"
@@ -33,6 +41,10 @@ import render_trigger
 import uploader
 import notifier
 import voiceover
+import word_sync
+import scene_classifier
+import asset_resolver
+import broll_descriptor
 
 
 def _slug(topic: str) -> str:
@@ -54,7 +66,8 @@ def run(topic: str, privacy: str, notify: bool, voiceover_mode: str) -> None:
             print(f"[warn] start notification failed: {exc}")
     script = script_generator.generate_script(topic, workspace)
 
-    # 2. Voiceover (auto via Edge TTS, or pause for manual kikivoice.ai upload)
+    # 2. Voiceover (auto via Edge TTS) — required before word_sync, which
+    #    needs the narrated audio to produce word-level timestamps.
     print("\n-- Voiceover stage --")
     if voiceover_mode == "auto":
         voiceover.generate_voiceover(script, audio_path)
@@ -62,9 +75,48 @@ def run(topic: str, privacy: str, notify: bool, voiceover_mode: str) -> None:
         print(f"Record on kikivoice.ai, then save it to:\n  {audio_path}\n")
         render_trigger.wait_for_audio(audio_path)
 
-    # 3. Render (batched + resumable; runs locally or on a remote CI runner)
+    # 3. Word sync (WhisperX) — word_timestamps.json for animation triggers.
+    print("\n-- Word sync stage (WhisperX) --")
+    word_timestamps = word_sync.generate_word_timestamps(
+        str(audio_path), workspace / "word_timestamps.json"
+    )
+
+    # 4. Scene intent classifier — visual_treatment / mood / components.
+    print("\n-- Scene classifier stage --")
+    scene_plan = scene_classifier.classify_sections(script, workspace)
+
+    # 5. Asset resolver — real brand logos mentioned in each section.
+    print("\n-- Asset resolver stage --")
+    section_assets = asset_resolver.resolve_sections(script)
+
+    # 6. B-roll descriptor — on-screen motion-graphics brief per section.
+    print("\n-- B-roll descriptor stage --")
+    broll = broll_descriptor.describe_sections(script, workspace)
+
+    # Merge per-section enrichment into the script sections so the Episode
+    # composition receives everything through episodeRuntime.json / --props.
+    enriched_sections = []
+    sections = script.get("sections", [])
+    for i, s in enumerate(sections):
+        sec = dict(s)
+        if i < len(scene_plan):
+            sec["visualTreatment"] = scene_plan[i].get("visual_treatment")
+            sec["mood"] = scene_plan[i].get("mood")
+            sec["suggestedComponents"] = scene_plan[i].get("suggested_components")
+        if i < len(section_assets):
+            sec["assets"] = section_assets[i]
+        if i < len(broll):
+            sec["broll"] = broll[i]
+        enriched_sections.append(sec)
+
+    enriched = {
+        "wordTimestamps": word_timestamps,
+        "sections": enriched_sections,
+    }
+
+    # 7. Render (batched + resumable; runs locally or on a remote CI runner)
     print("\n-- Render stage --")
-    video_path = render_trigger.render_batches(slug, audio_path)
+    video_path = render_trigger.render_batches(slug, audio_path, enriched=enriched)
 
     # 4. Upload (non-fatal: a YouTube/API hiccup must not lose the render)
     print("\n-- Upload stage --")

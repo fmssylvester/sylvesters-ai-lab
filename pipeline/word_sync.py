@@ -85,6 +85,20 @@ def sync_words(
     return words
 
 
+def generate_word_timestamps(audio_path: str, out_path) -> list[dict]:
+    """Run WhisperX on `audio_path` and write word-level timestamps to `out_path`.
+
+    Returns the timestamp list. Output JSON shape:
+        [{"word": "hello", "start": 0.0, "end": 0.3}, ...]
+    """
+    words = sync_words(audio_path)
+    Path(out_path).write_text(
+        json.dumps(words, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    print(f"[word_sync] wrote {len(words)} word timestamps -> {out_path}")
+    return words
+
+
 def main() -> None:
     if len(sys.argv) < 2:
         print(
