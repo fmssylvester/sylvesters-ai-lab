@@ -1,0 +1,160 @@
+{
+  "topic": "AI video prompt anatomy template",
+  "source": "tavily",
+  "query_time": "2026-07-19 08:44 UTC",
+  "queries": [
+    "best AI image to video prompt structure anatomy",
+    "AI video prompt template subject scene camera lighting",
+    "fill in the blanks image to video prompt formula"
+  ],
+  "result_count": 21,
+  "results": [
+    {
+      "query": "fill in the blanks image to video prompt formula",
+      "title": "Tavily answer",
+      "url": "",
+      "content": "The best image-to-video prompt formula is Subject + Motion + Camera + Environment. Focus on changes over time, not the static image details. Use clear camera language and believable motion for cinematic results.",
+      "score": 1.0
+    },
+    {
+      "query": "AI video prompt template subject scene camera lighting",
+      "title": "Tavily answer",
+      "url": "",
+      "content": "An effective AI video prompt includes a clear subject, action, setting, camera movement, lighting, and style. Use specific terms for camera angles and lighting to guide the AI. Keep the prompt concise and focused.",
+      "score": 1.0
+    },
+    {
+      "query": "best AI image to video prompt structure anatomy",
+      "title": "Tavily answer",
+      "url": "",
+      "content": "The best AI image-to-video prompt structure includes subject, action, context, and style. It guides the AI to animate the image naturally. Use clear, specific details for predictable results.",
+      "score": 1.0
+    },
+    {
+      "query": "best AI image to video prompt structure anatomy",
+      "title": "AI Image-to-Video Prompt Structure & Top Tools 2026 - U深搜",
+      "url": "https://unifuncs.com/s/jsHwSelG",
+      "content": "Image-to-video (img2vid) prompting follows a fundamentally different logic from text-to-video: the source image supplies all visual context, so the prompt must describe how the image moves, not what it depicts. The dominant framework — popularized by HackAIGC's widely shared blog — structures prompts around seven components: motion direction, animation type, focus area, tempo/pace, camera instruction, duration hint, and anti-distortion quality tags 94. A parallel six-element framework (camera + subject + action + setting + style + lighting) has also gained traction across the AI video community in 2026 98. The NSFW content vertical, where HackAIGC positions itself, introduces an additional c",
+      "score": 0.793
+    },
+    {
+      "query": "best AI image to video prompt structure anatomy",
+      "title": "AI Video Prompt Guide: How To Write AI Video Prompts",
+      "url": "https://ltx.io/blog/ai-video-prompt-guide",
+      "content": "## How to Write AI Video Prompts\n\nWriting effective AI video prompts follows a structured approach. While there's room for creativity and experimentation, understanding the core framework helps you consistently achieve better results.\n\n### The Anatomy of an Effective Prompt\n\nEvery strong video prompt contains several essential elements that work together to guide the AI toward your vision:\n\nSubject: What or who is the focus of your video? Be specific about the main element viewers should notice. Instead of \"a person,\" specify \"a woman in her 30s wearing a blue jacket.\"\n\nAction: What's happening in the scene? Describe movement and behavior clearly. \"Walking slowly\" tells the AI more than just",
+      "score": 0.77
+    },
+    {
+      "query": "best AI image to video prompt structure anatomy",
+      "title": "Complete Guide to Writing Prompts for AI: Text-to-Image, Text-to-Video, Image-to-Video, and Visual…",
+      "url": "https://medium.com/design-bootcamp/complete-guide-to-writing-prompts-for-ai-text-to-image-text-to-video-image-to-video-and-visual-f59ccd2929cb",
+      "content": "Sitemap\n\nOpen in app\n\nSign up\n\nSign in\n\n\n   Real examples and formulas\n   Tips to elevate your prompts\n   And finally, how to fine-tune with a camera and visual effects for that cinematic touch\n\nLet’s begin.\n\n## Understanding the Prompt Structure\n\nBefore we dive into formats and tools, let’s talk about the core anatomy of a strong prompt.\n\nEvery good prompt is made up of five building blocks:\n\nPrompt Structure: Main Subject + Motion + Scene + Enironmental Details + Artistic Style\n\n   Main Subject: Who or what is the focus?\n   Motion: What’s happening or changing?\n   Scene: Where is it happening?\n   Environmental Details: Time, weather, mood, objects\n   Artistic Style: Aesthetic, era, medium,",
+      "score": 0.765
+    },
+    {
+      "query": "best AI image to video prompt structure anatomy",
+      "title": "Image to Video Prompt Guide: Best Practices for Realistic Results",
+      "url": "https://www.eachlabs.ai/blog/image-to-video-prompt-guide-best-practices-for-realistic-results",
+      "content": "## 1. Prompt Anatomy\n\nThink of your prompt as a set of instructions for a very talented, but sometimes literal, director. The clearer and more structured your instructions, the closer the final video will be to what you imagined. It’s not just about listing things; it’s about how you arrange them.\n\nAt its core, a good prompt for image-to-video generation often follows a pattern. While there's no single rigid formula, a common and effective structure looks something like this:\n\n Subject: Who or what is the main focus?\n Action: What is the subject doing?\n Context/Environment: Where is this happening? What's around the subject?\n Cinematography/Camera: How is the scene being filmed? (e.g., shot ",
+      "score": 0.759
+    },
+    {
+      "query": "best AI image to video prompt structure anatomy",
+      "title": "Master AI Prompt Structure for Exceptional Images - Topic",
+      "url": "https://d-libro.com/topic/anatomy-of-ai-prompts",
+      "content": "Menu\n\nLog in\n\nSign up\n\nFrom beginner to master of web design, coding, infrastructure operation, business development and marketing\n\n© 2024 D-Libro. All Rights Reserved\n\nAnatomy of AI prompts\n\n# Anatomy of AI prompts\n\nAnatomy of AI prompts\n\nThe power of an AI image lies not just in the model it uses, but in the words you choose to guide it. Crafting a strong prompt is like setting the stage for a performance—your instructions provide the scenery, the mood, the lighting, even the texture of the story you want to tell. In this section, we’ll take a deeper look at the anatomy of AI prompts, drawing from practical, real-world techniques that can elevate your results from ordinary to truly excepti",
+      "score": 0.697
+    },
+    {
+      "query": "best AI image to video prompt structure anatomy",
+      "title": "80+ AI Video Prompts Every Content Creator Should Try | ImagineArt",
+      "url": "https://www.imagine.art/blogs/ai-video-prompts",
+      "content": "3D animated human heart beats realistically in mid-frame. Slow rotation camera movement reveals anatomy from multiple angles. Clean medical lighting emphasizes details and textures. Background: dark neutral for contrast. Motion: smooth and anatomically accurate. Mood: professional, informative, and visually immersive for medical education.\n Animated flowchart transforms from text into moving icons. Smooth camera pan across elements highlights process stages. Each icon subtly animates to indicate activity. Background: neutral with soft gradient. Lighting: subtle reflections to add depth. Motion: continuous and organized. Mood: professional, clear, and instructional for tech demonstrations. [.",
+      "score": 0.649
+    },
+    {
+      "query": "AI video prompt template subject scene camera lighting",
+      "title": "80+ AI Video Prompts Every Content Creator Should Try",
+      "url": "https://www.imagine.art/blogs/ai-video-prompts",
+      "content": "Here’s a prompt template that you can use for effective AI video prompting:\n\n> [Subject/Action] in [Environment/Setting], [Camera angle/movement], [Lighting/Mood], [Style/Genre], [Additional Details/Effects]\n\nHowever, different AI video models handle prompts in different ways. For example:\n\n Veo 3.1 accepts JSON-style prompts, which lets you structure multiple elements like camera angles, lighting, and effects in a single, organized input.\n Seedance 2.0 supports multi-shot prompting, so you can describe several consecutive shots in one prompt for dynamic storytelling.\n Kling 3.0 also accepts multi-shot prompts, but it can produce equally great results even with simpler prompts, making it gre",
+      "score": 0.868
+    },
+    {
+      "query": "AI video prompt template subject scene camera lighting",
+      "title": "AI Video Prompt Writing: Structured Templates and ...",
+      "url": "https://www.reddit.com/r/StableDiffusion/comments/1j4yhlb/ai_video_prompt_writing_structured_templates_and",
+      "content": "Visual Style – Clarify aesthetic approach and lighting conditions Structured Templates for AI Video Prompting Cinematic Scene Structure {Genre/setting}, {Main character/subject}, {Simple action}, {Environment details}, {Camera perspective}, {Lighting style} Example: A neon-lit cyberpunk city at midnight. A solitary figure stands atop a skyscraper, watching rain scatter the neon reflections below. Wide shot, slightly behind the figure. Cool-toned lighting with deep blue and purple hues enhancing the futuristic atmosphere. Nature Scene Framework {Location and time}, {Subject}, {Simple action}, {Environmental details}, {Camera perspective}, {Lighting} Example: A tropical beach at dawn. A sea tu",
+      "score": 0.847
+    },
+    {
+      "query": "AI video prompt template subject scene camera lighting",
+      "title": "Text-to-Video Prompts: Best Templates, Examples, and Tips for Better AI Videos",
+      "url": "https://queststudio.io/blog/text-to-video-prompts",
+      "content": "### 1. Cinematic scene prompt\n\nUse this for dramatic, film-like shots.\n\nTemplate:\n\nA [shot type] of [subject] in [location], performing [action]. The camera [camera move]. Over time, [environmental or subject motion]. Style is cinematic and realistic with [lighting], [atmosphere], and [color palette]. Audio includes [ambience and sound effects]. Keep movement natural and visually grounded.\n\nExample: [...] ## What makes a good text-to-video prompt\n\nA strong text-to-video prompt usually includes:\n\n subject\n action\n setting\n shot type\n camera movement\n lighting and style\n motion over time\n sound or dialogue, if supported\n any constraints that matter\n\nThat structure is consistent with how curren",
+      "score": 0.825
+    },
+    {
+      "query": "AI video prompt template subject scene camera lighting",
+      "title": "50 AI Camera Movement Prompts for Cinematic AI Video",
+      "url": "https://www.imagine.art/blogs/ai-camera-movement-prompts",
+      "content": "Separate your camera prompt from your subject prompt. Most AI video tools perform better when the camera instruction is clearly isolated from the subject description. Write your subject, lighting, and mood in one block, then add a clearly labeled CAMERA section beneath it. This helps the model process spatial instructions independently.\n Be specific about speed. Words like \"slow,\" \"moderate,\" and \"fast\" matter. A \"slow dolly\" and a \"rapid surge\" produce completely different emotional results. Always include speed intent in your AI camera movement prompt. [...] Copy the prompt text from any of the categories above and paste it into the camera or motion field of your AI video generator. Add yo",
+      "score": 0.8
+    },
+    {
+      "query": "AI video prompt template subject scene camera lighting",
+      "title": "Text-to-Video AI Prompt Examples: 50+ Templates | Renderforest",
+      "url": "https://www.renderforest.com/blog/text-to-video-ai-prompt-examples",
+      "content": "This guide is built as a practical prompt library. Pick the video goal closest to yours, copy the prompt, replace the details, and generate a better first draft. You will find 60 text-to-video AI prompt templates for product videos, social ads, YouTube clips, local business promos, SaaS demos, training videos, real estate, restaurants, fashion, beauty, and cinematic storytelling.\n\n## Quick answer: best text-to-video AI prompt format\n\nThe best text-to-video AI prompts describe one clear subject, one visible action, the setting, camera movement, lighting, visual style, aspect ratio, duration, and constraints.\n\nA reliable prompt usually follows this structure:\n\n> Subject + action + setting + ca",
+      "score": 0.799
+    },
+    {
+      "query": "AI video prompt template subject scene camera lighting",
+      "title": "AI Video Prompt Guide: How To Write AI Video Prompts",
+      "url": "https://ltx.io/blog/ai-video-prompt-guide",
+      "content": "The key is layering these elements in a logical order. Start with your main subject, then add contextual details, followed by technical specifications like camera work and lighting.\n\nThis structure helps the AI prioritize information correctly.\n\n### Balancing Specificity and Creative Freedom\n\nOne of the trickiest aspects of prompting is knowing when to be detailed and when to leave room for the AI's interpretation. Overly rigid prompts can produce stiff, unnatural results.\n\nToo vague, and you'll get unpredictable outputs that miss your vision.\n\nBe specific about elements that are critical to your vision. If brand colors, specific products, or particular compositions are essential, describe t",
+      "score": 0.76
+    },
+    {
+      "query": "fill in the blanks image to video prompt formula",
+      "title": "Cinematic Prompt Formula for Image to Video",
+      "url": "https://queststudio.io/blog/cinematic-prompt-formula-image-to-video",
+      "content": "## Common mistakes that ruin image-to-video prompts\n\n Describing what is already visible. You do not need to rewrite the whole image unless the model needs clarification.\n Adding too many actions. More instructions often create less control.\n Ignoring camera movement. Without camera language, many clips feel flat.\n Being too vague. Cinematic and epic are not enough by themselves. You need actual motion and shot direction.\n Forcing motion that fights the source image. If the image is a tight portrait, asking for a huge sweeping drone shot can lead to awkward results.\n\n## A quick prompt template for beginners\n\nUse this fill-in-the-blank version:\n\n[A clear subject], [one natural movement], [one",
+      "score": 0.79
+    },
+    {
+      "query": "fill in the blanks image to video prompt formula",
+      "title": "Image-to-Video Prompt Guide: Camera Moves, Motion, and Examples | Blyth AI",
+      "url": "https://blyth.ai/blog/image-to-video-prompt-guide",
+      "content": "The best image-to-video prompt describes what changes over time, not what the uploaded image already shows. Use this formula: subject motion + camera motion + environmental motion + pacing + invariants. Keep the first test simple: one primary subject action, one camera move, and a clear statement about what must remain unchanged.\n\nThis guide includes reusable prompt patterns for products, portraits, fashion, food, vehicles, and cinematic scenes. You can test them with the Blyth AI Video Generator, which supports prompt, image, reference, and keyframe-based video workflows across multiple models.\n\n## Quick image-to-video prompt formula\n\nWrite the prompt in five layers: [...] # Image-to-Video ",
+      "score": 0.684
+    },
+    {
+      "query": "fill in the blanks image to video prompt formula",
+      "title": "Complete Guide to Writing Prompts for AI: Text-to-Image ...",
+      "url": "https://medium.com/design-bootcamp/complete-guide-to-writing-prompts-for-ai-text-to-image-text-to-video-image-to-video-and-visual-f59ccd2929cb",
+      "content": "Press enter or click to view image in full size\n\nImage 10\n\nPress enter or click to view image in full size\n\nImage 11\n\nPress enter or click to view image in full size\n\nImage 12\n\nThis structure follows the recommended prompt formula for Text-to-Video:\n\nPrompt Structure: Main Subject + Motion + Scene + Environmental Details + Artistic Style/Medium + Camera Movement\n\nWith each layer, you shift from a flat description to a cinematic moment in motion.\n\n## 3. Image-to-Video: Breathing Life Into a Still Frame\n\nThink: evolving from a starting point\n\nImage-to-video is like taking a photograph and asking, “What happens next?” [...] Press enter or click to view image in full size\n\nImage 14\n\nPress enter ",
+      "score": 0.659
+    },
+    {
+      "query": "fill in the blanks image to video prompt formula",
+      "title": "Image to Video Prompt Guide: Best Practices for Realistic Results",
+      "url": "https://www.eachlabs.ai/blog/image-to-video-prompt-guide-best-practices-for-realistic-results",
+      "content": "## 1. Prompt Anatomy\n\nThink of your prompt as a set of instructions for a very talented, but sometimes literal, director. The clearer and more structured your instructions, the closer the final video will be to what you imagined. It’s not just about listing things; it’s about how you arrange them.\n\nAt its core, a good prompt for image-to-video generation often follows a pattern. While there's no single rigid formula, a common and effective structure looks something like this:\n\n Subject: Who or what is the main focus?\n Action: What is the subject doing?\n Context/Environment: Where is this happening? What's around the subject?\n Cinematography/Camera: How is the scene being filmed? (e.g., shot ",
+      "score": 0.645
+    },
+    {
+      "query": "fill in the blanks image to video prompt formula",
+      "title": "7 Text-to-Image Prompt Formulas That Generate Flawless Art - PromptsEra",
+      "url": "https://promptsera.com/text-to-image-prompt-formulas",
+      "content": "If you feed an AI unstructured, conversational thoughts, it will just guess your intentions and fill in the blanks with generic training data. To generate professional, commercial-grade artwork, I realized I had to stop guessing keywords and start using proven architectural frameworks. I decided to break down the exact text-to-image prompt formulas used by top digital artists to control lighting, style, camera angles, and composition flawlessly.\n\n## Table of Contents [...] Anime style illustration of a girl standing on a t\n\n  \n\nI’ve been there. Staring at the empty text box of an AI image generator can be entirely paralyzing. You might have a vivid, breathtaking image in your mind. You type ",
+      "score": 0.505
+    },
+    {
+      "query": "fill in the blanks image to video prompt formula",
+      "title": "How to write effective text prompts to generate AI videos?",
+      "url": "https://help.flexclip.com/en/articles/10326783-how-to-write-effective-text-prompts-to-generate-ai-videos",
+      "content": "FlexClip Help Center\n\n# How to write effective text prompts to generate AI videos?\n\nWritten by Michael\n\nA well-crafted prompt is key to dictating the content of the video produced by an AI model, whether you're generating AI videos from text or images. In this article, we present a formula for writing AI video generation prompts that can help you achieve optimal video output.\n\n## Structures of AI Video Generation Prompts\n\n## Text to Video Prompt Structure\n\n#### Prompt = Subject + Action + Scene + (Camera Movement+ Lighting + Style)\n\nSubject: What or who is the focus of the video? It can be people, animals, plants, objects, etc. To clarify, the subject should be described in detail, covering ",
+      "score": 0.492
+    }
+  ]
+}

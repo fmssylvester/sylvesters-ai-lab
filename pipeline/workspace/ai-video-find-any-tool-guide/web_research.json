@@ -1,0 +1,160 @@
+{
+  "topic": "AI video find any tool guide",
+  "source": "tavily",
+  "query_time": "2026-07-19 08:46 UTC",
+  "queries": [
+    "how to find your AI video tool official prompt guide documentation",
+    "where to find image to video prompting docs for tools",
+    "official prompting guide Runway LTX Kling image to video"
+  ],
+  "result_count": 21,
+  "results": [
+    {
+      "query": "official prompting guide Runway LTX Kling image to video",
+      "title": "Tavily answer",
+      "url": "",
+      "content": "For image-to-video on Runway LTX Kling, start with a clear reference image and use concise prompts to define motion and camera behavior. Use positive phrasing and keep prompts simple for best results.",
+      "score": 1.0
+    },
+    {
+      "query": "where to find image to video prompting docs for tools",
+      "title": "Tavily answer",
+      "url": "",
+      "content": "To find image to video prompting documentation, visit ImageToPrompt or Eachlabs. GitHub's cliprise repository also offers structured prompts. Runway ML's community forums provide additional guidance.",
+      "score": 1.0
+    },
+    {
+      "query": "how to find your AI video tool official prompt guide documentation",
+      "title": "Tavily answer",
+      "url": "",
+      "content": "To find your AI video tool's official prompt guide, check the tool's official website or support section. If not available, contact the tool's support team for assistance.",
+      "score": 1.0
+    },
+    {
+      "query": "how to find your AI video tool official prompt guide documentation",
+      "title": "AI Video Prompt Guide: How To Write AI Video Prompts",
+      "url": "https://ltx.io/blog/ai-video-prompt-guide",
+      "content": "## What is an AI Video Prompt?\n\nAn AI video prompt is a text instruction that guides AI models to generate specific video content. Think of it as creative direction for an AI filmmaker. Your prompt tells the AI what to create, how it should look, how elements should move, and what atmosphere to establish.\n\nAt its most basic, a prompt might be as simple as \"a cat walking through a garden.\" But effective prompting goes much deeper.\n\nProfessional-level prompts specify camera angles, lighting conditions, motion patterns, composition details, and stylistic choices that shape every aspect of the generated video.\n\nModern AI video tools have evolved from basic text-to-video generation to multi-modal",
+      "score": 0.614
+    },
+    {
+      "query": "how to find your AI video tool official prompt guide documentation",
+      "title": "The ONLY 7 Prompts You Need to Create Any AI Video",
+      "url": "https://www.youtube.com/watch?v=zzBmvzR-URg",
+      "content": "a prompt for that scene. And what you'll need to do is actually upload a PDF file that includes a documentation of how to write prompts into the knowledge section. And once that's done, we have our own GPT prompt helper. So here's an example where I uploaded a picture of this woman uh with this [music] stag. And I told her to write a prompt for a sad scene where the female elf is saying goodbye to her old stag friend. And this is what the GPT produces for us. So it'll give you a much longer detailed prompt that includes all the different elements of the cinematography, but also to the sound effects, the style, the lighting, and all the action that's happening in the scene. And the video that",
+      "score": 0.609
+    },
+    {
+      "query": "how to find your AI video tool official prompt guide documentation",
+      "title": "5 Levels of Prompting to Create ANY AI Video",
+      "url": "https://www.youtube.com/watch?v=4LI8JKPdOmU",
+      "content": "yourself after testing the AI video generator a bit about with all the different things that the video generator is bad at and the prompt should avoid trying to create. With this PDF document, I can now create my own GPT. So, inside ChatGPT, go to explore GPTs, and then create a new GPT. And inside the configuration, you can upload your different PDF guides, which will instruct the GPT on how to write prompts correctly. And you'll also need to give it some instructions. For this part, it works fine to just use natural language to describe how you want the GPT to use your PDF guides. So, using GPTs like this to help write your AI prompts can speed up your process significantly. However, the A",
+      "score": 0.588
+    },
+    {
+      "query": "how to find your AI video tool official prompt guide documentation",
+      "title": "Runway Resources | AI Video Prompting Guide: 92 Ready-to-Use Prompts",
+      "url": "https://runwayml.com/resources/ai-video-prompting-guide",
+      "content": "Whether you're creating marketing content, telling stories, or just experimenting, this guide gives you everything needed to start generating compelling AI videos today.\n\nNo film degree required. Just clear ideas and the right approach.\n\n## Video Prompting That Actually Works\n\nVideo prompts follow one simple structure that works across every platform:\n\n[Camera Movement] + [Scene] + [Action] + [Details]\n\nHere's what that looks like in practice: \"Slow dolly forward through misty forest. Ancient trees tower overhead. Figure in red coat walks away from camera. Sunlight pierces through canopy.\"\n\nThese four components work together to create a clear visual description.\n\nBest practices: [...] This ",
+      "score": 0.555
+    },
+    {
+      "query": "how to find your AI video tool official prompt guide documentation",
+      "title": "The complete guide to creative AI video prompts",
+      "url": "https://elements.envato.com/learn/ai-video-prompts",
+      "content": "This complexity is exactly what makes AI video so powerful (and so damn cool!!!). You’re not limited by physics, budgets, or logistics. Want a paper boat sailing across a teacup? A 360-degree rotation through a neon-lit cityscape? A talking frog made entirely of Nutella? It’s all possible, young grasshopper — if you know how to ask for it.\n\n## Getting started with VideoGen\n\nLet’s walk through creating your first AI video with VideoGen, understanding each step along the way.\n\n### Step 1: Access VideoGen\n\nHead to labs.envato.com/video-gen. This is where the magic happens.\n\n### Step 2: Understanding your controls\n\nBefore you start typing away, let’s talk about the controls that’ll shape your vi",
+      "score": 0.521
+    },
+    {
+      "query": "how to find your AI video tool official prompt guide documentation",
+      "title": "How To Make AI Videos - Prompting Guide For Beginners",
+      "url": "https://www.youtube.com/watch?v=1JkmT6L2CmA",
+      "content": "today is happening inside Higgs Field, which I like because it keeps all the newest AI models in one place. So we're not jumping between 10 different sites. And if that's not simple enough, I've put all the prompts used in this video in a file below so you can follow along as we go. Let's dive in. First, let's get our bearings inside Higgs Field so nobody feels lost. We'll log in and toggle our cursor over to video. From here, we can select whatever we want. But for all our videos today, we'll use Seedance 2.0. Don't worry, the layout is really simple. We've got our prompt box where we type what we want. We've got a spot to drop in reference images, and we've got our generate button. That's ",
+      "score": 0.511
+    },
+    {
+      "query": "where to find image to video prompting docs for tools",
+      "title": "Image to Video Prompt Generator — Free AI Tool | ImageToPrompt",
+      "url": "https://www.imagetoprompt.dev/image-to-video-prompt",
+      "content": "ImageToPrompt\n\nImageToPromptFree AI Prompt Generator\n\n🎥 8 Video Models Supported\n\n# Free Image to Video Prompt Generator\n\nUpload any image, choose your video model, and get a professionally crafted video prompt — instantly. No login required.\n\n## What is Image to Video Prompting?\n\nImage to video prompting is the process of starting with a still photograph or illustration and describing how you want that image to come to life as a video clip. Rather than generating a scene from scratch, you provide a reference frame — and the AI video model animates it according to your prompt. [...] 🎥Veo / Flow Studio 🎬Kling AI 🎦Runway Gen-3 ⚡Pika 1.5 🌞Luma Dream Machine 🌟Sora 🌻Minimax / Hailuo ⚙️Stable Vide",
+      "score": 0.59
+    },
+    {
+      "query": "where to find image to video prompting docs for tools",
+      "title": "Image to Video Prompt Guide: Best Practices for Realistic Results",
+      "url": "https://www.eachlabs.ai/blog/image-to-video-prompt-guide-best-practices-for-realistic-results",
+      "content": "For example, instead of just saying \"a desolate landscape,\" you could prompt \"a desolate landscape, no buildings, no roads, no signs of human activity.\" This gives the AI a clearer picture of what to avoid. It's a powerful tool for getting closer to the realistic results you're after, helping to avoid those little glitches that can pull you out of the scene. You can find more about creative tools and AI models at Eachlabs.\n\n> Using negative prompts is like having a safety net. It catches those little mistakes or unexpected interpretations the AI might make, allowing you to maintain control over the final look and feel of your video. It's not about limiting creativity, but about guiding it pr",
+      "score": 0.569
+    },
+    {
+      "query": "where to find image to video prompting docs for tools",
+      "title": "GitHub - cliprise/awesome-ai-video-generator-prompts: AI video generator prompts, text-to-video workflows, image-to-video examples, model guides and creative AI video resources. · GitHub",
+      "url": "https://github.com/cliprise/awesome-ai-video-generator-prompts",
+      "content": "## Repository structure suggestion\n\nIf you use this as a GitHub repository, a clean structure could look like this:\n\n```\nawesome-ai-video-generator-prompts/ README.md prompts/ cinematic-prompts.md product-video-prompts.md social-media-video-prompts.md ecommerce-video-prompts.md youtube-video-prompts.md music-video-prompts.md real-estate-video-prompts.md avatar-video-prompts.md workflows/ text-to-video-workflow.md image-to-video-workflow.md one-image-to-campaign.md prompt-to-ad-variations.md models/ sora-prompts.md veo-prompts.md kling-prompts.md seedance-prompts.md wan-prompts.md runway-prompts.md resources/ cliprise-links.md prompt-checklist.md negative-prompts.md \n```\n\n## Suggested GitHub ",
+      "score": 0.552
+    },
+    {
+      "query": "where to find image to video prompting docs for tools",
+      "title": "Struggling with Gen 3 image to video prompts : r/runwayml",
+      "url": "https://www.reddit.com/r/runwayml/comments/1hlkivt/struggling_with_gen_3_image_to_video_prompts",
+      "content": "- You can feed ChatGPT runways best practices and then have it write all your prompts. If the prompt doesn’t work tell it what result you got that was wrong ChatGPT can rewrite the prompt. I dunno I found this to be a massive time saver and it helped me get the movement and angles I wanted. [...] ## Top Comments\n- Hi koifishhy, Looks like tyou got a ton of great feedback already! To add to it, please check out Runway's Gen-3 Alpha Prompting Guide . Also, if you'd like to, please feel free to join the Runway Discord to connect with other creators and get more prompt ideas!\n- After creating my visuals, I usually upload them to ChatGPT and ask it to write a dynamic prompt for me. I review the p",
+      "score": 0.55
+    },
+    {
+      "query": "where to find image to video prompting docs for tools",
+      "title": "Beginners Guide to Prompting AI Video",
+      "url": "https://www.linkedin.com/pulse/beginners-guide-prompting-ai-video-jerrod-lew-vziee",
+      "content": "Importantly, AI video can be done anywhere now with the majority of tools accessible on your smart phones.\n\nWith more updates launching in 2026 already, here is a quick round-up!\n\n## Text-to-Video\n\nThe most basic form is going from a simple text prompt to a video. This gives you the least control, but is a critical part of exploring the functionality of your chosen tool.\n\nThis gives the reigns to the quality of the model, and learning how it understands your prompts is critical for more complex workflows.\n\nEvery tool is slightly different in this regard, so going for text-to-video can show you the early signs of strengths and weaknesses.\n\n## Image-to-Video\n\nImage-to-Video gives you the most ",
+      "score": 0.549
+    },
+    {
+      "query": "where to find image to video prompting docs for tools",
+      "title": "Free AI Video Prompts Library - New Prompts Daily",
+      "url": "https://youmind.com/prompts/video",
+      "content": "Image PromptsVideo PromptsWebpage Prompts\n\nAI Tools\n\nImage to PromptPhoto PromptsGPT Image 2 Slides\n\n## Built for creators. Free forever.\n\nYouMind is the AI creative copilot trusted by millions of creators worldwide. Every prompt here is curated to help you create better, faster.\n\nStart creating with YouMindExplore more prompts\n\n© 2026MIND MOTOR PTE. LTD.\n\nNano Banana Pro PromptsGPT Image 2 PromptsSeedance 2.0 PromptsGPT Image 1.5 PromptsSeedream 4.5 PromptsGemini 3 Pro Prompts\n\nFor agentsNotebookLM AlternativesGPT Image 2 Slides𝕏 Viral Articles TrackingMarkdown to 𝕏 ArticleNano Banana 2 VS ProAI Photo EditorPhoto PromptsImage to PromptLenny Career CoachABTI Personality Test\n\nSkillsExtension",
+      "score": 0.546
+    },
+    {
+      "query": "official prompting guide Runway LTX Kling image to video",
+      "title": "Kling 3.0 Prompting Guide",
+      "url": "https://blog.fal.ai/kling-3-0-prompting-guide",
+      "content": "Multi shot Prompt 1: Man in red suit starts dancing at top of stairs, taking first exaggerated steps down, arms spreading wide, head tilting back in ecstasy, cigarette smoke trailing (Duration: 5 seconds)\n\nMulti shot Prompt 2: Continuing wild dance down concrete steps, spinning and kicking, coat flapping dramatically, pure liberation and madness, reaching the bottom with triumphant pose (Duration: 5 seconds)\n\n### Image-to-Video: Lock First, Then Move\n\nWhen using image-to-video, treat the input image as an anchor. Kling 3.0 excels at preserving the identity, layout, and text details of the source image while introducing motion and depth. [...] ### Anchor Your Subjects Early for Consistency\n\nK",
+      "score": 0.719
+    },
+    {
+      "query": "official prompting guide Runway LTX Kling image to video",
+      "title": "Runway Prompts: Best Templates, Examples, and Tips for Better AI Videos",
+      "url": "https://queststudio.io/blog/runway-prompts",
+      "content": "If your Runway videos look generic or inconsistent, the prompt is usually the first thing to fix. Runway’s current official guidance for Gen-4 and Gen-4.5 says good prompting is less about stuffing in lots of descriptive keywords and more about clearly directing motion, camera behavior, and temporal progression. For image-to-video, Runway specifically recommends using the image to define the scene and using the text prompt to describe what moves.\n\nThis guide gives you practical Runway prompts you can copy, adapt, and reuse for cinematic scenes, product ads, social clips, dialogue shots, and image-to-video workflows.\n\n## What makes a good Runway prompt\n\nA strong Runway prompt usually includes",
+      "score": 0.718
+    },
+    {
+      "query": "official prompting guide Runway LTX Kling image to video",
+      "title": "AI Video Prompts: Direct Runway, Kling & Pika | Create By Prompt",
+      "url": "https://createbyprompt.com/articles/ai-video-prompts-guide",
+      "content": "But video is significantly harder than images. Each clip is hundreds of individual frames that must remain coherent. Motion must feel natural. Physics must be convincing. And all of this needs to be controlled through text prompts.\n\nThis guide teaches you how to prompt AI video generators like a cinematographer, covering camera movement vocabulary, motion descriptors, and platform-specific techniques for Runway, Kling, and Pika.\n\n## How Video AI Works\n\nUnderstanding the technical basics helps you write better prompts.\n\nTwo primary modes:\n\n Write a prompt describing the scene\n AI generates video from scratch\n Starting from noise (like image generation)\n More creative freedom, less control [..",
+      "score": 0.68
+    },
+    {
+      "query": "official prompting guide Runway LTX Kling image to video",
+      "title": "Leaving LTX Studio for Kling AI or Runway ML | Image to Video Generation",
+      "url": "https://www.youtube.com/watch?v=Z16zOthiC-s",
+      "content": "didn't turn his head or anything like that but it's fine and then I went on and brought in this is another mid Journey image just a Ste image and I dropped this in and the prompt that I did for this one I said a red car drives through a snowy Gothic City at night extreme wide angle uh establishing shot and I'm messed around with this a few times because you're going to see what goes wrong here and I could not get this to correct itself but so I press play and the car is driving backwards no idea why why but it's driving backwards now this now in theory you could say well just download the video and then just reverse it so like it's like the car is actually driving forward yeah I guess I coul",
+      "score": 0.675
+    },
+    {
+      "query": "official prompting guide Runway LTX Kling image to video",
+      "title": "AI Video Prompt Guide: How To Write AI Video Prompts",
+      "url": "https://ltx.io/blog/ai-video-prompt-guide",
+      "content": "Choose the Right Model: LTX Studio offers multiple video generation models — LTX-2.3 Pro for high-quality output with strong prompt adherence, Veo 3.1 and Kling 3.0 Pro for cinematic results with distinct motion characteristics, and Seedance 2.0 for sharper motion and stronger prompt adherence. For image-to-video workflows where visual consistency is critical, FLUX.2 Pro and Nano Banana Pro anchor the image references that drive the generation. Match the model to the output you need — not every model suits every style.\n Combine Text and Visual References: Don't choose between text prompts and reference images—use both. Text describes action, timing, and motion while images define style, comp",
+      "score": 0.631
+    },
+    {
+      "query": "official prompting guide Runway LTX Kling image to video",
+      "title": "Kling 3.0 on Runway | AI Video Generation with Audio",
+      "url": "https://runwayml.com/product/models/kling-3.0",
+      "content": "Now on Runway\n\n# Kling 3.0\n\nKling's most advanced video generation, on Runway. Turn text prompts and images into video with native audio and speech — with start/end frame control and multi-shot sequences.\n\n## How to use Kling 3.0 on Runway\n\n### Start from text or an image\n\nWrite a prompt to generate from scratch, or upload an image to animate. Pin the first and last frames with images to control exactly where the motion starts and ends.\n\n### Choose your tier and settings\n\nPick Kling 3.0 Standard for budget-friendly generations, Pro for the most advanced output with audio and speech, or Turbo when speed matters most.\n\n### Generate with sound\n\nHit Generate and your video comes back with audio ",
+      "score": 0.614
+    }
+  ]
+}

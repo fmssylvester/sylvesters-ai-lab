@@ -1,0 +1,160 @@
+{
+  "topic": "AI video fix ugly output",
+  "source": "tavily",
+  "query_time": "2026-07-19 08:47 UTC",
+  "queries": [
+    "fixing ugly AI image to video results negative prompts",
+    "source image preparation for better AI video",
+    "negative prompts and image prep image to video best practices"
+  ],
+  "result_count": 21,
+  "results": [
+    {
+      "query": "negative prompts and image prep image to video best practices",
+      "title": "Tavily answer",
+      "url": "",
+      "content": "Negative prompts exclude unwanted elements from AI-generated images and videos. Best practices include keeping them concise and specific. Use them to avoid common artifacts and enhance visual quality.",
+      "score": 1.0
+    },
+    {
+      "query": "source image preparation for better AI video",
+      "title": "Tavily answer",
+      "url": "",
+      "content": "Use high-resolution, well-lit images for AI video; optimize by adjusting brightness and contrast; upscale if needed for better results.",
+      "score": 1.0
+    },
+    {
+      "query": "fixing ugly AI image to video results negative prompts",
+      "title": "Tavily answer",
+      "url": "",
+      "content": "Negative prompts exclude unwanted elements from AI-generated images and videos, improving quality by avoiding issues like blur and bad anatomy. Use terms like \"low quality\" and \"bad hands\" to guide the AI. They help refine results without needing to regenerate content.",
+      "score": 1.0
+    },
+    {
+      "query": "fixing ugly AI image to video results negative prompts",
+      "title": "70+ Negative Prompt Examples That Improve Your AI Images and Videos",
+      "url": "https://filmora.wondershare.com/ai-prompt/negative-prompts.html",
+      "content": "Negative prompts are instructions that you ask the AI what to avoid while generating an image or video. Before the AI can guess and fill in missing details, you set clear boundaries for the final output. This extra layer of control helps reduce visual errors and saves time (or quota) you’d otherwise spend regenerating results.\n\nBelow are practical examples of how to use negative prompts to better control your results.\n\n### 1. Exclude Certain Colors\n\nIf you don’t set color boundaries clearly, the AI will just pick whatever it thinks looks good based on the data it was trained on. That’s how you end up with colors or shades that you may not have intended. [...] When the model is unsure or rush",
+      "score": 0.796
+    },
+    {
+      "query": "fixing ugly AI image to video results negative prompts",
+      "title": "200+ Best Stable Diffusion Negative Prompts for Text to Video [2025 Updated]",
+      "url": "https://aitubo.ai/blog/post/stable-diffusion-negative-prompts",
+      "content": "### Stable Diffusion Negative Prompt for Fingers\n\nFingers can often appear distorted in AI-generated images, leading to unrealistic and unappealing results. To enhance the quality of your images, consider using the following negative prompts to filter out common issues:\n\n too many fingers\n fused fingers\n ugly fingers\n missing fingers\n disconnected fingers\n poorly defined details\n awkward positioning\n blurry fingers\n unrealistic proportions\n deformed fingers\n clumsy appearance\n incorrect gestures\n overly large fingers\n thin or frail fingers\n bad textures\n\nBy incorporating these negative prompts, you can significantly improve the realism and visual appeal of the fingers in your generated image",
+      "score": 0.766
+    },
+    {
+      "query": "fixing ugly AI image to video results negative prompts",
+      "title": "Using Negative Prompts to Fix Common AI Art Issues",
+      "url": "https://www.artprompthq.com/blog/negative-prompts-fix-common-ai-art-issues",
+      "content": "### Basic Negative Prompt List for All Models\n\nA universal starter list can help with most AI image generators by tackling frequent quality issues. Use this as your foundation: `worst quality, low quality, blurry, jpeg artifacts, watermark, signature, text, bad anatomy, bad hands, extra limbs, deformed, ugly`. This set addresses technical flaws like blur and compression artifacts, unwanted overlays such as watermarks or text, and structural errors like extra fingers or distorted proportions. As AI Photo Generator explains:\n\n> \"Negative prompts aren't just a 'nice to have' - they're a core part of how the model decides what to generate. Leaving them blank means you're only using half the stee",
+      "score": 0.746
+    },
+    {
+      "query": "fixing ugly AI image to video results negative prompts",
+      "title": "How can I improve my prompts for Image to Video? (WAN)",
+      "url": "https://www.reddit.com/r/StableDiffusion/comments/1nkktjn/how_can_i_improve_my_prompts_for_image_to_video",
+      "content": "-  In general, A.I. does not understand \"negative action\". So putting something like \"not talking\" may in fact \"encourage\" A.I. to make the video talk. Instead, as others have already pointed out, put \"talking\" in the negative prompt where it belongs. [...] - Do you have negative prompt? The default workflow has chinese language negative prompt, that includes \"static\" as negative. It seems to add more movement for people and camera. So, you may change / add your negative prompt and put things you do not want there. Once, I wanted to avoid camera movement, and \"static camera\" did not work very well, but \"fixed camera\" did, so you may play a little with wording. I have seen complaints, that fa",
+      "score": 0.727
+    },
+    {
+      "query": "fixing ugly AI image to video results negative prompts",
+      "title": "How to master negative prompts for AI image generation",
+      "url": "https://picsart.com/tutorials/how-to-master-negative-prompts-for-ai-image-generation",
+      "content": "Negative prompts reduce likelihood, they don't guarantee removal. If something persists, try adding it multiple times with variations: \"text, letters, words, watermark, signature.\" Also check that your positive prompt isn't contradicting—asking for \"vintage photo with grain\" fights against \"no grain\" in negatives.\n\nYes. Adding \"cartoon, anime, illustration\" to negatives pushes results toward photorealism. Adding \"photorealistic, realistic\" pushes toward stylized art. This works when you want a specific aesthetic without explicitly naming it in the main prompt.\n\n## Need cleaner results?\n\nStart using negative prompts to fix common AI image problems instantly.\n\nGet the free app\n\nDownload on the",
+      "score": 0.711
+    },
+    {
+      "query": "fixing ugly AI image to video results negative prompts",
+      "title": "A guide to using negative prompts to generate AI video and images",
+      "url": "https://artlist.io/blog/negative-prompts",
+      "content": "Negative prompting helps you tell the AI what not to do, and nudging it gently towards what you do want to get an outcome that’s cleaner and closer to what you actually want. This simple habit will help you unlock AI’s full potential and create visuals that are sharp, clean, and true to your vision.Explore Artlist’s AI creative tools and bring your ideas to life — faster, smarter, and your way.\n\nWas this article helpful?\n\nYes No\n\n#ai#prompting\n\nDid you find this article useful?\n\nYes No\n\nWe’re sorry to hear that.\n\nSubmit\n\n### Thank you for letting us know!\n\n### About the author [...] Build a library: Note down what really works for you and group them into sets like “portrait cleanup,” “cinema",
+      "score": 0.7
+    },
+    {
+      "query": "source image preparation for better AI video",
+      "title": "Secrets to Enhance AI Image-to-Video Quality",
+      "url": "https://kling.ai/blog/ai-image-to-video-quality-optimization-guide",
+      "content": "## Why Is Image Preparation So Crucial?\n\n### Ensuring High Quality Source Images\n\nGarbage in, garbage out—that rule still applies in AI-generated video.\n\nYour source images need to be:\n\n Minimum 1024x1024px (preferably 2K and higher)\n Clear, well-lit, and free of compression artifacts\n Stylistically consistent if using multiple images\n\nDon't upscale low-resolution images solely to fulfill size specifications. Rather, work from the highest original quality you possess, or redesign higher-res versions if necessary.\n\n### Basic Editing And Improvement Guidelines\n\nOne round of pre-editing can make a huge difference: [...] # Secrets to Enhance AI Image-to-Video Quality\n\nAchieving professional AI v",
+      "score": 0.839
+    },
+    {
+      "query": "source image preparation for better AI video",
+      "title": "How to Optimize Images for AI Video Conversion",
+      "url": "https://invideo.io/blog/optimize-images-for-ai-video",
+      "content": "The effectiveness of AI video conversion largely depends on the input quality and characteristics of your source images. AI algorithms perform best when they can clearly identify distinct elements, understand spatial relationships, and detect patterns that can be transformed into natural-looking motion. This is why image optimization plays such a crucial role in achieving professional results.\n\nWhen AI systems process your images, they create interpolated frames between static images, generate motion paths for objects, and apply various effects to create the illusion of movement. The clearer and more detailed your source images, the more accurate and visually appealing these AI-generated ele",
+      "score": 0.731
+    },
+    {
+      "query": "source image preparation for better AI video",
+      "title": "How To Enhance Images With AI In 2026 | LTX Blog",
+      "url": "https://ltx.io/blog/how-to-enhance-images-with-ai",
+      "content": "For video production workflows, upscaling is particularly valuable when working with AI-generated images that will serve as keyframes or reference images for video generation. A higher-resolution starting image typically produces better video output, making the upscale step a practical investment before committing generation credits.\n\n## Best Practices For AI Image Enhancement\n\n### When To Upscale (And When Not To)\n\nAI enhancement works best for:\n\n• Low-resolution source images that need to meet a specific output requirement\n\n• AI-generated images that were created at lower resolution for speed and need to be brought up to production quality\n\n• Archive images being repurposed for new campaig",
+      "score": 0.697
+    },
+    {
+      "query": "source image preparation for better AI video",
+      "title": "Improving Poor Quality Output from AI Video Generator Using Images",
+      "url": "https://www.yepic.ai/blog/enhance-ai-video-quality-with-images",
+      "content": "## Practical Steps to Improve Video Quality\n\nImproving video quality using well-optimised images isn't just about selecting and preparing your pictures; it involves a bit of fine-tuning within the AI tool itself. Begin by uploading your optimised images into the tool. Pay attention to the order they appear in, as this will affect the narrative structure of the video.\n\nConsider making adjustments to the brightness and contrast settings. These tweaks can enhance the visual appeal of both your images and your final video output, making sure everything stands out. Experimenting with these settings can sometimes lead to surprising improvements in quality. Integrating transitions between images sm",
+      "score": 0.675
+    },
+    {
+      "query": "source image preparation for better AI video",
+      "title": "6 essential tips to perfect your AI-generated images and videos",
+      "url": "https://artlist.io/blog/how-to-create-ai-videos-with-images",
+      "content": "Now, let’s dive into the tips and start making your AI content shine.\n\n## Tip 1: Start with stills\n\nBefore you even think about generating your AI videos, nail your image. Why? Because great videos start with great frames, and in the world of AI, that means getting your still image just right before you hit Animate.\n\nIt’s quicker, more cost-effective, and gives you more room to experiment. You can fine-tune your prompt, tweak the lighting, and adjust the framing, all without using too many credits or waiting on longer renders. [...] ensuring perfect exposure, complemented by professional studio lighting techniques. Create a shallow depth of field for a focused, sharp image, and apply profess",
+      "score": 0.618
+    },
+    {
+      "query": "source image preparation for better AI video",
+      "title": "Inside AI Video Generation: Framework Technology Explained – Troy Lendman",
+      "url": "https://troylendman.com/inside-ai-video-generation-framework-technology-explained",
+      "content": "Enhancing AI video quality involves multiple strategies across the generation pipeline. Crafting detailed, specific prompts with clear descriptions of visual elements, actions, and style represents the most impactful approach. Providing high-quality reference images can significantly guide the aesthetic and content. Breaking complex scenes into smaller, more manageable generations often yields better results than attempting to generate everything in one pass. Post-processing techniques like frame interpolation, super-resolution, and selective editing can address common issues. For frameworks that support it, adjusting generation parameters such as guidance scale, sampling steps, or seed valu",
+      "score": 0.574
+    },
+    {
+      "query": "negative prompts and image prep image to video best practices",
+      "title": "Image to Video Prompt Guide: Best Practices for Realistic Results",
+      "url": "https://www.eachlabs.ai/blog/image-to-video-prompt-guide-best-practices-for-realistic-results",
+      "content": "Think of it like this: if you're trying to create a serene forest scene, you wouldn't want random cars or buildings popping up, right? A negative prompt lets you say, \"no cars, no buildings.\" It's a way to refine the output and make sure the AI stays focused on your vision. This is especially useful when you're aiming for a specific aesthetic or trying to avoid common AI artifacts.\n\nHere are some common things you might want to exclude: [...] Here's a quick rundown of common compositional terms:\n\n| Term | Description |\n --- |\n| Rule of Thirds | Dividing the frame into nine equal parts and placing key elements along the lines or intersections. |\n| Symmetry | Balancing elements on either side ",
+      "score": 0.825
+    },
+    {
+      "query": "negative prompts and image prep image to video best practices",
+      "title": "Negative Prompts Guide: What They Are & How To Use Them",
+      "url": "https://ltx.io/blog/negative-prompts",
+      "content": "## LTX-2.3 Token Budget\n\nLTX-2.3 uses classifier-free guidance with a tunable guidance scale. The negative prompt is encoded once and reused across denoising steps, which is faster than re-encoding per step. The practical takeaway: a 5-to-15-token negative prompt is the sweet spot. A practitioner moving from image generation, where 20-to-50-token negative prompts are common, should cut their habitual length by half on the first run.\n\n## Using Negative Prompts in LTX Studio\n\nNegative prompts work across LTX Studio’s generation tools: text-to-video, image-to-video, character generation, and storyboard creation. Apply them at the storyboard stage to establish visual standards that carry through",
+      "score": 0.804
+    },
+    {
+      "query": "negative prompts and image prep image to video best practices",
+      "title": "70+ Negative Prompt Examples That Improve Your AI Images and Videos",
+      "url": "https://filmora.wondershare.com/ai-prompt/negative-prompts.html",
+      "content": "Negative prompts are instructions that you ask the AI what to avoid while generating an image or video. Before the AI can guess and fill in missing details, you set clear boundaries for the final output. This extra layer of control helps reduce visual errors and saves time (or quota) you’d otherwise spend regenerating results.\n\nBelow are practical examples of how to use negative prompts to better control your results.\n\n### 1. Exclude Certain Colors\n\nIf you don’t set color boundaries clearly, the AI will just pick whatever it thinks looks good based on the data it was trained on. That’s how you end up with colors or shades that you may not have intended. [...] #### Using Text-to-Video Generat",
+      "score": 0.803
+    },
+    {
+      "query": "negative prompts and image prep image to video best practices",
+      "title": "200+ Best Stable Diffusion Negative Prompts for Text to Video [2025 ...",
+      "url": "https://aitubo.ai/blog/post/stable-diffusion-negative-prompts",
+      "content": "To ensure realistic and well-rendered hands in your generated images, consider using the following negative prompts:\n\n poorly drawn hands\n missing fingers\n extra fingers\n fused fingers\n deformed hands\n bad anatomy\n awkward positioning\n clumsy appearance\n blurry hands\n disconnected fingers\n unrealistic proportions\n ugly textures\n poorly defined details\n unusual gestures\n overly large hands\n\nBy incorporating these negative prompts, you can significantly enhance the quality and realism of the hands in your generated images.\n\nExample Prompt\n\nFor example, if you want to create an image of a person holding an object, you might say:\n\n\"Generate an image of a person gracefully holding a book, but exc",
+      "score": 0.793
+    },
+    {
+      "query": "negative prompts and image prep image to video best practices",
+      "title": "A guide to using negative prompts to generate AI video and images",
+      "url": "https://artlist.io/blog/negative-prompts",
+      "content": "Ignoring model limitations: Not all AI tools handle negatives in the same way, so get to know the model and adjust your prompts according to its capabilities.\n\nBeing too restrictive: Adding too many negative prompts can over-restrict the AI and make your visuals look stiff or lifeless. So leave some room for the AI to add creative or unexpected details.\n\nNot testing iteratively: Testing can save you time and credit, so make sure to test your negative prompts on small clips to check their effect, and then you can scale up.\n\n## Best practices and problem-solving\n\nAlright, we’ve covered what not to do – now let’s take a look at what you can do to maximise that negative prompt potential.\n\nKeep y",
+      "score": 0.788
+    },
+    {
+      "query": "negative prompts and image prep image to video best practices",
+      "title": "How can I improve my prompts for Image to Video? (WAN)",
+      "url": "https://www.reddit.com/r/StableDiffusion/comments/1nkktjn/how_can_i_improve_my_prompts_for_image_to_video",
+      "content": "- Do you have negative prompt? The default workflow has chinese language negative prompt, that includes \"static\" as negative. It seems to add more movement for people and camera. So, you may change / add your negative prompt and put things you do not want there. Once, I wanted to avoid camera movement, and \"static camera\" did not work very well, but \"fixed camera\" did, so you may play a little with wording. I have seen complaints, that fast loras limit movement, but I do not use them, so have no personal experience. [...] -  In general, A.I. does not understand \"negative action\". So putting something like \"not talking\" may in fact \"encourage\" A.I. to make the video talk. Instead, as others h",
+      "score": 0.747
+    }
+  ]
+}

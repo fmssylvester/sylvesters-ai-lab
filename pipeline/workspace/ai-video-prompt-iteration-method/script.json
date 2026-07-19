@@ -1,0 +1,40 @@
+{
+  "title": "The Scientific Way to Fix Bad AI Videos (Step-by-Step)",
+  "description": "Stop burning your AI video credits on random prompt guessing. In this episode of Sylvester's AI Lab, we break down the systematic 'Change-One-Variable' iteration loop that professionals use to get consistent, high-quality cinematic results from any image-to-video tool. \n\nWe cover the 3-stage AI video pipeline, how to isolate your motion variables, and when to pivot instead of brute-forcing your generation credits.\n\n### Timestamps\n0:00 - The Credit-Wasting Trap\n0:55 - The 3-Stage Pipeline (Flux, Midjourney, Runway, Kling)\n2:30 - The Change-One-Variable Method\n4:15 - Step-by-Step Demo & Human Reasoning\n6:00 - The Verdict: Does It Actually Work?\n\n### Resources Mentioned\n* Image-to-Video Pipeline Strategy: https://seedance-2ai.org/blog/ai-image-to-video-workflow-guide\n* Iteration Best Practices: https://ltx.io/blog/ai-video-prompt-guide\n* Composition & Framing Guide: https://www.eachlabs.ai/blog/image-to-video-prompt-guide-best-practices-for-realistic-results",
+  "tags": [
+    "ai video",
+    "prompt engineering",
+    "image to video",
+    "runway gen 3",
+    "kling ai",
+    "midjourney",
+    "flux ai",
+    "stable diffusion",
+    "ai filmmaking",
+    "ai prompting tutorial"
+  ],
+  "hook": "Stop wasting your AI video generation credits. Today, I'm showing you the exact, step-by-step prompt iteration method that turns glitchy, warped AI videos into clean, cinematic shots, without changing your tools.",
+  "sections": [
+    {
+      "heading": "The AI Video Prompting Trap",
+      "voiceover": "Welcome back to Sylvester's AI Lab. Let's talk about the giant black hole where your money goes: credit-burning. Most people trying to make AI videos use tools like Runway, Kling, or LTX by typing a text prompt, getting a weird, mutated mess, deleting the whole prompt, and typing an entirely new one. This is brute force. It is the absolute worst way to generate video. While platforms like YouTube are flooded with basic 'prompt engineering' tutorials that teach you how to write long, poetic paragraphs for text-to-image models, almost no one is talking about how to systematically iterate for video. Video is a completely different beast. You aren't just prompting for a static subject anymore; you are prompting for time, physics, and camera behavior. If you don't have a structured way to change your prompts, you are essentially pulling a slot machine lever and hoping for a jackpot."
+    },
+    {
+      "heading": "The 3-Stage AI Video Pipeline",
+      "voiceover": "To build a repeatable workflow, we need to understand the modern AI video pipeline. Professional creators don't rely on pure text-to-video. Instead, they use a three-stage process. Stage one is your concept generation. Stage two is generating a highly detailed starting frame using a robust text-to-image model like Midjourney, Flux, or Stable Diffusion. This gives you absolute control over the art direction, lighting, and composition. Finally, stage three is using an image-to-video tool to breathe life into that single frame. By feeding a high-quality starting image into your video generator, you remove 90% of its creative guesswork. But here is the catch: even with a perfect starting image, the video model still has to calculate motion. If your motion prompt is poorly structured, the physics will collapse, faces will melt, and the camera will warp the background. That is where our iteration loop comes in."
+    },
+    {
+      "heading": "The Change-One-Variable Loop",
+      "voiceover": "Here is the golden rule of systematic AI video prompting: keep successful prompt elements and adjust exactly one variable at a time. If your video generation fails, do not rewrite your entire prompt. If you change three different words at once, you will have no idea which change actually improved the video, and which one ruined it. Think of your prompt as a combination of three distinct variables: the Subject, the Action, and the Camera. If you want to change the camera speed, change only the camera-related words. Keep the subject and action variables identical. If you need to fix a glitch in how a person moves their hand, focus purely on simplifying that specific action phrasing, or switch to an analogous task. By isolating your variables, you can pinpoint exactly how the AI model interprets your directions, building a predictable mental map of what works and what doesn't."
+    },
+    {
+      "heading": "Live Demo: Troubleshooting a Glitchy Shot",
+      "voiceover": "Let's run through a realistic troubleshooting scenario. Imagine we have a high-quality starting frame of a detective standing in a dark, rain-slicked alley. We upload this image to our video generator. For our first prompt, we write: 'The detective turns around quickly, walking away from the camera as it pans down.' We hit generate. The result? The camera pans down, but the detective's head warps into a bizarre double-face, and the brick walls of the alley slide around like liquid. Here is where the human reasoning step comes in. Why did it fail? The motion was too complex. 'Turns around quickly' requires the model to hallucinate a completely new angle of the detective's face in a split second, while 'pans down' forces the background perspective to shift at the same time. Instead of throwing this prompt away, we apply our loop. We keep the starting image and the camera pan, but we change only the action variable to something simpler. We write: 'The detective stands still, slowly looking over his shoulder.' We run it. This time, the walls stay stable, and the face looks perfect, but the motion feels slightly too static and robotic. For our third iteration, we keep the prompt exactly the same, but we adjust a non-prompt variable: we slightly increase the motion strength slider in our tool's settings. By testing systematically, we achieved a cinematic, glitch-free shot in just three steps."
+    },
+    {
+      "heading": "The Verdict: Use It or Skip It?",
+      "voiceover": "My verdict on this systematic iteration method? It is an absolute 'use it'—in fact, it is the only way to work if you want to create professional-grade AI videos without going bankrupt. However, let's call out a real limitation: AI video models are still fundamentally non-deterministic. Sometimes, a seed is just broken. If you have iterated three times using this method, keeping your variables isolated, and the model still outputs absolute garbage, the issue isn't your motion prompt. The issue is likely your starting image. If your initial image has weird perspective lines, impossible anatomy, or inconsistent lighting, the video model will struggle to animate it, no matter how perfect your prompt is. In those cases, go back to stage two, fix the starting frame, and start the loop again."
+    }
+  ],
+  "cta": "If this systematic approach helps you save some credits on your next project, hit that subscribe button and give this video a like. Let me know in the comments which video tool you're currently using. I'll see you in the next lab session!"
+}

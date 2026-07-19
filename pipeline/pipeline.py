@@ -58,13 +58,32 @@ def run(topic: str, privacy: str, notify: bool, voiceover_mode: str) -> None:
 
     print(f"\n=== Sylvester's AI Lab pipeline: {topic} ===\n")
 
-    # 1. Script
+    # 1. Script (idempotent: reuse committed script.json when present)
     if notify:
         try:
             notifier.send_notification(f"Starting: *{topic}*")
         except Exception as exc:
             print(f"[warn] start notification failed: {exc}")
-    script = script_generator.generate_script(topic, workspace)
+    script_json_path = workspace / config.SCRIPT_JSON_REL
+    if script_json_path.exists():
+        try:
+            existing = json.loads(script_json_path.read_text(encoding="utf-8"))
+            if existing.get("sections"):
+                print(f"[run] reusing existing script.json in '{workspace.name}'")
+                script = existing
+            else:
+                script = script_generator.generate_script(
+                    topic, workspace, script_generator.load_research_brief(workspace)
+                )
+        except Exception as exc:
+            print(f"[run] could not read existing script ({exc}); regenerating")
+            script = script_generator.generate_script(
+                topic, workspace, script_generator.load_research_brief(workspace)
+            )
+    else:
+        script = script_generator.generate_script(
+            topic, workspace, script_generator.load_research_brief(workspace)
+        )
 
     # 2. Voiceover (auto via Edge TTS) — required before word_sync, which
     #    needs the narrated audio to produce word-level timestamps.

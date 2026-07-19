@@ -1,0 +1,42 @@
+{
+  "title": "How to Find & Use the Official Prompt Guide for Any AI Video Tool",
+  "description": "Stop wasting generation credits guessing how to prompt your AI video generator. In this episode of Sylvester's AI Lab, we reveal the ultimate transferable method to find and master the official prompting guides for any video AI tool on the market. We dive deep into the under-served world of image-to-video (I2V) prompting using official frameworks directly from the creators.\n\nTimestamps:\n0:00 - The AI Video Prompting Problem\n1:45 - The Universal Search Method\n3:30 - Live Demo: Locating Runway's Guide\n5:15 - Live Demo: Locating LTX's Guide\n7:00 - 3 Universal Rules of Image-to-Video\n9:15 - Limitations & Verdict\n\nResources Mentioned:\n- Runway Prompt Guide: https://runwayml.com/resources/ai-video-prompting-guide\n- LTX AI Video Prompt Guide: https://ltx.io/blog/ai-video-prompt-guide\n- Envato Creative Guide: https://elements.envato.com/learn/ai-video-prompts",
+  "tags": [
+    "ai video",
+    "prompt engineering",
+    "image to video",
+    "runway ml",
+    "ltx studio",
+    "ai video tutorial",
+    "sylvesters ai lab",
+    "generative ai"
+  ],
+  "hook": "Stop wasting your AI video credits guessing the prompts—there is a hidden, official instruction manual for every single video generator out there, and I’m going to show you exactly how to find and use it today.",
+  "sections": [
+    {
+      "heading": "The AI Video Blind Spot",
+      "voiceover": "Welcome back to Sylvester's AI Lab. If you've spent any time online looking up how to write AI prompts, you’ve probably run into a massive wall of text. There are endless three-hour courses on ChatGPT prompting, JSON structuring, and generic LLM hacks. But when you try to apply those same wordy techniques to an AI video generator, the output is almost always a distorted, chaotic mess. Why does this happen? It happens because video generators don't think like text models. They don't care about nested instructions or polite conversational filler. They care about physics, light, camera movement, and temporal consistency. The biggest strategic gap in the AI community right now is that while everyone is obsessed with text-prompt engineering, image-to-video prompting is wildly under-served. Most creators are just throwing random paragraphs at their video generators and hoping for the best. Today, we are putting an end to the guessing games. I am going to teach you a transferable, tool-agnostic method to locate and master the exact documentation written by the engineers who actually built the tool you are using."
+    },
+    {
+      "heading": "The Universal Strategy to Locate Any Guide",
+      "voiceover": "Instead of relying on third-party influencers who sell 'secret' prompt packs, your first step should always be going straight to the source. But here is the problem: AI companies are notorious for hiding their best technical documentation behind obscure support pages, community forums, or nested blog posts. To find the official prompt guide for literally any video tool on the planet, use this simple three-step search strategy. First, do not use standard Google searches which are flooded with SEO affiliate blogs. Instead, target the official domain directly using advanced search operators. Search for 'site: [the tool's official domain] \"prompt guide\"' or 'site: [the tool's official domain] \"documentation\"'. If that doesn't yield a direct hit, navigate to the tool's official help center or Discord community, and search for 'system prompts' or 'docs'. If a tool doesn't have an obvious guide, contact their support team directly and ask for their API developer documentation—even if you aren't a developer. The developer docs almost always contain the exact prompt formatting guidelines and parameter constraints that the model needs to perform its best."
+    },
+    {
+      "heading": "Live Demo 1: Finding Runway's Guide",
+      "voiceover": "Let's put this method into practice with our first live demonstration using Runway. We aren't here to rate or compare the tool, but rather to show you how to pull back the curtain on its official instructions. Step one: we go to the official domain, runwayml.com. Step two: we navigate to their resource section or use our search operator to locate the page titled 'Runway Resources | AI Video Prompting Guide'. Once you open this page, you’ll find 92 ready-to-use prompts. But don't just copy and paste them. Read the underlying structure. The official documentation clearly states that you don't need a film degree; you just need clear, directional ideas. It emphasizes positive phrasing—telling the machine what *to* see, rather than what *not* to see—and breaks down how to specify camera movements like pans, tilts, and tracks. By reading their direct examples, you learn exactly how their specific model interprets verbs versus nouns."
+    },
+    {
+      "heading": "Live Demo 2: Finding LTX's Guide",
+      "voiceover": "For our second demonstration, let's look at LTX. If we use our targeted search method, we can bypass the generic search results and go straight to the official LTX blog at ltx.io/blog/ai-video-prompt-guide. When we open this guide, titled 'AI Video Prompt Guide: How To Write AI Video Prompts', we find an entirely different goldmine of information. The engineers behind this tool explain that an AI video prompt acts as 'creative direction for an AI filmmaker'. Their official documentation teaches us that the key to image-to-video generation is starting with a highly detailed, clear reference image—which you can generate in tools like Midjourney, Stable Diffusion, or Flux—and then using highly concise, brief prompts to define *only* the motion and camera behavior. Instead of re-describing the scene, the guide explicitly instructs you to keep your text prompts simple, focus on the action, and let the reference image handle the visual details."
+    },
+    {
+      "heading": "The 3 Golden Rules of Image-to-Video",
+      "voiceover": "By analyzing these official guides across different platforms, we can distill three universal, transferable rules for image-to-video prompting that work on virtually any tool. Rule number one: Start with a pristine reference image. Do not rely on text-to-video to build a scene from scratch. Use your favorite image generator to get the exact lighting, character design, and composition you want, then feed that image into your video tool. Rule number two: Prompt the movement, not the subject. If your reference image shows a cup of coffee on a table, do not write 'a cup of hot coffee on a rustic wooden table with steam rising'. The AI already sees the cup and the table. Instead, write 'tight macro shot, steam rising slowly from the cup, subtle camera drift'. Rule number three: Keep it concise and positive. Avoid long-winded paragraphs. The official documentation across the board shows that shorter, punchier instructions prevent the model from getting confused and generating weird visual artifacts."
+    },
+    {
+      "heading": "Limitations & Verdict",
+      "voiceover": "Now for the honest truth. Even if you follow the official documentation to the letter, AI video models have severe, inherent limitations. They still struggle with complex human anatomy, fast-paced physical interactions, and text rendering. No prompt guide can completely fix a physics engine that decides to randomly morph a hand into a teacup. Because of this, my recommendation is to use these official prompt guides with caution. Don't expect perfection on the first generate button click. Instead, use these guides as a framework to systematically debug your generations. If a shot fails, check the guide: did you over-describe the scene? Did you confuse the camera movement instructions? Treat prompting as a science, not magic."
+    }
+  ],
+  "cta": "If you're tired of wasting your time and credits on bad AI generations, hit that subscribe button and turn on notifications. Here at Sylvester's AI Lab, we cut through the hype to give you the real, actionable workflows. See you in the next one."
+}

@@ -51,6 +51,8 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash")
 # Where the generated script JSON lives, consumed by the Remotion scene.
 SCRIPT_JSON_REL = "script.json"
+# Where first-hand YouTube research lives (produced by topic_research.py).
+RESEARCH_JSON_REL = "research.json"
 
 # ----------------------------------------------------------------------------
 # YouTube Data API (upload)

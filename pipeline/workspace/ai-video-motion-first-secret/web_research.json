@@ -1,0 +1,160 @@
+{
+  "topic": "AI video motion first secret",
+  "source": "tavily",
+  "query_time": "2026-07-19 08:44 UTC",
+  "queries": [
+    "why motion-first matters in AI image to video prompting",
+    "AI image to video prompting common beginner mistakes",
+    "Runway official guide prompting motion image to video"
+  ],
+  "result_count": 21,
+  "results": [
+    {
+      "query": "Runway official guide prompting motion image to video",
+      "title": "Tavily answer",
+      "url": "",
+      "content": "To convert images to videos on Runway, use detailed text prompts focusing on motion, camera work, and temporal progression. Gen-4.5 offers high-quality motion, while Gen-4 Turbo is faster for quick tests. Include key motion elements in your prompt for best results.",
+      "score": 1.0
+    },
+    {
+      "query": "AI image to video prompting common beginner mistakes",
+      "title": "Tavily answer",
+      "url": "",
+      "content": "Common beginner mistakes in AI video prompting include overcomplicating instructions, neglecting camera direction, and failing to specify lighting and subject focus. To improve, focus on one action, add camera and lighting details, and use concise, clear prompts.",
+      "score": 1.0
+    },
+    {
+      "query": "why motion-first matters in AI image to video prompting",
+      "title": "Tavily answer",
+      "url": "",
+      "content": "Motion-first prompting in AI image-to-video focuses on movement, reducing input details to avoid model distraction and ensuring smoother, more cinematic animations. Clear, concise motion instructions lead to better, more intentional results. This approach minimizes generation artifacts and enhances the overall quality of the output.",
+      "score": 1.0
+    },
+    {
+      "query": "why motion-first matters in AI image to video prompting",
+      "title": "Best Image-to-Video Prompts for Consistent Motion",
+      "url": "https://www.ai-inspo.com/blogs/video/best-image-to-video-prompts-consistent-motion",
+      "content": "## Why image-to-video prompts need structure\n\nText-to-video and image-to-video are not the same job. With a still as your input, the image already carries the composition, color, and style. Your words only have one real task: say what moves. Runway makes this explicit — its image-to-video prompting guide tells you to focus the prompt almost entirely on motion and to refer to subjects in general terms so the model knows what to animate.\n\nThat's why dumping a paragraph of scene description into image to video prompts backfires. You're re-describing things the image already shows, and the model burns its attention rebuilding the frame instead of moving it. Structure isn't about sounding cinemat",
+      "score": 0.833
+    },
+    {
+      "query": "why motion-first matters in AI image to video prompting",
+      "title": "Best Actionable Camera Movement Prompts for AI Image to Video",
+      "url": "https://aiimagetovideo.pro/blog/camera-movements-prompt-for-ai-video",
+      "content": "## Conclusion\n\nCamera movement prompting is a simple but powerful way to make AI Image to Video results feel more cinematic. This guide moves from easy to advanced techniques: starting with static camera, zoom in, camera pullback, rotating lens, pan, and tilt, then moving into more complex prompts that combine camera motion with character action, emotion, object reveals, FPV shots, animal perspectives, and underwater movement.\n\nThe key is to keep your camera direction short, clear, and matched to the reference image. A close-up portrait may only need a static camera or slow zoom. A full-body character can work well with pan-up or rotating lens. A wide landscape can support FPV movement, whil",
+      "score": 0.817
+    },
+    {
+      "query": "why motion-first matters in AI image to video prompting",
+      "title": "50 AI Camera Movement Prompts for Cinematic AI Video",
+      "url": "https://www.imagine.art/blogs/ai-camera-movement-prompts",
+      "content": "The AI stops guessing. When you tell the AI video model exactly what type of camera movement to generate, it does not have to infer intent from the mood or setting. You eliminate a major source of inconsistency.\n The emotional tone becomes deliberate. Different types of camera movements carry different emotional weight. A slow push-in builds tension. A wide crane shot creates awe. A handheld shake signals chaos. When you specify the camera shots, you are not just directing the camera, you are directing how the viewer feels.\n You reduce generation artifacts. Vague motion instructions can cause AI video generators to produce weird morphing effects or unnatural transitions. Precise camera movem",
+      "score": 0.748
+    },
+    {
+      "query": "why motion-first matters in AI image to video prompting",
+      "title": "Boosting Productivity with AI Image and Video Automation Workflows | MindStudio",
+      "url": "https://www.mindstudio.ai/blog/boosting-productivity-ai-image-video-automation",
+      "content": "Transfer movements directly from reference footage rather than trying to articulate them through prompts. This works especially well for complex physical movements like sports actions, dance sequences, or intricate camera movements.\n\nOther models are adopting similar reference-video capabilities. Expect this approach to become standard throughout 2026, fundamentally changing how creators specify motion in AI video generation.\n\n### Audio Integration\n\nNative audio generation eliminates significant post-production work. Models like Kling 2.6, Sora 2, and Veo 3.1 generate synchronized sound effects, ambient audio, and dialogue that matches visual content automatically. [...] The choice depends o",
+      "score": 0.707
+    },
+    {
+      "query": "why motion-first matters in AI image to video prompting",
+      "title": "12 essential camera movements to use in AI video (with examples)",
+      "url": "https://letsenhance.io/blog/all/ai-video-camera-movements/amp",
+      "content": "## Animate image with LetsEnhance\n\nLetsEnhance’s recent image-to-video tool turns static images into high-quality, cinematic clips. In less than 90 seconds, you can get 5-second 1080p MP4s to use across social media, e-commerce, and personal storytelling. It offers one-click presets, camera movements and pace speed but you can also take full control using the text prompt box. This is where you can truly direct the scene.\n\nTo do this, you need to speak the language of a director. Your prompt should focus purely on the motion: where the camera moves, how fast it goes, and what new details are revealed. Here is the simple and effective prompt structure:\n\n[Camera direction] + [Scene pace] + [Act",
+      "score": 0.667
+    },
+    {
+      "query": "why motion-first matters in AI image to video prompting",
+      "title": "Best Practices for Using an AI Video Generator from Images",
+      "url": "https://dubsmart.ai/blog/best-practices-ai-video-generator",
+      "content": "When crafting prompts for the AI, conciseness and specificity are key. This ensures that the AI accurately interprets your vision, producing more precise results. Additionally, keep your videos concise, ideally under three minutes, and be open to experimenting with different models to achieve natural motion. Finally, always preview outputs to refine pacing and transitions, ensuring your final product is polished and professional.\n\n## How to Use Image to Video AI\n\nFor those new to this technology, here's a step-by-step guide on how to use image to video AI tools, which is adaptable across various platforms: [...] Choosing the Right Platform: Begin by selecting a platform that aligns with your",
+      "score": 0.627
+    },
+    {
+      "query": "AI image to video prompting common beginner mistakes",
+      "title": "Common Prompt Mistakes in AI Video Generation and How to Fix Them",
+      "url": "https://ltx.io/blog/common-prompt-mistakes-in-ai-video-generation",
+      "content": "Key Takeaways\n\n Video prompts require chronological action descriptions, explicit camera direction, and concrete visual details — unlike image prompts, which can list attributes in any order, because the model must maintain consistency across dozens of frames over time.\n The seven most common mistakes are: vague descriptions, non-chronological order, too many competing elements, missing camera and lighting direction, abstract evaluative language, expecting multi-scene output, and skipping prompt enhancement.\n A reliable pre-generation checklist covers specificity, chronological order, length under 200 words, explicit camera direction, lighting description, single continuous shot, and enough ",
+      "score": 0.912
+    },
+    {
+      "query": "AI image to video prompting common beginner mistakes",
+      "title": "Best Prompts for AI Image to Video Generation",
+      "url": "https://invideo.io/blog/best-prompts-for-ai-image-to-video",
+      "content": "## Common Mistakes and How to Avoid Them\n\nUnderstanding common pitfalls in AI image to video prompt creation helps ensure better results and more efficient workflow.\n\nOverly Complex Instructions often lead to confused or inconsistent output. Instead of cramming multiple effects into one prompt, focus on one primary movement or effect per generation, then combine multiple clips if needed.\n\nVague Motion Descriptions like \"make it dynamic\" provide insufficient guidance for AI interpretation. Always specify direction, speed, and type of movement you want to achieve.\n\nIgnoring Image Composition can result in unnatural or impossible movements. Consider the original image's layout and ensure your p",
+      "score": 0.901
+    },
+    {
+      "query": "AI image to video prompting common beginner mistakes",
+      "title": "Every beginner mistake i made with AI video (and how to ...",
+      "url": "https://www.reddit.com/r/PromptEngineering/comments/1mzauni/every_beginner_mistake_i_made_with_ai_video_and",
+      "content": "this is 1going to save you months of expensive trial and error if you’re just starting with AI video generation… Made literally every mistake possible when I started with veo3. Burned through $2000+ learning what NOT to do before figuring out what actually works. Here are the biggest mistakes that cost me the most money and time: Mistake #1: Perfectionist single-shot approach What I did wrong: Spent hours crafting the “perfect prompt” then generated once, expecting perfection. Why this fails: AI video is inherently unpredictable. Same prompt under slightly different conditions produces completely different results. What works instead: Generate 8-12 variations of same concept, then select the",
+      "score": 0.846
+    },
+    {
+      "query": "AI image to video prompting common beginner mistakes",
+      "title": "How To Make AI Videos - Prompting Guide For Beginners",
+      "url": "https://www.youtube.com/watch?v=1JkmT6L2CmA",
+      "content": "seconds. So, when you give it 10 things to do, it sprints through all of them. The lesson? Give one clip one idea. The second mistake is not telling the AI where the camera goes. We prompted the dance scene, but said nothing about the shot. And the video that came back was genuinely really good. So, what's the problem? The problem is we have zero control over where it goes. Without camera direction, the AI picks the angle and the movement for us, and it's different every single time. One generation it pushes in, the next it drifts sideways, and you can never predict it. So, we'll add camera directions in our prompt like slow dolly in or low angle and take back the wheel. The third one is sne",
+      "score": 0.835
+    },
+    {
+      "query": "AI image to video prompting common beginner mistakes",
+      "title": "The 5 most common AI video prompt mistakes (and how to fix them)",
+      "url": "https://www.reddit.com/r/PromptEngineering/comments/1r83b7f/the_5_most_common_ai_video_prompt_mistakes_and",
+      "content": "Hey everyone, I've been deep into T2V prompt engineering for the past few months — using Runway, Kling, Sora, and recently Seedance 2.0. After tracking my own generations (and burning through way too many credits), I noticed a pattern in why prompts fail: 1. No camera motion specification — The model guesses, and usually guesses wrong. Always specify: \"slow dolly in\" or \"static shot\" rather than leaving it ambiguous. 2. Missing lighting context — \"A man walking\" vs \"A man walking in rim-lit golden hour light\" are completely different outputs. Models need lighting cues to set the mood. 3. Too many competing subjects — Each additional element in your prompt dilutes the model's attention. Keep ",
+      "score": 0.834
+    },
+    {
+      "query": "AI image to video prompting common beginner mistakes",
+      "title": "11 AI Image Mistakes Everyone Makes (And Quick Fixes) | ZSky AI",
+      "url": "https://zsky.ai/blog/ai-image-common-mistakes",
+      "content": "## Mistake 8: Forgetting Lighting\n\nLighting makes or breaks an image, yet most beginners never mention it in prompts. Add lighting descriptors to every prompt: golden hour, studio lighting, neon glow, overcast soft light, dramatic shadows. The difference is immediate and dramatic.\n\n## Mistake 9: No Post-Processing\n\nRaw AI output is rarely your best result. A quick crop, contrast adjustment, or color grade can elevate good to great. Spend thirty seconds in any photo editor after generating and your images will consistently look more polished.\n\n## Mistake 10: Not Learning from Results [...] Try It Free\n\n## Stop Making These Mistakes\n\nAfter watching thousands of beginners struggle with AI image",
+      "score": 0.824
+    },
+    {
+      "query": "Runway official guide prompting motion image to video",
+      "title": "Prompting Guide | Runway Academy",
+      "url": "https://academy.runwayml.com/guides/prompting-guide",
+      "content": "Visual descriptions — Describes what we see, where, and how it looks\n Motion descriptions — Describes how the scene moves and behaves\n\nThese elements may encompass multiple components:\n\n| Visual Components | Motion Components |\n --- |\n|  Subject appearance  Environment  Lighting  Composition/Framing  Style |  Subject action  Environmental motion  Camera motion  Motion style & timing  Direction & speed |\n\n## Image to Video\n\nImage to Video models transform images into videos with a text prompt to guide motion. When using this mode, you upload an image to define composition, subject matter, lighting, and style that guide the video. Your prompt's role is to describe what should happen—the motion",
+      "score": 0.822
+    },
+    {
+      "query": "Runway official guide prompting motion image to video",
+      "title": "Runway AI Prompts Guide for Video Editing and Control",
+      "url": "https://phygital.plus/blog/runway-ai-prompts-guide-video-editing-control",
+      "content": "According to Runway’s official model docs, gen4.5 is the flagship video model. It accepts text or image input and is positioned as Runway’s highest-end video generation model, with strong motion quality, prompt adherence, visual fidelity, temporal consistency, and controllability.\n\ngen4\\_turbo is different. It is not just “Gen-4.5 but cheaper.” In the official API docs it is an image-to-video model, which already tells you how to think about it. It is better for faster branching when you already have a visual starting point and want to test motion quickly. [...] ### Runway technical notes that are actually useful\n\nSome technical details are worth surfacing because they change workflow choice",
+      "score": 0.809
+    },
+    {
+      "query": "Runway official guide prompting motion image to video",
+      "title": "Runway Gen-3 Insane Image to Video Pro Guide",
+      "url": "https://www.youtube.com/watch?v=W82N6R28bAo",
+      "content": "5 Seconds click generate and for the next video I'll add a prompt with the image just to see how Runway deals without and with a prompt I'll try a weird prompt for this one so I've put in sausages full on the man's head and the results are really interesting so let's compare them the video without any prompt is just doing a kind of zoom into the face it still looks pretty good it's got some realistic motion to the face so you can always just put in an image and leave it without any prompt and it should do something with it I've tested loads of images before and runaway does like to kind of just zoom into images if you don't put any prompt so this could be a default motion that they usually u",
+      "score": 0.769
+    },
+    {
+      "query": "Runway official guide prompting motion image to video",
+      "title": "A Complete Guide to Runway",
+      "url": "https://learnprompting.org/blog/guide-runwayml",
+      "content": "Runway's video generation interface.\n\n### Step 1. Add an Image or Video (Optional)\n\nFrom here, select an image or a video to use for the generated video to reference.\n\nRunway's usage policy doesn't allow creating videos of celebrities without permission. So, as much as we'd love to bring another Will Smith eating spaghetti video to life, it's a no-go.\n\nTip\n\nIf your reference image doesn't match Runway's 1280x768 or 768x1280 aspect ratio, try using Runway's Expand Image tool to adjust it to the required dimensions.\n\n### Step 2. Write a Prompt\n\n#### Text-Only Prompting\n\nWhen using text-only prompting, the following structure provides consistent results:\n\nAstronaut\n\n#### Prompt\n\n[camera movemen",
+      "score": 0.758
+    },
+    {
+      "query": "Runway official guide prompting motion image to video",
+      "title": "Runway AI - Tutorial for Beginners in 17 MINUTES ! [ FULL ...",
+      "url": "https://www.youtube.com/watch?v=FqYRkl12ON8",
+      "content": "clicking on Input for Video in the bottom left corner. Then crop the reference image if needed. In the prompt box at the bottom, describe what you want in the video. For example, a blonde horse running with powerful movement. Here, describe the main subject, how it moves, its actions, any mood, and even camera movement. For example, camera tracks the horse while it runs, to follow the subject's motion. So, after defining the subject and camera movement, describe the scene or background. For example, the desert remains static, only sand dust rises behind. Then define the style. For example, cinematic or realistic. You can also choose cartoon, 3D animation, and more. You can find more guidance",
+      "score": 0.738
+    },
+    {
+      "query": "Runway official guide prompting motion image to video",
+      "title": "I just tried Runway’s new generative AI video features — here's how to make your own | Tom's Guide",
+      "url": "https://www.tomsguide.com/how-to/i-just-tried-runways-new-generative-ai-video-features-heres-how-to-make-your-own",
+      "content": "Runway is an AI video editor\n\nRunway is an AI video editor\n\nTo add a photo that can be turned into a video click upload a file to select an image from your computer. In my case, it is the cowboy picture I previously generated. You can also enter a simple text prompt to have Runway create the image for you.\n\n### How to add motion brush\n\nRunway is an AI video editor\n\nRunway is an AI video editor\n\nOnce you have the image loaded click the Motion Brush (beta) button. This will load the motion brush view where you simply draw in the area you want to animate.\n\nThe horizontal, vertical and proximity controls will prompt the AI to set the direction and size of the motion within the window you have dr",
+      "score": 0.729
+    }
+  ]
+}
