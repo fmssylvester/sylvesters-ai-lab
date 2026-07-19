@@ -130,22 +130,15 @@ export const RemotionRoot = () => {
       <Composition id="CtaEndCard" component={CtaEndCard} durationInFrames={120} fps={30} width={1920} height={1080} />
       <Composition id="LogoReveal" component={LogoReveal} durationInFrames={150} fps={30} width={1920} height={1080} />
 
-      {/* ── Pipeline-driven episode: consumes script.json + voiceover ── */}
+      {/* ── Pipeline-driven episode: consumes episodeRuntime.json ── */}
       <Composition
         id="Episode"
         component={Episode}
-        durationInFrames={episodeRuntime.durationInFrames}
+        durationInFrames={episodeRuntime.durationInFrames ?? 300}
         fps={30}
         width={1920}
         height={1080}
-        defaultProps={{
-          title: episodeRuntime.title,
-          hook: episodeRuntime.hook,
-          sections: episodeRuntime.sections,
-          cta: episodeRuntime.cta,
-          audioSrc: episodeRuntime.audioSrc,
-          audioDurationInFrames: episodeRuntime.audioDurationInFrames,
-        }}
+        defaultProps={episodeRuntime}
       />
     </>
   );
