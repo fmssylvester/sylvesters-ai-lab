@@ -45,10 +45,11 @@ def _describe_one(client, section: dict, idx: int) -> str:
         f"{voiceover}\n\n"
         "Describe the on-screen motion graphics action for this section."
     )
-    resp = client.models.generate_content(
-        model=config.GEMINI_MODEL,
-        contents=user_prompt,
-        config=types.GenerateContentConfig(
+    resp = config.gemini_generate(
+        client,
+        config.GEMINI_MODEL,
+        user_prompt,
+        types.GenerateContentConfig(
             system_instruction=SYSTEM_PROMPT,
             response_mime_type="application/json",
             max_output_tokens=512,

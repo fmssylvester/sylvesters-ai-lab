@@ -25,6 +25,7 @@ pipeline/.env file (see config.py for the full list).
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -100,17 +101,38 @@ def run(topic: str, privacy: str, notify: bool, voiceover_mode: str) -> None:
         str(audio_path), workspace / "word_timestamps.json"
     )
 
-    # 4. Scene intent classifier — visual_treatment / mood / components.
+    # 4. Scene intent classifier (reuse committed scene_plan.json when present).
     print("\n-- Scene classifier stage --")
-    scene_plan = scene_classifier.classify_sections(script, workspace)
+    scene_plan_path = workspace / "scene_plan.json"
+    if scene_plan_path.exists():
+        try:
+            scene_plan = json.loads(scene_plan_path.read_text(encoding="utf-8"))
+            print(f"[run] reusing existing scene_plan.json in '{workspace.name}'")
+        except Exception as exc:
+            print(f"[run] could not read scene_plan.json ({exc}); regenerating")
+            scene_plan = scene_classifier.classify_sections(script, workspace)
+    else:
+        scene_plan = scene_classifier.classify_sections(script, workspace)
 
-    # 5. Asset resolver — real brand logos mentioned in each section.
+    # 5. Asset resolver — real brand logos mentioned in each section (local, no API).
     print("\n-- Asset resolver stage --")
     section_assets = asset_resolver.resolve_sections(script)
 
-    # 6. B-roll descriptor — on-screen motion-graphics brief per section.
+    # 6. B-roll descriptor (reuse committed broll_descriptions.json when present).
     print("\n-- B-roll descriptor stage --")
-    broll = broll_descriptor.describe_sections(script, workspace)
+    broll_path = workspace / "broll_descriptions.json"
+    if broll_path.exists():
+        try:
+            _raw = json.loads(broll_path.read_text(encoding="utf-8"))
+            broll = [
+                (d.get("description", "") if isinstance(d, dict) else str(d)) for d in _raw
+            ]
+            print(f"[run] reusing existing broll_descriptions.json in '{workspace.name}'")
+        except Exception as exc:
+            print(f"[run] could not read broll_descriptions.json ({exc}); regenerating")
+            broll = broll_descriptor.describe_sections(script, workspace)
+    else:
+        broll = broll_descriptor.describe_sections(script, workspace)
 
     # Merge per-section enrichment into the script sections so the Episode
     # composition receives everything through episodeRuntime.json / --props.

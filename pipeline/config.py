@@ -5,6 +5,7 @@ module). Nothing sensitive is hard-coded here.
 """
 
 import os
+import time
 from pathlib import Path
 
 # Load .env (next to this file) BEFORE reading any os.getenv below.
@@ -96,6 +97,34 @@ def require(*names):
             "Missing required config: " + ", ".join(missing) +
             "\nSet them in the environment or a .env file in pipeline/."
         )
+
+
+def gemini_generate(client, model, contents, gen_config, attempts: int = 8):
+    """Call Gemini with retry/backoff on 429 (RESOURCE_EXHAUSTED) rate limits.
+
+    The free tier has a tiny quota (20 req/day for some models), so the pipeline
+    must wait out short rate-limit windows instead of failing or silently
+    falling back to low-quality defaults.
+    """
+    last = None
+    for i in range(attempts):
+        try:
+            return client.models.generate_content(
+                model=model, contents=contents, config=gen_config
+            )
+        except Exception as exc:  # noqa: BLE001
+            msg = str(exc)
+            if "429" in msg or "RESOURCE_EXHAUSTED" in msg:
+                wait = min(2 ** i * 5, 60)
+                print(
+                    f"[gemini] quota/429 hit; backing off {wait}s "
+                    f"(attempt {i + 1}/{attempts})"
+                )
+                time.sleep(wait)
+                last = exc
+                continue
+            raise
+    raise last or RuntimeError("gemini_generate exhausted retries")
 
 # Secrets that must never be logged.
 SECRET_KEYS = ("GEMINI_API_KEY", "TELEGRAM_BOT_TOKEN", "ANTHROPIC_API_KEY")

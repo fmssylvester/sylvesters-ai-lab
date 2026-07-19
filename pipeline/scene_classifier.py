@@ -90,10 +90,11 @@ def _classify_one(client, section: dict, idx: int) -> dict:
         f"Narration:\n{voiceover}\n\n"
         "Classify this section's visual treatment, mood, and suggested components."
     )
-    resp = client.models.generate_content(
-        model=config.GEMINI_MODEL,
-        contents=user_prompt,
-        config=types.GenerateContentConfig(
+    resp = config.gemini_generate(
+        client,
+        config.GEMINI_MODEL,
+        user_prompt,
+        types.GenerateContentConfig(
             system_instruction=SYSTEM_PROMPT.format(
                 treatments=", ".join(VISUAL_TREATMENTS),
                 moods=", ".join(MOODS),
