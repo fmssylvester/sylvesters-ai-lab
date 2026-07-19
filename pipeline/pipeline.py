@@ -66,26 +66,36 @@ def run(topic: str, privacy: str, notify: bool, voiceover_mode: str) -> None:
     print("\n-- Render stage --")
     video_path = render_trigger.render_batches(slug, audio_path)
 
-    # 4. Upload
+    # 4. Upload (non-fatal: a YouTube/API hiccup must not lose the render)
     print("\n-- Upload stage --")
-    video_id = uploader.upload(
-        video_path,
-        title=script.get("title", topic),
-        description=script.get("description", ""),
-        tags=script.get("tags", []),
-        privacy=privacy,
-    )
-    youtube_url = f"https://www.youtube.com/watch?v={video_id}"
+    video_id = None
+    try:
+        video_id = uploader.upload(
+            video_path,
+            title=script.get("title", topic),
+            description=script.get("description", ""),
+            tags=script.get("tags", []),
+            privacy=privacy,
+        )
+    except Exception as exc:
+        print(f"[warn] YouTube upload failed: {exc}")
+        print(f"[warn] Rendered video kept at: {video_path}")
+    youtube_url = f"https://www.youtube.com/watch?v={video_id}" if video_id else ""
 
     # 5. Notify
     print("\n-- Notify stage --")
     if notify:
         try:
-            if privacy == "public":
-                notifier.send_video_live(script.get("title", topic), video_id, youtube_url)
+            if video_id:
+                if privacy == "public":
+                    notifier.send_video_live(script.get("title", topic), video_id, youtube_url)
+                else:
+                    notifier.send_notification(
+                        f"Uploaded as *{privacy}*: [{script.get('title', topic)}]({youtube_url})"
+                    )
             else:
                 notifier.send_notification(
-                    f"Uploaded as *{privacy}*: [{script.get('title', topic)}]({youtube_url})"
+                    f"⚠️ Render finished but YouTube upload failed: {script.get('title', topic)}"
                 )
         except Exception as exc:
             print(f"[warn] notification failed: {exc}")

@@ -163,7 +163,7 @@ def _remotion_render_range(out_path: Path, props: dict, frm: int, to: int) -> No
         "npm", "run", "render", "--",
         config.REMOTION_COMPOSITION_ID, str(out_path),
         "--props", json.dumps(props),
-        "--from", str(frm), "--to", str(to),
+        "--frames", f"{frm}-{to-1}",
     ]
     if config.REMOTION_BROWSER_EXECUTABLE:
         cmd += ["--browser-executable", str(config.REMOTION_BROWSER_EXECUTABLE)]
