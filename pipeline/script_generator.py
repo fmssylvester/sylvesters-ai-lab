@@ -138,11 +138,11 @@ def _to_markdown(data: dict) -> str:
     return "\n".join(lines)
 
 
+def _slug(topic: str) -> str:
+    return "".join(c if c.isalnum() else "-" for c in topic.lower()).strip("-")
+
+
 if __name__ == "__main__":
     topic = sys.argv[1] if len(sys.argv) > 1 else input("Topic: ")
     ws = config.WORKSPACE / _slug(topic)
     generate_script(topic, ws)
-
-
-def _slug(topic: str) -> str:
-    return "".join(c if c.isalnum() else "-" for c in topic.lower()).strip("-")
