@@ -52,9 +52,10 @@ jobs:
 
       - name: Write YouTube OAuth files from secrets
         run: |
-          echo "${{ secrets.YOUTUBE_CLIENT_SECRETS }}" > client_secrets.json
+          echo "${{ secrets.YOUTUBE_CLIENT_SECRETS_B64 }}" | base64 -d > client_secrets.json
           mkdir -p pipeline
-          echo "${{ secrets.YOUTUBE_TOKEN }}" > pipeline/youtube_token.json
+          echo "${{ secrets.YOUTUBE_TOKEN_B64 }}" | base64 -d > pipeline/youtube_token.json
+          echo "Wrote client_secrets.json ($(wc -c < client_secrets.json) bytes) and youtube_token.json ($(wc -c < pipeline/youtube_token.json) bytes)"
         shell: bash
 
       - name: Run pipeline
