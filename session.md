@@ -29,15 +29,22 @@ Produce a **multi-part YouTube series** titled *"Mastering AI Image-to-Video Pro
 - Upgraded `script_generator.py`: web+YouTube merged research brief (`load_research_brief`), web synthesis (`synthesize_web_research`), tool-agnostic `extra_instruction` guardrails, fixed missing `config.RESEARCH_JSON_REL`.
 - Made `pipeline.py` idempotent (reuse existing `script.json`).
 - Added `config.RESEARCH_JSON_REL`, new `pipeline/produce_series.py` series harness.
-- **Generated all 6 grounded scripts** (research-injected; web synthesis falls back to raw Tavily results, which still ground the scripts). All tool-agnostic, constraint-compliant, cite first-hand sources.
-- Next: commit (force-add per-part workspace JSONs) → push → dispatch CI render per part.
+- **Generated all 6 grounded scripts** (research-injected; web synthesis falls back to raw Tavily results, which still ground the scripts). All tool-agnostic, constraint-compliant, cite first-hand sources. Spot-checked Part 1/4/6 — strong, grounded, on-brief.
+- Committed as `7291ab3` (branch `main`) + pushed. Per-part `script.json`/`research.json`/`web_research.json`/`script.md` force-added (workspace/ is gitignored) so CI checkout finds them.
+- **CI dispatched** for all 6 parts via `gh workflow run render.yml` (privacy=private). Run IDs:
+  - Part 1 `ai-video-motion-first-secret` → 29680501887
+  - Part 2 `ai-video-prompt-anatomy-template` → 29680503340
+  - Part 3 `ai-video-camera-movement-lexicon` → 29680505061
+  - Part 4 `ai-video-find-any-tool-guide` → 29680506371
+  - Part 5 `ai-video-prompt-iteration-method` → 29680507584
+  - Part 6 `ai-video-fix-ugly-output` → 29680508921
+  - CI reuses the committed grounded `script.json` (pipeline.py idempotent), then runs voiceover→WhisperX→enrich→Remotion render→YouTube upload.
 
 ## Current status
-- 6/6 scripts produced locally and verified (Part 1, 4, 6 spot-checked — strong, grounded, on-brief).
-- Not yet committed/pushed. CI not yet triggered.
+- **Local autonomous production: COMPLETE.** 6/6 research-grounded, tool-agnostic scripts produced, committed, pushed.
+- **CI: IN PROGRESS** (queued/running on GitHub). Renders are long; logs appear on completion. Telegram notify token is invalid (non-fatal — upload still proceeds).
 
 ## Next steps
-1. Commit pipeline changes + per-part `script.json`/`research.json`/`web_research.json`/`script.md` (force-add).
-2. Push to `master`.
-3. `gh workflow run render.yml` for each of the 6 parts (privacy=private). CI reuses committed grounded scripts.
-4. Update this log; report completion (CI runs are long/queued — videos render on CI).
+1. Monitor the 6 CI runs; confirm each renders + uploads as private YouTube video.
+2. If a CI run fails, inspect `gh run view <id> --log`, fix, re-dispatch that part.
+3. (Optional) Build a playlist uniting the 6 parts under the series umbrella title.
