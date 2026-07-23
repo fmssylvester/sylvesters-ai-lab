@@ -1,0 +1,112 @@
+{
+  "flux_unet": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "flux1-dev.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "flux_clip": {
+    "class_type": "DualCLIPLoader",
+    "inputs": {
+      "clip_name1": "clip_l.safetensors",
+      "clip_name2": "t5xxl_fp16.safetensors",
+      "type": "flux",
+      "device": "default"
+    }
+  },
+  "flux_vae": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    }
+  },
+  "pos": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": ["flux_clip", 0],
+      "text": "a cinematic portrait, highly detailed"
+    }
+  },
+  "neg": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": ["flux_clip", 0],
+      "text": ""
+    }
+  },
+  "guid_pos": {
+    "class_type": "FluxGuidance",
+    "inputs": {
+      "conditioning": ["pos", 0],
+      "guidance": 3.5
+    }
+  },
+  "guid_neg": {
+    "class_type": "FluxGuidance",
+    "inputs": {
+      "conditioning": ["neg", 0],
+      "guidance": 3.5
+    }
+  },
+  "latent": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    }
+  },
+  "load_img": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "reference.png"
+    }
+  },
+  "scale_img": {
+    "class_type": "ImageScale",
+    "inputs": {
+      "image": ["load_img", 0],
+      "width": 1024,
+      "height": 1024,
+      "upscale_method": "lanczos",
+      "crop": "disabled"
+    }
+  },
+  "vae_encode": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": ["scale_img", 0],
+      "vae": ["flux_vae", 0]
+    }
+  },
+  "ksampler": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": ["flux_unet", 0],
+      "positive": ["guid_pos", 0],
+      "negative": ["guid_neg", 0],
+      "latent_image": ["latent", 0],
+      "seed": 42,
+      "steps": 20,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1.0
+    }
+  },
+  "vae_decode": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": ["ksampler", 0],
+      "vae": ["flux_vae", 0]
+    }
+  },
+  "save": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": ["vae_decode", 0],
+      "filename_prefix": "flux_dev"
+    }
+  }
+}
