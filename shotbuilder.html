@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShotBuilder — Cinematic Prompt Studio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+:root{
+  --bg:#07090D; --surface:rgba(13,17,23,0.85); --border:rgba(0,217,255,0.18);
+  --cyan:#00D9FF; --gold:#E7B84D; --text:#EAF6FF; --dim:#9fb3c8;
+  --glass:linear-gradient(135deg, rgba(0,217,255,0.06), rgba(231,184,77,0.04));
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--bg); color:var(--text); font-family:'Inter',sans-serif;
+  min-height:100vh; padding:20px;
+  background-image:radial-gradient(1200px 600px at 12% -10%, rgba(0,217,255,0.10), transparent 60%),
+    radial-gradient(1000px 600px at 100% 110%, rgba(231,184,77,0.08), transparent 60%);
+}
+.container{max-width:1280px;margin:0 auto;}
+header{
+  display:flex;align-items:center;justify-content:space-between; padding:18px 24px;
+  border:1px solid var(--border); border-radius:18px; background:var(--glass);
+  backdrop-filter:blur(14px); margin-bottom:20px;
+}
+header h1{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;letter-spacing:1.5px;}
+header h1 span{color:var(--gold);}
+header .tag{font-size:11px;color:rgba(0,217,255,0.7);letter-spacing:3px;margin-top:3px;}
+header .badge{font-size:12px;color:var(--dim);}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:900px){.layout{grid-template-columns:1fr;}}
+.card{
+  background:var(--surface); border:1px solid var(--border); border-radius:16px;
+  padding:20px; backdrop-filter:blur(10px);
+}
+.card h2{font-family:'Space Grotesk',sans-serif;font-size:14px;letter-spacing:1.5px;color:var(--cyan);margin-bottom:14px;text-transform:uppercase;}
+.card label{display:block;font-size:12px;color:var(--dim);margin-bottom:4px;margin-top:12px;}
+.card label:first-child{margin-top:0;}
+select,.tag-group{width:100%;}
+select{
+  background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:10px;
+  color:var(--text); padding:10px 14px; font-size:14px; font-family:'Inter',sans-serif;
+  appearance:none; cursor:pointer; transition:border-color .15s;
+}
+select:focus{outline:none;border-color:var(--cyan);}
+.tag-group{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+.tag{
+  padding:8px 14px; border:1px solid rgba(0,217,255,0.25); border-radius:10px;
+  background:rgba(0,0,0,0.3); color:var(--dim); font-size:13px; cursor:pointer;
+  transition:all .15s; user-select:none; font-family:'Inter',sans-serif;
+}
+.tag:hover{border-color:var(--cyan);color:var(--text);}
+.tag.sel{
+  border-color:var(--cyan) !important;
+  background:linear-gradient(90deg, rgba(0,217,255,0.20), rgba(231,184,77,0.10)) !important;
+  color:var(--text) !important; box-shadow:0 0 14px rgba(0,217,255,0.30);
+}
+.prompt-box{
+  width:100%; min-height:120px; background:rgba(0,0,0,0.3); border:1px solid var(--border);
+  border-radius:12px; color:var(--text); padding:14px; font-size:14px; line-height:1.6;
+  font-family:'Inter',sans-serif; resize:vertical; margin-top:10px;
+}
+.prompt-box:focus{outline:none;border-color:var(--cyan);}
+.copy-btn{
+  background:linear-gradient(90deg,#00D9FF,#0A8FBF); color:#04121A; font-weight:700;
+  border:none; border-radius:12px; padding:12px 24px; cursor:pointer; font-size:14px;
+  letter-spacing:0.4px; margin-top:10px; transition:transform .15s, box-shadow .15s;
+  width:100%; font-family:'Space Grotesk',sans-serif;
+}
+.copy-btn:hover{box-shadow:0 0 34px rgba(0,217,255,0.5);transform:translateY(-1px);}
+.copy-btn.ok{background:linear-gradient(90deg,#27e08a,#1aa86b);box-shadow:0 0 20px rgba(39,224,138,0.3);}
+.ref-list{margin-top:10px;max-height:300px;overflow-y:auto;}
+.ref-item{
+  padding:8px 10px; border-bottom:1px solid rgba(0,217,255,0.08); cursor:pointer;
+  transition:background .15s; border-radius:6px;
+}
+.ref-item:hover{background:rgba(0,217,255,0.06);}
+.ref-item h4{font-size:13px;color:var(--gold);font-weight:600;}
+.ref-item p{font-size:12px;color:var(--dim);margin-top:2px;line-height:1.5;}
+.ref-item .eg{font-size:11px;color:rgba(0,217,255,0.6);font-style:italic;margin-top:3px;}
+.search-bar{
+  width:100%; background:rgba(0,0,0,0.3); border:1px solid var(--border);
+  border-radius:10px; color:var(--text); padding:10px 14px; font-size:13px;
+  font-family:'Inter',sans-serif; margin-bottom:10px;
+}
+.search-bar:focus{outline:none;border-color:var(--gold);}
+.voice-preview{font-size:12px;color:var(--dim);margin-top:6px;display:flex;gap:10px;flex-wrap:wrap;}
+.voice-preview span{background:rgba(0,217,255,0.08);padding:4px 10px;border-radius:6px;}
+.footer{text-align:center;margin-top:30px;padding:14px;font-size:12px;color:var(--dim);border-top:1px solid rgba(0,217,255,0.12);}
+.footer strong{color:#cfe9f7;font-family:'Space Grotesk',sans-serif;}
+.footer em{color:var(--gold);font-style:italic;}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <div>
+    <h1>SHOT<span>BUILDER</span></h1>
+    <div class="tag">CINEMATIC PROMPT STUDIO</div>
+  </div>
+  <div class="badge">Design shots · Compose prompts · Think like a filmmaker</div>
+</header>
+
+<div class="layout">
+  <!-- Left: Control panel -->
+  <div class="card">
+    <h2>Shot Design</h2>
+
+    <label>Subject / Action</label>
+    <input class="search-bar" id="subject" placeholder="e.g. a lone figure walking through mist..." value="a lone figure walking through morning mist">
+
+    <label>Shot Type</label>
+    <div class="tag-group" id="shotType">
+      <div class="tag" data-val="Extreme wide shot, vast landscape, tiny subject, scale">Extreme Wide</div>
+      <div class="tag sel" data-val="Wide shot, full body visible, environment dominant">Wide</div>
+      <div class="tag" data-val="Medium shot, subject from waist up, focus on subject">Medium</div>
+      <div class="tag" data-val="Close-up, tight on subject, detail, intimate">Close-up</div>
+      <div class="tag" data-val="Extreme close-up, macro detail, texture, eyes">Extreme CU</div>
+      <div class="tag" data-val="Over-the-shoulder shot, POV adjacent, conversation">OTS</div>
+      <div class="tag" data-val="Dutch angle, tilted horizon, unease, dynamic">Dutch Angle</div>
+      <div class="tag" data-val="Bird's-eye view, top-down, abstract, omniscient">Bird's Eye</div>
+      <div class="tag" data-val="Low angle, looking up, power, grandeur">Low Angle</div>
+    </div>
+
+    <label>Camera Movement</label>
+    <div class="tag-group" id="camMove">
+      <div class="tag sel" data-val="Static camera, locked-off tripod, steady">Static</div>
+      <div class="tag" data-val="Panning, horizontal rotation, revealing">Pan</div>
+      <div class="tag" data-val="Tilting, vertical rotation, revealing height">Tilt</div>
+      <div class="tag" data-val="Dolly shot, camera moving forward/backward, immersive">Dolly</div>
+      <div class="tag" data-val="Tracking shot, camera moving alongside subject, following">Track</div>
+      <div class="tag" data-val="Steadicam, smooth floating movement, following">Steadicam</div>
+      <div class="tag" data-val="Handheld, shaky, documentary feel, urgent">Handheld</div>
+      <div class="tag" data-val="Crane shot, vertical movement, epic reveal">Crane</div>
+      <div class="tag" data-val="Zoom, lens focal length change, pull focus">Zoom</div>
+    </div>
+
+    <label>Lighting</label>
+    <div class="tag-group" id="lighting">
+      <div class="tag sel" data-val="Golden hour, warm sunlight, long shadows, 35mm">Golden Hour</div>
+      <div class="tag" data-val="Soft diffused light, gentle shadows, even illumination">Soft</div>
+      <div class="tag" data-val="Hard light, sharp shadows, dramatic contrast, noir">Hard / Noir</div>
+      <div class="tag" data-val="Rim light, edge lighting, subject separation, glow">Rim</div>
+      <div class="tag" data-val="Backlit, silhouette, atmospheric, contre-jour">Backlit</div>
+      <div class="tag" data-val="Practical lights, diegetic sources, lamp, firelight">Practical</div>
+      <div class="tag" data-val="Neon, colored city lights, cyberpunk, reflections">Neon</div>
+      <div class="tag" data-val="Volumetric, light beams, fog, god rays, atmospheric">Volumetric</div>
+      <div class="tag" data-val="Candlelight, warm flicker, intimate, period">Candlelight</div>
+    </div>
+
+    <label>Color Palette</label>
+    <div class="tag-group" id="palette">
+      <div class="tag sel" data-val="Warm amber and gold tones, cozy, nostalgic">Warm</div>
+      <div class="tag" data-val="Cool blue and teal tones, cold, detached, night">Cool</div>
+      <div class="tag" data-val="Desaturated, muted, bleak, documentary">Desaturated</div>
+      <div class="tag" data-val="High saturation, vibrant, rich, stylized">Vibrant</div>
+      <div class="tag" data-val="Monochrome, black and white, timeless">Monochrome</div>
+      <div class="tag" data-val="Teal and orange, cinematic blockbuster look">Teal-Orange</div>
+      <div class="tag" data-val="Pastel, soft, dreamy, muted color">Pastel</div>
+      <div class="tag" data-val="Analog, film stock look, halation, grain">Analog</div>
+    </div>
+
+    <label>Mood / Atmosphere</label>
+    <div class="tag-group" id="mood">
+      <div class="tag sel" data-val="Cinematic, dramatic, epic, emotional">Cinematic</div>
+      <div class="tag" data-val="Peaceful, calm, serene, meditative">Peaceful</div>
+      <div class="tag" data-val="Melancholic, lonely, introspective, somber">Melancholic</div>
+      <div class="tag" data-val="Mysterious, suspenseful, tense, uneasy">Mysterious</div>
+      <div class="tag" data-val="Romantic, tender, warm, intimate">Romantic</div>
+      <div class="tag" data-val="Surreal, dreamlike, otherworldly, uncanny">Surreal</div>
+      <div class="tag" data-val="Gritty, raw, urban, documentary style">Gritty</div>
+      <div class="tag" data-val="Epic, grand, majestic, awe-inspiring">Epic</div>
+    </div>
+
+    <label>Era / Aesthetic</label>
+    <div class="tag-group" id="era">
+      <div class="tag sel" data-val="">None / Modern</div>
+      <div class="tag" data-val="1940s film noir, high contrast, shadowy, retro">Noir 40s</div>
+      <div class="tag" data-val="1980s synthwave, neon, retro-futuristic, vaporwave">80s Synth</div>
+      <div class="tag" data-val="Victorian, sepia, antique, period drama">Victorian</div>
+      <div class="tag" data-val="Cyberpunk, high tech low life, neon, rain">Cyberpunk</div>
+      <div class="tag" data-val="Fantasy, ethereal, magical, mythical, unreal">Fantasy</div>
+      <div class="tag" data-val="Sci-fi, sleek, futuristic, minimal, clean">Sci-Fi</div>
+      <div class="tag" data-val="Western, dusty, warm, wide open, Americana">Western</div>
+    </div>
+
+    <label style="margin-top:14px;">Depth of Field</label>
+    <div class="tag-group" id="dof">
+      <div class="tag sel" data-val="Deep focus, everything sharp, documentary">Deep</div>
+      <div class="tag" data-val="Shallow depth of field, blurred background, subject isolated">Shallow</div>
+      <div class="tag" data-val="Medium depth of field, some background detail">Medium</div>
+    </div>
+
+    <label style="margin-top:14px;">Lens / Format</label>
+    <div class="tag-group" id="lens">
+      <div class="tag sel" data-val="35mm film, cinematic, film grain">35mm</div>
+      <div class="tag" data-val="Wide angle lens, exaggerated perspective, 18mm">Wide Angle</div>
+      <div class="tag" data-val="Telephoto, compressed perspective, 85mm+">Telephoto</div>
+      <div class="tag" data-val="Anamorphic, wide aspect, lens flares, 2.35:1">Anamorphic</div>
+      <div class="tag" data-val="IMAX, large format, ultra detailed, immersive">IMAX</div>
+      <div class="tag" data-val="Pinhole, soft focus, dreamy, vintage">Pinhole</div>
+    </div>
+  </div>
+
+  <!-- Right: Output + Reference -->
+  <div>
+    <div class="card" style="margin-bottom:20px;">
+      <h2>Finished Prompt</h2>
+      <textarea class="prompt-box" id="promptOutput" readonly></textarea>
+      <button class="copy-btn" id="copyBtn">Copy Prompt</button>
+      <div class="voice-preview" id="voiceHint"></div>
+    </div>
+
+    <div class="card">
+      <h2>Cinematography Reference</h2>
+      <input class="search-bar" id="refSearch" placeholder="Search shots, lighting, terms..." oninput="filterRef()">
+      <div class="ref-list" id="refList"></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <strong>SHOTBUILDER</strong> · Sylvester's AI Lab &nbsp;·&nbsp; <em>Think in frames</em>
+</div>
+</div>
+
+<script>
+const REFERENCES = [
+  {title:"Extreme Wide Shot", desc:"Subject is tiny against the environment. Used for establishing scale and context. The human figure becomes a compositional element.", eg:"'tiny figure dwarfed by vast mountain range, extreme wide shot'"},
+  {title:"Wide Shot", desc:"Full body visible. Shows subject + environment. The workhorse of visual storytelling — establishes where we are and who's there.", eg:"'wide shot of a cowboy walking through a dusty town'"},
+  {title:"Medium Shot", desc:"Waist-up framing. Focuses on subject while keeping some environment. Natural for dialogue and character moments.", eg:"'medium shot, two people facing each other, tense atmosphere'"},
+  {title:"Close-Up", desc:"Fills frame with subject. Captures emotion, detail, reaction. Maximum emotional impact — use sparingly for maximum effect.", eg:"'close-up of eyes reflecting firelight, intense emotion'"},
+  {title:"Dutch Angle", desc:"Tilted horizon. Creates unease, disorientation, tension. Common in psychological thrillers and action sequences.", eg:"'dutch angle of a dark corridor, horror atmosphere'"},
+  {title:"Golden Hour Light", desc:"Warm light just after sunrise or before sunset. Long soft shadows, amber tones. The most flattering light for any subject.", eg:"'golden hour light streaming through window, warm amber tones'"},
+  {title:"Rim Light", desc:"Light from behind/side that outlines the subject. Creates separation from background. Gives a halo effect.", eg:"'rim light outlining the figure against dark background, edge glow'"},
+  {title:"Volumetric Lighting", desc:"Visible light beams through atmosphere (fog, dust, smoke). Creates depth and atmosphere. God rays.", eg:"'volumetric sunlight through forest canopy, dust particles dancing'"},
+  {title:"Dolly Shot", desc:"Camera physically moves forward/backward. Creates immersion and reveals space. Different from zoom — perspective changes.", eg:"'dolly forward into the dark doorway, sense of entering'"},
+  {title:"Steadicam", desc:"Smooth floating camera movement. Combines walking with stability. Creates the feeling of gliding through space.", eg:"'steadicam following behind the character through the corridor'"},
+  {title:"Handheld", desc:"Camera held by operator, slight shake. Documentary feel, urgency, realism. Used for chaos, danger, intimacy.", eg:"'handheld camera, running through the crowd, chaotic energy'"},
+  {title:"Teal-Orange Grade", desc:"The modern cinematic look. Teal shadows + orange skin tones. Creates natural color contrast that the eye loves.", eg:"'teal and orange color grade, cinematic blockbuster look'"},
+  {title:"Anamorphic", desc:"Widescreen format (2.35:1). Horizontal lens flares, oval bokeh. The 'movie look' — wider field of view.", eg:"'anamorphic lens, horizontal flares, cinematic widescreen'"},
+  {title:"Deep Focus", desc:"Everything in focus from foreground to background. Used by Orson Welles. Draws eye through the entire frame.", eg:"'deep focus, foreground rocks and distant mountain both sharp'"},
+  {title:"Shallow Focus", desc:"Only subject is sharp, background blurs. Isolates the subject. Directs attention precisely. Bokeh effect.", eg:"'shallow depth of field, face sharp, street blurred behind'"},
+  {title:"Rack Focus", desc:"Shifting focus from one subject to another within the same shot. Directs viewer attention in time.", eg:"'rack focus from wine glass to face across the table'"},
+  {title:"Silhouette", desc:"Subject dark against bright background. Anonymity, mystery, universal. Strong graphic composition.", eg:"'silhouette against sunset sky, figure standing on ridge'"},
+  {title:"Low Key", desc:"Mostly dark with small bright areas. High contrast, dramatic shadows. Film noir style.", eg:"'low key lighting, face half in shadow, noir atmosphere'"},
+  {title:"High Key", desc:"Bright even lighting, few shadows. Upbeat, commercial, clean. Used in comedies and beauty shots.", eg:"'high key lighting on white background, product photography'"},
+  {title:"Dutch Angle", desc:"Tilted camera creates unease. Common in The Matrix, Battlefield Earth. Use intentionally — it's a strong statement.", eg:"'dutch angle, neon signs reflected in puddle, disorientation'"},
+  {title:"Negative Space", desc:"Large empty area around subject. Isolation, loneliness, minimalism. Breathes in the frame.", eg:"'vast negative space, tiny figure in lower third, mist below'"},
+  {title:"Rule of Thirds", desc:"Subject on intersection of imaginary 3x3 grid. Creates balanced, pleasing compositions. The foundation.", eg:"'subject on left third, sunset on right two-thirds, balanced'"},
+  {title:"Leading Lines", desc:"Lines that draw the eye toward the subject. Roads, hallways, rivers. Creates depth and direction.", eg:"'leading lines of railroad tracks converging on figure, depth'"},
+  {title:"Frame Within Frame", desc:"Using foreground elements to frame the subject. Doorways, windows, arches. Adds depth and focus.", eg:"'framed through an arched doorway, figure in central courtyard'"},
+  {title:"Symmetry", desc:"Mirrored composition, balanced both sides. Authority, formality, grandeur. Used by Kubrick extensively.", eg:"'perfect symmetry, corridor with doors on both sides'"},
+  {title:"Crane Shot", desc:"Camera rises or falls vertically. Reveals scale, transitions perspective. Epic, omnipotent feeling.", eg:"'crane shot rising from ground to reveal the entire battlefield'"},
+  {title:"Snorricam", desc:"Camera attached to actor. World moves around them, subject stays still. Intense psychological effect.", eg:"'snorricam, subject static while room spins, disorientation'"},
+  {title:"Whip Pan", desc:"Extremely fast pan that blurs. Transition between shots or reveals. Creates energy and speed.", eg:"'whip pan to the next character, fast-paced energy'"},
+  {title:"Crash Zoom", desc:"Sudden fast zoom into subject. Emphasizes a realization or shock. 70s cinema staple.", eg:"'crash zoom into the gun, moment of realization'"},
+  {title:"Wes Anderson Style", desc:"Centered compositions, pastel colors, flat camera moves, deadpan. Highly stylized, playful.", eg:"'Wes Anderson style, pastel pink, symmetrical, flat dolly move'"},
+  {title:"Gladiator / Epic", desc:"Golden fields, wide lenses, emotional lighting, grand scale. Ridley Scott's epic style.", eg:"'golden wheat field, wide lens, epic scale, god rays'"},
+  {title:"Blade Runner / Cyberpunk", desc:"Rain-soaked streets, neon reflections, dark silhouettes, megastructures. Dystopian future.", eg:"'cyberpunk, neon rain, reflected in puddle, dark silhouette'"},
+  {title:"Terrence Malick / Poetic", desc:"Golden hour, floating camera, nature, voiceover, light through leaves. Meditative, spiritual.", eg:"'Malick style, golden light through leaves, floating camera, poetic'"},
+  {title:"Noir / Neo-Noir", desc:"High contrast shadows, venetian blinds, smoke, rain-slicked streets. Moral ambiguity.", eg:"'noir, venetian blind shadows across face, cigarette smoke'"},
+];
+
+let selections = {};
+
+document.querySelectorAll('.tag-group').forEach(group => {
+  group.querySelectorAll('.tag').forEach(tag => {
+    tag.addEventListener('click', () => {
+      if (tag.classList.contains('sel')) return;
+      group.querySelectorAll('.tag').forEach(t => t.classList.remove('sel'));
+      tag.classList.add('sel');
+      buildPrompt();
+    });
+  });
+});
+
+document.getElementById('subject').addEventListener('input', buildPrompt);
+
+function getSel(groupId){
+  const sel = document.querySelector(`#${groupId} .tag.sel`);
+  return sel ? sel.dataset.val : '';
+}
+
+function buildPrompt(){
+  const subject = document.getElementById('subject').value.trim();
+  const shot = getSel('shotType');
+  const move = getSel('camMove');
+  const light = getSel('lighting');
+  const palette = getSel('palette');
+  const mood = getSel('mood');
+  const era = getSel('era');
+  const dof = getSel('dof');
+  const lens = getSel('lens');
+
+  let parts = [subject];
+  if(shot) parts.push(shot.toLowerCase());
+  if(move && !move.toLowerCase().includes('static')) parts.push(move.toLowerCase());
+  if(light) parts.push(light.toLowerCase());
+  if(palette) parts.push(palette.toLowerCase() + ' tones');
+  if(mood) parts.push(mood.toLowerCase());
+  if(era) parts.push(era.toLowerCase());
+  if(dof) parts.push(dof.toLowerCase());
+  if(lens) parts.push(lens.toLowerCase());
+
+  const prompt = parts.join(', ');
+  document.getElementById('promptOutput').value = prompt;
+
+  // Voiceover hint
+  const voiceHint = document.getElementById('voiceHint');
+  const hasCam = move && !move.toLowerCase().includes('static');
+  const hasLight = light !== 'Soft diffused light, gentle shadows, even illumination';
+  voiceHint.innerHTML = `
+    <span>🎬 ${shot ? shot.split(',')[0] : 'Shot'}</span>
+    <span>📷 ${move ? move.split(',')[0] : 'Cam'}</span>
+    <span>💡 ${light ? light.split(',')[0] : 'Light'}</span>
+    <span>🎨 ${palette ? palette.split(',')[0] : 'Palette'}</span>
+    <span>📽️ ${lens ? lens.split(',')[0] : 'Lens'}</span>
+  `;
+  document.getElementById('copyBtn').textContent = 'Copy Prompt';
+  document.getElementById('copyBtn').className = 'copy-btn';
+}
+
+function filterRef(){
+  const q = document.getElementById('refSearch').value.toLowerCase();
+  const list = document.getElementById('refList');
+  list.innerHTML = '';
+  REFERENCES.filter(r => r.title.toLowerCase().includes(q) || r.desc.toLowerCase().includes(q) || r.eg.toLowerCase().includes(q))
+    .forEach(r => {
+      const d = document.createElement('div');
+      d.className = 'ref-item';
+      d.innerHTML = `<h4>${r.title}</h4><p>${r.desc}</p><div class="eg">${r.eg}</div>`;
+      d.addEventListener('click', () => {
+        document.getElementById('refSearch').value = r.title;
+        filterRef();
+      });
+      list.appendChild(d);
+    });
+}
+
+document.getElementById('copyBtn').addEventListener('click', () => {
+  const ta = document.getElementById('promptOutput');
+  ta.select(); ta.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(ta.value).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = 'Copied!';
+    btn.className = 'copy-btn ok';
+    setTimeout(() => { btn.textContent = 'Copy Prompt'; btn.className = 'copy-btn'; }, 2000);
+  });
+});
+
+// Init
+buildPrompt();
+filterRef();
+</script>
+</body>
+</html>
