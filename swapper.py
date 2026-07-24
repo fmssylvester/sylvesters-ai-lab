@@ -11,11 +11,16 @@ _RESTORER = None
 
 _INSWAPPER_URL = "https://github.com/deepinsight/insightface/releases/download/v0.7/inswapper_128.onnx"
 _GFPGAN_URL = "https://github.com/TencentARC/GFPGAN/releases/download/v1.3.0/GFPGANv1.4.pth"
+_BUFFALO_L_URL = "https://github.com/deepinsight/insightface/releases/download/v0.7/buffalo_l.zip"
+
+_BASE = Path("/teamspace/studios/this_studio")
+if not _BASE.exists():
+    _BASE = Path.cwd()
 
 MODEL_PATHS = [
-    "/teamspace/studios/this_studio/ComfyUI/models/insightface",
+    str(_BASE / "ComfyUI" / "models" / "insightface"),
     os.path.expanduser("~/.insightface/models"),
-    "/teamspace/studios/this_studio/ComfyUI/custom_nodes/comfyui-reactor-node",
+    str(_BASE / "ComfyUI" / "custom_nodes" / "comfyui-reactor-node"),
 ]
 
 
@@ -36,7 +41,7 @@ def _locate_models():
         os.path.join(os.path.dirname(INSIGHTFACE_DIR), "inswapper_128.onnx"),
         os.path.join(INSIGHTFACE_DIR, "inswapper_128.onnx"),
         os.path.join(INSIGHTFACE_DIR, "..", "inswapper_128.onnx"),
-        "/teamspace/studios/this_studio/ComfyUI/models/insightface/inswapper_128.onnx",
+        str(_BASE / "ComfyUI" / "models" / "insightface" / "inswapper_128.onnx"),
     ]
     for p in insw_candidates:
         p = os.path.abspath(p)
@@ -45,8 +50,8 @@ def _locate_models():
             break
 
     gfp_candidates = [
-        "/teamspace/studios/this_studio/ComfyUI/models/facerestore/GFPGANv1.4.pth",
-        "/teamspace/studios/this_studio/ComfyUI/custom_nodes/comfyui-reactor-node/GFPGANv1.4.pth",
+        str(_BASE / "ComfyUI" / "models" / "facerestore" / "GFPGANv1.4.pth"),
+        str(_BASE / "ComfyUI" / "custom_nodes" / "comfyui-reactor-node" / "GFPGANv1.4.pth"),
     ]
     for p in gfp_candidates:
         if os.path.isfile(p):
@@ -54,12 +59,33 @@ def _locate_models():
             break
 
 
+def _download_buffalo_l():
+    global INSIGHTFACE_DIR
+    _locate_models()
+    if INSIGHTFACE_DIR and os.path.isdir(os.path.join(INSIGHTFACE_DIR, "buffalo_l")):
+        return
+    dest_dir = INSIGHTFACE_DIR or MODEL_PATHS[0]
+    os.makedirs(dest_dir, exist_ok=True)
+    zip_path = os.path.join(dest_dir, "buffalo_l.zip")
+    print(f"Downloading buffalo_l models to {dest_dir}...")
+    try:
+        urllib.request.urlretrieve(_BUFFALO_L_URL, zip_path)
+        with zipfile.ZipFile(zip_path, "r") as zf:
+            zf.extractall(dest_dir)
+        os.remove(zip_path)
+        INSIGHTFACE_DIR = dest_dir
+        print("buffalo_l models ready")
+    except Exception as e:
+        print(f"buffalo_l download failed: {e}")
+
+
 def _download_inswapper(force: bool = False) -> str:
     global INSWAPPER_PATH
     _locate_models()
     if INSWAPPER_PATH and not force:
         return INSWAPPER_PATH
-    dest = os.path.join(os.path.dirname(INSIGHTFACE_DIR) if INSIGHTFACE_DIR else MODEL_PATHS[0], "inswapper_128.onnx")
+    base_dir = os.path.dirname(INSIGHTFACE_DIR) if INSIGHTFACE_DIR else MODEL_PATHS[0]
+    dest = os.path.join(base_dir, "inswapper_128.onnx")
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     print(f"Downloading inswapper_128.onnx to {dest}...")
     urllib.request.urlretrieve(_INSWAPPER_URL, dest)
@@ -67,14 +93,35 @@ def _download_inswapper(force: bool = False) -> str:
     return dest
 
 
+def _download_gfpgan(force: bool = False) -> Optional[str]:
+    global GFPGAN_PATH
+    _locate_models()
+    if GFPGAN_PATH and not force:
+        return GFPGAN_PATH
+    dest = str(_BASE / "ComfyUI" / "models" / "facerestore_models" / "GFPGANv1.4.pth")
+    os.makedirs(os.path.dirname(dest), exist_ok=True)
+    print(f"Downloading GFPGANv1.4.pth to {dest}...")
+    try:
+        urllib.request.urlretrieve(_GFPGAN_URL, dest)
+        GFPGAN_PATH = dest
+        return dest
+    except Exception as e:
+        print(f"GFPGAN download failed: {e}")
+        return None
+
+
 def _get_detector():
     global _DETECTOR
     if _DETECTOR is not None:
         return _DETECTOR
     _locate_models()
+    _download_buffalo_l()
     import insightface
     from insightface.app import FaceAnalysis
-    app = FaceAnalysis(name="buffalo_l", root=INSIGHTFACE_DIR, providers=_get_providers())
+    root = os.path.dirname(INSIGHTFACE_DIR) if INSIGHTFACE_DIR else str(_BASE)
+    providers = _get_providers()
+    print(f"Initializing FaceAnalysis (root={root}, providers={providers})...")
+    app = FaceAnalysis(name="buffalo_l", root=root, providers=providers)
     app.prepare(ctx_id=0, det_size=(640, 640))
     _DETECTOR = app
     return _DETECTOR
@@ -109,7 +156,9 @@ def _get_gfpgan():
         return _RESTORER
     _locate_models()
     if not GFPGAN_PATH:
-        return None
+        gfp = _download_gfpgan()
+        if not gfp:
+            return None
     try:
         from gfpgan import GFPGANer
         _RESTORER = GFPGANer(model_path=GFPGAN_PATH, upscale=1, arch="clean", channel_multiplier=2, bg_upsampler=None)
@@ -122,6 +171,8 @@ def extract_faces(image_path: str, det_thresh: float = 0.5) -> list:
     import cv2
     app = _get_detector()
     img = cv2.imread(image_path)
+    if img is None:
+        raise ValueError(f"Could not read image: {image_path}")
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     faces = app.get(img)
     return [{
@@ -144,8 +195,12 @@ def swap_face(source_img: str, target_img: str, source_idx: int = 0,
     swapper = _get_swapper()
 
     img_src = cv2.imread(source_img)
+    if img_src is None:
+        raise ValueError(f"Could not read source image: {source_img}")
     img_src = cv2.cvtColor(img_src, cv2.COLOR_BGR2RGB)
     img_tgt = cv2.imread(target_img)
+    if img_tgt is None:
+        raise ValueError(f"Could not read target image: {target_img}")
     img_tgt = cv2.cvtColor(img_tgt, cv2.COLOR_BGR2RGB)
 
     src_faces = app.get(img_src)
@@ -190,6 +245,7 @@ def swap_video(source_img: str, video_path: str, source_idx: int = 0,
                target_idx: int = 0, restore: bool = True, every_n: int = 1,
                output_path: str = None) -> str:
     import cv2
+    import numpy as np
     app = _get_detector()
     swapper = _get_swapper()
 
@@ -200,6 +256,8 @@ def swap_video(source_img: str, video_path: str, source_idx: int = 0,
     total = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
     src_img = cv2.imread(source_img)
+    if src_img is None:
+        raise ValueError(f"Could not read source image: {source_img}")
     src_img_rgb = cv2.cvtColor(src_img, cv2.COLOR_BGR2RGB)
     src_faces = app.get(src_img_rgb)
     if len(src_faces) <= source_idx:

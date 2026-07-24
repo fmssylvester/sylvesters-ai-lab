@@ -8,6 +8,10 @@ RIFE_MODEL_TYPES = ["rife4.25", "rife4.24", "rife4.23", "rife4.22", "rife4.21", 
 FAST_MODELS = ["rife4.25", "rife4.22", "rife4.13", "rife4.7", "rife4.1"]
 BEST_MODELS = ["rife4.25", "rife4.24"]
 
+_BASE = Path("/teamspace/studios/this_studio")
+if not _BASE.exists():
+    _BASE = Path.cwd()
+
 
 def _locate_vfi():
     global VFI_PATH
@@ -15,7 +19,7 @@ def _locate_vfi():
         return
 
     candidates = [
-        "/teamspace/studios/this_studio/ComfyUI/custom_nodes/ComfyUI-Frame-Interpolation",
+        str(_BASE / "ComfyUI" / "custom_nodes" / "ComfyUI-Frame-Interpolation"),
         os.path.join(os.path.dirname(__file__), "ComfyUI", "custom_nodes", "ComfyUI-Frame-Interpolation"),
     ]
     for p in candidates:
@@ -38,6 +42,7 @@ def interpolate_video(video_path: str, multiplier: int = 2,
     if VFI_PATH is not None:
         return _interpolate_vfi(video_path, multiplier, model, batch_size, output_path)
     else:
+        print("ComfyUI-Frame-Interpolation not found — using CV2 optical flow fallback")
         return _interpolate_cv2(video_path, multiplier, output_path)
 
 
@@ -49,18 +54,17 @@ def _interpolate_vfi(video_path: str, multiplier: int, model: str,
 
     import importlib
     vfi_utils = importlib.import_module("vfi_utils")
-    model_mod = importlib.import_module(f"vfi_models.rife")
-
-    ckpt = vfi_utils.load_file_from_github_release(model, "flownet.pth")
-    arch = model_mod.RIFE_Arch()
-
-    from comfy import model_management
-    device = model_management.get_torch_device() if hasattr(model_management, 'get_torch_device') else "cuda" if __import__('torch').cuda.is_available() else "cpu"
+    from vfi_models.rife import RIFE_Arch
 
     import torch
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    ckpt = vfi_utils.load_file_from_github_release(model, "flownet.pth")
+    arch = RIFE_Arch()
     arch = arch.to(device)
     sd = torch.load(ckpt, map_location=device, weights_only=True)
     arch.load_state_dict(sd, strict=True)
+    arch.eval()
 
     import cv2, numpy as np
     cap = cv2.VideoCapture(video_path)
@@ -81,14 +85,18 @@ def _interpolate_vfi(video_path: str, multiplier: int, model: str,
     writer = cv2.VideoWriter(output_path, fourcc, fps * multiplier, (w, h))
 
     for i in range(len(frames) - 1):
-        f0 = frames[i]
-        f1 = frames[i + 1]
-        f0_t = torch.from_numpy(f0).permute(2, 0, 1).unsqueeze(0).float().to(device) / 255.0
-        f1_t = torch.from_numpy(f1).permute(2, 0, 1).unsqueeze(0).float().to(device) / 255.0
+        f0 = torch.from_numpy(frames[i]).permute(2, 0, 1).unsqueeze(0).float().to(device) / 255.0
+        f1 = torch.from_numpy(frames[i + 1]).permute(2, 0, 1).unsqueeze(0).float().to(device) / 255.0
 
-        with torch.no_grad():
-            interp = vfi_utils.generic_frame_loop(frames, multiplier, arch, vfi_utils._generic_frame_loop, batch_size)
         writer.write(frames[i])
+
+        for step in range(1, multiplier):
+            t = step / multiplier
+            with torch.no_grad():
+                interp = arch(f0, f1, t)
+            interp_np = (interp.squeeze(0).permute(1, 2, 0).cpu().numpy() * 255).clip(0, 255).astype(np.uint8)
+            writer.write(interp_np)
+
     writer.release()
     return output_path
 
@@ -124,8 +132,8 @@ def _interpolate_cv2(video_path: str, multiplier: int, output_path: str) -> str:
         for i in range(1, multiplier):
             alpha = i / multiplier
             h_flow = flow * alpha
-            h, w_grid = flow.shape[:2]
-            x, y = np.meshgrid(np.arange(w_grid), np.arange(h))
+            h_grid, w_grid = flow.shape[:2]
+            x, y = np.meshgrid(np.arange(w_grid), np.arange(h_grid))
             map_x = (x + h_flow[..., 0]).astype(np.float32)
             map_y = (y + h_flow[..., 1]).astype(np.float32)
             interp = cv2.remap(prev, map_x, map_y, cv2.INTER_LINEAR)

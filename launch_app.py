@@ -103,7 +103,7 @@ def is_server_running(port=8188):
 def boot_server():
     os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
     log = open(COMFY_LOG_PATH, "a", encoding="utf-8")
-    proc = subprocess.Popen(["python", "main.py", "--normalvram", "--dont-print-server"], cwd=COMFY_PATH,
+    proc = subprocess.Popen(["python", "main.py", "--dont-print-server"], cwd=COMFY_PATH,
                              stdout=log, stderr=subprocess.STDOUT)
     start_time = time.time()
     while not is_server_running():

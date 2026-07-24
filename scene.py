@@ -28,7 +28,7 @@ def linear_pipeline(
     Returns {video_path, voiceover_path, swapped_path, interpolated_path, status}
     """
     _prog = progress or _noop_progress
-    result = {"video_path": None, "voiceover_path": None, "swapped_path": None, "interpolated_path": None, "status": []}
+    result = {"video_path": None, "voiceover_path": None, "swapped_path": None, "interpolated_path": None, "final_path": None, "status": []}
 
     # Step 1: Generate video
     _prog(0, desc="Generating video with LTX-2.3...")

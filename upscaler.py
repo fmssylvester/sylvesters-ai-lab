@@ -7,7 +7,10 @@ from pathlib import Path
 from PIL import Image
 from spandrel import ModelLoader
 
-BASE_PATH = Path("/teamspace/studios/this_studio")
+_BASE = Path("/teamspace/studios/this_studio")
+if not _BASE.exists():
+    _BASE = Path.cwd()
+BASE_PATH = _BASE
 MODEL_PATH = BASE_PATH / "ComfyUI" / "models" / "upscale" / "4x-UltraSharp.pth"
 
 QUALITY_EDGE = {"720p": 1280, "1080p (1K)": 1920, "1440p (2K)": 2560, "2160p (4K)": 3840}
@@ -16,7 +19,6 @@ _model = None
 
 
 def _download_model():
-    # Public 4x ESRGAN weights (spandrel loads by architecture, filename is irrelevant)
     url = "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth"
     try:
         MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)

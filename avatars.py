@@ -6,7 +6,10 @@ WAV2LIP_DIR = None
 WAV2LIP_MODEL_PATH = None
 FACE_DET_DIR = None
 
-BASE = "/teamspace/studios/this_studio"
+_BASE = Path("/teamspace/studios/this_studio")
+if not _BASE.exists():
+    _BASE = Path.cwd()
+BASE = str(_BASE)
 WAV2LIP_REPO = "https://github.com/Rudrabha/Wav2Lip.git"
 WAV2LIP_MODEL_URL = "https://iiitaphyd-my.sharepoint.com/personal/radrabha_m_research_iiit_ac_in/_layouts/15/download.aspx?share=EdjI7bZlgApMqsVoEUUXpLsBxqXbn5z8VTmikpFw3tGg"
 # Alternate: "https://drive.google.com/uc?id=1I0N1Tv5mN5GwKqXUoGd3Jj5VfQ0bY9kL&export=download"
