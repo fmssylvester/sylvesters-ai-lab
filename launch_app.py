@@ -881,7 +881,7 @@ with gr.Blocks(css=CSS, theme=theme) as demo:
                     vc_ref = gr.Audio(label="Reference Audio (3-30s of target speaker)", type="filepath", sources=["upload"])
                     vc_text = gr.Textbox(label="Text to Speak", placeholder="Enter the text you want in the cloned voice...", lines=4)
                     with gr.Row():
-                        vc_backend = gr.Dropdown(choices=vc_backends(), value="coqui-xtts", label="Backend")
+                        vc_backend = gr.Dropdown(choices=vc_backends() or ["edge-tts"], value="edge-tts", label="Backend")
                         vc_language = gr.Dropdown(choices=list(VC_LANGUAGES.values()), value="English", label="Language")
                     vc_edge_fallback = gr.Dropdown(choices=list(VOICE_PRESETS.keys()), value="Narrator (US Male)", label="Fallback Voice (if no reference)")
                     with gr.Row():
