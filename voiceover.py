@@ -23,9 +23,15 @@ def list_voices():
         return list(VOICE_PRESETS.keys())
 
 
+def _resolve_voice(voice: str) -> str:
+    if voice in VOICE_PRESETS:
+        return VOICE_PRESETS[voice]
+    return voice
+
 def generate(text: str, voice: str = "en-US-ChristopherNeural",
              pitch: str = "medium", rate: str = "medium",
              output_path: str = None) -> str:
+    voice = _resolve_voice(voice)
     if output_path is None:
         output_path = os.path.join(tempfile.gettempdir(), f"voiceover_{abs(hash(text))}.mp3")
     os.makedirs(os.path.dirname(output_path) or ".", exist_ok=True)
