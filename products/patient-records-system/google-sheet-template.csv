@@ -1,0 +1,9 @@
+id,name,age,gender,bloodType,allergies,medications,conditions,lastVisit,nextAppt,phone,urgency,notes
+PT-001,John Doe,45,Male,O+,Penicillin,Metformin 500mg,"Type 2 Diabetes, Hypertension",2026-06-12,2026-08-03,+2348012345678,stable,BP stable. Continue current meds.
+PT-002,Jane Smith,32,Female,A+,None,Lisinopril 5mg,None,2026-07-15,2026-10-15,+2348023456789,stable,Annual checkup scheduled.
+PT-003,Emeka Okafor,58,Male,B+,Sulfa,Atorvastatin 20mg,"High Cholesterol, CAD",2026-05-20,2026-08-20,+2348034567890,critical,Cardiology follow-up needed. Chest pain reported.
+PT-004,Aisha Mohammed,28,Female,AB+,None,None,None,2026-07-22,2026-08-22,+2348045678901,stable,Routine checkup only.
+PT-005,Chidi Nwosu,67,Male,O-,Penicillin,"Insulin, Amlodipine","Type 1 Diabetes, CKD Stage 3",2026-06-28,2026-07-28,+2348056789012,critical,"Kidney function declining. Nephrology referral."
+PT-006,Fatima Usman,41,Female,A+,None,Vitamin D,Vitamin D deficiency,2026-07-01,2026-10-01,+2348067890123,stable,Supplements prescribed.
+PT-007,Olusegun Adebayo,52,Male,B+,None,None,"Hypertension, Gout",2026-07-10,2026-09-10,+2348078901234,stable,"Diet counseling recommended."
+PT-008,Ngozi Eze,35,Female,O+,None,Combined oral contraceptive,None,2026-05-30,2026-08-30,+2348089012345,stable,Routine pap smear done.

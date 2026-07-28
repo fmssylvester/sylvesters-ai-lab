@@ -1,0 +1,158 @@
+{
+  "name": "Patient Records Lookup",
+  "nodes": [
+    {
+      "id": "919ff0cd-9087-42ca-bbe7-2222a530144d",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -480,
+        300
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "patient-lookup",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "webhookId": "3edfe91c-e8d4-4de8-9fee-6ddee9682e3a"
+    },
+    {
+      "id": "f0e294fe-509f-45d5-a8c6-fa343f84e717",
+      "name": "Extract Query",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -280,
+        300
+      ],
+      "parameters": {
+        "mode": "manual",
+        "includeOtherFields": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "query",
+              "name": "query",
+              "value": "={{ $json.body?.query ?? $json.query ?? \"\" }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "189de2a3-12f7-488c-ac95-a24897eea162",
+      "name": "Search Patients",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -80,
+        300
+      ],
+      "parameters": {
+        "resource": "row",
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "mode": "name",
+          "value": "Patients",
+          "cachedResultName": "Patients"
+        },
+        "matchType": "anyCondition",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "name",
+              "condition": "like",
+              "keyValue": "={{ \"%\" + $(\"Extract Query\").item.json.query + \"%\" }}"
+            }
+          ]
+        },
+        "returnAll": true
+      },
+      "alwaysOutputData": true
+    },
+    {
+      "id": "20d1d629-9d53-4864-85cf-b1d142ebe9c0",
+      "name": "Format or Not Found",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        120,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "const items = $input.all();\nconst patient = items[0]?.json;\n\nif (!patient || !patient.name) {\n  return [{ json: { error: 'Patient not found', found: false } }];\n}\n\nreturn [{\n  json: {\n    id: patient.id || '',\n    name: patient.name || '',\n    age: patient.age || '',\n    gender: patient.gender || '',\n    bloodType: patient.bloodType || '',\n    allergies: patient.allergies || 'None',\n    medications: patient.medications || 'None',\n    conditions: patient.conditions || 'None',\n    lastVisit: patient.lastVisit || '',\n    nextAppt: patient.nextAppt || 'Not scheduled',\n    phone: patient.phone || '',\n    urgency: patient.urgency || 'stable',\n    notes: patient.notes || '',\n    found: true\n  }\n}];"
+      }
+    },
+    {
+      "id": "d0139914-1ce5-4d9f-9dc5-21353690eff6",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        340,
+        300
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Extract Query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Query": {
+      "main": [
+        [
+          {
+            "node": "Search Patients",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Patients": {
+      "main": [
+        [
+          {
+            "node": "Format or Not Found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format or Not Found": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true
+  }
+}

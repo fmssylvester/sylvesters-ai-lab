@@ -1,0 +1,97 @@
+{
+  "name": "Missed Call SMS Text-Back (Basic)",
+  "nodes": [
+    {
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 300],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "missed-call-basic",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "name": "Format Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.1,
+      "position": [250, 300],
+      "parameters": {
+        "mode": "manual",
+        "includeOtherFields": true,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "phone",
+              "name": "phoneNumber",
+              "value": "={{ $json.body?.phone ?? $json.phone ?? \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "business",
+              "name": "businessName",
+              "value": "={{ $json.body?.business ?? $json.business ?? \"our practice\" }}",
+              "type": "string"
+            },
+            {
+              "id": "time",
+              "name": "callTime",
+              "value": "={{ $json.body?.timestamp ?? $json.timestamp ?? $now.toISO() }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "SMS Generator",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [500, 300],
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate a friendly SMS reply for a missed call.",
+        "options": {
+          "systemMessage": "You generate friendly SMS replies for missed calls. Keep it warm, professional, and under 160 characters.",
+          "maxIterations": 3
+        }
+      }
+    },
+    {
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [528, 336],
+      "parameters": {}
+    },
+    {
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [750, 300],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": true,\n  \"message\": \"{{ $json.output }}\",\n  \"timestamp\": \"{{ $now.toISO() }}\"\n}"
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [[{ "node": "Format Data", "type": "main", "index": 0 }]]
+    },
+    "Format Data": {
+      "main": [[{ "node": "SMS Generator", "type": "main", "index": 0 }]]
+    },
+    "SMS Generator": {
+      "main": [[{ "node": "Respond to Webhook", "type": "main", "index": 0 }]]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [[{ "node": "SMS Generator", "type": "ai_languageModel", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
