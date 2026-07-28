@@ -1,0 +1,109 @@
+{
+  "name": "Patient Records Lookup (Basic)",
+  "nodes": [
+    {
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        300
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "patient-lookup-basic",
+        "responseMode": "responseNode",
+        "options": {}
+      }
+    },
+    {
+      "name": "Extract Query",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        250,
+        300
+      ],
+      "parameters": {
+        "mode": "manual",
+        "includeOtherFields": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "query",
+              "name": "query",
+              "value": "={{ $json.body?.query ?? $json.query ?? \"\" }}",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Search Inline Patients",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        500,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "const patients = [\n  { name: 'John Doe', age: '45', gender: 'Male', bloodType: 'O+', allergies: 'Penicillin', medications: 'Lisinopril', conditions: 'Hypertension', lastVisit: '2026-06-15', nextAppt: '2026-08-20', phone: '+2348012345678', urgency: 'stable', notes: 'BP controlled' },\n  { name: 'Sarah Obi', age: '32', gender: 'Female', bloodType: 'A+', allergies: 'None', medications: 'None', conditions: 'None', lastVisit: '2026-07-10', nextAppt: 'Not scheduled', phone: '+2348023456789', urgency: 'low', notes: 'Annual checkup' },\n  { name: 'Emeka Okonkwo', age: '58', gender: 'Male', bloodType: 'B+', allergies: 'Sulfa', medications: 'Metformin, Atorvastatin', conditions: 'Type 2 Diabetes, High Cholesterol', lastVisit: '2026-05-22', nextAppt: '2026-09-15', phone: '+2348034567890', urgency: 'high', notes: 'Monitor blood sugar' },\n  { name: 'Amina Bello', age: '28', gender: 'Female', bloodType: 'AB+', allergies: 'Latex', medications: 'None', conditions: 'Asthma', lastVisit: '2026-07-28', nextAppt: '2026-10-10', phone: '+2348045678901', urgency: 'stable', notes: 'Asthma controlled' },\n  { name: 'Chidi Nnamdi', age: '67', gender: 'Male', bloodType: 'O-', allergies: 'Codeine', medications: 'Warfarin, Amlodipine', conditions: 'Atrial Fibrillation, Hypertension', lastVisit: '2026-04-05', nextAppt: '2026-08-01', phone: '+2348056789012', urgency: 'urgent', notes: 'INR monitoring required' },\n  { name: 'Ifeanyi Okafor', age: '41', gender: 'Female', bloodType: 'A-', allergies: 'NSAIDs', medications: 'Omeprazole', conditions: 'GERD', lastVisit: '2026-07-20', nextAppt: 'Not scheduled', phone: '+2348067890123', urgency: 'low', notes: 'Symptoms improving' }\n];\n\nconst query = $('Extract Query').item.json.query.toLowerCase().trim();\n\nif (!query) {\n  return [{ json: { error: 'No search query provided', found: false } }];\n}\n\nconst match = patients.find(p => p.name.toLowerCase().includes(query));\n\nif (!match) {\n  return [{ json: { error: 'Patient not found. Try a different name.', found: false } }];\n}\n\nreturn [{ json: { ...match, found: true } }];"
+      }
+    },
+    {
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        750,
+        300
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Extract Query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Query": {
+      "main": [
+        [
+          {
+            "node": "Search Inline Patients",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Inline Patients": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
