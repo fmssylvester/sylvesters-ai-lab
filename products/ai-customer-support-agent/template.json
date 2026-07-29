@@ -1,0 +1,138 @@
+{
+  "name": "AI Customer Support Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "customer-support",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 300],
+      "id": "webhook-node-id",
+      "name": "Webhook",
+      "webhookId": "customer-support"
+    },
+    {
+      "parameters": {
+        "agent": {
+          "agentType": "conversationalAgent",
+          "systemMessage": "You are a professional, friendly customer support agent for a SaaS company. Your name is 'SupportAI'.\n\n## Core Rules\n- Be helpful, concise, and empathetic\n- Never make up information you don't know\n- If you need more details, ask clarifying questions\n- Always maintain a professional tone\n- If a customer is frustrated, acknowledge their frustration first\n\n## When to Escalate\nIf the customer asks about:\n- Account deletion or data privacy requests\n- Billing disputes or refunds\n- Security concerns or suspected account breaches\n- Anything requiring human judgment or policy exceptions\n\nRespond with: ESCALATE: [reason] and I will guide them on next steps.\n\n## Response Format\nKeep responses under 150 words unless complex. Use clear sections for multi-part answers.\n\n## Available Information\nYou are a first-line support agent. You can:\n- Answer common questions about product features\n- Help with troubleshooting basic issues\n- Guide users to relevant documentation\n- Collect information for escalation\n\nRemember: You represent the company. Be professional, helpful, and honest."
+        },
+        "options": {
+          "maxIterations": 5,
+          "returnIntermediateSteps": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [350, 300],
+      "id": "ai-agent-node-id",
+      "name": "AI Customer Support Agent"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "temperature": 0.7,
+        "maxTokens": 1000,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [350, 50],
+      "id": "chat-model-node-id",
+      "name": "OpenAI Chat Model"
+    },
+    {
+      "parameters": {
+        "memoryType": "windowBuffer",
+        "contextWindowLength": 10,
+        "sessionIdType": "default",
+        "sessionId": "={{ $json.conversationId || $json.customerId || $executionId }}",
+        "sessionIdKey": "sessionId"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryManager",
+      "typeVersion": 1.1,
+      "position": [350, 550],
+      "id": "memory-node-id",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{\n  {\n    success: true,\n    response: $json.output,\n    conversationId: $json.conversationId || $executionId,\n    timestamp: new Date().toISOString()\n  }\n}}"
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [650, 300],
+      "id": "respond-node-id",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Customer Support Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Customer Support Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Customer Support Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Customer Support Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "AI"
+    },
+    {
+      "name": "Customer Support"
+    },
+    {
+      "name": "Chatbot"
+    },
+    {
+      "name": "Agent"
+    }
+  ]
+}

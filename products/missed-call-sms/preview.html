@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Missed Call SMS Text-Back - n8n Template</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0f; color: #e0e0e0; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+
+.header { text-align: center; padding: 60px 0 40px; }
+.header h1 { font-size: 2.5em; background: linear-gradient(135deg, #00d4ff, #7b2ff7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+.header .subtitle { color: #888; font-size: 1.2em; }
+.header .price { margin-top: 20px; font-size: 1.5em; color: #00d4ff; font-weight: bold; }
+.header .price span { color: #888; font-size: 0.6em; font-weight: normal; }
+
+.phone-mockup { background: #14141f; border-radius: 12px; padding: 30px; margin: 40px 0; border: 1px solid #2a2a3a; display: flex; gap: 30px; align-items: center; flex-wrap: wrap; justify-content: center; }
+.phone-frame { width: 280px; background: #000; border-radius: 30px; padding: 15px 10px; border: 2px solid #333; }
+.phone-notch { text-align: center; padding-bottom: 10px; color: #555; font-size: 0.8em; }
+.phone-screen { min-height: 350px; }
+.sms { max-width: 85%; margin: 8px 0; padding: 10px 14px; border-radius: 16px; font-size: 0.85em; line-height: 1.4; }
+.sms.in { background: #2a2a3a; margin-right: auto; border-bottom-left-radius: 4px; }
+.sms.out { background: linear-gradient(135deg, #00d4ff22, #7b2ff722); border: 1px solid #00d4ff44; margin-left: auto; border-bottom-right-radius: 4px; }
+.sms .time { font-size: 0.7em; color: #666; margin-top: 4px; }
+.phone-arrow { font-size: 3em; color: #00d4ff; }
+
+.workflow-viz { background: #14141f; border-radius: 12px; padding: 30px; margin: 40px 0; border: 1px solid #2a2a3a; }
+.flow { display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; }
+.node { background: #1e1e2e; border: 1px solid #3a3a5a; border-radius: 8px; padding: 10px 15px; text-align: center; min-width: 120px; }
+.node .icon { font-size: 1.5em; }
+.node .name { font-size: 0.85em; color: #00d4ff; font-weight: 600; }
+.node.ai { border-color: #7b2ff7; }
+.node .name.alt { color: #7b2ff7; }
+.arrow { color: #555; font-size: 1.5em; }
+
+.files { background: #14141f; border-radius: 12px; padding: 25px; margin: 40px 0; border: 1px solid #2a2a3a; }
+.files h3 { color: #00d4ff; margin-bottom: 15px; }
+.file-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #2a2a3a; }
+.file-item:last-child { border-bottom: none; }
+.file-icon { font-size: 1.5em; }
+.file-info .name { font-weight: 600; }
+.file-info .desc { color: #888; font-size: 0.85em; }
+
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 40px 0; }
+.step { background: #14141f; border: 1px solid #2a2a3a; border-radius: 12px; padding: 20px; text-align: center; }
+.step .num { width: 30px; height: 30px; background: linear-gradient(135deg, #00d4ff, #7b2ff7); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 10px; }
+
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 40px 0; }
+.feature-card { background: #14141f; border: 1px solid #2a2a3a; border-radius: 12px; padding: 25px; }
+.feature-card .icon { font-size: 2em; margin-bottom: 10px; }
+.feature-card h3 { color: #00d4ff; margin-bottom: 8px; }
+.feature-card p { color: #888; font-size: 0.9em; line-height: 1.5; }
+
+.pricing { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 40px 0; }
+.tier { background: #14141f; border: 1px solid #2a2a3a; border-radius: 12px; padding: 30px; text-align: center; }
+.tier.featured { border-color: #00d4ff; }
+.tier h3 { color: #00d4ff; margin-bottom: 10px; }
+.tier .price { font-size: 2em; font-weight: bold; margin: 15px 0; }
+.tier ul { list-style: none; color: #888; font-size: 0.9em; }
+.tier ul li { padding: 6px 0; border-bottom: 1px solid #2a2a3a; }
+
+.footer { text-align: center; padding: 40px; color: #555; font-size: 0.85em; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>Missed Call SMS Text-Back</h1>
+  <div class="subtitle">Never lose a lead because you missed their call</div>
+  <div class="price">$39 <span>Single</span> &middot; $79 <span>Commercial</span></div>
+</div>
+
+<!-- Phone Demo -->
+<div class="phone-mockup">
+  <div class="phone-frame">
+    <div class="phone-notch">&#x1f4f1; Missed Call</div>
+    <div class="phone-screen">
+      <div class="sms in">Hey, I had a question about appointments</div>
+      <div class="sms time" style="text-align:right;font-size:0.7em;color:#555;margin-bottom:10px;">2 min ago</div>
+      <div class="sms out">Hi there! Sorry we missed your call. This is our AI assistant. You can reply here to ask questions or book an appointment. How can I help you? &#x1f60a;</div>
+      <div class="sms time" style="text-align:right;font-size:0.7em;color:#555;">Just now</div>
+    </div>
+  </div>
+  <div class="phone-arrow">&#x21d2;</div>
+  <div style="max-width:300px;">
+    <h3 style="color:#00d4ff;margin-bottom:10px;">How it works</h3>
+    <p style="color:#888;font-size:0.9em;line-height:1.6;">
+      1. Customer calls and misses you<br>
+      2. Your phone system triggers the webhook<br>
+      3. AI writes a personalized SMS reply<br>
+      4. Twilio sends it within seconds<br>
+      5. Customer texts back to book or ask
+    </p>
+  </div>
+</div>
+
+<!-- Workflow -->
+<div class="workflow-viz">
+  <h3 style="text-align:center;color:#aaa;margin-bottom:20px;">The automation behind it</h3>
+  <div class="flow">
+    <div class="node"><div class="icon">&#x1f310;</div><div class="name">Webhook</div></div>
+    <div class="arrow">&#x2192;</div>
+    <div class="node"><div class="icon">&#x1f4cb;</div><div class="name">Format Data</div></div>
+    <div class="arrow">&#x2192;</div>
+    <div class="node ai"><div class="icon">&#x1f916;</div><div class="name alt">AI SMS Generator</div></div>
+    <div class="arrow">&#x2192;</div>
+    <div class="node"><div class="icon">&#x2709;</div><div class="name">Twilio Send</div></div>
+    <div class="arrow">&#x2192;</div>
+    <div class="node"><div class="icon">&#x1f4e8;</div><div class="name">Respond</div></div>
+  </div>
+</div>
+
+<!-- Files -->
+<div class="files">
+  <h3>What you download</h3>
+  <div class="file-item">
+    <div class="file-icon">&#x1f4c4;</div>
+    <div class="file-info"><div class="name">template.json</div><div class="desc">n8n workflow — import and configure your Twilio + OpenAI keys</div></div>
+  </div>
+  <div class="file-item">
+    <div class="file-icon">&#x1f4d6;</div>
+    <div class="file-info"><div class="name">SETUP.md</div><div class="desc">Setup guide with Twilio configuration and testing instructions</div></div>
+  </div>
+</div>
+
+<!-- Setup -->
+<h2 style="color:#aaa;margin-top:50px;">Setup in 5 minutes</h2>
+<div class="steps">
+  <div class="step"><div class="num">1</div><h4>Import</h4><p>Import template.json into your n8n dashboard</p></div>
+  <div class="step"><div class="num">2</div><h4>Add Keys</h4><p>Connect OpenAI + Twilio API keys</p></div>
+  <div class="step"><div class="num">3</div><h4>Set Number</h4><p>Enter your Twilio SMS number</p></div>
+  <div class="step"><div class="num">4</div><h4>Activate</h4><p>Toggle Active and forward missed calls to the webhook</p></div>
+</div>
+
+<!-- Features -->
+<h2 style="color:#aaa;margin-top:50px;">Why buy this</h2>
+<div class="features">
+  <div class="feature-card"><div class="icon">&#x1f4c8;</div><h3>Capture More Leads</h3><p>70% of missed calls never call back. An SMS within 60 seconds changes that.</p></div>
+  <div class="feature-card"><div class="icon">&#x1f916;</div><h3>AI-Powered Replies</h3><p>Each SMS is uniquely written by GPT-4o-mini for the caller and your business.</p></div>
+  <div class="feature-card"><div class="icon">&#x23f0;</div><h3>Instant Response</h3><p>From missed call to SMS in under 5 seconds. No delay, no lost opportunities.</p></div>
+  <div class="feature-card"><div class="icon">&#x1f3e0;</div><h3>Works With Any Phone System</h3><p>Twilio, RingCentral, VoIP, Google Voice — anything that sends webhooks.</p></div>
+</div>
+
+<!-- Pricing -->
+<h2 style="color:#aaa;margin-top:50px;">Pricing</h2>
+<div class="pricing">
+  <div class="tier"><h3>Single</h3><div class="price">$39</div><ul><li>Workflow template</li><li>Setup guide</li><li>Use on one n8n instance</li></ul></div>
+  <div class="tier featured"><h3>Commercial</h3><div class="price">$79</div><ul><li>Everything in Single</li><li>Use for unlimited clients</li><li>White-label rights</li><li>Priority support</li></ul></div>
+</div>
+
+<div class="footer">
+  Requires n8n (free), OpenAI API key, and Twilio account
+</div>
+
+</div>
+</body>
+</html>

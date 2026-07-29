@@ -15,6 +15,28 @@ import { AgentWorkflow, ToolGrid, BeforeAfter } from './components/ui-kit/Automa
 import { ProblemSolution, StepTimeline, AgentActivityStream, CtaEndCard, LogoReveal } from './components/ui-kit/PremiumTemplates';
 import Episode from './scenes/episode/Episode';
 import episodeRuntime from './episodeRuntime.json';
+import MotionFirstScene from './scenes/motionFirst/MotionFirstScene';
+import { computeTimeline } from './core/motion/MasterDirector';
+import motionFirstRuntime from './scenes/motionFirst/motionFirstRuntime.json';
+import { MotionFirstPart1 } from './scenes/motionFirst/MotionFirstPart1';
+import { TOTAL } from './scenes/motionFirst/part1Timeline';
+import { DemoScene } from './scenes/demo/DemoScene';
+import { Ep01Scene } from './scenes/ep01/Ep01Scene';
+import { VideoTestScene } from './scenes/ep01/VideoTestScene';
+import { Scene1BoldImpact } from './scenes/text-showcase/Scene1BoldImpact';
+import { Scene2ElegantSerif } from './scenes/text-showcase/Scene2ElegantSerif';
+import { Scene3TechMono } from './scenes/text-showcase/Scene3TechMono';
+import { Scene4MixedType } from './scenes/text-showcase/Scene4MixedType';
+import { Scene5Kinetic } from './scenes/text-showcase/Scene5Kinetic';
+import { Scene6StackedReveal } from './scenes/text-showcase/Scene6StackedReveal';
+import { Scene7DepthParallax } from './scenes/text-showcase/Scene7DepthParallax';
+import { Scene8WaveText } from './scenes/text-showcase/Scene8WaveText';
+import { Scene9SliceReveal } from './scenes/text-showcase/Scene9SliceReveal';
+import { Scene10BlurCascade } from './scenes/text-showcase/Scene10BlurCascade';
+import CsAgentDemo from './scenes/cs-agent-demo/CsAgentDemo';
+import { CS_AGENT_DEMO } from './scenes/cs-agent-demo/csAgentTimeline';
+import SmsBotDemo from './scenes/sms-bot-demo/SmsBotDemo';
+import { SMS_BOT_DEMO } from './scenes/sms-bot-demo/smsBotTimeline';
 
 export const RemotionRoot = () => {
   return (
@@ -139,6 +161,160 @@ export const RemotionRoot = () => {
         width={1920}
         height={1080}
         defaultProps={episodeRuntime}
+      />
+
+      {/* ── Part 1 (vertical 9:16 slice): The Motion-First Secret ── */}
+      <Composition
+        id="MotionFirst"
+        component={MotionFirstScene}
+        durationInFrames={computeTimeline(motionFirstRuntime as any).totalFrames}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+
+      {/* ── Part 1 (fresh, engine-driven build): The Motion-First Secret (16:9) ── */}
+      <Composition
+        id="MotionFirstPart1"
+        component={MotionFirstPart1}
+        durationInFrames={TOTAL}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* ── Demo: Motion Graphics Kit showcase (36s at 30fps = 1080 frames) ── */}
+      <Composition
+        id="DemoScene"
+        component={DemoScene}
+        durationInFrames={1080}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* ── Episode 01: The Motion-First Secret (10s at 30fps = 300 frames) ── */}
+      <Composition
+        id="Ep01"
+        component={Ep01Scene}
+        durationInFrames={300}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* ── Video Test: Screen recording playback test ── */}
+      <Composition
+        id="VideoTest"
+        component={VideoTestScene}
+        durationInFrames={180}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* ── Text Showcase: 5 typography scenes ── */}
+      <Composition
+        id="TextScene1"
+        component={Scene1BoldImpact}
+        durationInFrames={90}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TextScene2"
+        component={Scene2ElegantSerif}
+        durationInFrames={90}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TextScene3"
+        component={Scene3TechMono}
+        durationInFrames={90}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TextScene4"
+        component={Scene4MixedType}
+        durationInFrames={90}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TextScene5"
+        component={Scene5Kinetic}
+        durationInFrames={90}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* ── Text Showcase Batch 2: 5 more typography scenes ── */}
+      <Composition
+        id="TextScene6"
+        component={Scene6StackedReveal}
+        durationInFrames={120}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TextScene7"
+        component={Scene7DepthParallax}
+        durationInFrames={90}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TextScene8"
+        component={Scene8WaveText}
+        durationInFrames={90}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TextScene9"
+        component={Scene9SliceReveal}
+        durationInFrames={90}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="TextScene10"
+        component={Scene10BlurCascade}
+        durationInFrames={100}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* ── CS Agent Product Demo (18s at 30fps = 540 frames) ── */}
+      <Composition
+        id="CsAgentDemo"
+        component={CsAgentDemo}
+        durationInFrames={CS_AGENT_DEMO.TOTAL_FRAMES}
+        fps={CS_AGENT_DEMO.FPS}
+        width={1920}
+        height={1080}
+      />
+
+      {/* ── SMS Bot Product Demo (18s at 30fps = 540 frames) ── */}
+      <Composition
+        id="SmsBotDemo"
+        component={SmsBotDemo}
+        durationInFrames={SMS_BOT_DEMO.TOTAL_FRAMES}
+        fps={SMS_BOT_DEMO.FPS}
+        width={1920}
+        height={1080}
       />
     </>
   );

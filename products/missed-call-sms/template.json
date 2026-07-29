@@ -1,0 +1,177 @@
+{
+  "name": "Missed Call SMS Text-Back for Appointment Businesses",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "missed-call",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 300],
+      "id": "webhook-node-id",
+      "name": "Webhook",
+      "webhookId": "missed-call"
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "phoneNumber",
+              "value": "={{ $json.body?.phone || $json.phone || $json.From || '' }}"
+            },
+            {
+              "name": "businessName",
+              "value": "={{ $json.body?.business || $json.business || 'our practice' }}"
+            },
+            {
+              "name": "callTime",
+              "value": "={{ $json.body?.timestamp || $json.timestamp || new Date().toISOString() }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.1,
+      "position": [250, 300],
+      "id": "set-node-id",
+      "name": "Format Data"
+    },
+    {
+      "parameters": {
+        "agent": {
+          "agentType": "singlePurposeAgent",
+          "systemMessage": "You are an automated SMS assistant for {{ $json.businessName }}. A customer just called and missed reaching someone. Your ONLY job is to generate a friendly SMS reply that:\n\n1. Greets the customer by name if available (use 'there' if unknown)\n2. Apologizes for missing their call\n3. Explains they can reply to this message to book an appointment or ask a question\n4. Keeps the tone warm and professional\n\nThe response should be a single SMS (under 160 characters if possible).\n\nCustomer info: called at {{ $json.callTime }}"
+        },
+        "options": {
+          "maxIterations": 3
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [500, 300],
+      "id": "ai-agent-node-id",
+      "name": "SMS Generator Agent"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "temperature": 0.7,
+        "maxTokens": 200,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [500, 100],
+      "id": "chat-model-node-id",
+      "name": "OpenAI Chat Model"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "fromNumber": {
+          "__rl": true,
+          "value": "YOUR_TWILIO_NUMBER",
+          "mode": "fixed"
+        },
+        "toNumber": "={{ $json.phoneNumber }}",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [750, 300],
+      "id": "twilio-node-id",
+      "name": "Send SMS via Twilio"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": true,\n  \"sentTo\": \"{{ $json.phoneNumber }}\",\n  \"message\": \"{{ $json.output }}\",\n  \"timestamp\": \"{{ new Date().toISOString() }}\"\n}"
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1000, 300],
+      "id": "respond-node-id",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Format Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Data": {
+      "main": [
+        [
+          {
+            "node": "SMS Generator Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "SMS Generator Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SMS Generator Agent": {
+      "main": [
+        [
+          {
+            "node": "Send SMS via Twilio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send SMS via Twilio": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "SMS"
+    },
+    {
+      "name": "AI"
+    },
+    {
+      "name": "Appointment"
+    },
+    {
+      "name": "Automation"
+    }
+  ]
+}

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>n8n Automation Templates — AI Support & SMS Bot</title>
+<meta property="og:title" content="n8n Automation Templates">
+<meta property="og:description" content="AI Customer Support Agent + Missed Call SMS Text-Back. Ready-to-import n8n workflows. $29 each.">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #07090D; color: #e0e0e0; line-height: 1.6; }
+.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+.hero { text-align: center; padding: 60px 0 40px; border-bottom: 1px solid #1a1a2e; }
+.hero h1 { font-size: 2.6em; background: linear-gradient(135deg, #00D9FF, #E7B84D); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+.hero .subtitle { color: #889; font-size: 1.1em; margin-bottom: 30px; }
+.hero-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; margin: 0 auto; }
+.hero-card { background: #0d0f17; border: 1px solid #1a1a2e; border-radius: 12px; padding: 28px; text-align: center; }
+.hero-card .icon { font-size: 2.2em; margin-bottom: 8px; }
+.hero-card h3 { color: #00D9FF; margin-bottom: 6px; }
+.hero-card p { color: #667; font-size: 0.85em; }
+.hero-card .price { color: #E7B84D; font-size: 1.6em; font-weight: 700; margin: 10px 0; }
+.hero-card .price small { color: #556; font-size: 0.45em; font-weight: 400; }
+
+.tabs { display: flex; gap: 0; margin: 30px 0 0; border-bottom: 1px solid #1a1a2e; }
+.tab { padding: 14px 32px; cursor: pointer; color: #667; font-weight: 600; font-size: 0.95em; border-bottom: 2px solid transparent; transition: all .2s; background: none; border-top: none; border-left: none; border-right: none; }
+.tab:hover { color: #e0e0e0; }
+.tab.active { color: #00D9FF; border-bottom-color: #00D9FF; }
+
+.panel { display: none; }
+.panel.active { display: block; }
+
+.demo-video { margin: 30px 0; border-radius: 12px; overflow: hidden; background: #0d0f17; border: 1px solid #1a1a2e; }
+.demo-video video { width: 100%; display: block; }
+
+.workflow-viz { background: #0d0f17; border-radius: 12px; padding: 30px; margin: 30px 0; border: 1px solid #1a1a2e; }
+.flow-nodes { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.flow-node { background: #14141f; border: 1px solid #2a2a3a; border-radius: 8px; padding: 14px 18px; text-align: center; min-width: 120px; flex: 1; }
+.flow-node .icon { font-size: 1.4em; margin-bottom: 4px; }
+.flow-node .lbl { color: #667; font-size: 0.75em; }
+.flow-node .val { color: #00D9FF; font-size: 0.85em; font-weight: 600; }
+.flow-arrow { color: #3a3a5a; font-size: 1.2em; }
+
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 30px 0; }
+.feature-card { background: #0d0f17; border: 1px solid #1a1a2e; border-radius: 12px; padding: 24px; }
+.feature-card .icon { font-size: 1.8em; margin-bottom: 10px; }
+.feature-card h3 { color: #00D9FF; font-size: 1em; margin-bottom: 6px; }
+.feature-card p { color: #667; font-size: 0.85em; }
+
+.chat-demo { background: #0d0f17; border-radius: 12px; border: 1px solid #1a1a2e; margin: 30px 0; overflow: hidden; }
+.chat-header { display: flex; align-items: center; gap: 10px; padding: 15px 20px; border-bottom: 1px solid #1a1a2e; }
+.chat-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #00D9FF, #E7B84D); display: flex; align-items: center; justify-content: center; font-size: 0.8em; color: #07090D; font-weight: 700; flex-shrink: 0; }
+.chat-body { padding: 20px; max-height: 400px; overflow-y: auto; }
+.chat-msg { max-width: 80%; margin: 10px 0; padding: 12px 16px; border-radius: 12px; font-size: 0.9em; line-height: 1.5; }
+.chat-msg.user { background: #1a1a2e; margin-right: auto; border-bottom-left-radius: 4px; }
+.chat-msg.ai { background: #00D9FF0d; border: 1px solid #00D9FF22; margin-left: auto; border-bottom-right-radius: 4px; }
+.chat-msg.ai .name { color: #00D9FF; font-size: 0.8em; margin-bottom: 3px; font-weight: 600; }
+.chat-input { display: flex; gap: 10px; padding: 15px 20px; border-top: 1px solid #1a1a2e; }
+.chat-input input { flex: 1; background: #14141f; border: 1px solid #2a2a3a; border-radius: 8px; padding: 12px 16px; color: #e0e0e0; font-size: 0.9em; outline: none; }
+.chat-input input:focus { border-color: #00D9FF; }
+.chat-input input:disabled { opacity: 0.5; }
+.chat-input button { background: #00D9FF; color: #07090D; border: none; border-radius: 8px; padding: 12px 24px; font-weight: 600; cursor: pointer; }
+.chat-input button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.trial-overlay { display: none; padding: 40px 20px; text-align: center; background: #0d0f17; border-top: 1px solid #1a1a2e; }
+.trial-overlay.show { display: block; }
+.trial-overlay h3 { color: #00D9FF; font-size: 1.3em; margin-bottom: 10px; }
+.trial-overlay p { color: #667; font-size: 0.9em; margin-bottom: 20px; }
+.trial-overlay .btn { display: inline-block; padding: 14px 32px; background: #00D9FF; color: #07090D; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1.1em; }
+.trial-overlay .btn:hover { background: #00E8FF; transform: translateY(-2px); }
+.trial-overlay .btn.premium { background: #E7B84D; margin-left: 12px; }
+
+.pricing { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 30px 0; }
+.tier { background: #0d0f17; border: 1px solid #1a1a2e; border-radius: 12px; padding: 28px; text-align: center; }
+.tier.featured { border-color: #00D9FF; position: relative; }
+.tier.featured::before { content: 'Best for warm leads'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #00D9FF; color: #07090D; padding: 4px 16px; border-radius: 20px; font-size: 0.7em; font-weight: 700; white-space: nowrap; }
+.tier .badge { display: inline-block; background: #E7B84D15; border: 1px solid #E7B84D33; color: #E7B84D; padding: 4px 14px; border-radius: 20px; font-size: 0.75em; margin-bottom: 10px; }
+.tier h3 { color: #00D9FF; margin-bottom: 6px; }
+.tier .price-usd { font-size: 2em; font-weight: 700; margin: 10px 0 4px; }
+.tier .price-ngn { color: #E7B84D; font-size: 0.95em; margin-bottom: 15px; }
+.tier ul { list-style: none; color: #667; font-size: 0.85em; }
+.tier ul li { padding: 6px 0; border-bottom: 1px solid #1a1a2e; }
+.tier ul li:last-child { border-bottom: none; }
+.tier .btn { display: inline-block; padding: 12px 28px; background: #00D9FF; color: #07090D; border-radius: 8px; font-weight: 700; text-decoration: none; margin-top: 16px; }
+.tier .btn:hover { background: #00E8FF; transform: translateY(-2px); }
+
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 30px 0; }
+.step { background: #0d0f17; border: 1px solid #1a1a2e; border-radius: 12px; padding: 20px; text-align: center; }
+.step .num { width: 28px; height: 28px; background: linear-gradient(135deg, #00D9FF, #E7B84D); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85em; margin-bottom: 10px; color: #07090D; }
+.step h4 { font-size: 0.9em; margin-bottom: 4px; }
+.step p { color: #667; font-size: 0.8em; }
+
+.demo-form { background: #0d0f17; border: 1px solid #1a1a2e; border-radius: 12px; padding: 30px; margin: 30px 0; text-align: center; }
+.demo-form h2 { color: #00D9FF; margin-bottom: 8px; }
+.demo-form p { color: #667; margin-bottom: 20px; font-size: 0.9em; }
+.form-group { margin-bottom: 15px; text-align: left; max-width: 500px; margin-left: auto; margin-right: auto; }
+.form-group label { display: block; color: #889; font-size: 0.85em; margin-bottom: 5px; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; background: #14141f; border: 1px solid #2a2a3a; border-radius: 8px; padding: 12px 16px; color: #e0e0e0; font-size: 0.9em; outline: none; }
+.form-group input:focus, .form-group textarea:focus { border-color: #00D9FF; }
+.form-group textarea { min-height: 80px; resize: vertical; }
+.demo-form .btn { width: auto; padding: 12px 40px; background: #00D9FF; color: #07090D; border: none; border-radius: 8px; font-weight: 700; font-size: 1em; cursor: pointer; }
+
+.testimonials { display: grid; gap: 16px; margin: 30px 0; }
+.testimonial { background: #0d0f17; border: 1px solid #1a1a2e; border-radius: 12px; padding: 24px; }
+.testimonial .text { color: #889; font-style: italic; font-size: 0.9em; margin-bottom: 10px; }
+.testimonial .author { color: #e0e0e0; font-weight: 600; font-size: 0.85em; }
+.testimonial .role { color: #667; font-size: 0.8em; }
+
+.faq { margin: 30px 0; }
+.faq details { background: #0d0f17; border: 1px solid #1a1a2e; border-radius: 8px; padding: 16px 20px; margin-bottom: 10px; }
+.faq summary { color: #00D9FF; font-weight: 600; cursor: pointer; font-size: 0.95em; }
+.faq .answer { color: #889; font-size: 0.9em; margin-top: 10px; line-height: 1.6; }
+
+.footer { text-align: center; padding: 40px 0; color: #445; font-size: 0.8em; border-top: 1px solid #1a1a2e; margin-top: 40px; }
+.footer a { color: #00D9FF; }
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 1.8em; }
+  .hero-cards { grid-template-columns: 1fr; }
+  .pricing { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .features { grid-template-columns: 1fr 1fr; }
+  .flow-arrow { display: none; }
+  .flow-nodes { flex-direction: column; }
+  .flow-node { width: 100%; }
+  .trial-overlay .btn { display: block; width: 100%; margin: 8px 0; }
+  .trial-overlay .btn.premium { margin-left: 0; }
+}
+@media (max-width: 480px) {
+  .steps { grid-template-columns: 1fr; }
+  .features { grid-template-columns: 1fr; }
+  .tabs { overflow-x: auto; white-space: nowrap; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="hero">
+  <h1>n8n Automation Templates</h1>
+  <div class="subtitle">Ready-to-import workflows. AI-powered. 5-minute setup.</div>
+  <div class="hero-cards">
+    <div class="hero-card">
+      <div class="icon">🤖</div>
+      <h3>AI Customer Support Agent</h3>
+      <p>Handles inquiries, remembers context, escalates issues</p>
+      <div class="price">$29 <small>one-time</small></div>
+    </div>
+    <div class="hero-card">
+      <div class="icon">📱</div>
+      <h3>Missed Call SMS Text-Back</h3>
+      <p>Auto-SMS replies when you miss a call — AI-written, instant</p>
+      <div class="price">$29 <small>one-time</small></div>
+    </div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('cs-agent')">🤖 CS Agent</button>
+  <button class="tab" onclick="switchTab('sms-bot')">📱 SMS Bot</button>
+</div>
+
+<div id="panel-cs-agent" class="panel active">
+
+  <!-- Demo Video -->
+  <div class="demo-video">
+    <video controls preload="metadata" poster="">
+      <source src="../media/cs-agent-demo.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- Workflow -->
+  <div class="workflow-viz">
+    <div style="text-align:center; color:#667; margin-bottom:20px; font-size:0.9em;">How it works — 4 connected nodes</div>
+    <div class="flow-nodes">
+      <div class="flow-node"><div class="icon">🌐</div><div class="lbl">Receives from</div><div class="val">Webhook</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="icon">🤖</div><div class="lbl">Processes with</div><div class="val">AI Agent</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="icon">🧠</div><div class="lbl">10-msg memory</div><div class="val">Context Window</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="icon">📨</div><div class="lbl">Sends back</div><div class="val">Webhook Response</div></div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="features">
+    <div class="feature-card"><div class="icon">💬</div><h3>Conversational AI</h3><p>Handles inquiries naturally. Understands context, tone, and intent with GPT-5-mini.</p></div>
+    <div class="feature-card"><div class="icon">🧠</div><h3>10-Message Memory</h3><p>Remembers conversation context. Customers don't repeat themselves.</p></div>
+    <div class="feature-card"><div class="icon">🚨</div><h3>Auto-Escalation</h3><p>Detects billing, security & complex issues. Escalates to humans automatically.</p></div>
+    <div class="feature-card"><div class="icon">🎨</div><h3>Fully Customizable</h3><p>Edit the system prompt. Add tools for order lookup, FAQ search, and more.</p></div>
+  </div>
+
+  <!-- Chat Demo -->
+  <div class="chat-demo" id="cs-chat">
+    <div class="chat-header">
+      <div class="chat-avatar">AI</div>
+      <div><strong>SupportAI</strong> <span style="color:#00D9FF;font-size:0.75em;">● Online</span> <span style="color:#667;font-size:0.75em;">— 5 free messages</span></div>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div class="chat-msg user">Hi, I need help resetting my password</div>
+      <div class="chat-msg ai"><div class="name">SupportAI</div>Hello! I'd be happy to help you reset your password. Could you please confirm the email address associated with your account?</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter') sendMessage()">
+      <button id="chatSend" onclick="sendMessage()">Send</button>
+    </div>
+    <div class="trial-overlay" id="trialOverlay">
+      <h3>🚀 You've tested SupportAI live!</h3>
+      <p>Get the full n8n workflow template. Import in 1 click. No subscription.</p>
+      <div>
+        <a href="https://sylvesterlab.gumroad.com/l/ai-customer-support-pro" class="btn">Buy on Gumroad — $29</a>
+        <a href="https://sylvesterlab.gumroad.com/l/ai-customer-support-agent" class="btn premium">+$5 for step-by-step guide</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing -->
+  <div class="pricing">
+    <div class="tier">
+      <div class="badge">Cold traffic</div>
+      <h3>Base</h3>
+      <div class="price-usd">$12</div>
+      <div class="price-ngn">~₦16,500</div>
+      <ul>
+        <li>Single workflow template</li>
+        <li>Setup guide (PDF)</li>
+        <li>Personal use license</li>
+      </ul>
+      <a href="https://sylvesterlab.gumroad.com/l/ai-customer-support-agent" class="btn">Buy $12</a>
+    </div>
+    <div class="tier featured">
+      <h3>Pro — You tested it</h3>
+      <div class="price-usd">$29</div>
+      <div class="price-ngn">~₦40,000</div>
+      <ul>
+        <li>Workflow template + guide</li>
+        <li>Step-by-step installation help</li>
+        <li>Personal use license</li>
+        <li>Email support</li>
+      </ul>
+      <a href="https://sylvesterlab.gumroad.com/l/ai-customer-support-pro" class="btn">Buy $29</a>
+    </div>
+  </div>
+</div>
+
+<div id="panel-sms-bot" class="panel">
+
+  <!-- Demo Video -->
+  <div class="demo-video">
+    <video controls preload="metadata">
+      <source src="../media/sms-bot-demo.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- Workflow -->
+  <div class="workflow-viz">
+    <div style="text-align:center; color:#667; margin-bottom:20px; font-size:0.9em;">How it works — 5 connected nodes</div>
+    <div class="flow-nodes">
+      <div class="flow-node"><div class="icon">📞</div><div class="lbl">Triggered by</div><div class="val">Webhook</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="icon">📋</div><div class="lbl">Extracts</div><div class="val">Format Data</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="icon">🤖</div><div class="lbl">Writes SMS with</div><div class="val">AI Generator</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="icon">📨</div><div class="lbl">Sends via</div><div class="val">Twilio</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="icon">✅</div><div class="lbl">Confirms</div><div class="val">Respond</div></div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="features">
+    <div class="feature-card"><div class="icon">📈</div><h3>Capture More Leads</h3><p>70% of missed calls never call back. An SMS within 60 seconds changes that.</p></div>
+    <div class="feature-card"><div class="icon">🤖</div><h3>AI-Powered Replies</h3><p>Each SMS is uniquely written by GPT-4o-mini for the caller and your business.</p></div>
+    <div class="feature-card"><div class="icon">⚡</div><h3>Instant Response</h3><p>From missed call to SMS in under 5 seconds. No delay, no lost opportunities.</p></div>
+    <div class="feature-card"><div class="icon">📱</div><h3>Any Phone System</h3><p>Works with Twilio, RingCentral, VoIP, Google Voice — anything with webhooks.</p></div>
+  </div>
+
+  <!-- Static Phone Demo -->
+  <div style="background:#0d0f17; border:1px solid #1a1a2e; border-radius:12px; margin:30px 0; overflow:hidden;">
+    <div style="padding:30px; text-align:center;">
+      <h3 style="color:#00D9FF; margin-bottom:20px;">See it in action</h3>
+      <div style="display:flex; gap:30px; align-items:center; justify-content:center; flex-wrap:wrap;">
+        <div style="width:280px; background:#000; border-radius:30px; padding:15px 10px; border:2px solid #333;">
+          <div style="text-align:center; padding-bottom:10px; color:#555; font-size:0.85em;">📱 Missed Call</div>
+          <div style="min-height:350px;">
+            <div style="max-width:88%; margin:8px 0; padding:10px 14px; border-radius:16px; font-size:0.85em; background:#2a2a3a; margin-right:auto; border-bottom-left-radius:4px;">(Missed call from +234 812 345 6789)<div style="font-size:0.7em;color:#666;margin-top:4px;">2 min ago</div></div>
+            <div style="max-width:88%; margin:8px 0; padding:10px 14px; border-radius:16px; font-size:0.85em; background:linear-gradient(135deg, #00D9FF22, #7b2ff722); border:1px solid #00D9FF44; margin-left:auto; border-bottom-right-radius:4px;">Hi there! We missed your call. I'm the AI assistant. You can reply here to book or ask a question. How can I help? 🚗<div style="font-size:0.7em;color:#666;margin-top:4px;">Just now</div></div>
+            <div style="max-width:88%; margin:8px 0; padding:10px 14px; border-radius:16px; font-size:0.85em; background:#2a2a3a; margin-right:auto; border-bottom-left-radius:4px;">I need an oil change tomorrow</div>
+            <div style="max-width:88%; margin:8px 0; padding:10px 14px; border-radius:16px; font-size:0.85em; background:linear-gradient(135deg, #00D9FF22, #7b2ff722); border:1px solid #00D9FF44; margin-left:auto; border-bottom-right-radius:4px;">Sure! We have 10 AM or 2 PM tomorrow. Which works for you? 🙂</div>
+          </div>
+        </div>
+        <div style="max-width:300px; text-align:left;">
+          <div style="color:#00D9FF; font-weight:700; font-size:1.1em; margin-bottom:12px;">How it works</div>
+          <div style="color:#667; font-size:0.9em; line-height:1.8;">
+            1. Customer calls and misses you<br>
+            2. Your phone system triggers the webhook<br>
+            3. AI writes a personalized SMS reply<br>
+            4. Twilio sends it within seconds<br>
+            5. Customer texts back to book
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Setup Steps -->
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h4>Import</h4><p>Import template.json into your n8n dashboard</p></div>
+    <div class="step"><div class="num">2</div><h4>Add Keys</h4><p>Connect OpenAI + Twilio API keys</p></div>
+    <div class="step"><div class="num">3</div><h4>Set Number</h4><p>Enter your Twilio SMS number</p></div>
+    <div class="step"><div class="num">4</div><h4>Activate</h4><p>Toggle Active and forward missed calls to the webhook</p></div>
+  </div>
+
+  <!-- Pricing -->
+  <div class="pricing">
+    <div class="tier">
+      <div class="badge">Cold traffic</div>
+      <h3>Base</h3>
+      <div class="price-usd">$17</div>
+      <div class="price-ngn">~₦23,300</div>
+      <ul>
+        <li>Single workflow template</li>
+        <li>Setup guide (PDF)</li>
+        <li>Personal use license</li>
+      </ul>
+      <a href="https://sylvesterlab.gumroad.com/l/missed-call-sms-text-back" class="btn">Buy $17</a>
+    </div>
+    <div class="tier featured">
+      <h3>Pro</h3>
+      <div class="price-usd">$29</div>
+      <div class="price-ngn">~₦40,000</div>
+      <ul>
+        <li>Workflow template + guide</li>
+        <li>Step-by-step installation help</li>
+        <li>Personal use license</li>
+        <li>Email support</li>
+      </ul>
+      <a href="https://sylvesterlab.gumroad.com/l/missed-call-sms-pro" class="btn">Buy $29</a>
+    </div>
+  </div>
+</div>
+
+<!-- Lead Capture -->
+<div class="demo-form" id="request-demo">
+  <h2>Want a walkthrough?</h2>
+  <p>Leave your email and I'll send you a video walkthrough of both templates.</p>
+  <form id="demoForm">
+    <div class="form-group">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" placeholder="e.g., Chisom Okonkwo" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="you@example.com" required>
+    </div>
+    <div class="form-group">
+      <label for="business">Business Type</label>
+      <select id="business">
+        <option value="">Select your business type...</option>
+        <option value="saas">SaaS / Software</option>
+        <option value="ecommerce">E-commerce</option>
+        <option value="agency">Digital Agency</option>
+        <option value="service">Service Business</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="message">What are you looking to automate?</label>
+      <textarea id="message" placeholder="Tell me about your needs..."></textarea>
+    </div>
+    <button type="submit" class="btn">Request Walkthrough</button>
+  </form>
+  <div id="formSuccess" style="display:none; margin-top:20px; padding:20px; background:#00D9FF0d; border:1px solid #00D9FF33; border-radius:8px; color:#00D9FF;">
+    ✅ Thanks! I'll send the walkthrough to your email within 24 hours.
+  </div>
+</div>
+
+<div class="testimonials">
+  <div class="testimonial">
+    <div class="text">"Set up the CS Agent in 10 minutes. It's handling about 60% of our tier-1 support tickets now."</div>
+    <div class="author">— Michael A.</div>
+    <div class="role">SaaS Founder, Lagos</div>
+  </div>
+  <div class="testimonial">
+    <div class="text">"The SMS Bot is genius. I installed it for my auto shop. Customers get instant replies at 2 AM. Game changer."</div>
+    <div class="author">— Segun O.</div>
+    <div class="role">Auto Shop Owner, Abuja</div>
+  </div>
+</div>
+
+<div class="faq">
+  <details>
+    <summary>Do I need technical skills to set these up?</summary>
+    <div class="answer">Basic familiarity with n8n helps, but the setup guide walks you through every step. Import, add your API key, activate. About 5 minutes. The Pro tier includes step-by-step installation help.</div>
+  </details>
+  <details>
+    <summary>What do I need to run the CS Agent?</summary>
+    <div class="answer">An n8n instance (free self-hosted or cloud at app.n8n.cloud) and an OpenAI API key. Total cost per conversation is ~$0.002 with GPT-4o-mini.</div>
+  </details>
+  <details>
+    <summary>What do I need to run the SMS Bot?</summary>
+    <div class="answer">n8n (any version), an OpenAI API key, and a Twilio account with an SMS-capable phone number.</div>
+  </details>
+  <details>
+    <summary>Can I customize the responses?</summary>
+    <div class="answer">Yes. Both templates have editable system prompts. Change the brand voice, add product knowledge, or connect custom tools.</div>
+  </details>
+  <details>
+    <summary>What about Nigerian payment?</summary>
+    <div class="answer">Gumroad accepts Nigerian debit cards (Verve, Mastercard). The price is in USD but your bank converts at the current rate (~₦1,370/USD). $29 ≈ ₦40,000.</div>
+  </details>
+</div>
+
+<div class="footer">
+  Requires n8n (free) + OpenAI API key | Approved on n8n.markets<br>
+  Built by Sylvester — <a href="https://sylvesterlab.gumroad.com/">Gumroad</a>
+</div>
+
+</div>
+
+<script>
+function switchTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.tab[onclick*="${id}"]`).classList.add('active');
+  document.getElementById('panel-' + id).classList.add('active');
+}
+
+// 5-Message Trial — localStorage based (per browser session)
+const TRIAL_KEY = 'cs-agent-msg-count';
+let msgCount = parseInt(localStorage.getItem(TRIAL_KEY) || '0', 10);
+const MAX_MSGS = 5;
+let convId = 'demo-' + Date.now();
+
+// Check if trial already expired on load
+if (msgCount >= MAX_MSGS) {
+  document.getElementById('chatInput').disabled = true;
+  document.getElementById('chatSend').disabled = true;
+  document.getElementById('trialOverlay').classList.add('show');
+}
+
+function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const sendBtn = document.getElementById('chatSend');
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  const chatBody = document.getElementById('chatBody');
+  chatBody.innerHTML += `<div class="chat-msg user">${escHtml(msg)}</div>`;
+  input.value = '';
+  chatBody.scrollTop = chatBody.scrollHeight;
+
+  msgCount++;
+  localStorage.setItem(TRIAL_KEY, msgCount.toString());
+
+  const typing = document.createElement('div');
+  typing.className = 'chat-msg ai';
+  typing.innerHTML = '<div class="name">SupportAI</div><em>typing...</em>';
+  typing.id = 'typing';
+  chatBody.appendChild(typing);
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: msg, conversationId: convId })
+  })
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById('typing')?.remove();
+    if (data.trial_over) {
+      input.disabled = true;
+      sendBtn.disabled = true;
+      document.getElementById('trialOverlay').classList.add('show');
+    } else {
+      chatBody.innerHTML += `<div class="chat-msg ai"><div class="name">SupportAI</div>${escHtml(data.response)}</div>`;
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+    if (msgCount >= MAX_MSGS) {
+      input.disabled = true;
+      sendBtn.disabled = true;
+      document.getElementById('trialOverlay').classList.add('show');
+    }
+  })
+  .catch(() => {
+    document.getElementById('typing')?.remove();
+    chatBody.innerHTML += `<div class="chat-msg ai"><div class="name">SupportAI</div>Connection issue. Please try again.</div>`;
+  });
+}
+
+function escHtml(str) { return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+document.getElementById('demoForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const data = {
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    business: document.getElementById('business').value,
+    message: document.getElementById('message').value
+  };
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).catch(() => {});
+  document.getElementById('demoForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+});
+</script>
+</body>
+</html>

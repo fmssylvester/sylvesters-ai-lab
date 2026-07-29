@@ -1,0 +1,83 @@
+{
+  "name": "CS Agent — Lead Capture",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cs-agent-lead",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 300],
+      "id": "lead-webhook",
+      "name": "Lead Webhook"
+    },
+    {
+      "parameters": {
+        "fromEmail": "sylvester@yourdomain.com",
+        "toEmail": "sylvester@yourdomain.com",
+        "subject": "=New CS Agent Demo Request — {{ $json.name }}",
+        "text": "=New Demo Request\n\nName: {{ $json.name }}\nEmail: {{ $json.email }}\nBusiness: {{ $json.business }}\nMessage: {{ $json.message }}\n\nTimestamp: {{ new Date().toISOString() }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [350, 300],
+      "id": "email-notify",
+      "name": "Email Notification"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": "Leads",
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json.name }}",
+            "Email": "={{ $json.email }}",
+            "Business": "={{ $json.business }}",
+            "Message": "={{ $json.message }}",
+            "Timestamp": "={{ new Date().toISOString() }}"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [350, 500],
+      "id": "save-lead",
+      "name": "Save to Google Sheets"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": true,\n  \"message\": \"Thanks! We'll send you the demo shortly.\"\n}"
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [650, 300],
+      "id": "respond-lead",
+      "name": "Respond to Lead"
+    }
+  ],
+  "connections": {
+    "Lead Webhook": {
+      "main": [[{"node": "Email Notification", "type": "main", "index": 0}]]
+    },
+    "Email Notification": {
+      "main": [[{"node": "Save to Google Sheets", "type": "main", "index": 0}]]
+    },
+    "Save to Google Sheets": {
+      "main": [[{"node": "Respond to Lead", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": {"executionOrder": "v1"},
+  "tags": [{"name": "Sales"}, {"name": "Leads"}]
+}
