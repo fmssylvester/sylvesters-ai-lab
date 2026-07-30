@@ -20,14 +20,14 @@ module.exports = async function handler(req, res) {
 
     let system
     if (product === 'multi-channel') {
-      const guide = channel === 'telegram'
-        ? 'Casual, concise, use markdown.'
-        : channel === 'sms'
-        ? 'Very short, no formatting.'
-        : 'Professional, friendly, brief.'
-      system = `Multi-channel hub demo. Channel: ${channel || 'WhatsApp'}. ${guide} Answer directly in 1-2 sentences.`
+      const guide = channel === 'sms'
+        ? 'Max 160 chars.'
+        : channel === 'telegram'
+        ? 'Max 200 chars.'
+        : 'Max 300 chars.'
+      system = `Demo assistant (${channel || 'whatsapp'} channel). ${guide}`
     } else {
-      system = `SupportAI demo assistant for ${product}. Answer in 1-2 sentences.`
+      system = `SupportAI demo assistant for ${product}.`
     }
 
     const aiResp = await callNvidia(system, msg)
