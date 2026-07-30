@@ -31,9 +31,9 @@ Unify WhatsApp, Telegram, and SMS into one AI-powered workflow. Automatically de
 - One or more: WhatsApp Business API / Telegram Bot / Twilio
 
 ### Pricing
-$29 — Essentials (single use)
-$69 — Professional (commercial license)
-$149 — Enterprise (white-label + custom channels)
+$97 — Essentials (single use)
+$197 — Professional (commercial license)
+$397 — Enterprise (white-label + custom channels)
 
 ### Tags
 Multi-Channel, WhatsApp, Telegram, SMS, Omnichannel, AI, Twilio, n8n

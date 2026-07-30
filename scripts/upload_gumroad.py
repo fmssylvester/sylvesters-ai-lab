@@ -126,7 +126,7 @@ PRODUCTS = {
     "multi-channel-hub": {
         "dir": "products/multi-channel-hub",
         "name": "Multi-Channel Communication Hub - n8n Workflow Template",
-        "price": 29,
+        "price": 97,
         "custom_summary": "Unify WhatsApp, Telegram & SMS into one AI-powered n8n workflow. Channel-aware responses, single webhook, easy setup.",
         "description": (
             "Unify your customer communications across WhatsApp, Telegram, and SMS "
@@ -231,10 +231,14 @@ def create_product(token, product_key, product_info):
                     {"name": "Agency - White Label", "price_difference_cents": 12000},
                 ]
             }
-        ] if product_key not in ("patient-records", "ai-agent-memory") else [
+        ] if product_key not in ("patient-records", "ai-agent-memory", "multi-channel-hub") else [
             {
                 "title": "Edition",
                 "variants": [
+                    {"name": "Essentials", "price_difference_cents": 0},
+                    {"name": "Professional", "price_difference_cents": 10000},
+                    {"name": "Enterprise", "price_difference_cents": 30000},
+                ] if product_key == "multi-channel-hub" else [
                     {"name": "Essentials", "price_difference_cents": 0},
                     {"name": "Professional", "price_difference_cents": 4800},
                     {"name": "Enterprise", "price_difference_cents": 14800},

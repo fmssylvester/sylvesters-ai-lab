@@ -27,9 +27,9 @@ Unify your customer communications across WhatsApp, Telegram, and SMS in one pow
 - Channel-optimized response formatting
 
 **Pricing:**
-- **Essentials ($29):** Single use license + setup guide
-- **Professional ($69):** Commercial license + priority support + customization
-- **Enterprise ($149):** White-label rights + installation + custom channel integration
+- **Essentials ($97):** Single use license + setup guide
+- **Professional ($197):** Commercial license + priority support + customization
+- **Enterprise ($397):** White-label rights + installation + custom channel development
 
 **Requirements:**
 - n8n instance (free self-hosted or cloud)
