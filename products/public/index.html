@@ -677,7 +677,7 @@ function sendMessage() {
   typing.id = 'typing';
   chatBody.appendChild(typing);
 
-  fetch('/', {
+  fetch('/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ message: msg, conversationId: convId })
@@ -742,7 +742,7 @@ function sendAgentMessage() {
   typing.id = 'agentTyping';
   chatBody.appendChild(typing);
 
-  fetch('/', {
+  fetch('/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ message: msg, conversationId: agentConvId, product: 'ai-agent' })
@@ -778,7 +778,7 @@ document.getElementById('demoForm').addEventListener('submit', function(e) {
     business: document.getElementById('business').value,
     message: document.getElementById('message').value
   };
-  fetch('/', {
+  fetch('/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)

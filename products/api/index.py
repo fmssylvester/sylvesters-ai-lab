@@ -93,7 +93,7 @@ def call_ai(messages, product='cs-agent'):
     except Exception as e:
         return f"I apologize, I'm having a temporary issue. Please try again in a moment. (Error: {str(e)[:50]})"
 
-@app.route('/', methods=['POST', 'OPTIONS'])
+@app.route('/api/chat', methods=['POST', 'OPTIONS'])
 def handle_post():
     if request.method == 'OPTIONS':
         return '', 204
