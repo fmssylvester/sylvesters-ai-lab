@@ -123,6 +123,37 @@ PRODUCTS = {
         "files": ["workflow-patient-lookup.json", "google-sheet-template.csv"],
         "tags": ["Healthcare", "Medical", "Patient Records", "n8n", "Clinic"],
     },
+    "multi-channel-hub": {
+        "dir": "products/multi-channel-hub",
+        "name": "Multi-Channel Communication Hub - n8n Workflow Template",
+        "price": 29,
+        "custom_summary": "Unify WhatsApp, Telegram & SMS into one AI-powered n8n workflow. Channel-aware responses, single webhook, easy setup.",
+        "description": (
+            "Unify your customer communications across WhatsApp, Telegram, and SMS "
+            "in one powerful n8n workflow. The Multi-Channel Hub automatically detects "
+            "which channel a message arrives on, generates an AI response optimized for "
+            "that channel, and sends the reply back.\n\n"
+            "**What's Included:**\n"
+            "- Ready-to-import n8n workflow JSON\n"
+            "- AI-powered response generation (GPT-4o-mini)\n"
+            "- Channel-aware replies (WhatsApp/Telegram/SMS optimized)\n"
+            "- WhatsApp Business API integration\n"
+            "- Telegram bot integration\n"
+            "- Twilio SMS integration\n"
+            "- Detailed setup guide\n\n"
+            "**Features:**\n"
+            "- Single webhook endpoint for all channels\n"
+            "- AI detects intent and responds appropriately per channel\n"
+            "- Easy to add more channels\n"
+            "- Channel-optimized response formatting\n\n"
+            "**Requirements:**\n"
+            "- n8n instance (free self-hosted or cloud)\n"
+            "- OpenAI API key\n"
+            "- At least one channel account"
+        ),
+        "files": ["template.json", "SETUP.md"],
+        "tags": ["Multi-Channel", "WhatsApp", "Telegram", "SMS", "Omnichannel", "AI", "Twilio", "n8n"],
+    },
     "ai-agent-memory": {
         "dir": "products/ai-agent-memory",
         "name": "AI Agent with Memory & Tools - n8n Workflow Template",
@@ -253,7 +284,7 @@ def main():
     if not token:
         print("Usage: python3 scripts/upload_gumroad.py [access_token] [product_name]")
         print("\n  Or set GUMROAD_TOKEN environment variable")
-        print("\nAvailable products: ai-customer-support, missed-call-sms, patient-records, ai-agent-memory")
+        print("\nAvailable products: ai-customer-support, missed-call-sms, patient-records, ai-agent-memory, multi-channel-hub")
         print("\nTo get your access token:")
         print("  1. Go to https://gumroad.com/settings/advanced")
         print("  2. Create an application")
