@@ -36,6 +36,7 @@ out/
 *.wav
 *.mov
 *.mkv
+!products/public/media/*.mp4
 *.png.bak
 
 # Archives / misc dumps
