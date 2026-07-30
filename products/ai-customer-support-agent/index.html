@@ -14,7 +14,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .hero { text-align: center; padding: 60px 0 40px; border-bottom: 1px solid #1a1a2e; }
 .hero h1 { font-size: 2.6em; background: linear-gradient(135deg, #00D9FF, #E7B84D); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
 .hero .subtitle { color: #889; font-size: 1.1em; margin-bottom: 30px; }
-.hero-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
+.hero-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1100px; margin: 0 auto; }
 .hero-card { background: #0d0f17; border: 1px solid #1a1a2e; border-radius: 12px; padding: 28px; text-align: center; }
 .hero-card .icon { font-size: 2.2em; margin-bottom: 8px; }
 .hero-card h3 { color: #00D9FF; margin-bottom: 6px; }
@@ -163,6 +163,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
       <p>Instant patient records from any phone. Type name or ID, get medical summary</p>
       <div class="price">$49 <small>one-time</small></div>
     </div>
+    <div class="hero-card">
+      <div class="icon">🧠</div>
+      <h3>AI Agent + Memory & Tools</h3>
+      <p>Conversational AI with 20-msg memory, calculator, and Wikipedia lookup</p>
+      <div class="price">$49 <small>one-time</small></div>
+    </div>
   </div>
 </div>
 
@@ -170,6 +176,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   <button class="tab active" onclick="switchTab('cs-agent')">🤖 CS Agent</button>
   <button class="tab" onclick="switchTab('sms-bot')">📱 SMS Bot</button>
   <button class="tab" onclick="switchTab('patient-records')">🏥 Patient Records</button>
+  <button class="tab" onclick="switchTab('ai-agent')">🧠 AI Agent</button>
 </div>
 
 <div id="panel-cs-agent" class="panel active">
@@ -421,6 +428,111 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   </div>
 </div>
 
+<div id="panel-ai-agent" class="panel">
+
+  <!-- Demo Video -->
+  <div class="demo-video">
+    <video controls preload="metadata">
+      <source src="../media/ai-agent-demo.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- Workflow -->
+  <div class="workflow-viz">
+    <div style="text-align:center; color:#667; margin-bottom:20px; font-size:0.9em;">How it works — 5 connected nodes</div>
+    <div class="flow-nodes">
+      <div class="flow-node"><div class="icon">🌐</div><div class="lbl">Triggered by</div><div class="val">Webhook</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="icon">🧠</div><div class="lbl">20-msg context</div><div class="val">Memory</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="icon">🤖</div><div class="lbl">Processes with</div><div class="val">AI Agent</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="icon">🧮</div><div class="lbl">Built-in</div><div class="val">Calculator + Wiki</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="icon">📨</div><div class="lbl">Sends to</div><div class="val">Webhook Response</div></div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="features">
+    <div class="feature-card"><div class="icon">🧠</div><h3>20-Message Memory</h3><p>Remembers conversation context across messages. Users don't repeat themselves.</p></div>
+    <div class="feature-card"><div class="icon">🧮</div><h3>Calculator Tool</h3><p>Solves math problems, conversions, and equations instantly. No extra API key needed.</p></div>
+    <div class="feature-card"><div class="icon">📚</div><h3>Wikipedia Lookup</h3><p>Researches facts, history, science, and biography. Works out of the box.</p></div>
+    <div class="feature-card"><div class="icon">🔌</div><h3>Webhook API</h3><p>Integrates with any frontend. Send a message, get a response. Simple JSON format.</p></div>
+  </div>
+
+  <!-- Chat Demo -->
+  <div class="chat-demo" id="agent-chat">
+    <div class="chat-header">
+      <div class="chat-avatar">AI</div>
+      <div><strong>Agent</strong> <span style="color:#00D9FF;font-size:0.75em;">● Online</span> <span style="color:#667;font-size:0.75em;">— Memory + Calculator + Wikipedia</span></div>
+    </div>
+    <div class="chat-body" id="agentChatBody">
+      <div class="chat-msg user">What is 342 × 567?</div>
+      <div class="chat-msg ai"><div class="name">Agent</div>Let me calculate that for you. 342 × 567 = <strong style="color:#E7B84D;">193,914</strong>.</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="agentChatInput" placeholder="Ask me anything..." onkeydown="if(event.key==='Enter') sendAgentMessage()">
+      <button id="agentChatSend" onclick="sendAgentMessage()">Send</button>
+    </div>
+    <div class="trial-overlay" id="agentTrialOverlay">
+      <h3>🧠 You've tested the AI Agent live!</h3>
+      <p>Get the full n8n workflow template with memory + tools. Import in 1 click. No subscription.</p>
+      <div>
+        <a href="https://sylvesterlab.gumroad.com/l/ai-agent-n8n" class="btn">Buy on Gumroad — $49</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Setup Steps -->
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h4>Import</h4><p>Import template.json into your n8n dashboard</p></div>
+    <div class="step"><div class="num">2</div><h4>Add OpenAI Key</h4><p>Connect your OpenAI API key to the chat model</p></div>
+    <div class="step"><div class="num">3</div><h4>Activate</h4><p>Toggle the workflow on and get your webhook URL</p></div>
+    <div class="step"><div class="num">4</div><h4>Chat</h4><p>Send a POST request with your message and get AI response</p></div>
+  </div>
+
+  <!-- Pricing -->
+  <div class="pricing pricing-3">
+    <div class="tier">
+      <h3>Essentials</h3>
+      <div class="price-usd">$49</div>
+      <div class="price-ngn">~₦67,000</div>
+      <ul>
+        <li>Core n8n workflow (7 nodes)</li>
+        <li>20-message memory</li>
+        <li>Calculator + Wikipedia tools</li>
+        <li>Setup guide included</li>
+      </ul>
+      <a href="https://sylvesterlab.gumroad.com/l/ai-agent-n8n" class="btn">Buy on Gumroad — $49</a>
+    </div>
+    <div class="tier featured">
+      <h3>Professional</h3>
+      <div class="price-usd">$97</div>
+      <div class="price-ngn">~₦133,000</div>
+      <ul>
+        <li>All Essentials features</li>
+        <li>Step-by-step installation help</li>
+        <li>Demo video walkthrough</li>
+        <li>Priority email support</li>
+      </ul>
+      <a href="https://sylvesterlab.gumroad.com/l/ai-agent-n8n" class="btn">Buy on Gumroad — $97</a>
+    </div>
+    <div class="tier">
+      <h3>Enterprise</h3>
+      <div class="price-usd">$197</div>
+      <div class="price-ngn">~₦270,000</div>
+      <ul>
+        <li>All Professional features</li>
+        <li>White-label branding</li>
+        <li>Custom tool integration</li>
+        <li>Priority 1hr setup call</li>
+      </ul>
+      <a href="https://sylvesterlab.gumroad.com/l/ai-agent-n8n" class="btn">Buy on Gumroad — $197</a>
+    </div>
+  </div>
+</div>
+
 <!-- Lead Capture -->
 <div class="demo-form" id="request-demo">
   <h2>Want a walkthrough?</h2>
@@ -498,6 +610,18 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   <details>
     <summary>Can patients access their own records?</summary>
     <div class="answer">The dashboard gives secure access to staff only. Patients interact through the channels you set up — you control who can search and what they see.</div>
+  </details>
+  <details>
+    <summary>What do I need to run the AI Agent?</summary>
+    <div class="answer">An n8n instance (free self-hosted or cloud) and an OpenAI API key. The Calculator and Wikipedia tools work without any extra keys. Total cost per query is ~$0.001 with GPT-4o-mini.</div>
+  </details>
+  <details>
+    <summary>Can I add more tools to the AI Agent?</summary>
+    <div class="answer">Yes. The workflow is designed to be extensible. Add any n8n-supported tool node (SerpAPI for web search, vector store for knowledge base, etc.) and connect it to the AI Agent's <code>ai_tool</code> input. The agent automatically discovers new tools.</div>
+  </details>
+  <details>
+    <summary>Does the AI Agent remember previous conversations?</summary>
+    <div class="answer">Yes. It has a 20-message window buffer memory. Pass a <code>sessionId</code> in your request to continue previous conversations. Without it, each request starts fresh.</div>
   </details>
   <details>
     <summary>What about Nigerian payment?</summary>
@@ -582,6 +706,69 @@ function sendMessage() {
 }
 
 function escHtml(str) { return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// AI Agent Chat
+const AGENT_KEY = 'agent-msg-count';
+let agentCount = parseInt(localStorage.getItem(AGENT_KEY) || '0', 10);
+const AGENT_MAX = 5;
+let agentConvId = 'agent-' + Date.now();
+
+if (agentCount >= AGENT_MAX) {
+  const inp = document.getElementById('agentChatInput');
+  const btn = document.getElementById('agentChatSend');
+  if (inp) { inp.disabled = true; }
+  if (btn) { btn.disabled = true; }
+  const ov = document.getElementById('agentTrialOverlay');
+  if (ov) { ov.classList.add('show'); }
+}
+
+function sendAgentMessage() {
+  const input = document.getElementById('agentChatInput');
+  const sendBtn = document.getElementById('agentChatSend');
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  const chatBody = document.getElementById('agentChatBody');
+  chatBody.innerHTML += `<div class="chat-msg user">${escHtml(msg)}</div>`;
+  input.value = '';
+  chatBody.scrollTop = chatBody.scrollHeight;
+
+  agentCount++;
+  localStorage.setItem(AGENT_KEY, agentCount.toString());
+
+  const typing = document.createElement('div');
+  typing.className = 'chat-msg ai';
+  typing.innerHTML = '<div class="name">Agent</div><em>thinking...</em>';
+  typing.id = 'agentTyping';
+  chatBody.appendChild(typing);
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: msg, conversationId: agentConvId, product: 'ai-agent' })
+  })
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById('agentTyping')?.remove();
+    if (data.trial_over) {
+      input.disabled = true;
+      sendBtn.disabled = true;
+      document.getElementById('agentTrialOverlay').classList.add('show');
+    } else {
+      chatBody.innerHTML += `<div class="chat-msg ai"><div class="name">Agent</div>${escHtml(data.response)}</div>`;
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+    if (agentCount >= AGENT_MAX) {
+      input.disabled = true;
+      sendBtn.disabled = true;
+      document.getElementById('agentTrialOverlay').classList.add('show');
+    }
+  })
+  .catch(() => {
+    document.getElementById('agentTyping')?.remove();
+    chatBody.innerHTML += `<div class="chat-msg ai"><div class="name">Agent</div>Connection issue. Please try again.</div>`;
+  });
+}
 
 document.getElementById('demoForm').addEventListener('submit', function(e) {
   e.preventDefault();

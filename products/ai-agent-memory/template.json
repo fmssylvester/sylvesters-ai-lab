@@ -1,0 +1,177 @@
+{
+  "name": "AI Agent with Memory & Tools",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ai-agent",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-id",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 300],
+      "webhookId": "ai-agent"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "temperature": 0.7,
+        "maxTokens": 2000,
+        "options": {}
+      },
+      "id": "chat-model-id",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [350, 50]
+    },
+    {
+      "parameters": {
+        "memoryType": "windowBuffer",
+        "contextWindowLength": 20,
+        "sessionIdType": "default",
+        "sessionId": "={{ $json.sessionId || $executionId }}",
+        "sessionIdKey": "sessionId"
+      },
+      "id": "memory-id",
+      "name": "Window Buffer Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryManager",
+      "typeVersion": 1.1,
+      "position": [350, 600]
+    },
+    {
+      "parameters": {
+        "agentType": "conversationalAgent",
+        "systemMessage": "You are an intelligent AI agent with memory and tools. You answer questions, perform calculations, and look up information.\n\n## Available Tools\n- **Calculator**: Use for math problems, arithmetic, equations, conversions\n- **Wikipedia**: Use for facts, history, science, biography, general knowledge\n\n## Rules\n1. When asked a math or calculation question → use the Calculator tool\n2. When asked about facts, history, science, or general knowledge → use Wikipedia\n3. For conversation, opinions, or advice → respond naturally\n4. If a tool fails or returns nothing, tell the user honestly and offer alternatives\n5. Keep responses under 200 words unless the topic requires more depth\n6. Remember context from earlier messages — reference it when relevant\n7. If the user asks about something outside your knowledge, say so honestly\n\n## Response Format\n- Start with a brief acknowledgment or answer\n- If you used a tool, summarize what you found\n- End with a question to keep the conversation flowing (when appropriate)",
+        "options": {
+          "maxIterations": 10,
+          "returnIntermediateSteps": false
+        }
+      },
+      "id": "agent-id",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [350, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{\n  {\n    success: true,\n    response: $json.output,\n    conversationId: $json.conversationId || $executionId,\n    timestamp: new Date().toISOString()\n  }\n}}"
+      },
+      "id": "respond-id",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {},
+      "id": "calc-id",
+      "name": "Calculator",
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [150, 550]
+    },
+    {
+      "parameters": {},
+      "id": "wiki-id",
+      "name": "Wikipedia",
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "typeVersion": 1,
+      "position": [550, 550]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wikipedia": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "AI"
+    },
+    {
+      "name": "Agent"
+    },
+    {
+      "name": "Tools"
+    },
+    {
+      "name": "Memory"
+    },
+    {
+      "name": "Chatbot"
+    }
+  ]
+}

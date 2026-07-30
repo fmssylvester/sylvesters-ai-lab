@@ -39,6 +39,8 @@ import SmsBotDemo from './scenes/sms-bot-demo/SmsBotDemo';
 import { SMS_BOT_DEMO } from './scenes/sms-bot-demo/smsBotTimeline';
 import PatientRecordsDemo from './scenes/patient-records-demo/PatientRecordsDemo';
 import { PATIENT_RECORDS_DEMO } from './scenes/patient-records-demo/patientRecordsTimeline';
+import AiAgentDemo from './scenes/ai-agent-demo/AiAgentDemo';
+import { AI_AGENT_DEMO } from './scenes/ai-agent-demo/aiAgentTimeline';
 
 export const RemotionRoot = () => {
   return (
@@ -325,6 +327,16 @@ export const RemotionRoot = () => {
         component={PatientRecordsDemo}
         durationInFrames={PATIENT_RECORDS_DEMO.TOTAL_FRAMES}
         fps={PATIENT_RECORDS_DEMO.FPS}
+        width={1920}
+        height={1080}
+      />
+
+      {/* ── AI Agent with Memory & Tools Demo (18s at 30fps = 540 frames) ── */}
+      <Composition
+        id="AiAgentDemo"
+        component={AiAgentDemo}
+        durationInFrames={AI_AGENT_DEMO.TOTAL_FRAMES}
+        fps={AI_AGENT_DEMO.FPS}
         width={1920}
         height={1080}
       />

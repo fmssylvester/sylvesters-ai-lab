@@ -123,6 +123,37 @@ PRODUCTS = {
         "files": ["workflow-patient-lookup.json", "google-sheet-template.csv"],
         "tags": ["Healthcare", "Medical", "Patient Records", "n8n", "Clinic"],
     },
+    "ai-agent-memory": {
+        "dir": "products/ai-agent-memory",
+        "name": "AI Agent with Memory & Tools - n8n Workflow Template",
+        "price": 49,
+        "custom_summary": "Deploy an intelligent AI agent with 20-message memory, calculator, and Wikipedia tools. Import into n8n in 1 click. Works with just an OpenAI key.",
+        "description": (
+            "Deploy a production-ready AI agent that remembers conversations, "
+            "performs calculations, and researches information — all in one importable template.\n\n"
+            "**What Makes This Different:**\n"
+            "- 20-message conversation memory (remembers context across messages)\n"
+            "- Calculator tool for math, conversions, and equations\n"
+            "- Wikipedia tool for facts, history, and research\n"
+            "- No extra API keys needed beyond OpenAI\n"
+            "- Structured JSON webhook response\n\n"
+            "**What's Included:**\n"
+            "- Ready-to-import n8n workflow JSON (7 connected nodes)\n"
+            "- Detailed setup guide\n"
+            "- Customizable system prompt\n"
+            "- Works with any frontend (web, mobile, CLI)\n\n"
+            "**Use Cases:**\n"
+            "- AI assistant with research capabilities\n"
+            "- Customer support with calculation features\n"
+            "- Educational Q&A bot\n"
+            "- Internal help desk with knowledge lookup\n\n"
+            "**Requirements:**\n"
+            "- n8n instance (free self-hosted or cloud)\n"
+            "- OpenAI API key"
+        ),
+        "files": ["template.json", "SETUP.md"],
+        "tags": ["AI", "Agent", "Tools", "Memory", "Chatbot", "n8n", "Automation", "LLM", "Calculator", "Wikipedia"],
+    },
 }
 
 GUMROAD_API = "https://api.gumroad.com/v2"
@@ -169,7 +200,7 @@ def create_product(token, product_key, product_info):
                     {"name": "Agency - White Label", "price_difference_cents": 12000},
                 ]
             }
-        ] if product_key != "patient-records" else [
+        ] if product_key not in ("patient-records", "ai-agent-memory") else [
             {
                 "title": "Edition",
                 "variants": [
@@ -222,7 +253,7 @@ def main():
     if not token:
         print("Usage: python3 scripts/upload_gumroad.py [access_token] [product_name]")
         print("\n  Or set GUMROAD_TOKEN environment variable")
-        print("\nAvailable products: ai-customer-support, missed-call-sms, patient-records")
+        print("\nAvailable products: ai-customer-support, missed-call-sms, patient-records, ai-agent-memory")
         print("\nTo get your access token:")
         print("  1. Go to https://gumroad.com/settings/advanced")
         print("  2. Create an application")

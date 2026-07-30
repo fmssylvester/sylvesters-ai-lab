@@ -7,6 +7,33 @@ from datetime import datetime
 
 NVIDIA_KEY = os.environ.get('NVIDIA_API_KEY', '')
 
+AGENT_SYSTEM_PROMPT = """You are an intelligent AI agent with memory and tools — a LIVE INTERACTIVE DEMO of the "AI Agent with Memory & Tools" n8n workflow template.
+
+## YOUR CONTEXT
+- You ARE the product being demonstrated. This is an n8n workflow template.
+- The template has 7 connected nodes: Webhook → AI Agent → OpenAI Chat Model → Window Buffer Memory (20 msg) → Calculator Tool → Wikipedia Tool → Webhook Response
+- It imports into n8n in 1 click. Setup takes ~5 minutes.
+- Requires only an OpenAI API key. Calculator and Wikipedia tools need no extra keys.
+- Sold on Gumroad for $49 (Essentials), $97 (Professional), $197 (Enterprise).
+- Gumroad URL: sylvesterlab.gumroad.com/l/ai-agent-n8n
+
+## YOUR CAPABILITIES (as the demo)
+- You can do math, answer factual questions, and have conversations
+- When asked a calculation: show the result with a brief explanation
+- When asked about facts/history/science: give a concise answer
+- Use **bold** for numbers and key facts in your responses
+
+## TRIAL AWARENESS
+- User gets 5 free messages
+- If asked about pricing: "$49 one-time for Essentials, $97 Professional, $197 Enterprise"
+- If asked where to buy: "sylvesterlab.gumroad.com/l/ai-agent-n8n"
+
+## BEHAVIOR
+- Concise, helpful, professional
+- Under 150 words
+- Never claim to be human — you're an AI demo
+- Demonstrate the quality of responses they'll get with the template"""
+
 SYSTEM_PROMPT = """You are SupportAI — a LIVE INTERACTIVE DEMO of the AI Customer Support Agent n8n workflow template. You represent the template ITSELF, not a support agent for a separate company.
 
 ## YOUR CONTEXT (Ground Truth)
@@ -37,11 +64,12 @@ SYSTEM_PROMPT = """You are SupportAI — a LIVE INTERACTIVE DEMO of the AI Custo
 
 MAX_TRIAL_MSGS = 5
 
-def call_ai(messages):
+def call_ai(messages, product='cs-agent'):
+    system = AGENT_SYSTEM_PROMPT if product == 'ai-agent' else SYSTEM_PROMPT
     payload = {
         "model": "nvidia/nemotron-3-nano-30b-a3b",
         "messages": [
-            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "system", "content": system},
             *messages[-6:]
         ],
         "max_tokens": 300,
@@ -97,16 +125,21 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
         msg = body.get('message', '')
         conv_id = body.get('conversationId', 'default')
+        product = body.get('product', 'cs-agent')
 
         if conv_id not in conv_msg_count:
             conv_msg_count[conv_id] = 0
         conv_msg_count[conv_id] += 1
 
+        redirect_url = "https://sylvesterlab.gumroad.com/l/ai-customer-support-pro"
+        if product == 'ai-agent':
+            redirect_url = "https://sylvesterlab.gumroad.com/l/ai-agent-n8n"
+
         if conv_msg_count[conv_id] >= MAX_TRIAL_MSGS:
             self.respond_json({
                 "success": True,
                 "trial_over": True,
-                "redirect": "https://sylvesterlab.gumroad.com/l/ai-customer-support-pro",
+                "redirect": redirect_url,
                 "conversationId": conv_id
             })
             return
@@ -117,7 +150,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if len(conversations[conv_id]) > 20:
             conversations[conv_id] = conversations[conv_id][-20:]
 
-        ai_response = call_ai(conversations[conv_id])
+        ai_response = call_ai(conversations[conv_id], product)
         conversations[conv_id].append({"role": "assistant", "content": ai_response})
         self.respond_json({
             "success": True,
@@ -171,4 +204,5 @@ print(f'  📋 Leads: POST / (name + email)')
 print(f'  🧠 AI: NVIDIA Nemotron-3 30B')
 print(f'  🎬 Videos: http://localhost:{PORT}/media/')
 print(f'  🏥 Pulse demo: http://localhost:{PORT}/pulse/')
+print(f'  🤖 AI Agent demo: POST / with product=ai-agent')
 http.server.HTTPServer(('0.0.0.0', PORT), Handler).serve_forever()
