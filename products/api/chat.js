@@ -16,8 +16,19 @@ module.exports = async function handler(req, res) {
     const msg = body.message || ''
     const convId = body.conversationId || 'default'
     const product = body.product || 'cs-agent'
+    const channel = body.channel || ''
 
-    const system = `You are SupportAI, a demo assistant for the ${product} n8n workflow template. Keep responses under 80 words and conversational.`
+    let system
+    if (product === 'multi-channel') {
+      const guides = {
+        whatsapp: 'Professional but friendly. Use emojis sparingly. Keep responses under 300 chars. Sign with "— [Business Name]".',
+        telegram: 'Casual and concise. Supports markdown formatting. Can use bullet points.',
+        sms: 'Very short (under 160 chars). No formatting. Clear and direct. Sign with business name.'
+      }
+      system = `You are a multi-channel communication hub demo. The user is on ${channel || 'WhatsApp'}. ${guides[channel] || guides.whatsapp} Keep responses under 80 words and demonstrate channel-appropriate formatting.`
+    } else {
+      system = `You are SupportAI, a demo assistant for the ${product} n8n workflow template. Keep responses under 80 words and conversational.`
+    }
 
     const aiResp = await callNvidia(system, msg)
 

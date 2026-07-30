@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>n8n Automation Templates — AI Support, SMS Bot & Patient Records</title>
 <meta property="og:title" content="n8n Automation Templates">
-<meta property="og:description" content="AI Customer Support Agent, Missed Call SMS Text-Back & Patient Records Lookup. Ready-to-import n8n workflows. From $29.">
+<meta property="og:description" content="AI Customer Support, SMS Bot, Patient Records, AI Agent & Multi-Channel Hub. Ready-to-import n8n workflows. From $29.">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #07090D; color: #e0e0e0; line-height: 1.6; }
@@ -14,7 +14,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .hero { text-align: center; padding: 60px 0 40px; border-bottom: 1px solid #1a1a2e; }
 .hero h1 { font-size: 2.6em; background: linear-gradient(135deg, #00D9FF, #E7B84D); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
 .hero .subtitle { color: #889; font-size: 1.1em; margin-bottom: 30px; }
-.hero-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1100px; margin: 0 auto; }
+.hero-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; max-width: 1200px; margin: 0 auto; }
 .hero-card { background: #0d0f17; border: 1px solid #1a1a2e; border-radius: 12px; padding: 28px; text-align: center; }
 .hero-card .icon { font-size: 2.2em; margin-bottom: 8px; }
 .hero-card h3 { color: #00D9FF; margin-bottom: 6px; }
@@ -169,6 +169,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
       <p>Conversational AI with 20-msg memory, calculator, and Wikipedia lookup</p>
       <div class="price">$29 <small>one-time</small></div>
     </div>
+    <div class="hero-card">
+      <div class="icon">🔗</div>
+      <h3>Multi-Channel Hub</h3>
+      <p>Unify WhatsApp, Telegram & SMS into one AI-powered workflow</p>
+      <div class="price">$29 <small>one-time</small></div>
+    </div>
   </div>
 </div>
 
@@ -177,6 +183,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   <button class="tab" onclick="switchTab('sms-bot')">📱 SMS Bot</button>
   <button class="tab" onclick="switchTab('patient-records')">🏥 Patient Records</button>
   <button class="tab" onclick="switchTab('ai-agent')">🧠 AI Agent</button>
+  <button class="tab" onclick="switchTab('multi-channel')">🔗 Multi-Channel</button>
 </div>
 
 <div id="panel-cs-agent" class="panel active">
@@ -228,25 +235,48 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
       <h3>🚀 You've tested SupportAI live!</h3>
       <p>Get the full n8n workflow template. Import in 1 click. No subscription.</p>
       <div>
-        <a href="https://sylvesterlab.gumroad.com/l/ai-customer-support-pro" class="btn">Buy on Gumroad — $29</a>
-        <a href="https://sylvesterlab.gumroad.com/l/ai-customer-support-agent" class="btn premium">+$5 for step-by-step guide</a>
+        <a href="https://sylvesterlab.gumroad.com/l/ai-customer-support-pro" class="btn">Buy on Gumroad — from $29</a>
       </div>
     </div>
   </div>
 
   <!-- Pricing -->
-  <div class="pricing" style="grid-template-columns:1fr;max-width:400px;margin:30px auto;">
-    <div class="tier featured">
-      <h3>Get the Template</h3>
+  <div class="pricing pricing-3">
+    <div class="tier">
+      <h3>Essentials</h3>
       <div class="price-usd">$29</div>
       <div class="price-ngn">~₦40,000</div>
       <ul>
         <li>Full n8n workflow template</li>
         <li>Setup guide + step-by-step help</li>
-        <li>Send to your Gumroad email</li>
+        <li>Sent to your Gumroad email</li>
         <li>One-time payment, no subscription</li>
       </ul>
-      <a href="https://sylvesterlab.gumroad.com/l/ai-customer-support-pro" class="btn">Buy on Gumroad — $29</a>
+      <a href="https://sylvesterlab.gumroad.com/l/ai-customer-support-pro" class="btn">Buy — $29</a>
+    </div>
+    <div class="tier featured">
+      <h3>Professional</h3>
+      <div class="price-usd">$49</div>
+      <div class="price-ngn">~₦67,000</div>
+      <ul>
+        <li>Everything in Essentials</li>
+        <li>Priority support & customization help</li>
+        <li>Custom brand voice setup</li>
+        <li>Integration guidance</li>
+      </ul>
+      <a href="https://sylvesterlab.gumroad.com/l/ai-customer-support-pro" class="btn">Buy — $49</a>
+    </div>
+    <div class="tier">
+      <h3>Agency</h3>
+      <div class="price-usd">$149</div>
+      <div class="price-ngn">~₦204,000</div>
+      <ul>
+        <li>Everything in Professional</li>
+        <li>Commercial license (use for clients)</li>
+        <li>White-label rights</li>
+        <li>Installation assistance</li>
+      </ul>
+      <a href="https://sylvesterlab.gumroad.com/l/ai-customer-support-pro" class="btn">Buy — $149</a>
     </div>
   </div>
 </div>
@@ -321,18 +351,30 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   </div>
 
   <!-- Pricing -->
-  <div class="pricing" style="grid-template-columns:1fr;max-width:400px;margin:30px auto;">
+  <div class="pricing pricing-3" style="max-width:600px;">
     <div class="tier featured">
-      <h3>Get the Template</h3>
-      <div class="price-usd">$29</div>
-      <div class="price-ngn">~₦40,000</div>
+      <h3>Essentials</h3>
+      <div class="price-usd">$39</div>
+      <div class="price-ngn">~₦53,000</div>
       <ul>
         <li>Full n8n workflow template</li>
         <li>Setup guide + step-by-step help</li>
-        <li>Send to your Gumroad email</li>
+        <li>Sent to your Gumroad email</li>
         <li>One-time payment, no subscription</li>
       </ul>
-      <a href="https://sylvesterlab.gumroad.com/l/missed-call-sms-pro" class="btn">Buy on Gumroad — $29</a>
+      <a href="https://sylvesterlab.gumroad.com/l/missed-call-sms-pro" class="btn">Buy — $39</a>
+    </div>
+    <div class="tier">
+      <h3>Professional</h3>
+      <div class="price-usd">$79</div>
+      <div class="price-ngn">~₦108,000</div>
+      <ul>
+        <li>Everything in Essentials</li>
+        <li>Commercial license (use for clients)</li>
+        <li>Customizable SMS templates</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="https://sylvesterlab.gumroad.com/l/missed-call-sms-pro" class="btn">Buy — $79</a>
     </div>
   </div>
 </div>
@@ -533,6 +575,124 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   </div>
 </div>
 
+<div id="panel-multi-channel" class="panel">
+
+  <!-- Workflow Diagram -->
+  <h2>How It Works</h2>
+  <div class="workflow">
+    <div class="wf-node"><div class="wf-icon">📱</div><div>WhatsApp</div></div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-node"><div class="wf-icon">💬</div><div>Telegram</div></div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-node"><div class="wf-icon">✉️</div><div>SMS</div></div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-node highlight"><div class="wf-icon">🤖</div><div>AI Agent</div></div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-node"><div class="wf-icon">📤</div><div>Auto-Reply</div></div>
+  </div>
+
+  <!-- Features -->
+  <h2>Features</h2>
+  <div class="features">
+    <div class="feature">
+      <div class="icon">📱</div>
+      <h3>WhatsApp Business</h3>
+      <p>Professional automated replies via WhatsApp Business API. Perfect for customer support and order updates.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">💬</div>
+      <h3>Telegram Bot</h3>
+      <p>Casual, markdown-enabled responses through Telegram bots. Great for communities and group chats.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">✉️</div>
+      <h3>SMS (Twilio)</h3>
+      <p>Short, direct text messages via Twilio. Ideal for appointment reminders and urgent alerts.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🧠</div>
+      <h3>AI-Optimized Per Channel</h3>
+      <p>One AI model, channel-optimized responses. Professional on WhatsApp, casual on Telegram, concise on SMS.</p>
+    </div>
+  </div>
+
+  <!-- Live Demo -->
+  <h2>Try the Demo</h2>
+  <div class="chat-demo">
+    <div class="chat-window">
+      <div class="chat-header">
+        <select id="hubChannel" style="background:rgba(255,255,255,0.06);color:#fff;border:1px solid rgba(255,255,255,0.1);padding:6px 12px;border-radius:6px;font-size:14px;">
+          <option value="whatsapp">📱 WhatsApp</option>
+          <option value="telegram">💬 Telegram</option>
+          <option value="sms">✉️ SMS</option>
+        </select>
+      </div>
+      <div class="chat-body" id="hubChatBody">
+        <div class="chat-msg ai"><div class="name">Hub</div>Select a channel above and type a message to see how the AI response changes per channel.</div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="hubChatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendHubMessage()">
+        <button id="hubChatSend" onclick="sendHubMessage()">Send</button>
+      </div>
+      <div class="trial-overlay" id="hubTrialOverlay">
+        <h3>🚀 You've tested the Hub!</h3>
+        <p>Get the full Multi-Channel Communication Hub workflow. Import in 1 click.</p>
+        <a href="https://sylvesterlab.gumroad.com/l/multi-channel-hub" class="btn">Buy on Gumroad — from $29</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Setup Steps -->
+  <h2>Setup in 4 Steps</h2>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h4>Import</h4><p>Import template.json into your n8n dashboard</p></div>
+    <div class="step"><div class="num">2</div><h4>Add Keys</h4><p>Connect OpenAI + channel API keys</p></div>
+    <div class="step"><div class="num">3</div><h4>Activate Webhook</h4><p>Copy the webhook URL and configure your channels</p></div>
+    <div class="step"><div class="num">4</div><h4>Go Live</h4><p>Toggle Active — all channels respond automatically</p></div>
+  </div>
+
+  <!-- Pricing -->
+  <h2>Pricing</h2>
+  <div class="pricing pricing-3">
+    <div class="tier">
+      <h3>Essentials</h3>
+      <div class="price-usd">$29</div>
+      <div class="price-ngn">~₦40,000</div>
+      <ul>
+        <li>Full n8n workflow template</li>
+        <li>Setup guide + step-by-step help</li>
+        <li>Sent to your Gumroad email</li>
+        <li>One-time payment, no subscription</li>
+      </ul>
+      <a href="https://sylvesterlab.gumroad.com/l/multi-channel-hub" class="btn">Buy — $29</a>
+    </div>
+    <div class="tier featured">
+      <h3>Professional</h3>
+      <div class="price-usd">$69</div>
+      <div class="price-ngn">~₦95,000</div>
+      <ul>
+        <li>All Essentials features</li>
+        <li>Commercial license (use for clients)</li>
+        <li>Priority support & customization</li>
+        <li>Custom channel integration</li>
+      </ul>
+      <a href="https://sylvesterlab.gumroad.com/l/multi-channel-hub" class="btn">Buy — $69</a>
+    </div>
+    <div class="tier">
+      <h3>Enterprise</h3>
+      <div class="price-usd">$149</div>
+      <div class="price-ngn">~₦204,000</div>
+      <ul>
+        <li>All Professional features</li>
+        <li>White-label rights</li>
+        <li>Installation assistance</li>
+        <li>Custom channel development</li>
+      </ul>
+      <a href="https://sylvesterlab.gumroad.com/l/multi-channel-hub" class="btn">Buy — $149</a>
+    </div>
+  </div>
+</div>
+
 <!-- Lead Capture -->
 <div class="demo-form" id="request-demo">
   <h2>Want a walkthrough?</h2>
@@ -622,6 +782,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   <details>
     <summary>Does the AI Agent remember previous conversations?</summary>
     <div class="answer">Yes. It has a 20-message window buffer memory. Pass a <code>sessionId</code> in your request to continue previous conversations. Without it, each request starts fresh.</div>
+  </details>
+  <details>
+    <summary>What channels does the Multi-Channel Hub support?</summary>
+    <div class="answer">WhatsApp (Business API), Telegram (bot), and SMS (Twilio). The workflow is designed to be extensible — add any n8n messaging node to support more channels. The AI adapts its response style to each channel automatically.</div>
   </details>
   <details>
     <summary>What about Nigerian payment?</summary>
@@ -767,6 +931,70 @@ function sendAgentMessage() {
   .catch(() => {
     document.getElementById('agentTyping')?.remove();
     chatBody.innerHTML += `<div class="chat-msg ai"><div class="name">Agent</div>Connection issue. Please try again.</div>`;
+  });
+}
+
+// Multi-Channel Hub Chat
+const HUB_KEY = 'hub-msg-count';
+let hubCount = parseInt(localStorage.getItem(HUB_KEY) || '0', 10);
+const HUB_MAX = 5;
+let hubConvId = 'hub-' + Date.now();
+
+if (hubCount >= HUB_MAX) {
+  const inp = document.getElementById('hubChatInput');
+  const btn = document.getElementById('hubChatSend');
+  if (inp) { inp.disabled = true; }
+  if (btn) { btn.disabled = true; }
+  const ov = document.getElementById('hubTrialOverlay');
+  if (ov) { ov.classList.add('show'); }
+}
+
+function sendHubMessage() {
+  const input = document.getElementById('hubChatInput');
+  const sendBtn = document.getElementById('hubChatSend');
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  const channel = document.getElementById('hubChannel').value;
+  const chatBody = document.getElementById('hubChatBody');
+  chatBody.innerHTML += `<div class="chat-msg user"><div class="name">You (${channel})</div>${escHtml(msg)}</div>`;
+  input.value = '';
+  chatBody.scrollTop = chatBody.scrollHeight;
+
+  hubCount++;
+  localStorage.setItem(HUB_KEY, hubCount.toString());
+
+  const typing = document.createElement('div');
+  typing.className = 'chat-msg ai';
+  typing.innerHTML = '<div class="name">Hub AI</div><em>typing...</em>';
+  typing.id = 'hubTyping';
+  chatBody.appendChild(typing);
+
+  fetch('/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: msg, conversationId: hubConvId, product: 'multi-channel', channel: channel })
+  })
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById('hubTyping')?.remove();
+    if (data.trial_over) {
+      input.disabled = true;
+      sendBtn.disabled = true;
+      document.getElementById('hubTrialOverlay').classList.add('show');
+    } else {
+      chatBody.innerHTML += `<div class="chat-msg ai"><div class="name">Hub AI (${channel})</div>${escHtml(data.response)}</div>`;
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+    if (hubCount >= HUB_MAX) {
+      input.disabled = true;
+      sendBtn.disabled = true;
+      document.getElementById('hubTrialOverlay').classList.add('show');
+    }
+  })
+  .catch(() => {
+    document.getElementById('hubTyping')?.remove();
+    chatBody.innerHTML += `<div class="chat-msg ai"><div class="name">Hub AI</div>Connection issue. Please try again.</div>`;
   });
 }
 

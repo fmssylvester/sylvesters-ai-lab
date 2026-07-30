@@ -67,6 +67,7 @@ products/
 | Missed Call SMS Text-Back | `/l/missed-call-sms-pro` | $29 | — |
 | Patient Records System | `/l/patient-records-n8n` | $49–$197 | Pulse website |
 | AI Agent with Memory & Tools | `/l/ai-agent-n8n` | $29–$149 | Chat on landing page (product=ai-agent) |
+| Multi-Channel Communication Hub | `/l/multi-channel-hub` | $29–$149 | Channel-switchable chat demo (product=multi-channel) |
 
 ## History
 

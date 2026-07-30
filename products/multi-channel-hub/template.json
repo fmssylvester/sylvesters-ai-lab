@@ -1,0 +1,178 @@
+{
+  "name": "Multi-Channel Communication Hub",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "multi-channel",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-id",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 300],
+      "webhookId": "multi-channel"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "temperature": 0.7,
+        "maxTokens": 1000,
+        "options": {}
+      },
+      "id": "chat-model-id",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [300, 150]
+    },
+    {
+      "parameters": {
+        "agentType": "conversationalAgent",
+        "systemMessage": "You are a multi-channel customer communication assistant. Respond based on the channel and user message.\n\n## Channel Guidelines\n- **whatsapp**: Professional but friendly. Use emojis sparingly. Keep responses under 300 chars.\n- **telegram**: Casual and concise. Supports markdown formatting. Can send longer messages.\n- **sms**: Very short (under 160 chars recommended). No formatting. Clear and direct. Include business name as signature.\n\n## Rules\n1. Detect the user's intent (question, complaint, booking, info request)\n2. Respond appropriately for the channel\n3. If the message contains an email, phone, or booking request, acknowledge and store it\n4. Keep responses helpful and professional\n5. When appropriate, offer to connect the user with a human agent\n\nRespond in a way that matches the channel's norms.",
+        "options": {
+          "maxIterations": 5,
+          "returnIntermediateSteps": false
+        }
+      },
+      "id": "agent-id",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [300, 300]
+    },
+    {
+      "parameters": {
+        "dataType": "string",
+        "value1": "={{ $json.channel }}",
+        "rules": [
+          { "value2": "whatsapp", "output": 0 },
+          { "value2": "telegram", "output": 1 },
+          { "value2": "sms", "output": 2 }
+        ],
+        "fallbackOutput": 3,
+        "options": {}
+      },
+      "id": "router-out-id",
+      "name": "Route by Channel",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 2,
+      "position": [550, 300]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "phoneNumber": "={{ $json.to }}",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "id": "whatsapp-id",
+      "name": "Send WhatsApp",
+      "type": "n8n-nodes-base.waBusiness",
+      "typeVersion": 2,
+      "position": [800, 100]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $json.chatId }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": { "parse_mode": "Markdown" }
+      },
+      "id": "telegram-id",
+      "name": "Send Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 2,
+      "position": [800, 300]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "fromNumber": "={{ $json.fromNumber }}",
+        "toNumber": "={{ $json.to }}",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "id": "sms-id",
+      "name": "Send SMS (Twilio)",
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 2,
+      "position": [800, 500]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{\n  {\n    success: true,\n    channel: $json.channel,\n    response: $json.output,\n    conversationId: $json.conversationId || $executionId,\n    timestamp: new Date().toISOString()\n  }\n}}"
+      },
+      "id": "respond-whatsapp-id",
+      "name": "Respond WhatsApp",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1050, 100]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{\n  {\n    success: true,\n    channel: $json.channel,\n    response: $json.output,\n    conversationId: $json.conversationId || $executionId,\n    timestamp: new Date().toISOString()\n  }\n}}"
+      },
+      "id": "respond-telegram-id",
+      "name": "Respond Telegram",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{\n  {\n    success: true,\n    channel: $json.channel,\n    response: $json.output,\n    conversationId: $json.conversationId || $executionId,\n    timestamp: new Date().toISOString()\n  }\n}}"
+      },
+      "id": "respond-sms-id",
+      "name": "Respond SMS",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1050, 500]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{\n  {\n    success: false,\n    channel: $json.channel,\n    error: 'Unknown channel: ' + ($json.channel || 'none'),\n    timestamp: new Date().toISOString()\n  }\n}}"
+      },
+      "id": "respond-fallback-id",
+      "name": "Respond Fallback",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1050, 700]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [[[{ "node": "AI Agent", "type": "main", "index": 0 }]]]
+    },
+    "AI Agent": {
+      "main": [[[{ "node": "Route by Channel", "type": "main", "index": 0 }]]]
+    },
+    "Route by Channel": {
+      "main": [
+        [[{ "node": "Send WhatsApp", "type": "main", "index": 0 }]],
+        [[{ "node": "Send Telegram", "type": "main", "index": 0 }]],
+        [[{ "node": "Send SMS (Twilio)", "type": "main", "index": 0 }]],
+        [[{ "node": "Respond Fallback", "type": "main", "index": 0 }]]
+      ]
+    },
+    "Send WhatsApp": {
+      "main": [[[{ "node": "Respond WhatsApp", "type": "main", "index": 0 }]]]
+    },
+    "Send Telegram": {
+      "main": [[[{ "node": "Respond Telegram", "type": "main", "index": 0 }]]]
+    },
+    "Send SMS (Twilio)": {
+      "main": [[[{ "node": "Respond SMS", "type": "main", "index": 0 }]]]
+    }
+  }
+}
