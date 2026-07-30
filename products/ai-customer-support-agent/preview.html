@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Customer Support Agent - n8n Template</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0f; color: #e0e0e0; }
+.container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+
+/* Header */
+.header { text-align: center; padding: 60px 0 40px; }
+.header h1 { font-size: 2.5em; background: linear-gradient(135deg, #00d4ff, #7b2ff7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+.header .subtitle { color: #888; font-size: 1.2em; }
+.header .price { margin-top: 20px; font-size: 1.5em; color: #00d4ff; font-weight: bold; }
+.header .price span { color: #888; font-size: 0.6em; font-weight: normal; }
+
+/* Workflow diagram - pure CSS */
+.workflow-viz { background: #14141f; border-radius: 12px; padding: 40px; margin: 40px 0; border: 1px solid #2a2a3a; }
+.flow-row { display: flex; align-items: center; justify-content: center; gap: 20px; margin: 10px 0; }
+.node { background: #1e1e2e; border: 1px solid #3a3a5a; border-radius: 8px; padding: 12px 20px; text-align: center; min-width: 140px; }
+.node .icon { font-size: 1.5em; margin-bottom: 4px; }
+.node .label { font-size: 0.85em; color: #aaa; }
+.node .name { font-size: 0.95em; color: #00d4ff; font-weight: 600; }
+.node.primary { border-color: #00d4ff; }
+.node.ai { border-color: #7b2ff7; }
+.arrow { color: #555; font-size: 1.5em; }
+.arrow.down { display: block; text-align: center; margin: 5px 0; }
+.side-nodes { display: flex; flex-direction: column; gap: 15px; }
+.side-node { background: #1e1e2e; border: 1px solid #3a3a5a; border-radius: 8px; padding: 10px 15px; text-align: center; min-width: 160px; }
+.side-node .label { font-size: 0.8em; color: #888; }
+.side-node .name { font-size: 0.85em; color: #7b2ff7; }
+
+/* Chat Demo */
+.chat-demo { background: #14141f; border-radius: 12px; padding: 20px; margin: 40px 0; border: 1px solid #2a2a3a; }
+.chat-header { display: flex; align-items: center; gap: 10px; padding-bottom: 15px; border-bottom: 1px solid #2a2a3a; margin-bottom: 15px; }
+.chat-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #00d4ff, #7b2ff7); display: flex; align-items: center; justify-content: center; font-size: 0.8em; }
+.chat-msg { max-width: 75%; margin: 10px 0; padding: 12px 16px; border-radius: 12px; line-height: 1.5; font-size: 0.9em; }
+.chat-msg.customer { background: #2a2a3a; margin-right: auto; border-bottom-left-radius: 4px; }
+.chat-msg.ai { background: linear-gradient(135deg, #00d4ff22, #7b2ff722); border: 1px solid #00d4ff44; margin-left: auto; border-bottom-right-radius: 4px; }
+.chat-msg.ai .name { color: #00d4ff; font-size: 0.8em; margin-bottom: 4px; }
+
+/* Features */
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 40px 0; }
+.feature-card { background: #14141f; border: 1px solid #2a2a3a; border-radius: 12px; padding: 25px; }
+.feature-card .icon { font-size: 2em; margin-bottom: 10px; }
+.feature-card h3 { color: #00d4ff; margin-bottom: 8px; }
+.feature-card p { color: #888; font-size: 0.9em; line-height: 1.5; }
+
+/* Pricing */
+.pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 40px 0; }
+.tier { background: #14141f; border: 1px solid #2a2a3a; border-radius: 12px; padding: 30px; text-align: center; }
+.tier.featured { border-color: #00d4ff; position: relative; }
+.tier.featured::before { content: 'Popular'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #00d4ff; color: #000; padding: 4px 16px; border-radius: 20px; font-size: 0.8em; font-weight: 600; }
+.tier h3 { color: #00d4ff; margin-bottom: 10px; }
+.tier .price { font-size: 2em; font-weight: bold; margin: 15px 0; }
+.tier ul { list-style: none; color: #888; font-size: 0.9em; }
+.tier ul li { padding: 6px 0; border-bottom: 1px solid #2a2a3a; }
+.tier ul li:last-child { border-bottom: none; }
+
+/* Files */
+.files { background: #14141f; border-radius: 12px; padding: 25px; margin: 40px 0; border: 1px solid #2a2a3a; }
+.files h3 { color: #00d4ff; margin-bottom: 15px; }
+.file-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #2a2a3a; }
+.file-item:last-child { border-bottom: none; }
+.file-icon { font-size: 1.5em; }
+.file-info .name { font-weight: 600; }
+.file-info .desc { color: #888; font-size: 0.85em; }
+
+/* Setup Steps */
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 40px 0; }
+.step { background: #14141f; border: 1px solid #2a2a3a; border-radius: 12px; padding: 20px; text-align: center; }
+.step .num { width: 30px; height: 30px; background: linear-gradient(135deg, #00d4ff, #7b2ff7); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 10px; }
+.step h4 { margin-bottom: 5px; }
+.step p { color: #888; font-size: 0.85em; }
+
+.footer { text-align: center; padding: 40px; color: #555; font-size: 0.85em; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>AI Customer Support Agent</h1>
+  <div class="subtitle">Ready-to-import n8n workflow template</div>
+  <div class="price">$29 <span>Basic</span> &middot; $49 <span>Pro</span> &middot; $149 <span>Agency</span></div>
+</div>
+
+<!-- Workflow Visual -->
+<div class="workflow-viz">
+  <h3 style="text-align:center; color:#aaa; margin-bottom:25px;">What you get — 5 connected nodes, ready to import</h3>
+  <div style="display:flex; flex-direction:column; align-items:center;">
+    <div class="node primary"><div class="icon">&#x1f310;</div><div class="label">Receives messages from</div><div class="name">Webhook</div></div>
+    <div class="arrow down">&#x2193;</div>
+    <div class="node ai"><div class="icon">&#x1f916;</div><div class="label">Processes with AI</div><div class="name">AI Customer Support Agent</div></div>
+    <div class="arrow down">&#x2193;</div>
+    <div class="node primary"><div class="icon">&#x1f4e8;</div><div class="label">Sends response</div><div class="name">Respond to Webhook</div></div>
+  </div>
+  <div style="display:flex; justify-content:center; gap:30px; margin-top:25px; flex-wrap:wrap;">
+    <div class="side-node"><div class="icon">&#x1f9e0;</div><div class="label">AI Brain</div><div class="name">OpenAI GPT-4o-mini</div></div>
+    <div class="side-node"><div class="icon">&#x1f4ad;</div><div class="label">Remembers context</div><div class="name">10-message memory</div></div>
+    <div class="side-node"><div class="icon">&#x1f6a8;</div><div class="label">Detects issues</div><div class="name">Auto-escalation</div></div>
+  </div>
+</div>
+
+<!-- Chat Demo -->
+<div class="chat-demo">
+  <h3 style="color:#aaa; margin-bottom:15px;">Live conversation example</h3>
+  <div class="chat-header">
+    <div class="chat-avatar">AI</div>
+    <div><strong>SupportAI</strong> &middot; <span style="color:#888;font-size:0.85em;">Online</span></div>
+  </div>
+  <div class="chat-msg customer">Hi, I need help resetting my password</div>
+  <div class="chat-msg ai">
+    <div class="name">SupportAI</div>
+    Hello! I'd be happy to help you reset your password. Could you please confirm the email address associated with your account so I can send you a reset link?
+  </div>
+  <div class="chat-msg customer">Sure, it's john@example.com</div>
+  <div class="chat-msg ai">
+    <div class="name">SupportAI</div>
+    Thanks John! I've sent a password reset link to john@example.com. Please check your inbox (and spam folder just in case). Let me know if you need any further help!
+  </div>
+  <div class="chat-msg customer">Got it, thanks!</div>
+  <div class="chat-msg ai">
+    <div class="name">SupportAI</div>
+    You're welcome! If you ever need anything else, I'm here 24/7. Have a great day! &#x1f44b;
+  </div>
+</div>
+
+<!-- What's Included -->
+<div class="files">
+  <h3>What you download</h3>
+  <div class="file-item">
+    <div class="file-icon">&#x1f4c4;</div>
+    <div class="file-info"><div class="name">template.json</div><div class="desc">n8n workflow file — import directly into your n8n instance (4,273 bytes)</div></div>
+  </div>
+  <div class="file-item">
+    <div class="file-icon">&#x1f4d6;</div>
+    <div class="file-info"><div class="name">SETUP.md</div><div class="desc">Step-by-step setup guide with screenshots and troubleshooting</div></div>
+  </div>
+</div>
+
+<!-- Setup Steps -->
+<h2 style="color:#aaa; margin-top:50px;">Setup in 5 minutes</h2>
+<div class="steps">
+  <div class="step"><div class="num">1</div><h4>Import</h4><p>Open n8n &rarr; Import Workflow &rarr; Select template.json</p></div>
+  <div class="step"><div class="num">2</div><h4>Add API Key</h4><p>Connect your OpenAI key to the chat model node</p></div>
+  <div class="step"><div class="num">3</div><h4>Activate</h4><p>Click Listen on the webhook, then toggle Active</p></div>
+  <div class="step"><div class="num">4</div><h4>Connect</h4><p>Point your chat widget or app to the webhook URL</p></div>
+</div>
+
+<!-- Features -->
+<h2 style="color:#aaa; margin-top:50px;">Features</h2>
+<div class="features">
+  <div class="feature-card"><div class="icon">&#x1f4ac;</div><h3>Conversational AI</h3><p>Handles customer inquiries naturally with GPT-4o-mini. Understands context, tone, and intent.</p></div>
+  <div class="feature-card"><div class="icon">&#x1f9e0;</div><h3>10-Message Memory</h3><p>Remembers the last 10 messages per conversation. No repeating information.</p></div>
+  <div class="feature-card"><div class="icon">&#x1f6a8;</div><h3>Auto-Escalation</h3><p>Detects billing disputes, security issues, and refund requests. Escalates to humans automatically.</p></div>
+  <div class="feature-card"><div class="icon">&#x1f504;</div><h3>Customizable</h3><p>Edit the system prompt to match your brand voice. Add tools for order lookup, FAQ search, and more.</p></div>
+</div>
+
+<!-- Pricing -->
+<h2 style="color:#aaa; margin-top:50px;">Choose your plan</h2>
+<div class="pricing">
+  <div class="tier"><h3>Basic</h3><div class="price">$29</div><ul><li>Single workflow template</li><li>Setup guide</li><li>Personal use</li></ul></div>
+  <div class="tier featured"><h3>Pro</h3><div class="price">$49</div><ul><li>Everything in Basic</li><li>Priority support</li><li>Customization help</li><li>Commercial use</li></ul></div>
+  <div class="tier"><h3>Agency</h3><div class="price">$149</div><ul><li>Everything in Pro</li><li>White-label rights</li><li>Installation assistance</li><li>Use for unlimited clients</li></ul></div>
+</div>
+
+<div class="footer">
+  Requires n8n (free) and an OpenAI API key (~$0.002 per conversation)
+</div>
+
+</div>
+</body>
+</html>
