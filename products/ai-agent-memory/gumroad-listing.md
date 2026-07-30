@@ -33,5 +33,7 @@ Deploy a production-ready AI agent in minutes. This n8n workflow combines conver
 - n8n instance (free self-hosted or cloud)
 - OpenAI API key
 
+**Pricing:** $29 (Essentials) / $69 (Professional) / $149 (Enterprise)
+
 ## Tags
 AI, Agent, Tools, Memory, Chatbot, n8n, Automation, Conversational AI, LLM, Calculator, Wikipedia, Research Assistant

@@ -30,4 +30,4 @@ Deploy an intelligent AI agent that remembers your conversations and can calcula
 AI, Customer Support, Automation
 
 ## Price
-$49 (Essentials), $97 (Professional), $197 (Enterprise)
+$29 (Essentials), $69 (Professional), $149 (Enterprise)

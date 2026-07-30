@@ -126,7 +126,7 @@ PRODUCTS = {
     "ai-agent-memory": {
         "dir": "products/ai-agent-memory",
         "name": "AI Agent with Memory & Tools - n8n Workflow Template",
-        "price": 49,
+        "price": 29,
         "custom_summary": "Deploy an intelligent AI agent with 20-message memory, calculator, and Wikipedia tools. Import into n8n in 1 click. Works with just an OpenAI key.",
         "description": (
             "Deploy a production-ready AI agent that remembers conversations, "
