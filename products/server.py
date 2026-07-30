@@ -65,6 +65,7 @@ def call_ai(messages):
 BASE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(BASE, 'ai-customer-support-agent')
 MEDIA_ROOT = os.path.join(BASE, 'media')
+PULSE_ROOT = os.path.join(BASE, 'patient-records-system')
 LEADS_FILE = os.path.join(BASE, 'leads.json')
 conversations = {}
 conv_msg_count = {}
@@ -130,7 +131,13 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if path == '/':
             path = '/index.html'
 
-        if path.startswith('/media/'):
+        if path.startswith('/pulse'):
+            serve_root = os.path.join(PULSE_ROOT, 'website')
+            spath = path[len('/pulse'):] or '/'
+            if spath == '/':
+                spath = '/index.html'
+            filepath = os.path.join(serve_root, spath.lstrip('/'))
+        elif path.startswith('/media/'):
             filepath = os.path.join(MEDIA_ROOT, path.lstrip('/media/'))
         else:
             filepath = os.path.join(ROOT, path.lstrip('/'))
@@ -138,8 +145,9 @@ class Handler(http.server.BaseHTTPRequestHandler):
         filepath = os.path.normpath(filepath)
         in_media = filepath.startswith(MEDIA_ROOT)
         in_root = filepath.startswith(ROOT)
+        in_pulse = filepath.startswith(os.path.join(PULSE_ROOT, 'website'))
 
-        if (in_media or in_root) and os.path.isfile(filepath) and not filepath.endswith('.json'):
+        if (in_media or in_root or in_pulse) and os.path.isfile(filepath) and not filepath.endswith('.json'):
             with open(filepath, 'rb') as f:
                 self.send_response(200)
                 self.send_header('Content-Type', mimetypes.guess_type(filepath)[0] or 'application/octet-stream')
@@ -162,4 +170,5 @@ print(f'  💬 Chat API: POST / (message + conversationId)')
 print(f'  📋 Leads: POST / (name + email)')
 print(f'  🧠 AI: NVIDIA Nemotron-3 30B')
 print(f'  🎬 Videos: http://localhost:{PORT}/media/')
+print(f'  🏥 Pulse demo: http://localhost:{PORT}/pulse/')
 http.server.HTTPServer(('0.0.0.0', PORT), Handler).serve_forever()

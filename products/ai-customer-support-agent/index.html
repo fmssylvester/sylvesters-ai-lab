@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>n8n Automation Templates — AI Support & SMS Bot</title>
+<title>n8n Automation Templates — AI Support, SMS Bot & Patient Records</title>
 <meta property="og:title" content="n8n Automation Templates">
-<meta property="og:description" content="AI Customer Support Agent + Missed Call SMS Text-Back. Ready-to-import n8n workflows. $29 each.">
+<meta property="og:description" content="AI Customer Support Agent, Missed Call SMS Text-Back & Patient Records Lookup. Ready-to-import n8n workflows. From $29.">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #07090D; color: #e0e0e0; line-height: 1.6; }
@@ -14,7 +14,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .hero { text-align: center; padding: 60px 0 40px; border-bottom: 1px solid #1a1a2e; }
 .hero h1 { font-size: 2.6em; background: linear-gradient(135deg, #00D9FF, #E7B84D); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
 .hero .subtitle { color: #889; font-size: 1.1em; margin-bottom: 30px; }
-.hero-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; margin: 0 auto; }
+.hero-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 900px; margin: 0 auto; }
 .hero-card { background: #0d0f17; border: 1px solid #1a1a2e; border-radius: 12px; padding: 28px; text-align: center; }
 .hero-card .icon { font-size: 2.2em; margin-bottom: 8px; }
 .hero-card h3 { color: #00D9FF; margin-bottom: 6px; }
@@ -71,6 +71,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .trial-overlay .btn.premium { background: #E7B84D; margin-left: 12px; }
 
 .pricing { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 30px 0; }
+.pricing-3 { grid-template-columns: repeat(3, 1fr); max-width: 800px; margin: 30px auto; }
 .tier { background: #0d0f17; border: 1px solid #1a1a2e; border-radius: 12px; padding: 28px; text-align: center; }
 .tier.featured { border-color: #00D9FF; position: relative; }
 .tier.featured::before { content: 'Best for warm leads'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #00D9FF; color: #07090D; padding: 4px 16px; border-radius: 20px; font-size: 0.7em; font-weight: 700; white-space: nowrap; }
@@ -114,10 +115,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .footer { text-align: center; padding: 40px 0; color: #445; font-size: 0.8em; border-top: 1px solid #1a1a2e; margin-top: 40px; }
 .footer a { color: #00D9FF; }
 
+@media (max-width: 900px) {
+  .hero-cards { grid-template-columns: 1fr 1fr; }
+}
 @media (max-width: 768px) {
   .hero h1 { font-size: 1.8em; }
   .hero-cards { grid-template-columns: 1fr; }
   .pricing { grid-template-columns: 1fr; }
+  .pricing-3 { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr 1fr; }
   .features { grid-template-columns: 1fr 1fr; }
   .flow-arrow { display: none; }
@@ -152,12 +157,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
       <p>Auto-SMS replies when you miss a call — AI-written, instant</p>
       <div class="price">$29 <small>one-time</small></div>
     </div>
+    <div class="hero-card">
+      <div class="icon">🏥</div>
+      <h3>Patient Records Lookup</h3>
+      <p>Instant patient records from any phone. Type name or ID, get medical summary</p>
+      <div class="price">$49 <small>one-time</small></div>
+    </div>
   </div>
 </div>
 
 <div class="tabs">
   <button class="tab active" onclick="switchTab('cs-agent')">🤖 CS Agent</button>
   <button class="tab" onclick="switchTab('sms-bot')">📱 SMS Bot</button>
+  <button class="tab" onclick="switchTab('patient-records')">🏥 Patient Records</button>
 </div>
 
 <div id="panel-cs-agent" class="panel active">
@@ -318,10 +330,101 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
   </div>
 </div>
 
+<div id="panel-patient-records" class="panel">
+
+  <!-- Demo Video -->
+  <div class="demo-video">
+    <video controls preload="metadata">
+      <source src="../media/patient-records-demo.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- Workflow -->
+  <div class="workflow-viz">
+    <div style="text-align:center; color:#667; margin-bottom:20px; font-size:0.9em;">How it works — 5 connected nodes</div>
+    <div class="flow-nodes">
+      <div class="flow-node"><div class="icon">📞</div><div class="lbl">Triggered by</div><div class="val">Webhook</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="icon">🔍</div><div class="lbl">Search by</div><div class="val">Name / ID</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="icon">📊</div><div class="lbl">Queries</div><div class="val">Google Sheets</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="icon">🤖</div><div class="lbl">Formats with</div><div class="val">AI Summary</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node"><div class="icon">📨</div><div class="lbl">Delivers to</div><div class="val">Any Channel</div></div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="features">
+    <div class="feature-card"><div class="icon">⚡</div><h3>Instant Search</h3><p>Type a patient name or ID. Get results from Google Sheets in milliseconds.</p></div>
+    <div class="feature-card"><div class="icon">📋</div><h3>Medical Summary</h3><p>Allergies, medications, blood type, conditions, visit history — all in one view.</p></div>
+    <div class="feature-card"><div class="icon">📱</div><h3>Any Device</h3><p>Works via Telegram, WhatsApp, SMS, or web dashboard. No app install needed.</p></div>
+    <div class="feature-card"><div class="icon">🚀</div><h3>1-Day Setup</h3><p>Import JSON, connect Google Sheets, activate. No coding required.</p></div>
+  </div>
+
+  <!-- Visual Dashboard Showcase -->
+  <div style="background:#0d0f17; border:1px solid #1a1a2e; border-radius:12px; margin:30px 0; padding:30px;">
+    <h3 style="color:#00D9FF; margin-bottom:20px; text-align:center;">🏥 See it in action</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <img src="../media/patient-workflow.png" style="width:100%;border-radius:8px;border:1px solid #1a1a2e;" alt="n8n Workflow">
+      <img src="../media/patient-features.png" style="width:100%;border-radius:8px;border:1px solid #1a1a2e;" alt="Features Overview">
+    </div>
+  </div>
+
+  <!-- Setup Steps -->
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h4>Import</h4><p>Import the workflow JSON into your n8n dashboard</p></div>
+    <div class="step"><div class="num">2</div><h4>Connect Sheet</h4><p>Link your Google Sheets patient database</p></div>
+    <div class="step"><div class="num">3</div><h4>Pick Channels</h4><p>Choose Telegram, WhatsApp, SMS, or web</p></div>
+    <div class="step"><div class="num">4</div><h4>Activate</h4><p>Toggle Active and start searching patients</p></div>
+  </div>
+
+  <!-- Pricing -->
+  <div class="pricing pricing-3">
+    <div class="tier">
+      <h3>Essentials</h3>
+      <div class="price-usd">$49</div>
+      <div class="price-ngn">~₦67,000</div>
+      <ul>
+        <li>Core n8n workflow + Google Sheets</li>
+        <li>Single-channel delivery (web)</li>
+        <li>Setup guide included</li>
+        <li>One-time payment, no subscription</li>
+      </ul>
+      <a href="https://sylvesterlab.gumroad.com/l/patient-records-n8n" class="btn">Buy on Gumroad — $49</a>
+    </div>
+    <div class="tier featured">
+      <h3>Professional</h3>
+      <div class="price-usd">$97</div>
+      <div class="price-ngn">~₦133,000</div>
+      <ul>
+        <li>All Essentials features</li>
+        <li>Multi-channel (Telegram, WhatsApp, SMS, web)</li>
+        <li>AI-formatted patient summaries</li>
+        <li>Works on any phone, no app install</li>
+      </ul>
+      <a href="https://sylvesterlab.gumroad.com/l/patient-records-n8n" class="btn">Buy on Gumroad — $97</a>
+    </div>
+    <div class="tier">
+      <h3>Enterprise</h3>
+      <div class="price-usd">$197</div>
+      <div class="price-ngn">~₦270,000</div>
+      <ul>
+        <li>All Professional features</li>
+        <li>White-label branding</li>
+        <li>Multi-practice license</li>
+        <li>Priority 1hr setup call</li>
+      </ul>
+      <a href="https://sylvesterlab.gumroad.com/l/patient-records-n8n" class="btn">Buy on Gumroad — $197</a>
+    </div>
+  </div>
+</div>
+
 <!-- Lead Capture -->
 <div class="demo-form" id="request-demo">
   <h2>Want a walkthrough?</h2>
-  <p>Leave your email and I'll send you a video walkthrough of both templates.</p>
+  <p>Leave your email and I'll send you a video walkthrough of any template.</p>
   <form id="demoForm">
     <div class="form-group">
       <label for="name">Your Name</label>
@@ -364,6 +467,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
     <div class="author">— Segun O.</div>
     <div class="role">Auto Shop Owner, Abuja</div>
   </div>
+  <div class="testimonial">
+    <div class="text">"No more digging through paper files. I search on my phone before I even walk into the exam room. Worth every naira."</div>
+    <div class="author">— Dr. Amara E.</div>
+    <div class="role">GP, Enugu</div>
+  </div>
 </div>
 
 <div class="faq">
@@ -384,13 +492,21 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
     <div class="answer">Yes. Both templates have editable system prompts. Change the brand voice, add product knowledge, or connect custom tools.</div>
   </details>
   <details>
+    <summary>What do I need to run Patient Records Lookup?</summary>
+    <div class="answer">An n8n instance (free self-hosted or cloud) and a Google Sheets document with patient data. That's it. No OpenAI key required — data is looked up directly from your sheet.</div>
+  </details>
+  <details>
+    <summary>Can patients access their own records?</summary>
+    <div class="answer">The dashboard gives secure access to staff only. Patients interact through the channels you set up — you control who can search and what they see.</div>
+  </details>
+  <details>
     <summary>What about Nigerian payment?</summary>
     <div class="answer">Gumroad accepts Nigerian debit cards (Verve, Mastercard). The price is in USD but your bank converts at the current rate (~₦1,370/USD). $29 ≈ ₦40,000.</div>
   </details>
 </div>
 
 <div class="footer">
-  Requires n8n (free) + OpenAI API key | Approved on n8n.markets<br>
+  Requires n8n (free) + Google Sheets | AI models via OpenAI<br>
   Built by Sylvester — <a href="https://sylvesterlab.gumroad.com/">Gumroad</a>
 </div>
 

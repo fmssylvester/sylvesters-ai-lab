@@ -37,6 +37,8 @@ import CsAgentDemo from './scenes/cs-agent-demo/CsAgentDemo';
 import { CS_AGENT_DEMO } from './scenes/cs-agent-demo/csAgentTimeline';
 import SmsBotDemo from './scenes/sms-bot-demo/SmsBotDemo';
 import { SMS_BOT_DEMO } from './scenes/sms-bot-demo/smsBotTimeline';
+import PatientRecordsDemo from './scenes/patient-records-demo/PatientRecordsDemo';
+import { PATIENT_RECORDS_DEMO } from './scenes/patient-records-demo/patientRecordsTimeline';
 
 export const RemotionRoot = () => {
   return (
@@ -313,6 +315,16 @@ export const RemotionRoot = () => {
         component={SmsBotDemo}
         durationInFrames={SMS_BOT_DEMO.TOTAL_FRAMES}
         fps={SMS_BOT_DEMO.FPS}
+        width={1920}
+        height={1080}
+      />
+
+      {/* ── Patient Records Product Demo (18s at 30fps = 540 frames) ── */}
+      <Composition
+        id="PatientRecordsDemo"
+        component={PatientRecordsDemo}
+        durationInFrames={PATIENT_RECORDS_DEMO.TOTAL_FRAMES}
+        fps={PATIENT_RECORDS_DEMO.FPS}
         width={1920}
         height={1080}
       />
