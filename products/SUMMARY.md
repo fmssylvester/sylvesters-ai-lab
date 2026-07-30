@@ -16,7 +16,7 @@
 ```
 products/
 ├── api/
-│   └── index.py            # Flask app — only handles POST /
+│   └── chat.js             # Node.js serverless function (POST /api/chat)
 ├── public/
 │   ├── index.html          # Landing page (served from CDN instantly)
 │   ├── media/              # Demo videos, product images (CDN)
@@ -26,32 +26,38 @@ products/
 ├── ai-customer-support-agent/  # CS Agent product files (not served)
 ├── missed-call-sms/        # SMS Bot product files (not served)
 ├── patient-records-system/ # Patient Records product files (not served)
-├── vercel.json             # Routes POST / to function, static everything else via CDN
-├── requirements.txt        # Flask dependency
+├── package.json            # Node.js project marker for Vercel detection
+├── vercel.json             # Config: api/chat.js gets 30s maxDuration
 └── SUMMARY.md              # This file
 ```
 
 ## Vercel Config (`vercel.json`)
 
 - `public/` is served as static assets by Vercel CDN — no function invocation needed
-- POST `/` is the only route that hits the Flask function (chat API + lead capture)
-- GET `/` → CDN serves `public/index.html` instantly
+- `api/chat.js` handles POST `/api/chat` for both chat messages and demo form submissions
+- GET everything → CDN serves static files instantly
+- Project rootDirectory set to `products/` so the site root is `public/index.html`
 
-## Flask App (`api/index.py`)
+## Node.js Function (`api/chat.js`)
 
-- POST `/` handles two payload shapes:
-  1. `{name, email, ...}` → lead capture (saves to `/tmp/leads.json`)
-  2. `{message, conversationId, product?}` → AI chat (calls NVIDIA Nemotron-3 30B)
-- `product` field selects which system prompt (CS Agent vs AI Agent)
-- 5-message trial limit per conversation
+- CommonJS `module.exports` (Vercel auto-detects `.js` as Node.js)
+- POST `/api/chat` handles two payload shapes:
+  1. `{name, email, ...}` → lead capture (acknowledges form submission)
+  2. `{message, conversationId, product?}` → AI chat (calls NVIDIA Nemotron-3 30B via fetch)
+- `product` field selects system prompt ('cs-agent' or 'ai-agent')
 - CORS headers on all responses
+- Graceful fallback: if NVIDIA API fails, returns a friendly canned response
+- No state (serverless — best-effort conversation continuity)
+- MaxDuration: 30s (configured in vercel.json)
 
 ## Deployment
 
 1. Push to GitHub (`main` branch)
 2. Vercel auto-deploys (connected via GitHub integration)
-3. URL: `https://sylvesterlab.vercel.app` (custom domain TBD)
+3. Production URL: `https://sylvesterailab.vercel.app`
 4. Env vars needed in Vercel dashboard: `NVIDIA_API_KEY`
+5. Can also deploy via API: `POST /v13/deployments` with gitSource
+6. Alias assignment: `POST /v1/deployments/{uid}/aliases` with `{"alias":"sylvesterailab.vercel.app"}`
 
 ## n8n Template Store
 
@@ -62,6 +68,15 @@ products/
 | Patient Records System | `/l/patient-records-n8n` | $49–$197 | Pulse website |
 | AI Agent with Memory & Tools | `/l/ai-agent-n8n` | $29–$149 | Chat on landing page (product=ai-agent) |
 
-## Previous Host (Render)
+## History
 
-The old `server.py` (Python `http.server`) served all routes from one process. It supported GET /media/, GET /pulse/, and the POST handler. On Render this was necessary because the free tier couldn't serve static files independently. On Vercel, static files are handled at the CDN layer and the function only handles POST.
+- **Render (June–July 2026)**: Python `server.py` served everything from one process. 30s cold starts on free tier.
+- **Vercel Python (July 2026)**: `api/index.py` (Flask) — worked initially but Python runtime on Vercel was unreliable (hanging/timeout during deployment).
+- **Vercel Node.js (current)**: `api/chat.js` (CommonJS) — clean, fast, reliable. Minimal function that calls NVIDIA API via `fetch`.
+
+**Migration pain points:**
+- Vercel project was initially configured as `python` framework — had to PATCH to `null` for auto-detection
+- Root directory `products/` requires `api/` inside it, not at repo root
+- Empty `requirements.txt` triggered Python setup even with Node.js files — deleted
+- Added `package.json` in `products/` to signal Node.js environment
+- `vercel.json` `functions` block needed to match the actual file path (`api/chat.js`)
