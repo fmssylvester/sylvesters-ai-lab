@@ -5,6 +5,12 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA = os.path.join(ROOT, "products", "media")
+PUBLIC_MEDIA = os.path.join(ROOT, "products", "public", "media")
+
+def save(img, filename):
+    save(img, filename)
+    if os.path.isdir(PUBLIC_MEDIA):
+        img.save(os.path.join(PUBLIC_MEDIA, filename))
 CYAN = (0, 217, 255)
 GOLD = (231, 184, 77)
 VOID = (7, 9, 13)
@@ -35,7 +41,7 @@ def gen_cover(name, tagline, filename):
     d.text((80, 340), "Ready-to-import n8n workflow", fill=MUTED, font=sf)
     d.ellipse([1050, 80, 1080, 110], fill=GOLD)
     d.ellipse([1090, 80, 1120, 110], fill=CYAN)
-    img.save(os.path.join(MEDIA, filename))
+    save(img, filename)
     print(f"  {filename}")
 
 def gen_dashboard(name, filename):
@@ -53,7 +59,7 @@ def gen_dashboard(name, filename):
     f = get_font(20)
     d.text((340, 160), name, fill=CYAN, font=f)
     d.text((340, 440), "Activity Overview", fill=TEXT, font=f)
-    img.save(os.path.join(MEDIA, filename))
+    save(img, filename)
     print(f"  {filename}")
 
 def gen_features(name, features, filename):
@@ -72,7 +78,7 @@ def gen_features(name, features, filename):
         cy += 155
         if cy > 620:
             cx, cy = 600, 160
-    img.save(os.path.join(MEDIA, filename))
+    save(img, filename)
     print(f"  {filename}")
 
 def gen_mobile(filename):
@@ -84,7 +90,7 @@ def gen_mobile(filename):
     d.ellipse([280, 34, 320, 42], fill=(255,255,255,30))
     for y in range(100, 800, 80):
         draw_rounded_rect(d, (80, y, 520, y+50), 12, fill=PANEL)
-    img.save(os.path.join(MEDIA, filename))
+    save(img, filename)
     print(f"  {filename}")
 
 def gen_workflow(nodes, edges, filename):
@@ -98,7 +104,7 @@ def gen_workflow(nodes, edges, filename):
         if i < len(nodes) - 1:
             nx, ny = nodes[i+1][1], nodes[i+1][2]
             d.line([x+160, y+25, nx, ny+25], fill=CYAN, width=2)
-    img.save(os.path.join(MEDIA, filename))
+    save(img, filename)
     print(f"  {filename}")
 
 # Multi-Channel Hub
