@@ -875,7 +875,12 @@ function escHtml(str) { return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').re
 const AGENT_KEY = 'agent-msg-count';
 let agentCount = parseInt(localStorage.getItem(AGENT_KEY) || '0', 10);
 const AGENT_MAX = 5;
-let agentConvId = 'agent-' + Date.now();
+const AGENT_SESSION_KEY = 'agent-session-id';
+let agentSessionId = localStorage.getItem(AGENT_SESSION_KEY);
+if (!agentSessionId) {
+  agentSessionId = (crypto.randomUUID && crypto.randomUUID()) || ('agent-' + Date.now() + '-' + Math.random().toString(36).slice(2));
+  localStorage.setItem(AGENT_SESSION_KEY, agentSessionId);
+}
 
 if (agentCount >= AGENT_MAX) {
   const inp = document.getElementById('agentChatInput');
@@ -906,10 +911,10 @@ function sendAgentMessage() {
   typing.id = 'agentTyping';
   chatBody.appendChild(typing);
 
-  fetch('/api/chat', {
+  fetch('https://sylvestersailab.app.n8n.cloud/webhook/ai-agent', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message: msg, conversationId: agentConvId, product: 'ai-agent' })
+    body: JSON.stringify({ sessionId: agentSessionId, message: msg })
   })
   .then(r => r.json())
   .then(data => {
