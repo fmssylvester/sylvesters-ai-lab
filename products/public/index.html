@@ -83,6 +83,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .trial-overlay h3 { color: #00D9FF; font-size: 1.3em; margin-bottom: 10px; }
 .trial-overlay p { color: #667; font-size: 0.9em; margin-bottom: 20px; }
 .trial-overlay .btn { display: inline-block; padding: 14px 32px; background: #00D9FF; color: #07090D; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1.1em; }
+.trial-overlay button.btn { border: none; cursor: pointer; font-family: inherit; }
 .trial-overlay .btn:hover { background: #00E8FF; transform: translateY(-2px); }
 .trial-overlay .btn.premium { background: #E7B84D; margin-left: 12px; }
 
@@ -556,9 +557,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
     </div>
     <div class="trial-overlay" id="agentTrialOverlay">
       <h3>🧠 You've tested the AI Agent live!</h3>
-      <p>Get the full n8n workflow template with memory + tools. Import in 1 click. No subscription.</p>
+      <p>Join Sylvester's AI Lab for free — get template drops + 10 more demo messages.</p>
       <div>
         <a href="https://sylvesterlab.gumroad.com/l/ai-agent-n8n" class="btn">Buy on Gumroad — $29</a>
+        <button class="btn premium" onclick="unlockAgentChat()">Join free — unlock 10 more</button>
       </div>
     </div>
   </div>
@@ -944,8 +946,21 @@ document.getElementById('newsletterForm').addEventListener('submit', function (e
     .then(data => {
       if (data.status === 200) {
         this.reset();
-        msg.textContent = 'You are in! Welcome to Sylvester\'s AI Lab — check your inbox.';
-        msg.className = 'newsletter-msg ok';
+        if (sessionStorage.getItem('agent-unlock-pending') === '1') {
+          sessionStorage.removeItem('agent-unlock-pending');
+          localStorage.setItem(AGENT_UNLOCK_KEY, '1');
+          const inp = document.getElementById('agentChatInput');
+          const sendBtn = document.getElementById('agentChatSend');
+          if (inp) { inp.disabled = false; }
+          if (sendBtn) { sendBtn.disabled = false; }
+          const ov = document.getElementById('agentTrialOverlay');
+          if (ov) { ov.classList.remove('show'); }
+          msg.textContent = "You're in! Demo chat unlocked — 10 more messages. Check your inbox.";
+          msg.className = 'newsletter-msg ok';
+        } else {
+          msg.textContent = 'You are in! Welcome to Sylvester\'s AI Lab — check your inbox.';
+          msg.className = 'newsletter-msg ok';
+        }
       } else {
         throw new Error('Unexpected response');
       }
@@ -964,7 +979,9 @@ document.getElementById('newsletterForm').addEventListener('submit', function (e
 // AI Agent Chat
 const AGENT_KEY = 'agent-msg-count';
 let agentCount = parseInt(localStorage.getItem(AGENT_KEY) || '0', 10);
-const AGENT_MAX = 5;
+const AGENT_UNLOCK_KEY = 'agent-unlocked';
+const agentUnlocked = localStorage.getItem(AGENT_UNLOCK_KEY) === '1';
+const AGENT_MAX = agentUnlocked ? 15 : 5;
 const AGENT_SESSION_KEY = 'agent-session-id';
 let agentSessionId = localStorage.getItem(AGENT_SESSION_KEY);
 if (!agentSessionId) {
@@ -979,6 +996,13 @@ if (agentCount >= AGENT_MAX) {
   if (btn) { btn.disabled = true; }
   const ov = document.getElementById('agentTrialOverlay');
   if (ov) { ov.classList.add('show'); }
+}
+
+function unlockAgentChat() {
+  sessionStorage.setItem('agent-unlock-pending', '1');
+  const nl = document.getElementById('newsletter');
+  if (nl) { nl.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  document.getElementById('nlEmail')?.focus();
 }
 
 function sendAgentMessage() {
