@@ -30,6 +30,22 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .panel { display: none; }
 .panel.active { display: block; }
 
+.newsletter { background: linear-gradient(135deg, #0d0f17, #101a24); border: 1px solid #1a2a3a; border-radius: 16px; padding: 36px 40px; margin: 40px 0; text-align: center; }
+.newsletter h2 { color: #00D9FF; font-size: 1.6em; margin-bottom: 8px; }
+.newsletter p { color: #889; font-size: 0.95em; margin-bottom: 24px; }
+.newsletter-form { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; max-width: 780px; margin: 0 auto; }
+.newsletter-form input, .newsletter-form select { background: #14141f; border: 1px solid #2a2a3a; color: #e0e0e0; padding: 13px 16px; border-radius: 8px; font-size: 0.95em; outline: none; min-width: 150px; flex: 1; }
+.newsletter-form input:focus, .newsletter-form select:focus { border-color: #00D9FF; }
+.newsletter-form select { color: #889; }
+.newsletter-form select option { color: #e0e0e0; background: #14141f; }
+.newsletter-form .btn { padding: 13px 28px; background: #00D9FF; color: #07090D; border: none; border-radius: 8px; font-weight: 700; font-size: 0.95em; cursor: pointer; white-space: nowrap; }
+.newsletter-form .btn:hover { background: #33e2ff; }
+.newsletter-form .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.newsletter-msg { margin-top: 16px; font-size: 0.95em; display: none; }
+.newsletter-msg.ok { color: #7ddc8f; }
+.newsletter-msg.err { color: #ff6b6b; }
+@media (max-width: 640px) { .newsletter { padding: 24px 18px; } .newsletter-form input, .newsletter-form select { min-width: 100%; } }
+
 .demo-video { margin: 30px 0; border-radius: 12px; overflow: hidden; background: #0d0f17; border: 1px solid #1a1a2e; }
 .demo-video video { width: 100%; display: block; }
 
@@ -176,6 +192,27 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
       <div class="price">$97 <small>one-time</small></div>
     </div>
   </div>
+</div>
+
+<div class="newsletter" id="newsletter">
+  <h2>Join Sylvester's AI Lab</h2>
+  <p>New n8n templates, AI automation tips and tutorials — straight to your inbox.</p>
+  <form class="newsletter-form" id="newsletterForm" novalidate>
+    <input type="text" id="nlFirst" placeholder="First Name" required autocomplete="given-name">
+    <input type="text" id="nlLast" placeholder="Last Name" autocomplete="family-name">
+    <input type="email" id="nlEmail" placeholder="Email Address" required autocomplete="email">
+    <select id="nlBusiness" required>
+      <option value="" disabled selected>Business Type</option>
+      <option>Small Business</option>
+      <option>Clinic/Hospital</option>
+      <option>Real Estate</option>
+      <option>E-commerce</option>
+      <option>Freelancer</option>
+      <option>Other</option>
+    </select>
+    <button type="submit" class="btn">Subscribe</button>
+  </form>
+  <div class="newsletter-msg" id="nlMsg"></div>
 </div>
 
 <div class="tabs">
@@ -870,6 +907,59 @@ function sendMessage() {
 }
 
 function escHtml(str) { return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// Newsletter Signup (posts to n8n Form Trigger)
+const NEWSLETTER_URL = 'https://sylvestersailab.app.n8n.cloud/form/82d6cd2d-c26c-4cb9-893e-79ffede89b58';
+document.getElementById('newsletterForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const first = document.getElementById('nlFirst');
+  const last = document.getElementById('nlLast');
+  const email = document.getElementById('nlEmail');
+  const business = document.getElementById('nlBusiness');
+  const msg = document.getElementById('nlMsg');
+  const btn = this.querySelector('.btn');
+
+  if (!first.value.trim() || !email.value.trim() || !email.validity.valid || !business.value) {
+    msg.textContent = 'Please fill in your first name, a valid email, and business type.';
+    msg.className = 'newsletter-msg err';
+    msg.style.display = 'block';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Subscribing...';
+  msg.style.display = 'none';
+
+  const fd = new FormData();
+  fd.append('field-0', first.value.trim());
+  fd.append('field-1', last.value.trim());
+  fd.append('field-2', email.value.trim());
+  fd.append('field-3', business.value);
+
+  fetch(NEWSLETTER_URL, { method: 'POST', body: fd })
+    .then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(data => {
+      if (data.status === 200) {
+        this.reset();
+        msg.textContent = 'You are in! Welcome to Sylvester\'s AI Lab — check your inbox.';
+        msg.className = 'newsletter-msg ok';
+      } else {
+        throw new Error('Unexpected response');
+      }
+    })
+    .catch(() => {
+      msg.textContent = 'Something went wrong. Please try again in a moment.';
+      msg.className = 'newsletter-msg err';
+    })
+    .finally(() => {
+      msg.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Subscribe';
+    });
+});
 
 // AI Agent Chat
 const AGENT_KEY = 'agent-msg-count';
