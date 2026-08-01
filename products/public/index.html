@@ -44,6 +44,25 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 .newsletter-msg { margin-top: 16px; font-size: 0.95em; display: none; }
 .newsletter-msg.ok { color: #7ddc8f; }
 .newsletter-msg.err { color: #ff6b6b; }
+
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(7, 9, 13, 0.88); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.show { display: flex; }
+.modal { background: #0d0f17; border: 1px solid #1a2a3a; border-radius: 16px; padding: 32px; max-width: 420px; width: 100%; position: relative; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5); }
+.modal h3 { color: #00D9FF; font-size: 1.35em; margin-bottom: 8px; }
+.modal p { color: #889; font-size: 0.9em; margin-bottom: 20px; }
+.modal .form-group { margin-bottom: 12px; }
+.modal .form-group input, .modal .form-group select { width: 100%; background: #14141f; border: 1px solid #2a2a3a; border-radius: 8px; padding: 12px 16px; color: #e0e0e0; font-size: 0.95em; outline: none; box-sizing: border-box; }
+.modal .form-group input:focus, .modal .form-group select:focus { border-color: #00D9FF; }
+.modal .form-group select { color: #889; }
+.modal .form-group select option { color: #e0e0e0; background: #14141f; }
+.modal .btn { width: 100%; padding: 13px; background: #00D9FF; color: #07090D; border: none; border-radius: 8px; font-weight: 700; font-size: 1em; cursor: pointer; font-family: inherit; }
+.modal .btn:hover { background: #33e2ff; }
+.modal .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.modal-close { position: absolute; top: 10px; right: 14px; background: none; border: none; color: #667; font-size: 1.5em; cursor: pointer; line-height: 1; }
+.modal-close:hover { color: #fff; }
+.modal-msg { margin-top: 14px; font-size: 0.9em; display: none; }
+.modal-msg.ok { color: #7ddc8f; }
+.modal-msg.err { color: #ff6b6b; }
 @media (max-width: 640px) { .newsletter { padding: 24px 18px; } .newsletter-form input, .newsletter-form select { min-width: 100%; } }
 
 .demo-video { margin: 30px 0; border-radius: 12px; overflow: hidden; background: #0d0f17; border: 1px solid #1a1a2e; }
@@ -214,6 +233,32 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
     <button type="submit" class="btn">Subscribe</button>
   </form>
   <div class="newsletter-msg" id="nlMsg"></div>
+</div>
+
+<div class="modal-overlay" id="signupModal" onclick="if(event.target===this)closeSignupModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeSignupModal()" aria-label="Close">×</button>
+    <h3>Join Sylvester's AI Lab</h3>
+    <p>Free template drops + unlock 10 more demo messages.</p>
+    <form id="signupModalForm" novalidate>
+      <div class="form-group"><input type="text" id="nlMFirst" placeholder="First Name" required autocomplete="given-name"></div>
+      <div class="form-group"><input type="text" id="nlMLast" placeholder="Last Name" autocomplete="family-name"></div>
+      <div class="form-group"><input type="email" id="nlMEmail" placeholder="Email Address" required autocomplete="email"></div>
+      <div class="form-group">
+        <select id="nlMBusiness" required>
+          <option value="" disabled selected>Business Type</option>
+          <option>Small Business</option>
+          <option>Clinic/Hospital</option>
+          <option>Real Estate</option>
+          <option>E-commerce</option>
+          <option>Freelancer</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <button type="submit" class="btn">Join — unlock 10 more messages</button>
+      <div class="modal-msg" id="nlMMsg"></div>
+    </form>
+  </div>
 </div>
 
 <div class="tabs">
@@ -946,21 +991,8 @@ document.getElementById('newsletterForm').addEventListener('submit', function (e
     .then(data => {
       if (data.status === 200) {
         this.reset();
-        if (sessionStorage.getItem('agent-unlock-pending') === '1') {
-          sessionStorage.removeItem('agent-unlock-pending');
-          localStorage.setItem(AGENT_UNLOCK_KEY, '1');
-          const inp = document.getElementById('agentChatInput');
-          const sendBtn = document.getElementById('agentChatSend');
-          if (inp) { inp.disabled = false; }
-          if (sendBtn) { sendBtn.disabled = false; }
-          const ov = document.getElementById('agentTrialOverlay');
-          if (ov) { ov.classList.remove('show'); }
-          msg.textContent = "You're in! Demo chat unlocked — 10 more messages. Check your inbox.";
-          msg.className = 'newsletter-msg ok';
-        } else {
-          msg.textContent = 'You are in! Welcome to Sylvester\'s AI Lab — check your inbox.';
-          msg.className = 'newsletter-msg ok';
-        }
+        msg.textContent = 'You are in! Welcome to Sylvester\'s AI Lab — check your inbox.';
+        msg.className = 'newsletter-msg ok';
       } else {
         throw new Error('Unexpected response');
       }
@@ -990,20 +1022,102 @@ if (!agentSessionId) {
 }
 
 if (agentCount >= AGENT_MAX) {
-  const inp = document.getElementById('agentChatInput');
-  const btn = document.getElementById('agentChatSend');
-  if (inp) { inp.disabled = true; }
-  if (btn) { btn.disabled = true; }
-  const ov = document.getElementById('agentTrialOverlay');
-  if (ov) { ov.classList.add('show'); }
+  lockAgentChat();
 }
 
-function unlockAgentChat() {
-  sessionStorage.setItem('agent-unlock-pending', '1');
-  const nl = document.getElementById('newsletter');
-  if (nl) { nl.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-  document.getElementById('nlEmail')?.focus();
+function lockAgentChat() {
+  const inp = document.getElementById('agentChatInput');
+  const btn = document.getElementById('agentChatSend');
+  if (inp) {
+    inp.disabled = true;
+    inp.style.pointerEvents = 'none';
+    inp.placeholder = 'Chat paused — click to join the list and continue';
+  }
+  if (btn) { btn.disabled = true; btn.style.pointerEvents = 'none'; }
+  const ov = document.getElementById('agentTrialOverlay');
+  if (ov) { ov.classList.add('show'); }
+  const demo = document.getElementById('agent-chat');
+  if (demo) { demo.addEventListener('click', unlockAgentChat); }
 }
+
+function grantAgentUnlock() {
+  localStorage.setItem(AGENT_UNLOCK_KEY, '1');
+  const inp = document.getElementById('agentChatInput');
+  const btn = document.getElementById('agentChatSend');
+  if (inp) { inp.disabled = false; inp.style.pointerEvents = ''; }
+  if (btn) { btn.disabled = false; btn.style.pointerEvents = ''; }
+  const ov = document.getElementById('agentTrialOverlay');
+  if (ov) { ov.classList.remove('show'); }
+  const demo = document.getElementById('agent-chat');
+  if (demo) { demo.removeEventListener('click', unlockAgentChat); }
+}
+
+function openSignupModal() {
+  document.getElementById('signupModal')?.classList.add('show');
+  document.getElementById('nlMEmail')?.focus();
+}
+
+function closeSignupModal() {
+  document.getElementById('signupModal')?.classList.remove('show');
+}
+
+function unlockAgentChat(e) {
+  if (e && e.target && e.target.closest && e.target.closest('.btn')) return;
+  openSignupModal();
+}
+
+document.getElementById('signupModalForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const first = document.getElementById('nlMFirst');
+  const last = document.getElementById('nlMLast');
+  const email = document.getElementById('nlMEmail');
+  const business = document.getElementById('nlMBusiness');
+  const msg = document.getElementById('nlMMsg');
+  const btn = this.querySelector('.btn');
+
+  if (!first.value.trim() || !email.value.trim() || !email.validity.valid || !business.value) {
+    msg.textContent = 'Please fill in your first name, a valid email, and business type.';
+    msg.className = 'modal-msg err';
+    msg.style.display = 'block';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Subscribing...';
+  msg.style.display = 'none';
+
+  const fd = new FormData();
+  fd.append('field-0', first.value.trim());
+  fd.append('field-1', last.value.trim());
+  fd.append('field-2', email.value.trim());
+  fd.append('field-3', business.value);
+
+  fetch(NEWSLETTER_URL, { method: 'POST', body: fd })
+    .then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(data => {
+      if (data.status === 200) {
+        this.reset();
+        grantAgentUnlock();
+        msg.textContent = "You're in! Demo chat unlocked — 10 more messages. Check your inbox.";
+        msg.className = 'modal-msg ok';
+        setTimeout(closeSignupModal, 2500);
+      } else {
+        throw new Error('Unexpected response');
+      }
+    })
+    .catch(() => {
+      msg.textContent = 'Something went wrong. Please try again in a moment.';
+      msg.className = 'modal-msg err';
+    })
+    .finally(() => {
+      msg.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Join — unlock 10 more messages';
+    });
+});
 
 function sendAgentMessage() {
   const input = document.getElementById('agentChatInput');
@@ -1034,17 +1148,13 @@ function sendAgentMessage() {
   .then(data => {
     document.getElementById('agentTyping')?.remove();
     if (data.trial_over) {
-      input.disabled = true;
-      sendBtn.disabled = true;
-      document.getElementById('agentTrialOverlay').classList.add('show');
+      lockAgentChat();
     } else {
       chatBody.innerHTML += `<div class="chat-msg ai"><div class="name">Agent</div>${escHtml(data.response)}</div>`;
       chatBody.scrollTop = chatBody.scrollHeight;
     }
     if (agentCount >= AGENT_MAX) {
-      input.disabled = true;
-      sendBtn.disabled = true;
-      document.getElementById('agentTrialOverlay').classList.add('show');
+      lockAgentChat();
     }
   })
   .catch(() => {
