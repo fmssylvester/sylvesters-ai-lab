@@ -10,6 +10,9 @@ import CollectorScene from './scenes/collector/CollectorScene';
 import CollectorCinematic from './scenes/collector/CollectorCinematic';
 import OpeningSequence from './scenes/collector/OpeningSequence';
 import { COLLECTOR } from './scenes/collector/collectorTimeline';
+import N8nIntroScene from './scenes/n8n/N8nIntroScene';
+import N8nOutroScene from './scenes/n8n/N8nOutroScene';
+import { N8N_INTRO_TIMELINE, N8N_OUTRO_TIMELINE } from './scenes/n8n/n8nTimeline';
 import { GlassPoster, GamifiedBanner, DataFlowDashboard, PromptInputBar, VoiceBanner, OtpSheet, SwipeCard, FrostedPoster, AppNavMenu } from './components/ui-kit/UiKit';
 import { AgentWorkflow, ToolGrid, BeforeAfter } from './components/ui-kit/AutomationTemplates';
 import { ProblemSolution, StepTimeline, AgentActivityStream, CtaEndCard, LogoReveal } from './components/ui-kit/PremiumTemplates';
@@ -41,10 +44,45 @@ import PatientRecordsDemo from './scenes/patient-records-demo/PatientRecordsDemo
 import { PATIENT_RECORDS_DEMO } from './scenes/patient-records-demo/patientRecordsTimeline';
 import AiAgentDemo from './scenes/ai-agent-demo/AiAgentDemo';
 import { AI_AGENT_DEMO } from './scenes/ai-agent-demo/aiAgentTimeline';
+import { TitleCard } from './scenes/title-card/TitleCard';
+import { ExplainerPOC } from './scenes/explainer-poc/ExplainerPOC';
+import { FullVideo } from './scenes/full-video/FullVideo';
+import { MotionHook } from './scenes/motion-hook/MotionHook';
+import { DesignLab } from './scenes/design-lab/DesignLab';
+import { Seg1ClayGlass } from './scenes/seg1-clay-glass/Seg1ClayGlass';
+import { Seg1Creative } from './scenes/seg1-creative/Seg1Creative';
+import { Seg2Creative } from './scenes/seg2-creative/Seg2Creative';
+import { AvatarPlaceholder } from './scenes/avatar-placeholder/AvatarPlaceholder';
+import { Seg5Creative } from './scenes/seg5-creative/Seg5Creative';
+import { Seg6Creative } from './scenes/seg6-creative/Seg6Creative';
 
 export const RemotionRoot = () => {
   return (
     <>
+      <Composition
+        id="n8n-intro"
+        component={N8nIntroScene}
+        durationInFrames={N8N_INTRO_TIMELINE.TOTAL_FRAMES}
+        fps={N8N_INTRO_TIMELINE.FPS}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="n8n-outro"
+        component={N8nOutroScene}
+        durationInFrames={N8N_OUTRO_TIMELINE.TOTAL_FRAMES}
+        fps={N8N_OUTRO_TIMELINE.FPS}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="FullVideo"
+        component={FullVideo}
+        durationInFrames={7350}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
       <Composition
         id="ToolOverload"
         component={ToolOverloadScene}
@@ -337,6 +375,64 @@ export const RemotionRoot = () => {
         component={AiAgentDemo}
         durationInFrames={AI_AGENT_DEMO.TOTAL_FRAMES}
         fps={AI_AGENT_DEMO.FPS}
+        width={1920}
+        height={1080}
+      />
+
+      {/* ── TitleCard: minimalist high-contrast title (3s at 30fps = 90 frames) ── */}
+      <Composition
+        id="TitleCard"
+        component={TitleCard}
+        durationInFrames={90}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* ── Explainer POC: transcript-synced kinetic type, hook (~11s = 330 frames) ── */}
+      <Composition
+        id="ExplainerPOC"
+        component={ExplainerPOC}
+        durationInFrames={330}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* ── Motion Hook: transcript-synced MOTION GRAPHICS + SFX (~11s = 330 frames) ── */}
+      <Composition
+        id="MotionHook"
+        component={MotionHook}
+        durationInFrames={330}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* ── Design Lab: clay + liquid-glass POC on ash+purple (7s = 210 frames) ── */}
+      <Composition
+        id="DesignLab"
+        component={DesignLab}
+        durationInFrames={210}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* ── Seg1 Clay Glass: Segment 1 re-skinned in clay + liquid-glass (137f) ── */}
+      <Composition
+        id="Seg1ClayGlass"
+        component={Seg1ClayGlass}
+        durationInFrames={137}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="Seg1Creative"
+        component={Seg1Creative}
+        durationInFrames={137}
+        fps={30}
         width={1920}
         height={1080}
       />
