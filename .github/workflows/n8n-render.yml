@@ -24,7 +24,7 @@ jobs:
 
       - name: Install Chrome for Testing
         run: |
-          npx -y @puppeteer/browsers install chrome@stable --path /opt/chrome
+          npx -y @puppeteer/browsers install chrome@131 --path /opt/chrome
           echo "CHROME_BIN=$(find /opt/chrome -type f -name chrome -path '*chrome-linux64*' | head -1)" >> "$GITHUB_ENV"
           echo "Chrome: $CHROME_BIN"
 
