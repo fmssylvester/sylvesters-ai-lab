@@ -1,0 +1,54 @@
+name: Render n8n Intro/Outro
+
+on:
+  workflow_dispatch:
+
+jobs:
+  render-n8n:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install system deps (ffmpeg + Chrome libs)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg \
+            libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2t64 libdrm2 \
+            libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 \
+            libgbm1 libpango-1.0-0 libcairo2 libasound2t64 libatspi2.0-0
+
+      - name: Install Chrome for Testing
+        run: |
+          npx -y @puppeteer/browsers install chrome@stable --path /opt/chrome
+          echo "CHROME_BIN=$(find /opt/chrome -type f -name chrome -path '*chrome-linux64*' | head -1)" >> "$GITHUB_ENV"
+          echo "Chrome: $CHROME_BIN"
+
+      - name: npm install
+        run: npm ci
+
+      - name: Verify compositions
+        env:
+          REMOTION_BROWSER_EXECUTABLE: ${{ env.CHROME_BIN }}
+        run: node ./node_modules/.bin/remotion compositions src/index.ts 2>&1 | grep -E "n8n|error" || true
+
+      - name: Render n8n-intro
+        env:
+          REMOTION_BROWSER_EXECUTABLE: ${{ env.CHROME_BIN }}
+        run: node ./node_modules/.bin/remotion render n8n-intro out/n8n-intro.mp4 --concurrency=2
+
+      - name: Render n8n-outro
+        env:
+          REMOTION_BROWSER_EXECUTABLE: ${{ env.CHROME_BIN }}
+        run: node ./node_modules/.bin/remotion render n8n-outro out/n8n-outro.mp4 --concurrency=2
+
+      - name: Upload renders
+        uses: actions/upload-artifact@v4
+        with:
+          name: n8n-renders
+          path: out/*.mp4
+          retention-days: 7
