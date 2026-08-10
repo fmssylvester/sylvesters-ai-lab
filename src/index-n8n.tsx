@@ -2,10 +2,19 @@ import { registerRoot, Composition } from 'remotion';
 import React from 'react';
 import N8nIntroScene from './scenes/n8n/N8nIntroScene';
 import N8nOutroScene from './scenes/n8n/N8nOutroScene';
+import StyleTrial from './scenes/n8n/StyleTrial';
 import { N8N_INTRO_TIMELINE, N8N_OUTRO_TIMELINE } from './scenes/n8n/n8nTimeline';
 
 registerRoot(() => (
   <React.Fragment>
+    <Composition
+      id="style-trial"
+      component={StyleTrial}
+      durationInFrames={180}
+      fps={30}
+      width={1920}
+      height={1080}
+    />
     <Composition
       id="n8n-intro"
       component={N8nIntroScene}
