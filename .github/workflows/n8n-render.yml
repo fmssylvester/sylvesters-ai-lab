@@ -34,17 +34,17 @@ jobs:
       - name: Verify compositions
         env:
           REMOTION_BROWSER_EXECUTABLE: ${{ env.CHROME_BIN }}
-        run: node ./node_modules/.bin/remotion compositions src/index.ts 2>&1 | grep -E "n8n|error" || true
+        run: node ./node_modules/.bin/remotion compositions src/index-n8n.tsx 2>&1 | grep -E "n8n|error" || true
 
       - name: Render n8n-intro
         env:
           REMOTION_BROWSER_EXECUTABLE: ${{ env.CHROME_BIN }}
-        run: node ./node_modules/.bin/remotion render n8n-intro out/n8n-intro.mp4 --concurrency=2
+        run: node ./node_modules/.bin/remotion render src/index-n8n.tsx n8n-intro out/n8n-intro.mp4 --concurrency=2
 
       - name: Render n8n-outro
         env:
           REMOTION_BROWSER_EXECUTABLE: ${{ env.CHROME_BIN }}
-        run: node ./node_modules/.bin/remotion render n8n-outro out/n8n-outro.mp4 --concurrency=2
+        run: node ./node_modules/.bin/remotion render src/index-n8n.tsx n8n-outro out/n8n-outro.mp4 --concurrency=2
 
       - name: Upload renders
         uses: actions/upload-artifact@v4
