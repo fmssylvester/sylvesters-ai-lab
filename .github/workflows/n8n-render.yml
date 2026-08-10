@@ -50,6 +50,11 @@ jobs:
           REMOTION_BROWSER_EXECUTABLE: ${{ env.CHROME_BIN }}
         run: node ./node_modules/.bin/remotion compositions src/index-n8n.tsx 2>&1 | grep -E "n8n|error" || true
 
+      - name: Render style-trial
+        env:
+          REMOTION_BROWSER_EXECUTABLE: ${{ env.CHROME_BIN }}
+        run: node ./node_modules/.bin/remotion render src/index-n8n.tsx style-trial out/style-trial.mp4 --concurrency=2
+
       - name: Render n8n-intro
         env:
           REMOTION_BROWSER_EXECUTABLE: ${{ env.CHROME_BIN }}
