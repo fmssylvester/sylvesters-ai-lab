@@ -28,6 +28,15 @@ jobs:
           echo "CHROME_BIN=$(find /opt/chrome -type f -name chrome -path '*chrome-linux64*' | head -1)" >> "$GITHUB_ENV"
           echo "Chrome: $CHROME_BIN"
 
+      - name: Probe Chrome
+        run: |
+          echo "=== chrome version ==="
+          "$CHROME_BIN" --version
+          echo "=== dump-dom test ==="
+          "$CHROME_BIN" --headless --no-sandbox --disable-gpu --dump-dom about:blank 2>&1 | head -5 || true
+          echo "=== ldd missing ==="
+          ldd "$CHROME_BIN" 2>/dev/null | grep "not found" | head -10 || echo "no missing libs"
+
       - name: npm install
         run: npm ci
 
