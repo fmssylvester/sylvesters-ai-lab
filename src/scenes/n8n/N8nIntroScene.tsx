@@ -380,10 +380,10 @@ export const N8nIntroScene: React.FC = () => {
     <div style={{ width: 1920, height: 1080, position: 'relative', background: COLORS.bg, overflow: 'hidden', fontFamily: FONT }}>
       <DepthBackground frame={frame} />
       <SceneContent frame={frame} />
-      <Audio src={staticFile('audio/voiceover.mp3')} />
-      {sfxMessage && <Audio src={staticFile('audio/notification.mp3')} startFrom={0} />}
-      {atWorkflow && <Audio src={staticFile('audio/whoosh.mp3')} startFrom={0} />}
-      {atKinetic && <Audio src={staticFile('audio/whoosh.mp3')} startFrom={1200} />}
+      <Audio src={staticFile('audio/voiceover.wav')} />
+      {sfxMessage && <Audio src={staticFile('audio/notification.wav')} startFrom={0} />}
+      {atWorkflow && <Audio src={staticFile('audio/whoosh.wav')} startFrom={0} />}
+      {atKinetic && <Audio src={staticFile('audio/whoosh.wav')} startFrom={1200} />}
     </div>
   );
 };

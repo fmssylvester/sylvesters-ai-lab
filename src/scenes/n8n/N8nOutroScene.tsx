@@ -131,7 +131,7 @@ export const N8nOutroScene: React.FC = () => {
     <div style={{ width: 1920, height: 1080, position: 'relative', background: COLORS.bg, overflow: 'hidden', fontFamily: FONT }}>
       <DepthBackground frame={frame} />
       {inRecap ? <RecapNodes frame={frame} /> : <EndCard frame={frame} />}
-      <Audio src={staticFile('audio/voiceover.mp3')} />
+      <Audio src={staticFile('audio/voiceover.wav')} />
     </div>
   );
 };
