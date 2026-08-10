@@ -48,7 +48,7 @@ jobs:
       - name: Render n8n-intro
         env:
           REMOTION_BROWSER_EXECUTABLE: ${{ env.CHROME_BIN }}
-        run: node ./node_modules/.bin/remotion render src/index-n8n.tsx n8n-intro out/n8n-intro.mp4 --concurrency=2
+        run: node ./node_modules/.bin/remotion render src/index-n8n.tsx n8n-intro out/n8n-intro.mp4 --concurrency=2 --frames=0-2 --log=verbose 2>&1 | tail -60
 
       - name: Render n8n-outro
         env:
