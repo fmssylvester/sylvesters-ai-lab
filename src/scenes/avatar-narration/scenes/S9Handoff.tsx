@@ -61,7 +61,7 @@ export const S9Handoff: React.FC = () => {
 
           {/* cursor */}
           <div style={{ position: 'absolute', left: cursorX, top: cursorY, transform: `scale(${cursorClick})`, filter: `drop-shadow(0 0 10px ${CYAN}${hexA(0.8)})` }}>
-            <Prop file="02_ICONS/lucide/cursor.svg" size={44} color="white" />
+            <Prop file="02_ICONS/lucide/mouse-pointer.svg" size={44} color="white" />
           </div>
         </div>
 
