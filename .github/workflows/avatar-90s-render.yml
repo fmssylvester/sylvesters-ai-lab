@@ -62,7 +62,7 @@ jobs:
               echo "MISSING  $f"
               missing=1
             fi
-          done           < <(grep -rhoE "staticFile\(\s*[\`'\"][^\`'\"]+[\`'\"]\s*\)" src/scenes/avatar-narration/ | grep -oE "[\`'\"][^\`'\"]+[\`'\"]" | tr -d "\`'\"" | sort -u; grep -rhoE "file=?\s*[\`'\"][A-Za-z0-9_/-]+\.(svg|wav)[\`'\"]" src/scenes/avatar-narration/ -g '*.tsx' | grep -oE "[A-Za-z0-9_/-]+\.(svg|wav)" | sort -u; grep -rhoE "\"sfx/[a-z0-9-]+\.wav\"" src/scenes/avatar-narration/ -g '*.tsx' | tr -d '"' | sort -u)
+          done           < <(grep -rhoE "staticFile\(\s*[\`'\"][^\`'\"]+[\`'\"]\s*\)" src/scenes/avatar-narration/ | grep -oE "[\`'\"][^\`'\"]+[\`'\"]" | tr -d "\`'\"" | grep -v '\${' | sort -u; grep -rhoE "file=?\s*[\`'\"][A-Za-z0-9_/-]+\.(svg|wav)[\`'\"]" src/scenes/avatar-narration/ -g '*.tsx' | grep -oE "[A-Za-z0-9_/-]+\.(svg|wav)" | sort -u; grep -rhoE "\"sfx/[a-z0-9-]+\.wav\"" src/scenes/avatar-narration/ -g '*.tsx' | tr -d '"' | sort -u)
           exit $missing
 
       - name: Render AvatarNarration90s
