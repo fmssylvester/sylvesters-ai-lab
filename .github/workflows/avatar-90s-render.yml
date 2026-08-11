@@ -1,0 +1,54 @@
+name: Render AvatarNarration90s
+
+on:
+  workflow_dispatch:
+
+jobs:
+  render-avatar90s:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install system deps (ffmpeg + Chrome libs)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg \
+            libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2t64 libdrm2 \
+            libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 \
+            libgbm1 libpango-1.0-0 libcairo2 libasound2t64 libatspi2.0-0
+
+      - name: Install Chrome for Testing (pinned 120 — newer crashes CDP)
+        run: |
+          npx -y @puppeteer/browsers install chrome@120 --path /opt/chrome
+          echo "CHROME_BIN=$(find /opt/chrome -type f -name chrome -path '*chrome-linux64*' | head -1)" >> "$GITHUB_ENV"
+          echo "Chrome: $CHROME_BIN"
+
+      - name: npm install
+        run: npm ci
+
+      - name: Patch Remotion single-process flag (crashes modern Chrome on Linux)
+        run: |
+          sed -i "s/process.platform === 'linux' ? '--single-process' : null,/null,/" node_modules/@remotion/renderer/dist/open-browser.js
+          grep -c "single-process" node_modules/@remotion/renderer/dist/open-browser.js || echo "patched (0 matches)"
+
+      - name: Verify compositions
+        env:
+          REMOTION_BROWSER_EXECUTABLE: ${{ env.CHROME_BIN }}
+        run: node ./node_modules/.bin/remotion compositions src/index-avatar90s.tsx 2>&1 | grep -E "AvatarNarration90s|error" || true
+
+      - name: Render AvatarNarration90s
+        env:
+          REMOTION_BROWSER_EXECUTABLE: ${{ env.CHROME_BIN }}
+        run: node ./node_modules/.bin/remotion render src/index-avatar90s.tsx AvatarNarration90s out/avatar-90s.mp4 --concurrency=2
+
+      - name: Upload render
+        uses: actions/upload-artifact@v4
+        with:
+          name: avatar-90s-render
+          path: out/*.mp4
+          retention-days: 7

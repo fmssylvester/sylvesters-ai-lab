@@ -18,6 +18,20 @@
 - No pip installs without --break-system-packages
 - Prefer free-tier solutions
 
+## STANDING ORDER — RENDERING
+- **NEVER render videos on this phone/device.** It takes ~1h+ per composition and
+  competes for resources with the live services. Phone is for editing/writing code only.
+- **ALWAYS render via GitHub Actions:** commit, push to origin, then trigger the matching
+  workflow: `gh workflow run "<Workflow>" --repo fmssylvester/sylvesters-ai-lab` and poll
+  `gh run list --repo fmssylvester/sylvesters-ai-lab --limit 1`. Download artifacts with
+  `TMPDIR=/data/data/com.termux/files/usr/tmp gh run download <RUN_ID> -n <artifact>`.
+- Follow REMOTE_RENDER_GUIDE.md: dedicated entry point per render (never `src/index.ts`),
+  audio as WAV committed with `-f` (gitignore skips *.wav), Chrome pinned 120, single-process
+  patch applied by the workflow.
+- The Visual Director storyboard → implementation flow ends with "push + trigger workflow",
+  NOT a local render. Local `remotion render` is only acceptable for quick frame probes
+  (still/still frame extraction) when explicitly asked.
+
 ## Agent Orchestration Pipeline
 You are a strict coordinator. You DO NOT write scripts, generate visual assets, or write code yourself. 
 Your ONLY job is to delegate tasks to specialized sub-agents:

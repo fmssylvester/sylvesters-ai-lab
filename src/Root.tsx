@@ -51,6 +51,8 @@ import { MotionHook } from './scenes/motion-hook/MotionHook';
 import { DesignLab } from './scenes/design-lab/DesignLab';
 import { Seg1ClayGlass } from './scenes/seg1-clay-glass/Seg1ClayGlass';
 import { Seg1Creative } from './scenes/seg1-creative/Seg1Creative';
+import { AvatarNarration90s } from './scenes/avatar-narration/AvatarNarration90s';
+import { TOTAL as AVATAR_TOTAL } from './scenes/avatar-narration/timeline';
 import { Seg2Creative } from './scenes/seg2-creative/Seg2Creative';
 import { AvatarPlaceholder } from './scenes/avatar-placeholder/AvatarPlaceholder';
 import { Seg5Creative } from './scenes/seg5-creative/Seg5Creative';
@@ -432,6 +434,16 @@ export const RemotionRoot = () => {
         id="Seg1Creative"
         component={Seg1Creative}
         durationInFrames={137}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+
+      {/* ── Avatar Narration 90s: approved storyboard v2, 9 scenes over kiki.mp3 ── */}
+      <Composition
+        id="AvatarNarration90s"
+        component={AvatarNarration90s}
+        durationInFrames={AVATAR_TOTAL}
         fps={30}
         width={1920}
         height={1080}
