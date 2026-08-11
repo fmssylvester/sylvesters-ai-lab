@@ -7,6 +7,14 @@ on:
         description: 'Render resolution (720p or 1080p)'
         required: false
         default: '720p'
+      composition:
+        description: 'Composition to render'
+        required: false
+        default: 'AvatarNarration90s'
+        type: choice
+        options:
+          - AvatarNarration90s
+          - Smoke3D
 
 jobs:
   render-avatar90s:
@@ -65,7 +73,7 @@ jobs:
           done           < <(grep -rhoE "staticFile\(\s*[\`'\"][^\`'\"]+[\`'\"]\s*\)" src/scenes/avatar-narration/ | grep -oE "[\`'\"][^\`'\"]+[\`'\"]" | tr -d "\`'\"" | grep -v '\${' | sort -u; grep -rhoE "file=?\s*[\`'\"][A-Za-z0-9_/-]+\.(svg|wav)[\`'\"]" src/scenes/avatar-narration/ -g '*.tsx' | grep -oE "[A-Za-z0-9_/-]+\.(svg|wav)" | sort -u; grep -rhoE "\"sfx/[a-z0-9-]+\.wav\"" src/scenes/avatar-narration/ -g '*.tsx' | tr -d '"' | sort -u)
           exit $missing
 
-      - name: Render AvatarNarration90s
+      - name: Render ${{ inputs.composition }}
         env:
           REMOTION_BROWSER_EXECUTABLE: ${{ env.CHROME_BIN }}
         run: |
@@ -74,7 +82,7 @@ jobs:
           else
             SIZE_ARGS="--width=1280 --height=720"
           fi
-          node ./node_modules/.bin/remotion render src/index-avatar90s.tsx AvatarNarration90s out/avatar-90s.mp4 --concurrency=2 $SIZE_ARGS
+          node ./node_modules/.bin/remotion render src/index-avatar90s.tsx ${{ inputs.composition }} out/avatar-90s.mp4 --concurrency=2 $SIZE_ARGS
 
       - name: Upload render
         uses: actions/upload-artifact@v4

@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@remotion/eslint-plugin": "^3.3.103",
+    "@types/three": "^0.185.0",
     "@vitejs/plugin-react": "^6.0.3",
     "eslint": "^9.39.5",
     "eslint-plugin-react-hooks": "^7.1.1",

@@ -7,6 +7,7 @@ import '@fontsource/inter/500.css';
 import '@fontsource/inter/700.css';
 import './styles/playfair-font.css';
 import { AvatarNarration90s } from './scenes/avatar-narration/AvatarNarration90s';
+import { Smoke3D } from './scenes/avatar-narration/smoke/Smoke3D';
 import { TOTAL } from './scenes/avatar-narration/timeline';
 
 registerRoot(() => (
@@ -18,6 +19,14 @@ registerRoot(() => (
       fps={30}
       width={1920}
       height={1080}
+    />
+    <Composition
+      id="Smoke3D"
+      component={Smoke3D}
+      durationInFrames={48}
+      fps={30}
+      width={1280}
+      height={720}
     />
   </React.Fragment>
 ));
