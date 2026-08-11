@@ -2,6 +2,11 @@ name: Render AvatarNarration90s
 
 on:
   workflow_dispatch:
+    inputs:
+      scale:
+        description: 'Render scale (1 = 1080p, 0.6667 = 720p)'
+        required: false
+        default: '1'
 
 jobs:
   render-avatar90s:
@@ -44,7 +49,7 @@ jobs:
       - name: Render AvatarNarration90s
         env:
           REMOTION_BROWSER_EXECUTABLE: ${{ env.CHROME_BIN }}
-        run: node ./node_modules/.bin/remotion render src/index-avatar90s.tsx AvatarNarration90s out/avatar-90s.mp4 --concurrency=2
+        run: node ./node_modules/.bin/remotion render src/index-avatar90s.tsx AvatarNarration90s out/avatar-90s.mp4 --concurrency=2 --scale=${{ inputs.scale }}
 
       - name: Upload render
         uses: actions/upload-artifact@v4
