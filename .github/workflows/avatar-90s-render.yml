@@ -15,6 +15,15 @@ on:
         options:
           - AvatarNarration90s
           - Smoke3D
+          - S1-3D
+          - S2-3D
+          - S3-3D
+          - S4-3D
+          - S5-3D
+          - S6-3D
+          - S7-3D
+          - S8-3D
+          - S9-3D
 
 jobs:
   render-avatar90s:
