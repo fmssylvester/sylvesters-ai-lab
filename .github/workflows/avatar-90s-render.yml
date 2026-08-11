@@ -46,6 +46,25 @@ jobs:
           REMOTION_BROWSER_EXECUTABLE: ${{ env.CHROME_BIN }}
         run: node ./node_modules/.bin/remotion compositions src/index-avatar90s.tsx 2>&1 | grep -E "AvatarNarration90s|error" || true
 
+      - name: Pre-flight asset check (fail fast on missing files)
+        run: |
+          set -e
+          grep -rhoE "staticFile\(\s*[\`'\"][^\`'\"]+[\`'\"]\s*\)" src/scenes/avatar-narration/ || true
+          grep -rhoE "file=?\s*[\`'\"][A-Za-z0-9_/-]+\.svg[\`'\"]" src/scenes/avatar-narration/ -g '*.tsx' || true
+          missing=0
+          while read -r f; do
+            [ -z "$f" ] && continue
+            if [ -f "assets/$f" ]; then
+              echo "OK  $f"
+            elif [ -f "assets/sfx/$f" ]; then
+              echo "OK  assets/sfx/$f"
+            else
+              echo "MISSING  $f"
+              missing=1
+            fi
+          done           < <(grep -rhoE "staticFile\(\s*[\`'\"][^\`'\"]+[\`'\"]\s*\)" src/scenes/avatar-narration/ | grep -oE "[\`'\"][^\`'\"]+[\`'\"]" | tr -d "\`'\"" | sort -u; grep -rhoE "file=?\s*[\`'\"][A-Za-z0-9_/-]+\.(svg|wav)[\`'\"]" src/scenes/avatar-narration/ -g '*.tsx' | grep -oE "[A-Za-z0-9_/-]+\.(svg|wav)" | sort -u; grep -rhoE "\"sfx/[a-z0-9-]+\.wav\"" src/scenes/avatar-narration/ -g '*.tsx' | tr -d '"' | sort -u)
+          exit $missing
+
       - name: Render AvatarNarration90s
         env:
           REMOTION_BROWSER_EXECUTABLE: ${{ env.CHROME_BIN }}
