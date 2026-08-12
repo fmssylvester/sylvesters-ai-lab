@@ -112,7 +112,8 @@ const makeShadowCanvas2 = (): { width: number; height: number } | null => {
   const ctx = c.getContext('2d');
   const g = ctx!.createRadialGradient(64, 64, 4, 64, 64, 64);
   g.addColorStop(0, 'rgba(0,0,0,1)');
-  g.addColorStop(0.6, 'rgba(0,0,0,0.62)');
+  g.addColorStop(0.32, 'rgba(0,0,0,0.72)');
+  g.addColorStop(0.62, 'rgba(0,0,0,0.22)');
   g.addColorStop(1, 'rgba(0,0,0,0)');
   ctx!.fillStyle = g;
   ctx!.fillRect(0, 0, 128, 128);
@@ -148,8 +149,8 @@ export const GroundShadow: React.FC<{ x?: number; y?: number; z?: number; r?: nu
   return (
     <>
       <mesh position={[x + dx, y, z + dz]} rotation={[-Math.PI / 2, 0, 0]}>
-        <circleGeometry args={[r * 0.72, 48]} />
-        <meshBasicMaterial map={core} transparent depthWrite={false} opacity={Math.min(1, opacity * 1.15)} color="#000000" />
+        <circleGeometry args={[r * 0.55, 48]} />
+        <meshBasicMaterial map={core} transparent depthWrite={false} opacity={Math.min(1, opacity * 1.3)} color="#000000" />
       </mesh>
       <mesh position={[x, y, z]} rotation={[-Math.PI / 2, 0, 0]}>
         <circleGeometry args={[r * 1.5, 48]} />
@@ -188,8 +189,8 @@ export const GlassPanel: React.FC<{
           <meshPhysicalMaterial
             color={GOLD}
             metalness={1}
-            roughness={0.08}
-            envMapIntensity={2.2}
+            roughness={0.12}
+            envMapIntensity={1.9}
           />
         </RoundedBox>
       )}
@@ -223,9 +224,9 @@ export const Orb: React.FC<{
     <meshPhysicalMaterial
       color={color}
       metalness={metalness}
-      roughness={0.07}
+      roughness={0.045}
       clearcoat={1}
-      clearcoatRoughness={0.06}
+      clearcoatRoughness={0.05}
       emissive={emissive ?? color}
       emissiveIntensity={emissiveIntensity}
       envMapIntensity={2.0}
@@ -247,8 +248,8 @@ export const Ring: React.FC<{
     <meshPhysicalMaterial
       color={color}
       metalness={1}
-      roughness={0.05}
-      envMapIntensity={2.6}
+      roughness={0.09}
+      envMapIntensity={2.0}
       emissive={emissiveIntensity > 0 ? color : '#000000'}
       emissiveIntensity={emissiveIntensity}
     />
