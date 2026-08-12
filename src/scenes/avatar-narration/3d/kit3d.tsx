@@ -49,7 +49,7 @@ export const GridFloor: React.FC<{ y?: number; color?: string; sub?: string }> =
   color = '#8FA8C8',
   sub = '#15233A',
 }) => (
-  <gridHelper args={[24, 24, color, sub]} position={[0, y, 0]} />
+  <gridHelper args={[16, 16, color, sub]} position={[0, y, 0]} />
 );
 
 // ── Soft ground shadows: radial-gradient sprite (cheap realism, no shadow maps)
@@ -87,10 +87,52 @@ const makeShadowCanvas = (): { width: number; height: number } | null => {
 
 const _shadowCanvas = makeShadowCanvas();
 
-export const GroundShadow: React.FC<{ x?: number; y?: number; z?: number; r?: number; opacity?: number }> = ({
-  x = 0, y = -1.298, z = 0, r = 1.6, opacity = 1,
+const makeShadowCanvas2 = (): { width: number; height: number } | null => {
+  const gg = globalThis as {
+    document?: {
+      createElement(tag: string): {
+        width: number;
+        height: number;
+        getContext(kind: string): {
+          createRadialGradient(x0: number, y0: number, r0: number, x1: number, y1: number, r1: number): {
+            addColorStop(o: number, c: string): void;
+          };
+          fillStyle: unknown;
+          fillRect(x: number, y: number, w: number, h: number): void;
+        } | null;
+      };
+    };
+  };
+  const doc = gg.document;
+  if (!doc) {
+    return null;
+  }
+  const c = doc.createElement('canvas');
+  c.width = c.height = 128;
+  const ctx = c.getContext('2d');
+  const g = ctx!.createRadialGradient(64, 64, 4, 64, 64, 64);
+  g.addColorStop(0, 'rgba(0,0,0,1)');
+  g.addColorStop(0.6, 'rgba(0,0,0,0.62)');
+  g.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx!.fillStyle = g;
+  ctx!.fillRect(0, 0, 128, 128);
+  return c;
+};
+
+const _shadowCanvas2 = makeShadowCanvas2();
+
+export const GroundShadow: React.FC<{ x?: number; y?: number; z?: number; r?: number; opacity?: number; dir?: number }> = ({
+  x = 0, y = -1.298, z = 0, r = 1.6, opacity = 1, dir = 0,
 }) => {
-  const tex = React.useMemo(() => {
+  const core = React.useMemo(() => {
+    if (!_shadowCanvas2) {
+      return null;
+    }
+    const t = new THREE.CanvasTexture(_shadowCanvas2);
+    t.needsUpdate = true;
+    return t;
+  }, []);
+  const soft = React.useMemo(() => {
     if (!_shadowCanvas) {
       return null;
     }
@@ -98,14 +140,22 @@ export const GroundShadow: React.FC<{ x?: number; y?: number; z?: number; r?: nu
     t.needsUpdate = true;
     return t;
   }, []);
-  if (!tex) {
+  if (!core || !soft) {
     return null;
   }
+  const dx = Math.sin(dir) * 0.22;
+  const dz = Math.cos(dir) * 0.16;
   return (
-    <mesh position={[x, y, z]} rotation={[-Math.PI / 2, 0, 0]}>
-      <circleGeometry args={[r, 48]} />
-      <meshBasicMaterial map={tex} transparent depthWrite={false} opacity={opacity} color="#000000" />
-    </mesh>
+    <>
+      <mesh position={[x + dx, y, z + dz]} rotation={[-Math.PI / 2, 0, 0]}>
+        <circleGeometry args={[r * 0.72, 48]} />
+        <meshBasicMaterial map={core} transparent depthWrite={false} opacity={Math.min(1, opacity * 1.15)} color="#000000" />
+      </mesh>
+      <mesh position={[x, y, z]} rotation={[-Math.PI / 2, 0, 0]}>
+        <circleGeometry args={[r * 1.5, 48]} />
+        <meshBasicMaterial map={soft} transparent depthWrite={false} opacity={opacity * 0.45} color="#000000" />
+      </mesh>
+    </>
   );
 };
 
@@ -138,8 +188,8 @@ export const GlassPanel: React.FC<{
           <meshPhysicalMaterial
             color={GOLD}
             metalness={1}
-            roughness={0.22}
-            envMapIntensity={1.4}
+            roughness={0.08}
+            envMapIntensity={2.2}
           />
         </RoundedBox>
       )}
@@ -148,11 +198,11 @@ export const GlassPanel: React.FC<{
           color={color}
           transparent={opacity < 1}
           opacity={opacity}
-          roughness={0.12}
-          metalness={0.05}
-          clearcoat={0.9}
-          clearcoatRoughness={0.12}
-          envMapIntensity={1.9}
+          roughness={0.09}
+          metalness={0.06}
+          clearcoat={1}
+          clearcoatRoughness={0.05}
+          envMapIntensity={2.4}
         />
       </RoundedBox>
     </group>
@@ -173,9 +223,9 @@ export const Orb: React.FC<{
     <meshPhysicalMaterial
       color={color}
       metalness={metalness}
-      roughness={0.12}
-      clearcoat={0.7}
-      clearcoatRoughness={0.12}
+      roughness={0.07}
+      clearcoat={1}
+      clearcoatRoughness={0.06}
       emissive={emissive ?? color}
       emissiveIntensity={emissiveIntensity}
       envMapIntensity={2.0}
@@ -196,9 +246,9 @@ export const Ring: React.FC<{
     <torusGeometry args={[radius, tube, 24, 72]} />
     <meshPhysicalMaterial
       color={color}
-      metalness={0.85}
-      roughness={0.2}
-      envMapIntensity={1.9}
+      metalness={1}
+      roughness={0.05}
+      envMapIntensity={2.6}
       emissive={emissiveIntensity > 0 ? color : '#000000'}
       emissiveIntensity={emissiveIntensity}
     />
@@ -261,7 +311,7 @@ export const Scene3D: React.FC<{
       <div
         style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
-          background: 'radial-gradient(120% 95% at 50% 42%, transparent 55%, rgba(6,9,15,0.55) 100%)',
+          background: 'radial-gradient(125% 100% at 50% 42%, transparent 66%, rgba(8,12,20,0.48) 100%)',
         }}
       />
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
