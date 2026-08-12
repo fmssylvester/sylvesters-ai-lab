@@ -53,27 +53,38 @@ export const GridFloor: React.FC<{ y?: number; color?: string; sub?: string }> =
 );
 
 // ── Soft ground shadows: radial-gradient sprite (cheap realism, no shadow maps)
-const _shadowCanvas = (() => {
+const makeShadowCanvas = (): HTMLCanvasElement | null => {
+  if (typeof document === 'undefined') {
+    return null;
+  }
   const c = document.createElement('canvas');
   c.width = c.height = 256;
   const ctx = c.getContext('2d');
-  const g = ctx.createRadialGradient(128, 128, 8, 128, 128, 128);
+  const g = ctx!.createRadialGradient(128, 128, 8, 128, 128, 128);
   g.addColorStop(0, 'rgba(2,5,10,0.9)');
   g.addColorStop(0.55, 'rgba(2,5,10,0.45)');
   g.addColorStop(1, 'rgba(2,5,10,0)');
-  ctx.fillStyle = g;
-  ctx.fillRect(0, 0, 256, 256);
+  ctx!.fillStyle = g;
+  ctx!.fillRect(0, 0, 256, 256);
   return c;
-})();
+};
+
+const _shadowCanvas = makeShadowCanvas();
 
 export const GroundShadow: React.FC<{ x?: number; y?: number; z?: number; r?: number; opacity?: number }> = ({
   x = 0, y = -1.298, z = 0, r = 1.6, opacity = 1,
 }) => {
   const tex = React.useMemo(() => {
+    if (!_shadowCanvas) {
+      return null;
+    }
     const t = new THREE.CanvasTexture(_shadowCanvas);
     t.needsUpdate = true;
     return t;
   }, []);
+  if (!tex) {
+    return null;
+  }
   return (
     <mesh position={[x, y, z]} rotation={[-Math.PI / 2, 0, 0]}>
       <circleGeometry args={[r, 48]} />
