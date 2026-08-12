@@ -46,7 +46,7 @@ export const GridFloor: React.FC<{ y?: number; color?: string; sub?: string }> =
   color = '#8FA8C8',
   sub = '#15233A',
 }) => (
-  <gridHelper args={[30, 30, color, sub]} position={[0, y, 0]} />
+  <gridHelper args={[24, 24, color, sub]} position={[0, y, 0]} />
 );
 
 // ── Glass panel (rounded, clearcoat studio finish, brass trim option) ───────
@@ -90,7 +90,7 @@ export const GlassPanel: React.FC<{
           opacity={opacity}
           roughness={0.28}
           metalness={0.12}
-          clearcoat={1}
+          clearcoat={0.55}
           clearcoatRoughness={0.18}
           envMapIntensity={1.15}
         />
@@ -189,7 +189,7 @@ export const Scene3D: React.FC<{
         width={GL_W}
         height={GL_H}
         camera={{ fov: CAM_FOV, position: poses[0].pos, near: 0.1, far: 120 }}
-        gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }}
+        gl={{ antialias: false, alpha: false, powerPreference: 'high-performance' }}
         style={{ position: 'absolute', inset: 0 }}
       >
         <VoidAtmosphere />
