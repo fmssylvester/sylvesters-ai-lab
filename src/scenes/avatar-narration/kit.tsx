@@ -45,7 +45,7 @@ export const FilmGrade: React.FC<{ frame: number }> = ({ frame }) => {
         style={{
           top: '-25%', left: '-25%', width: '150%', height: '150%',
           backgroundImage: GRAIN, backgroundSize: '150px 150px',
-          opacity: 0.035, mixBlendMode: 'soft-light',
+          opacity: 0.05, mixBlendMode: 'soft-light',
           transform: `translate(${gx}px, ${gy}px)`,
         }}
       />

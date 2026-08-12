@@ -122,6 +122,37 @@ const makeShadowCanvas2 = (): { width: number; height: number } | null => {
 };
 
 const _shadowCanvas2 = makeShadowCanvas2();
+const _noiseCanvas = (() => {
+  if (typeof globalThis === 'undefined' || !(globalThis as any).document) {
+    return null;
+  }
+  const c = (globalThis as any).document.createElement('canvas');
+  c.width = c.height = 128;
+  const ctx = c.getContext('2d');
+  const img = ctx.createImageData(128, 128);
+  for (let i = 0; i < img.data.length; i += 4) {
+    const v = 120 + Math.random() * 90;
+    img.data[i] = v;
+    img.data[i + 1] = v;
+    img.data[i + 2] = v;
+    img.data[i + 3] = 255;
+  }
+  ctx.putImageData(img, 0, 0);
+  return c;
+})();
+
+const roughnessNoise = (): THREE.Texture | null => {
+  if (!_noiseCanvas) {
+    return null;
+  }
+  const t = new THREE.CanvasTexture(_noiseCanvas as any);
+  t.needsUpdate = true;
+  t.wrapS = THREE.RepeatWrapping;
+  t.wrapT = THREE.RepeatWrapping;
+  t.repeat.set(2, 2);
+  return t;
+};
+
 
 export const GroundShadow: React.FC<{ x?: number; y?: number; z?: number; r?: number; opacity?: number; dir?: number }> = ({
   x = 0, y = -1.298, z = 0, r = 1.6, opacity = 1, dir = 0,
@@ -204,6 +235,7 @@ export const GlassPanel: React.FC<{
           metalness={0.06}
           clearcoat={1}
           clearcoatRoughness={0.05}
+          roughnessMap={roughnessNoise()}
           envMapIntensity={2.4}
         />
       </RoundedBox>
@@ -228,6 +260,7 @@ export const Orb: React.FC<{
       roughness={0.045}
       clearcoat={1}
       clearcoatRoughness={0.05}
+      roughnessMap={roughnessNoise()}
       emissive={emissive ?? color}
       emissiveIntensity={emissiveIntensity}
       envMapIntensity={2.0}
@@ -250,7 +283,8 @@ export const Ring: React.FC<{
       color={color}
       metalness={1}
       roughness={0.09}
-      envMapIntensity={2.0}
+      roughnessMap={roughnessNoise()}
+      envMapIntensity={2.3}
       emissive={emissiveIntensity > 0 ? color : '#000000'}
       emissiveIntensity={emissiveIntensity}
     />
@@ -313,7 +347,7 @@ export const Scene3D: React.FC<{
       <div
         style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
-          background: 'radial-gradient(125% 100% at 50% 42%, transparent 66%, rgba(8,12,20,0.48) 100%)',
+          background: 'radial-gradient(125% 100% at 50% 42%, transparent 58%, rgba(6,8,16,0.58) 100%)',
         }}
       />
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
