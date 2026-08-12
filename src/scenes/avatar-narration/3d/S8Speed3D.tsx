@@ -46,15 +46,15 @@ export const S8Speed3D: React.FC = () => {
         {LINES.map((a, i) => (
           <mesh key={i} position={[Math.sin((a * Math.PI) / 180) * 1.6, 0.1, Math.cos((a * Math.PI) / 180) * 1.6]} rotation={[0, (-a * Math.PI) / 180, 0]}>
             <boxGeometry args={[0.05, 0.05, 2.1]} />
-            <meshPhysicalMaterial color={SOFT} transparent opacity={0.5 * linePulse} emissive={SOFT} emissiveIntensity={0.5} metalness={0.6} roughness={0.3} />
+            <meshPhysicalMaterial color={SOFT} transparent opacity={0.38 * linePulse} emissive={SOFT} emissiveIntensity={0.3} metalness={0.6} roughness={0.3} />
           </mesh>
         ))}
       </group>
 
       {/* chrono ring + dial */}
       <group position={[0, 0.15, 0]}>
-        <Ring radius={1.55} tube={0.05} color={GOLD} emissiveIntensity={0.3} />
-        <Ring radius={1.32} tube={0.02} color={SOFT} emissiveIntensity={0.25} />
+        <Ring radius={1.55} tube={0.05} color={GOLD} emissiveIntensity={0.18} />
+        <Ring radius={1.32} tube={0.02} color={SOFT} emissiveIntensity={0.12} />
         <group rotation={[0, 0, (sweep * Math.PI) / 180]}>
           <mesh position={[0, 1.5, 0]}>
             <boxGeometry args={[0.05, 0.4, 0.05]} />

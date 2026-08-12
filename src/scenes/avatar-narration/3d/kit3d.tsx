@@ -112,8 +112,9 @@ const makeShadowCanvas2 = (): { width: number; height: number } | null => {
   const ctx = c.getContext('2d');
   const g = ctx!.createRadialGradient(64, 64, 4, 64, 64, 64);
   g.addColorStop(0, 'rgba(0,0,0,1)');
-  g.addColorStop(0.32, 'rgba(0,0,0,0.72)');
-  g.addColorStop(0.62, 'rgba(0,0,0,0.22)');
+  g.addColorStop(0.22, 'rgba(0,0,0,0.88)');
+  g.addColorStop(0.45, 'rgba(0,0,0,0.4)');
+  g.addColorStop(0.7, 'rgba(0,0,0,0.12)');
   g.addColorStop(1, 'rgba(0,0,0,0)');
   ctx!.fillStyle = g;
   ctx!.fillRect(0, 0, 128, 128);
@@ -149,8 +150,8 @@ export const GroundShadow: React.FC<{ x?: number; y?: number; z?: number; r?: nu
   return (
     <>
       <mesh position={[x + dx, y, z + dz]} rotation={[-Math.PI / 2, 0, 0]}>
-        <circleGeometry args={[r * 0.55, 48]} />
-        <meshBasicMaterial map={core} transparent depthWrite={false} opacity={Math.min(1, opacity * 1.3)} color="#000000" />
+        <circleGeometry args={[r * 0.6, 48]} />
+        <meshBasicMaterial map={core} transparent depthWrite={false} opacity={Math.min(1, opacity * 1.55)} color="#000000" />
       </mesh>
       <mesh position={[x, y, z]} rotation={[-Math.PI / 2, 0, 0]}>
         <circleGeometry args={[r * 1.5, 48]} />

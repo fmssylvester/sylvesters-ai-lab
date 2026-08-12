@@ -63,12 +63,6 @@ export const S4Problem3D: React.FC = () => {
       <GroundShadow x={-2.4} r={1.0} opacity={0.5} />
       <GroundShadow x={2.4} r={1.15} opacity={0.55} />
 
-      {/* link beam: our response time -> the customer, dims as they drift away */}
-      <mesh position={[0, -1.35 + hOurs * 2 + 0.06, 0]} rotation={[0, 0, Math.PI / 2]} scale={[1, 4.8 / 0.5, 1]}>
-        <boxGeometry args={[0.5, 0.5, 0.012]} />
-        <meshBasicMaterial color={GOLD} transparent opacity={0.16 + 0.5 * (1 - dim)} blending={THREE.AdditiveBlending} depthWrite={false} />
-      </mesh>
-
       {/* our pillar (12h) */}
       <group position={[-2.4, 0, 0]}>
         <mesh position={[0, -1.35 + hOurs, 0]}>
