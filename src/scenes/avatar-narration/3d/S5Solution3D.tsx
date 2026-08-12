@@ -2,7 +2,7 @@
 // automation panel rises in with a glowing zap ring.
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
-import { Scene3D, GridFloor, GlassPanel, Ring, Orb, Headline, WordsRev, Chip } from './kit3d';
+import { Scene3D, GridFloor, GlassPanel, Ring, Orb, Headline, WordsRev, Chip, GroundShadow } from './kit3d';
 import { Caption } from '../kit';
 import { GOLD, SOFT, CREAM, NEUTRAL, EASE } from '../theme';
 
@@ -39,6 +39,8 @@ export const S5Solution3D: React.FC = () => {
       }
     >
       <GridFloor y={-1.35} />
+      <GroundShadow x={-2.4} r={0.9} opacity={0.4} />
+      <GroundShadow x={1.5} r={1.3} opacity={0.55} />
 
       {/* coin stack (staff route) — sinks + fades */}
       <group position={[-2.4, staffDrop, 0]} scale={interpolate(frame, [40, 110], [1, 0.85], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })}>

@@ -2,6 +2,7 @@
 // Studio reflections via drei Lightformers baked to PMREM (offline, no network),
 // glass panels, grid floor, frame-driven camera rig, headline caption helpers.
 import React from 'react';
+import * as THREE from 'three';
 import { ThreeCanvas } from '@remotion/three';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
 import { Environment, Lightformer, RoundedBox, PerspectiveCamera } from '@react-three/drei';
@@ -26,7 +27,7 @@ export const StudioLights: React.FC<{ tint?: string }> = ({ tint = SOFT }) => (
 
 export const StudioEnv: React.FC = () => (
   <Environment resolution={256} frames={1}>
-    <Lightformer form="rect" intensity={4.5} color={CREAM} scale={[10, 2.6, 1]} position={[0, 5, -6]} />
+    <Lightformer form="rect" intensity={5.5} color={CREAM} scale={[10, 2.6, 1]} position={[0, 5, -6]} />
     <Lightformer form="rect" intensity={3.2} color={GOLD} scale={[3, 8, 1]} position={[-7, 2, 4]} rotation={[0, Math.PI / 2.6, 0]} />
     <Lightformer form="rect" intensity={2.4} color={SOFT} scale={[3, 7, 1]} position={[7, 1, 3]} rotation={[0, -Math.PI / 2.6, 0]} />
     <Lightformer form="rect" intensity={2.6} color={CREAM} scale={[8, 1.6, 1]} position={[0, -6, 4]} rotation={[Math.PI / 1.2, 0, 0]} />
@@ -50,6 +51,36 @@ export const GridFloor: React.FC<{ y?: number; color?: string; sub?: string }> =
 }) => (
   <gridHelper args={[24, 24, color, sub]} position={[0, y, 0]} />
 );
+
+// ── Soft ground shadows: radial-gradient sprite (cheap realism, no shadow maps)
+const _shadowCanvas = (() => {
+  const c = document.createElement('canvas');
+  c.width = c.height = 256;
+  const ctx = c.getContext('2d');
+  const g = ctx.createRadialGradient(128, 128, 8, 128, 128, 128);
+  g.addColorStop(0, 'rgba(2,5,10,0.9)');
+  g.addColorStop(0.55, 'rgba(2,5,10,0.45)');
+  g.addColorStop(1, 'rgba(2,5,10,0)');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, 256, 256);
+  return c;
+})();
+
+export const GroundShadow: React.FC<{ x?: number; y?: number; z?: number; r?: number; opacity?: number }> = ({
+  x = 0, y = -1.298, z = 0, r = 1.6, opacity = 1,
+}) => {
+  const tex = React.useMemo(() => {
+    const t = new THREE.CanvasTexture(_shadowCanvas);
+    t.needsUpdate = true;
+    return t;
+  }, []);
+  return (
+    <mesh position={[x, y, z]} rotation={[-Math.PI / 2, 0, 0]}>
+      <circleGeometry args={[r, 48]} />
+      <meshBasicMaterial map={tex} transparent depthWrite={false} opacity={opacity} color="#000000" />
+    </mesh>
+  );
+};
 
 // ── Glass panel (rounded, clearcoat studio finish, brass trim option) ───────
 export const GlassPanel: React.FC<{
@@ -191,7 +222,7 @@ export const Scene3D: React.FC<{
         width={GL_W}
         height={GL_H}
         camera={{ fov: CAM_FOV, position: poses[0].pos, near: 0.1, far: 120 }}
-        gl={{ antialias: false, alpha: false, powerPreference: 'high-performance' }}
+        gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }}
         style={{ position: 'absolute', inset: 0 }}
       >
         <VoidAtmosphere />
@@ -200,6 +231,12 @@ export const Scene3D: React.FC<{
         <CamRig poses={poses} />
         {children}
       </ThreeCanvas>
+      <div
+        style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          background: 'radial-gradient(120% 95% at 50% 42%, transparent 55%, rgba(6,9,15,0.55) 100%)',
+        }}
+      />
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
         {headline}
         {overlay}
@@ -217,7 +254,7 @@ export const Headline: React.FC<{
   style?: React.CSSProperties;
 }> = ({ frame, fps, children, style }) => (
   <div style={{ position: 'absolute', top: 78, left: 150, ...style }}>
-    <div style={{ color: CREAM, fontSize: 66, fontWeight: 800, letterSpacing: '-0.01em', lineHeight: 1.12 }}>
+    <div style={{ color: CREAM, fontSize: 66, fontWeight: 800, letterSpacing: '-0.01em', lineHeight: 1.12, textShadow: '0 4px 40px rgba(6,9,15,0.8), 0 2px 14px rgba(6,9,15,0.6)' }}>
       {children}
     </div>
   </div>

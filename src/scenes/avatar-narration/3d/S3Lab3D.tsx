@@ -2,7 +2,7 @@
 // glass slab; "real AI automations / not theory" chips beneath.
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
-import { Scene3D, GlassPanel, Ring, Orb, Headline, WordsRev, Chip } from './kit3d';
+import { Scene3D, GlassPanel, Ring, Orb, Headline, WordsRev, Chip, GroundShadow } from './kit3d';
 import { Prop } from '../kit';
 import { GOLD, SOFT, CREAM, NEUTRAL } from '../theme';
 
@@ -51,6 +51,7 @@ export const S3Lab3D: React.FC = () => {
         <Orb position={[0.85, 0.55, 0.3]} radius={0.1} color={SOFT} />
       </group>
       {/* slab */}
+      <GroundShadow r={1.7} opacity={0.45} />
       <GlassPanel width={2.9} height={0.28} depth={0.9} radius={0.07} position={[0, -1.1, 0]} color={CREAM} opacity={0.85} />
     </Scene3D>
   );

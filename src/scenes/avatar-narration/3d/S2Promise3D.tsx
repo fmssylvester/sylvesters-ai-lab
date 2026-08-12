@@ -2,7 +2,7 @@
 // (the build: webhook → brain → gate). Camera tracks right-to-left.
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
-import { Scene3D, GridFloor, GlassPanel, Orb, Headline, WordsRev, Chip } from './kit3d';
+import { Scene3D, GridFloor, GlassPanel, Orb, Headline, WordsRev, Chip, GroundShadow } from './kit3d';
 import { Caption, Prop } from '../kit';
 import { GOLD, SOFT, CREAM, NEUTRAL, EASE } from '../theme';
 
@@ -43,6 +43,9 @@ export const S2Promise3D: React.FC = () => {
       }
     >
       <GridFloor y={-1.35} />
+      <GroundShadow x={-2.35} r={1.0} opacity={0.5} />
+      <GroundShadow x={0} r={1.0} opacity={0.5} />
+      <GroundShadow x={2.35} r={1.0} opacity={0.5} />
       {/* brass rail */}
       <mesh position={[0, -0.94, 0]}>
         <boxGeometry args={[7.4, 0.07, 0.07]} />

@@ -2,7 +2,7 @@
 // 11PM → 3AM, "instant reply, even at 3 AM" (Playfair overlay).
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
-import { Scene3D, StudioLights, GridFloor, GlassPanel, Ring, Orb, Headline, WordsRev, Chip } from './kit3d';
+import { Scene3D, StudioLights, GridFloor, GlassPanel, Ring, Orb, Headline, WordsRev, Chip, GroundShadow } from './kit3d';
 import { Prop } from '../kit';
 import { GOLD, SOFT, CREAM, NEUTRAL, EASE } from '../theme';
 
@@ -56,6 +56,7 @@ export const S1Question3D: React.FC = () => {
       }
     >
       <GridFloor y={-1.3} />
+      <GroundShadow x={0.65} r={1.5} opacity={0.5} />
 
       {/* message glass panel */}
       <GlassPanel width={2.7} height={1.62} depth={0.16} radius={0.11} position={[0.65, floatY, 0]} trim color={CREAM} />

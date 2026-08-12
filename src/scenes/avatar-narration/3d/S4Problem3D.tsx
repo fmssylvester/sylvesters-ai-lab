@@ -2,7 +2,7 @@
 // 2 min (competitor, brass, brightens); the customer orb drifts away.
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
-import { Scene3D, GridFloor, GlassPanel, Ring, Orb, Headline, WordsRev, Chip } from './kit3d';
+import { Scene3D, GridFloor, GlassPanel, Ring, Orb, Headline, WordsRev, Chip, GroundShadow } from './kit3d';
 import { Caption } from '../kit';
 import { GOLD, SOFT, CREAM, NEUTRAL, EASE } from '../theme';
 
@@ -59,6 +59,8 @@ export const S4Problem3D: React.FC = () => {
       }
     >
       <GridFloor y={-1.35} />
+      <GroundShadow x={-2.4} r={1.0} opacity={0.5} />
+      <GroundShadow x={2.4} r={1.15} opacity={0.55} />
 
       {/* our pillar (12h) */}
       <group position={[-2.4, 0, 0]}>

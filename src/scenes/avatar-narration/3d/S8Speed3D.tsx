@@ -2,7 +2,7 @@
 // falls 5.0s → 2.8s; glowing radial lines; camera pushes in hard.
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
-import { Scene3D, GridFloor, Ring, Orb, Chip } from './kit3d';
+import { Scene3D, GridFloor, Ring, Orb, Chip, GroundShadow } from './kit3d';
 import { Caption } from '../kit';
 import { GOLD, SOFT, CREAM, NEUTRAL, EASE } from '../theme';
 
@@ -39,6 +39,7 @@ export const S8Speed3D: React.FC = () => {
       }
     >
       <GridFloor y={-1.4} />
+      <GroundShadow r={2.1} opacity={0.4} />
 
       {/* radial speed lines */}
       <group rotation={[0, spin, 0]}>

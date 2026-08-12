@@ -3,7 +3,7 @@
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate } from 'remotion';
 import { RoundedBox } from '@react-three/drei';
-import { Scene3D, GridFloor, GlassPanel, Ring, Orb, Chip } from './kit3d';
+import { Scene3D, GridFloor, GlassPanel, Ring, Orb, Chip, GroundShadow } from './kit3d';
 import { Caption, Prop } from '../kit';
 import { GOLD, SOFT, CREAM, NEUTRAL, EASE } from '../theme';
 
@@ -57,6 +57,7 @@ export const S6Agent3D: React.FC = () => {
       }
     >
       <GridFloor y={-1.3} />
+      <GroundShadow r={1.25} opacity={0.5} />
       {/* bot: glass head + brass halo + antenna */}
       <group position={[0, bob + 0.3, 0]} rotation={[tilt, 0, 0]}>
         <group scale={haloPulse}>
