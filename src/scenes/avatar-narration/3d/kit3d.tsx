@@ -54,7 +54,7 @@ export const GridFloor: React.FC<{ y?: number; color?: string; sub?: string }> =
 
 // ── Soft ground shadows: radial-gradient sprite (cheap realism, no shadow maps)
 const makeShadowCanvas = (): { width: number; height: number } | null => {
-  const g = globalThis as {
+  const gg = globalThis as {
     document?: {
       createElement(tag: string): {
         width: number;
@@ -69,7 +69,7 @@ const makeShadowCanvas = (): { width: number; height: number } | null => {
       };
     };
   };
-  const doc = g.document;
+  const doc = gg.document;
   if (!doc) {
     return null;
   }
