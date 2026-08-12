@@ -2,15 +2,15 @@ import React from 'react';
 import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame } from 'remotion';
 import { S, FPS, TOTAL } from './timeline';
 import { SceneBackdrop, FilmGrade } from './kit';
-import { S1Question } from './scenes/S1Question';
-import { S2Promise } from './scenes/S2Promise';
-import { S3Lab } from './scenes/S3Lab';
-import { S4Problem } from './scenes/S4Problem';
-import { S5Solution } from './scenes/S5Solution';
-import { S6Agent } from './scenes/S6Agent';
-import { S7Pipeline } from './scenes/S7Pipeline';
-import { S8Speed } from './scenes/S8Speed';
-import { S9Handoff } from './scenes/S9Handoff';
+import { S1Question3D } from './3d/S1Question3D';
+import { S2Promise3D } from './3d/S2Promise3D';
+import { S3Lab3D } from './3d/S3Lab3D';
+import { S4Problem3D } from './3d/S4Problem3D';
+import { S5Solution3D } from './3d/S5Solution3D';
+import { S6Agent3D } from './3d/S6Agent3D';
+import { S7Pipeline3D } from './3d/S7Pipeline3D';
+import { S8Speed3D } from './3d/S8Speed3D';
+import { S9Handoff3D } from './3d/S9Handoff3D';
 
 // ── SFX helper: placed on motion beats, low volume so VO dominates ──────────
 const Sfx: React.FC<{ from: number; file: string; volume: number }> = ({ from, file, volume }) => (
@@ -63,31 +63,31 @@ export const AvatarNarration90s: React.FC = () => {
 
       {/* scenes with 16-frame cross-dissolve overlaps */}
       <Sequence from={S.S1.start} durationInFrames={S.S2.start - S.S1.start + 16}>
-        <FadeScene dur={S.S2.start - S.S1.start + 16}><S1Question /></FadeScene>
+        <FadeScene dur={S.S2.start - S.S1.start + 16}><S1Question3D /></FadeScene>
       </Sequence>
       <Sequence from={S.S2.start} durationInFrames={S.S3.start - S.S2.start + 16}>
-        <FadeScene dur={S.S3.start - S.S2.start + 16}><S2Promise /></FadeScene>
+        <FadeScene dur={S.S3.start - S.S2.start + 16}><S2Promise3D /></FadeScene>
       </Sequence>
       <Sequence from={S.S3.start} durationInFrames={S.S4.start - S.S3.start + 16}>
-        <FadeScene dur={S.S4.start - S.S3.start + 16}><S3Lab /></FadeScene>
+        <FadeScene dur={S.S4.start - S.S3.start + 16}><S3Lab3D /></FadeScene>
       </Sequence>
       <Sequence from={S.S4.start} durationInFrames={S.S5.start - S.S4.start + 16}>
-        <FadeScene dur={S.S5.start - S.S4.start + 16}><S4Problem /></FadeScene>
+        <FadeScene dur={S.S5.start - S.S4.start + 16}><S4Problem3D /></FadeScene>
       </Sequence>
       <Sequence from={S.S5.start} durationInFrames={S.S6.start - S.S5.start + 16}>
-        <FadeScene dur={S.S6.start - S.S5.start + 16}><S5Solution /></FadeScene>
+        <FadeScene dur={S.S6.start - S.S5.start + 16}><S5Solution3D /></FadeScene>
       </Sequence>
       <Sequence from={S.S6.start} durationInFrames={S.S7.start - S.S6.start + 16}>
-        <FadeScene dur={S.S7.start - S.S6.start + 16}><S6Agent /></FadeScene>
+        <FadeScene dur={S.S7.start - S.S6.start + 16}><S6Agent3D /></FadeScene>
       </Sequence>
       <Sequence from={S.S7.start} durationInFrames={S.S8.start - S.S7.start + 16}>
-        <FadeScene dur={S.S8.start - S.S7.start + 16}><S7Pipeline /></FadeScene>
+        <FadeScene dur={S.S8.start - S.S7.start + 16}><S7Pipeline3D /></FadeScene>
       </Sequence>
       <Sequence from={S.S8.start} durationInFrames={S.S9.start - S.S8.start + 16}>
-        <FadeScene dur={S.S9.start - S.S8.start + 16}><S8Speed /></FadeScene>
+        <FadeScene dur={S.S9.start - S.S8.start + 16}><S8Speed3D /></FadeScene>
       </Sequence>
       <Sequence from={S.S9.start} durationInFrames={TOTAL - S.S9.start}>
-        <FadeScene dur={TOTAL - S.S9.start}><S9Handoff /></FadeScene>
+        <FadeScene dur={TOTAL - S.S9.start}><S9Handoff3D /></FadeScene>
       </Sequence>
 
       {/* global grade over everything */}

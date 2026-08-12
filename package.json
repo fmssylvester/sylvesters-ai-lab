@@ -18,6 +18,7 @@
     "@fontsource/jetbrains-mono": "^5.2.8",
     "@fontsource/space-grotesk": "^5.2.10",
     "@huggingface/inference": "^4.13.23",
+    "@react-three/drei": "^10.7.8",
     "@remotion/cli": "^3.3.103",
     "@remotion/gif": "^3.3.103",
     "@remotion/lottie": "^3.3.103",
@@ -32,10 +33,14 @@
     "undici": "^8.7.0"
   },
   "allowScripts": {
-    "esbuild@0.28.1": true
+    "esbuild@0.28.1": true,
+    "esbuild@0.16.12": true,
+    "remotion@3.3.103": true,
+    "@remotion/bundler@3.3.103": true
   },
   "devDependencies": {
     "@remotion/eslint-plugin": "^3.3.103",
+    "@types/three": "^0.185.0",
     "@vitejs/plugin-react": "^6.0.3",
     "eslint": "^9.39.5",
     "eslint-plugin-react-hooks": "^7.1.1",

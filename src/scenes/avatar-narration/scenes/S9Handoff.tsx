@@ -1,17 +1,16 @@
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, Easing } from 'remotion';
-import { GlassCard, Prop, riseIn, popIn, Words, SceneBackdrop, FilmGrade } from '../kit';
-import { CYAN, GOLD, WHITE, MUTED, FONT, hexA, breath } from '../theme';
+import { Prop, riseIn, popIn, Words, SceneBackdrop, FilmGrade } from '../kit';
+import { GOLD, SOFT, WHITE, MUTED, DEEP, CREAM, hexA } from '../theme';
 
+// the handoff: browser fills the screen, AI replies on the landing page
 export const S9Handoff: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // device frame scales up and fills screen by the end (hard cut to screen recording)
   const grow = interpolate(frame, [10, 400], [0.62, 1.42], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.inOut(Easing.cubic) });
   const cardO = interpolate(frame, [0, 20], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
 
-  // cursor moves in and clicks
   const cursorX = interpolate(frame, [80, 190], [300, 720], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.inOut(Easing.cubic) });
   const cursorY = interpolate(frame, [80, 190], [300, 430], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.inOut(Easing.cubic) });
   const cursorClick = frame > 190 && frame < 196 ? 0.85 : 1;
@@ -19,14 +18,14 @@ export const S9Handoff: React.FC = () => {
   const badgePulse = 1 + 0.08 * (0.5 + 0.5 * Math.sin(frame * 0.1));
 
   return (
-    <AbsoluteFill style={{ fontFamily: FONT, overflow: 'hidden' }}>
-      <SceneBackdrop frame={frame} tint={GOLD} />
+    <AbsoluteFill style={{ overflow: 'hidden' }}>
+      <SceneBackdrop frame={frame} />
       <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center' }}>
         <div style={{ transform: `scale(${grow})`, position: 'relative', opacity: cardO }}>
           {/* browser window */}
-          <div style={{ width: 1180, borderRadius: 26, overflow: 'hidden', background: '#0B0E14', border: '1px solid rgba(255,255,255,0.14)', boxShadow: '0 80px 200px rgba(0,0,0,0.7)' }}>
+          <div style={{ width: 1180, borderRadius: 26, overflow: 'hidden', background: DEEP, border: '1px solid rgba(244,237,224,0.14)', boxShadow: '0 80px 200px rgba(0,0,0,0.7)' }}>
             {/* chrome bar */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '18px 24px', borderBottom: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '18px 24px', borderBottom: '1px solid rgba(244,237,224,0.08)', background: 'rgba(244,237,224,0.04)' }}>
               <div style={{ display: 'flex', gap: 8 }}>
                 <div style={{ width: 14, height: 14, borderRadius: '50%', background: '#FF5F57' }} />
                 <div style={{ width: 14, height: 14, borderRadius: '50%', background: '#FEBC2E' }} />
@@ -38,16 +37,15 @@ export const S9Handoff: React.FC = () => {
               </div>
             </div>
             {/* page mockup */}
-            <div style={{ height: 560, position: 'relative', background: 'linear-gradient(160deg, #0d1320 0%, #0a0e16 60%)', overflow: 'hidden' }}>
-              {/* fake landing blocks */}
-              <div style={{ position: 'absolute', top: 70, left: 90, width: 420, height: 30, background: 'rgba(255,255,255,0.10)', borderRadius: 6 }} />
-              <div style={{ position: 'absolute', top: 118, left: 90, width: 260, height: 16, background: 'rgba(255,255,255,0.06)', borderRadius: 6 }} />
-              <div style={{ position: 'absolute', top: 180, left: 90, width: 180, height: 46, borderRadius: 10, background: `${CYAN}22`, border: `1px solid ${CYAN}55`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: CYAN, fontSize: 18, fontWeight: 700 }}>
+            <div style={{ height: 560, position: 'relative', background: '#0A1626', overflow: 'hidden' }}>
+              <div style={{ position: 'absolute', top: 70, left: 90, width: 420, height: 30, background: 'rgba(244,237,224,0.12)', borderRadius: 6 }} />
+              <div style={{ position: 'absolute', top: 118, left: 90, width: 260, height: 16, background: 'rgba(244,237,224,0.08)', borderRadius: 6 }} />
+              <div style={{ position: 'absolute', top: 180, left: 90, width: 180, height: 46, borderRadius: 10, background: `${SOFT}22`, border: `1px solid ${SOFT}55`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: SOFT, fontSize: 18, fontWeight: 700 }}>
                 Chat with us
               </div>
               {/* chat widget bubble */}
-              <div style={{ position: 'absolute', right: 60, bottom: 50, display: 'flex', alignItems: 'center', gap: 12, padding: '16px 22px', borderRadius: 18, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.14)', backdropFilter: 'blur(10px)' }}>
-                <Prop file="02_ICONS/lucide/message-circle.svg" size={24} color="cyan" />
+              <div style={{ position: 'absolute', right: 60, bottom: 50, display: 'flex', alignItems: 'center', gap: 12, padding: '16px 22px', borderRadius: 18, background: 'rgba(244,237,224,0.07)', border: '1px solid rgba(244,237,224,0.14)' }}>
+                <Prop file="02_ICONS/lucide/message-circle.svg" size={24} color="soft" />
                 <span style={{ color: WHITE, fontSize: 17 }}>Hi! How can we help? 😊</span>
               </div>
             </div>
@@ -60,19 +58,14 @@ export const S9Handoff: React.FC = () => {
           </div>
 
           {/* cursor */}
-          <div style={{ position: 'absolute', left: cursorX, top: cursorY, transform: `scale(${cursorClick})`, filter: `drop-shadow(0 0 10px ${CYAN}${hexA(0.8)})` }}>
-            <Prop file="02_ICONS/lucide/cursor.svg" size={44} color="white" />
+          <div style={{ position: 'absolute', left: cursorX, top: cursorY, transform: `scale(${cursorClick})`, filter: `drop-shadow(0 0 10px rgba(201,162,75,0.8))` }}>
+            <Prop file="02_ICONS/lucide/mouse-pointer.svg" size={44} color="white" />
           </div>
         </div>
 
         {/* headline above frame */}
         <div style={{ position: 'absolute', top: 64, left: 0, right: 0, textAlign: 'center' }}>
-          <div style={{ color: WHITE, fontSize: 60, fontWeight: 800, letterSpacing: '-0.02em' }}>
-            <Words text="watch this" frame={frame} start={4} fps={fps} gap={3} />
-          </div>
-          <div style={{ color: MUTED, fontSize: 21, marginTop: 8 }}>
-            live demo — landing page
-          </div>
+          <Words text="watch this" frame={frame} start={4} fps={fps} gap={3} style={{ color: CREAM, fontSize: 62, fontWeight: 800, letterSpacing: '-0.02em' }} />
         </div>
       </AbsoluteFill>
       <FilmGrade frame={frame} />
