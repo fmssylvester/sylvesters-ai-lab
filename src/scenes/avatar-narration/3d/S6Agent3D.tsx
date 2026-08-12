@@ -25,8 +25,9 @@ export const S6Agent3D: React.FC = () => {
   return (
     <Scene3D
       poses={[
-        { f: 0, pos: [0, 1.5, 6.6], look: [0, 0.4, 0] },
-        { f: 173, pos: [0, 1.5, 5.4], look: [0, 0.4, 0] },
+        { f: 0, pos: [0.7, 1.45, 7.0], look: [-0.25, 0.4, 0] },
+        { f: 86, pos: [0, 1.5, 6.1], look: [0, 0.4, 0] },
+        { f: 173, pos: [-0.6, 1.55, 5.1], look: [0.22, 0.4, 0] },
       ]}
       headline={
         <div style={{ position: 'absolute', inset: 0 }}>

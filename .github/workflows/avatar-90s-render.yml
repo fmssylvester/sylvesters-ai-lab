@@ -91,7 +91,7 @@ jobs:
           else
             SIZE_ARGS="--width=1280 --height=720"
           fi
-          node ./node_modules/.bin/remotion render src/index-avatar90s.tsx ${{ inputs.composition }} out/avatar-90s.mp4 --concurrency=2 $SIZE_ARGS
+          node ./node_modules/.bin/remotion render src/index-avatar90s.tsx ${{ inputs.composition }} out/avatar-90s.mp4 --concurrency=4 $SIZE_ARGS
 
       - name: Upload render
         uses: actions/upload-artifact@v4

@@ -21,8 +21,9 @@ export const S5Solution3D: React.FC = () => {
   return (
     <Scene3D
       poses={[
-        { f: 0, pos: [0, 1.6, 6.9], look: [0, 0.5, 0] },
-        { f: 172, pos: [0, 1.55, 5.6], look: [0, 0.6, 0] },
+        { f: 0, pos: [0.6, 1.5, 7.3], look: [-0.3, 0.5, 0] },
+        { f: 86, pos: [0, 1.6, 6.4], look: [0, 0.55, 0] },
+        { f: 172, pos: [-0.5, 1.7, 5.2], look: [0.25, 0.6, 0] },
       ]}
       headline={
         <>

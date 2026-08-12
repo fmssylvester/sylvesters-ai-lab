@@ -20,9 +20,9 @@ export const S8Speed3D: React.FC = () => {
   return (
     <Scene3D
       poses={[
-        { f: 0, pos: [0, 1.4, 8.4], look: [0, 0.4, 0] },
-        { f: 88, pos: [0, 1.45, 7.0], look: [0, 0.45, 0] },
-        { f: 176, pos: [0, 1.5, 5.6], look: [0, 0.5, 0] },
+        { f: 0, pos: [0, 1.3, 9.2], look: [0, 0.45, 0] },
+        { f: 88, pos: [0, 1.45, 7.2], look: [0, 0.45, 0] },
+        { f: 176, pos: [0, 1.6, 5.0], look: [0, 0.5, 0] },
       ]}
       headline={
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>

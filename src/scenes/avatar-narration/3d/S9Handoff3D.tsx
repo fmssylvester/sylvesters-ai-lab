@@ -21,9 +21,9 @@ export const S9Handoff3D: React.FC = () => {
   return (
     <Scene3D
       poses={[
-        { f: 0, pos: [0, 1.0, 8.6], look: [0, 0, 0] },
-        { f: 200, pos: [0, 0.6, 5.8], look: [0, 0, 0] },
-        { f: 459, pos: [0, 0.4, 3.3], look: [0, 0, 0] },
+        { f: 0, pos: [0, 1.1, 9.4], look: [0, 0, 0] },
+        { f: 200, pos: [0, 0.55, 5.6], look: [0, -0.05, 0] },
+        { f: 459, pos: [-0.2, 0.35, 3.0], look: [0.05, -0.1, 0] },
       ]}
       headline={
         <div style={{ position: 'absolute', top: 60, left: 0, right: 0, textAlign: 'center' }}>

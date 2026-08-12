@@ -17,9 +17,9 @@ export const S3Lab3D: React.FC = () => {
   return (
     <Scene3D
       poses={[
-        { f: 0, pos: [0.0, 1.3, 7.0], look: [0, 0.9, 0] },
-        { f: 82, pos: [0.0, 1.25, 6.3], look: [0, 0.95, 0] },
-        { f: 164, pos: [0.0, 1.3, 7.2], look: [0, 0.9, 0] },
+        { f: 0, pos: [-0.9, 1.35, 7.3], look: [0.2, 0.9, 0] },
+        { f: 82, pos: [0.6, 1.15, 5.7], look: [-0.1, 0.95, 0] },
+        { f: 164, pos: [0.9, 1.05, 7.0], look: [-0.3, 0.9, 0] },
       ]}
       headline={
         <div style={{ position: 'absolute', top: 96, left: 0, right: 0, textAlign: 'center' }}>

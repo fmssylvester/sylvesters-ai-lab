@@ -19,8 +19,9 @@ export const S2Promise3D: React.FC = () => {
   return (
     <Scene3D
       poses={[
-        { f: 0, pos: [-2.1, 1.7, 7.4], look: [0, 0.6, 0] },
-        { f: 317, pos: [2.1, 1.7, 7.4], look: [0, 0.6, 0] },
+        { f: 0, pos: [-2.6, 1.6, 7.8], look: [-0.4, 0.7, 0] },
+        { f: 160, pos: [0, 1.8, 6.9], look: [0, 0.7, 0] },
+        { f: 317, pos: [2.6, 1.9, 6.2], look: [0.4, 0.7, 0] },
       ]}
       headline={
         <>

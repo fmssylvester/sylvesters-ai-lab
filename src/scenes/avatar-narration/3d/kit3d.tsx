@@ -13,22 +13,24 @@ export const GL_H = 720;
 const CAM_FOV = 42;
 const ORIGIN: [number, number, number] = [0, 0.5, 0];
 
-// ── Lighting: ambient + key/fill/rim + baked studio reflections ────────────
+// ── Lighting: high-contrast key/fill/rim + baked studio reflections ─────────
 export const StudioLights: React.FC<{ tint?: string }> = ({ tint = SOFT }) => (
   <>
-    <ambientLight intensity={0.35} color={CREAM} />
-    <directionalLight position={[5, 8, 4]} intensity={1.25} color={GOLD} />
-    <directionalLight position={[-6, 3, -2]} intensity={0.55} color={tint} />
-    <pointLight position={[0, 5, 0]} intensity={0.4} color={CREAM} />
+    <ambientLight intensity={0.16} color={CREAM} />
+    <directionalLight position={[5, 8, 4]} intensity={1.9} color={GOLD} />
+    <directionalLight position={[-6, 3, -2]} intensity={0.6} color={tint} />
+    <directionalLight position={[0, 3, -6]} intensity={1.2} color={CREAM} />
+    <pointLight position={[0, 5, 0]} intensity={0.3} color={CREAM} />
   </>
 );
 
 export const StudioEnv: React.FC = () => (
   <Environment resolution={256} frames={1}>
-    <Lightformer form="rect" intensity={3.2} color={CREAM} scale={[10, 2.6, 1]} position={[0, 5, -6]} />
-    <Lightformer form="rect" intensity={2.1} color={GOLD} scale={[3, 8, 1]} position={[-7, 2, 4]} rotation={[0, Math.PI / 2.6, 0]} />
-    <Lightformer form="rect" intensity={1.6} color={SOFT} scale={[3, 7, 1]} position={[7, 1, 3]} rotation={[0, -Math.PI / 2.6, 0]} />
-    <Lightformer form="circle" intensity={1.2} color={CREAM} scale={4} position={[0, 7, 2]} />
+    <Lightformer form="rect" intensity={4.5} color={CREAM} scale={[10, 2.6, 1]} position={[0, 5, -6]} />
+    <Lightformer form="rect" intensity={3.2} color={GOLD} scale={[3, 8, 1]} position={[-7, 2, 4]} rotation={[0, Math.PI / 2.6, 0]} />
+    <Lightformer form="rect" intensity={2.4} color={SOFT} scale={[3, 7, 1]} position={[7, 1, 3]} rotation={[0, -Math.PI / 2.6, 0]} />
+    <Lightformer form="rect" intensity={2.6} color={CREAM} scale={[8, 1.6, 1]} position={[0, -6, 4]} rotation={[Math.PI / 1.2, 0, 0]} />
+    <Lightformer form="circle" intensity={1.6} color={CREAM} scale={4} position={[0, 7, 2]} />
   </Environment>
 );
 
@@ -88,11 +90,11 @@ export const GlassPanel: React.FC<{
           color={color}
           transparent={opacity < 1}
           opacity={opacity}
-          roughness={0.28}
-          metalness={0.12}
-          clearcoat={0.55}
-          clearcoatRoughness={0.18}
-          envMapIntensity={1.15}
+          roughness={0.12}
+          metalness={0.05}
+          clearcoat={0.9}
+          clearcoatRoughness={0.12}
+          envMapIntensity={1.9}
         />
       </RoundedBox>
     </group>
@@ -113,12 +115,12 @@ export const Orb: React.FC<{
     <meshPhysicalMaterial
       color={color}
       metalness={metalness}
-      roughness={0.18}
-      clearcoat={0.6}
-      clearcoatRoughness={0.15}
+      roughness={0.12}
+      clearcoat={0.7}
+      clearcoatRoughness={0.12}
       emissive={emissive ?? color}
       emissiveIntensity={emissiveIntensity}
-      envMapIntensity={1.3}
+      envMapIntensity={2.0}
     />
   </mesh>
 );
@@ -138,7 +140,7 @@ export const Ring: React.FC<{
       color={color}
       metalness={0.85}
       roughness={0.2}
-      envMapIntensity={1.4}
+      envMapIntensity={1.9}
       emissive={emissiveIntensity > 0 ? color : '#000000'}
       emissiveIntensity={emissiveIntensity}
     />

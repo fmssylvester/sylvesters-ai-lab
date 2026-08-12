@@ -20,8 +20,9 @@ export const S1Question3D: React.FC = () => {
   return (
     <Scene3D
       poses={[
-        { f: 0, pos: [1.2, 1.15, 7.6] },
-        { f: 317, pos: [0.6, 1.25, 5.9] },
+        { f: 0, pos: [1.5, 1.05, 8.0], look: [0.2, 0.8, 0] },
+        { f: 160, pos: [0.9, 1.2, 6.6], look: [0.2, 0.8, 0] },
+        { f: 317, pos: [0.25, 1.35, 5.2], look: [0.15, 0.85, 0] },
       ]}
       headline={
         <>
