@@ -35,13 +35,13 @@ export const S4Problem3D: React.FC = () => {
           </Headline>
           <div style={{ position: 'absolute', top: 214, left: 0, right: 0, display: 'flex', justifyContent: 'center', gap: 340 }}>
             <div style={{ textAlign: 'center', opacity: 0.35 + 0.65 * dim }}>
-              <div style={{ fontSize: 84, fontWeight: 800, color: NEUTRAL, fontVariantNumeric: 'tabular-nums', lineHeight: 1 }}>
+              <div style={{ fontSize: 84, fontWeight: 800, color: NEUTRAL, fontVariantNumeric: 'tabular-nums', lineHeight: 1, textShadow: '0 1px 0 rgba(255,255,255,0.1), 0 3px 12px rgba(6,9,15,0.8)' }}>
                 {Math.round(hrs)}
                 <span style={{ fontSize: 40, fontWeight: 700 }}> hrs</span>
               </div>
             </div>
             <div style={{ textAlign: 'center', opacity: bright }}>
-              <div style={{ fontSize: 84, fontWeight: 800, color: GOLD, fontVariantNumeric: 'tabular-nums', lineHeight: 1 }}>
+              <div style={{ fontSize: 84, fontWeight: 800, color: GOLD, fontVariantNumeric: 'tabular-nums', lineHeight: 1, textShadow: '0 1px 0 rgba(255,255,255,0.14), 0 3px 12px rgba(6,9,15,0.8)' }}>
                 2<span style={{ fontSize: 40, fontWeight: 700 }}> min</span>
               </div>
             </div>
@@ -69,7 +69,7 @@ export const S4Problem3D: React.FC = () => {
           <boxGeometry args={[0.75, hOurs * 2, 0.75]} />
           <meshPhysicalMaterial color={NEUTRAL} transparent opacity={0.78 * dim} roughness={0.3} metalness={0.1} clearcoat={0.8} clearcoatRoughness={0.2} envMapIntensity={1.1} />
         </mesh>
-        <Orb position={[0, -1.35 + hOurs * 2 + 0.07, 0]} radius={0.12} color={NEUTRAL} emissiveIntensity={0.28} />
+        <Orb position={[0, -1.35 + hOurs * 2 + 0.07, 0]} radius={0.12} color={NEUTRAL} emissiveIntensity={0.18} />
       </group>
 
       {/* competitor pillar (2 min) */}
@@ -78,7 +78,7 @@ export const S4Problem3D: React.FC = () => {
           <boxGeometry args={[0.9, hTheirs * 2, 0.9]} />
           <meshPhysicalMaterial color={SOFT} transparent opacity={0.85 * bright} roughness={0.22} metalness={0.15} clearcoat={1} clearcoatRoughness={0.15} envMapIntensity={1.25} />
         </mesh>
-        <Orb position={[0, -1.35 + hTheirs * 2 + 0.08, 0]} radius={0.14} color={GOLD} emissiveIntensity={0.5} />
+        <Orb position={[0, -1.35 + hTheirs * 2 + 0.08, 0]} radius={0.14} color={GOLD} emissiveIntensity={0.34} />
       </group>
 
       {/* drifting customer orb */}

@@ -53,8 +53,8 @@ export const S8Speed3D: React.FC = () => {
 
       {/* chrono ring + dial */}
       <group position={[0, 0.15, 0]}>
-        <Ring radius={1.55} tube={0.05} color={GOLD} emissiveIntensity={0.18} />
-        <Ring radius={1.32} tube={0.02} color={SOFT} emissiveIntensity={0.12} />
+        <Ring radius={1.55} tube={0.05} color={GOLD} emissiveIntensity={0.28} />
+        <Ring radius={1.32} tube={0.02} color={SOFT} emissiveIntensity={0.18} />
         <group rotation={[0, 0, (sweep * Math.PI) / 180]}>
           <mesh position={[0, 1.5, 0]}>
             <boxGeometry args={[0.05, 0.4, 0.05]} />

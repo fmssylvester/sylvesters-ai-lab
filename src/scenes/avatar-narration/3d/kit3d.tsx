@@ -367,7 +367,7 @@ export const Headline: React.FC<{
   style?: React.CSSProperties;
 }> = ({ frame, fps, children, style }) => (
   <div style={{ position: 'absolute', top: 78, left: 150, ...style }}>
-    <div style={{ color: CREAM, fontSize: 66, fontWeight: 800, letterSpacing: '-0.01em', lineHeight: 1.12, textShadow: '0 4px 40px rgba(6,9,15,0.8), 0 2px 14px rgba(6,9,15,0.6)' }}>
+    <div style={{ color: CREAM, fontSize: 66, fontWeight: 800, letterSpacing: '-0.01em', lineHeight: 1.12, textShadow: '0 1px 0 rgba(255,255,255,0.12), 0 2px 2px rgba(6,9,15,0.9), 0 6px 20px rgba(6,9,15,0.65), 0 14px 60px rgba(6,9,15,0.5)' }}>
       {children}
     </div>
   </div>
