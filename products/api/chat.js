@@ -18,6 +18,25 @@ module.exports = async function handler(req, res) {
     const product = body.product || 'cs-agent'
     const channel = body.channel || ''
 
+    if (product === 'cs-agent') {
+      const webhookUrl = process.env.N8N_CS_WEBHOOK_URL ||
+        'https://sylvesters-ailab.app.n8n.cloud/webhook/customer-support'
+      const resp = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: msg, conversationId: convId }),
+        signal: AbortSignal.timeout(30000)
+      })
+      if (!resp.ok) throw new Error(`n8n ${resp.status}`)
+      const data = await resp.json()
+      return res.json({
+        success: true,
+        response: data.response,
+        conversationId: convId,
+        timestamp: new Date().toISOString()
+      })
+    }
+
     let system
     if (product === 'multi-channel') {
       const ch = channel || 'whatsapp'
