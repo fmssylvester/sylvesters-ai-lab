@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0c12;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding: 20px;
+  }
+  .card {
+    background: #11141e;
+    border-radius: 28px;
+    padding: 40px 50px;
+    width: 1200px;
+    border: 1px solid #1e2433;
+    position: relative;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+  .header-left { display: flex; align-items: center; gap: 16px; }
+  .logo-dot {
+    width: 16px; height: 16px;
+    background: #a855f7;
+    border-radius: 50%;
+    box-shadow: 0 0 24px rgba(168,85,247,0.5);
+  }
+  .template-name { color: #fff; font-size: 30px; font-weight: 700; }
+  .template-category {
+    color: #f1f5f9;
+    font-size: 20px;
+    background: rgba(255,255,255,0.12);
+    padding: 8px 20px;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-weight: 600;
+  }
+  .price-tag {
+    background: rgba(46,204,113,0.12);
+    border: 1px solid rgba(46,204,113,0.3);
+    padding: 10px 24px;
+    border-radius: 24px;
+    color: #2ecc71;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .row { display: flex; align-items: center; justify-content: center; gap: 0; position: relative; }
+  .node {
+    padding: 28px 36px;
+    border-radius: 18px;
+    text-align: center;
+    color: #fff;
+    min-width: 240px;
+  }
+  .node .icon { font-size: 36px; margin-bottom: 12px; }
+  .node .title { font-size: 24px; font-weight: 700; }
+  .node .sub { font-size: 16px; opacity: 0.6; margin-top: 8px; font-weight: 400; }
+  .node .sub span { color: #cbd5e1; }
+
+  .g { background: linear-gradient(135deg, #1a5632, #0f3b20); border: 2px solid #2ecc71; }
+  .p { background: linear-gradient(135deg, #3b1f6e, #261347); border: 2px solid #a855f7; }
+  .b { background: linear-gradient(135deg, #1a3a5c, #0f2440); border: 2px solid #3b82f6; }
+
+  .arrow { font-size: 36px; color: #4a5568; margin: 0 16px; }
+  .down-arrow { font-size: 36px; color: #4a5568; }
+  .connector-area { display: flex; flex-direction: column; align-items: center; margin: 0 12px; position: relative; }
+  .label-tag {
+    background: #1e293b;
+    padding: 6px 18px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #e2e8f0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 8px;
+  }
+  .model-row { display: flex; justify-content: center; margin-bottom: 20px; }
+  .model-connector { display: flex; flex-direction: column; align-items: center; }
+
+  .features {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #1e2433;
+  }
+  .feature {
+    color: #94a3b8;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+  }
+  .feature .d { width: 6px; height: 6px; background: #2ecc71; border-radius: 50%; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <div class="header-left">
+      <div class="logo-dot"></div>
+      <span class="template-name">AI Customer Support Agent</span>
+      <span class="template-category">CRM Integration</span>
+    </div>
+    <div class="price-tag">$9 · One-Time</div>
+  </div>
+
+  <div class="model-row">
+    <div class="model-connector">
+      <div class="node b" style="min-width:200px;">
+        <div class="icon">🧠</div>
+        <div class="title">OpenAI Chat Model</div>
+        <div class="sub"><span>gpt-5-mini</span> · managed credits</div>
+      </div>
+      <div class="down-arrow" style="margin-top:-8px;">⬇</div>
+      <div class="label-tag" style="margin-top:-4px;">ai_languageModel</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="node g">
+      <div class="icon">⚡</div>
+      <div class="title">Webhook</div>
+      <div class="sub"><span>POST</span> /customer-support</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node p">
+      <div class="icon">🤖</div>
+      <div class="title">AI Customer Support Agent</div>
+      <div class="sub">toolsAgent · <span>gpt-5-mini</span></div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node g">
+      <div class="icon">📤</div>
+      <div class="title">Respond to Webhook</div>
+      <div class="sub"><span>JSON</span> response</div>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="feature"><div class="d"></div> AI-powered replies</div>
+    <div class="feature"><div class="d"></div> Escalation logic</div>
+    <div class="feature"><div class="d"></div> GPT-5-mini</div>
+    <div class="feature"><div class="d"></div> Webhook ready</div>
+  </div>
+</div>
+</body>
+</html>

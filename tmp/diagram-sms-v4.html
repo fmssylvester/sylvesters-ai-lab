@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0c12;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding: 20px;
+  }
+  .card {
+    background: #11141e;
+    border-radius: 28px;
+    padding: 30px 40px;
+    width: 1350px;
+    border: 1px solid #1e2433;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  .header-left { display: flex; align-items: center; gap: 16px; }
+  .logo-dot {
+    width: 16px; height: 16px;
+    background: #f59e0b;
+    border-radius: 50%;
+    box-shadow: 0 0 24px rgba(245,158,11,0.5);
+  }
+  .template-name { color: #fff; font-size: 28px; font-weight: 700; }
+  .template-category {
+    color: #f1f5f9;
+    font-size: 20px;
+    background: rgba(255,255,255,0.12);
+    padding: 8px 20px;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-weight: 600;
+  }
+  .price-tag {
+    background: rgba(46,204,113,0.12);
+    border: 1px solid rgba(46,204,113,0.3);
+    padding: 10px 24px;
+    border-radius: 24px;
+    color: #2ecc71;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .row { display: flex; align-items: center; justify-content: center; gap: 0; }
+  .node {
+    padding: 24px 28px;
+    border-radius: 18px;
+    text-align: center;
+    color: #fff;
+    min-width: 180px;
+  }
+  .node .icon { font-size: 32px; margin-bottom: 10px; }
+  .node .title { font-size: 22px; font-weight: 700; }
+  .node .sub { font-size: 15px; opacity: 0.6; margin-top: 6px; font-weight: 400; }
+  .node .sub span { color: #cbd5e1; }
+
+  .g { background: linear-gradient(135deg, #1a5632, #0f3b20); border: 2px solid #2ecc71; }
+  .p { background: linear-gradient(135deg, #3b1f6e, #261347); border: 2px solid #a855f7; }
+  .b { background: linear-gradient(135deg, #1a3a5c, #0f2440); border: 2px solid #3b82f6; }
+  .o { background: linear-gradient(135deg, #5c3a1a, #3d2612); border: 2px solid #f59e0b; }
+  .r { background: linear-gradient(135deg, #3d1a1a, #2a1212); border: 2px solid #ef4444; }
+
+  .arrow { font-size: 32px; color: #4a5568; margin: 0 12px; }
+  .down-wrap { display: flex; flex-direction: column; align-items: center; }
+  .label-tag {
+    background: #1e293b;
+    padding: 5px 16px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #e2e8f0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 6px;
+  }
+  .model-row { display: flex; justify-content: center; margin-bottom: 16px; }
+
+  .features {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #1e2433;
+  }
+  .feature {
+    color: #94a3b8;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+  }
+  .feature .d { width: 6px; height: 6px; background: #f59e0b; border-radius: 50%; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <div class="header-left">
+      <div class="logo-dot"></div>
+      <span class="template-name">Missed Call SMS Text-Back</span>
+      <span class="template-category">Lead Generation</span>
+    </div>
+    <div class="price-tag">$14 · One-Time</div>
+  </div>
+
+  <div class="model-row">
+    <div class="down-wrap">
+      <div class="node b" style="min-width:180px;">
+        <div class="icon">🧠</div>
+        <div class="title">OpenAI Chat Model</div>
+        <div class="sub"><span>gpt-4o-mini</span></div>
+      </div>
+      <div style="font-size:30px;color:#4a5568;margin-top:-4px;">⬇</div>
+      <div class="label-tag" style="margin-top:-2px;">ai_languageModel</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="node g">
+      <div class="icon">⚡</div>
+      <div class="title">Webhook</div>
+      <div class="sub"><span>POST</span> /missed-call</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node o">
+      <div class="icon">📋</div>
+      <div class="title">Format Data</div>
+      <div class="sub">phone · business · time</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node p">
+      <div class="icon">🤖</div>
+      <div class="title">SMS Generator Agent</div>
+      <div class="sub">AI generates <span>SMS reply</span></div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node r">
+      <div class="icon">📱</div>
+      <div class="title">Send SMS via Twilio</div>
+      <div class="sub"><span>Twilio API</span></div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node g">
+      <div class="icon">📤</div>
+      <div class="title">Respond to Webhook</div>
+      <div class="sub"><span>JSON</span> response</div>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="feature"><div class="d"></div> AI-generated SMS</div>
+    <div class="feature"><div class="d"></div> Missed call detection</div>
+    <div class="feature"><div class="d"></div> Twilio delivery</div>
+    <div class="feature"><div class="d"></div> Appointment ready</div>
+  </div>
+</div>
+</body>
+</html>

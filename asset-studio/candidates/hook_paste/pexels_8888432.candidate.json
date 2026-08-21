@@ -1,0 +1,41 @@
+{
+  "id": "pexels_8888432",
+  "url": "https://videos.pexels.com/video-files/8888432/8888432-hd_1366_720_25fps.mp4",
+  "kind": "video",
+  "w": 1366,
+  "h": 720,
+  "fps": 25,
+  "text": "https://www.pexels.com/video/a-person-typing-on-the-keyboard-8888432/  screen recording typing",
+  "searchTerms": [
+    "screen recording typing",
+    "person using computer AI",
+    "typing keyboard close up",
+    "AI interface screen"
+  ],
+  "beat": "hook_paste",
+  "meta": {
+    "pexelsId": 8888432
+  },
+  "file": "/data/data/com.termux/files/home/ai-lab-internal/asset-studio/candidates/hook_paste/8888432-hd_1366_720_25fps.mp4",
+  "downloaded": true,
+  "score": {
+    "dimensions": {
+      "resolution": 8,
+      "frameRate": 7,
+      "compression": 8.5,
+      "orientation": 10,
+      "lighting": 7.098890857142857,
+      "camera": 7.5,
+      "colorPalette": 9,
+      "metadataRelevance": 2.5,
+      "subjectRelevance": 2.5,
+      "motionComplexity": 7,
+      "visualCleanliness": 10,
+      "brandSafety": 9,
+      "licensing": 10
+    },
+    "overall": 8.17,
+    "weighted": true,
+    "probe": true
+  }
+}

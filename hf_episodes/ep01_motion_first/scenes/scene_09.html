@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1920px; height: 1080px; overflow: hidden; background: #050505; font-family: 'Inter', sans-serif; color: #fff; }
+    .bg {{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; filter: saturate(0.7) contrast(1.1); }}
+    .ov { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(5,5,5,0.85) 0%, rgba(5,5,5,0.6) 50%, rgba(5,5,5,0.85) 100%); }
+    .ct { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 80px 120px; z-index: 10; }
+    .sh { font-size: 80px; font-weight: 900; text-align: center; line-height: 1.05; text-shadow: 0 4px 30px rgba(0,0,0,0.8); letter-spacing: -2px; }
+    .ss { font-size: 36px; font-weight: 400; color: #00F0FF; margin-top: 24px; text-align: center; text-shadow: 0 2px 20px rgba(0,0,0,0.6); }
+    .stat { font-size: 200px; font-weight: 900; color: #BC00FF; font-family: 'JetBrains Mono', monospace; text-shadow: 0 0 60px #BC00FF40; }
+    .sl { font-size: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 6px; color: #FFFFFF; opacity: 0.7; }
+    .al { position: absolute; background: #00F0FF; opacity: 0.3; }
+    .al.h { width: 0; height: 2px; top: 50%; left: 10%; }
+    .al.v { width: 2px; height: 0; left: 50%; top: 20%; }
+    .go { position: absolute; border-radius: 50%; filter: blur(80px); }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="scene-9" data-start="0" data-duration="6" data-width="1920" data-height="1080">
+    <img class="bg" src="scene_09.png" alt="" />
+    <div class="ov"></div>
+    <div class="al h"></div>
+    <div class="al v"></div>
+    <div class="go" style="width:400px;height:400px;background:#00F0FF;top:-100px;right:-100px;"></div>
+    <div class="go" style="width:300px;height:300px;background:#BC00FF;bottom:-80px;left:-80px;"></div>
+    <div class="ct">
+      <h1 class="sh">MOTION-FIRST: APPROVED</h1>
+
+    </div>
+  </div>
+  <script>
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+    window.__timelines = window.__timelines || {}; const tl = gsap.timeline({ paused: true });
+    tl.from('.bg', {scale:1.2, duration:8, ease:'none'}, 0);
+    tl.to('.bg', {scale:1.0, duration:8, ease:'none'}, 0);
+    tl.from('.go', {opacity:0, scale:0.5, duration:2, stagger:0.3, ease:'power2.out'}, 0.5);
+    tl.to('.al.h', {width:'80%', duration:1.5, ease:'power3.out'}, 0.3);
+    tl.to('.al.v', {height:'60%', duration:1.5, ease:'power3.out'}, 0.5);
+    tl.from('.sh', {y:40, opacity:0, duration:0.8, ease:'power3.out'}, 0.5);
+    tl.from('.ss', {opacity:0, duration:0.5}, 1.0);
+    tl.to('.ct', {opacity:0, duration:0.5}, -0.5);
+    window.__timelines['scene-9'] = tl;
+  </script>
+  </script>
+</body>
+</html>

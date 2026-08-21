@@ -1,0 +1,41 @@
+{
+  "id": "pexels_34719023",
+  "url": "https://videos.pexels.com/video-files/34719023/14717079_360_640_30fps.mp4",
+  "kind": "video",
+  "w": 360,
+  "h": 640,
+  "fps": 30,
+  "text": "https://www.pexels.com/video/blurred-focus-desktop-setup-with-computer-monitor-34719023/  screen recording typing",
+  "searchTerms": [
+    "screen recording typing",
+    "person using computer AI",
+    "typing keyboard close up",
+    "AI interface screen"
+  ],
+  "beat": "hook_paste",
+  "meta": {
+    "pexelsId": 34719023
+  },
+  "file": "/data/data/com.termux/files/home/ai-lab-internal/asset-studio/candidates/hook_paste/14717079_360_640_30fps.mp4",
+  "downloaded": true,
+  "score": {
+    "dimensions": {
+      "resolution": 4,
+      "frameRate": 9,
+      "compression": 8.5,
+      "orientation": 4,
+      "lighting": 8.936116,
+      "camera": 7.5,
+      "colorPalette": 9,
+      "metadataRelevance": 2.5,
+      "subjectRelevance": 2.5,
+      "motionComplexity": 7,
+      "visualCleanliness": 10,
+      "brandSafety": 9,
+      "licensing": 10
+    },
+    "overall": 7.13,
+    "weighted": true,
+    "probe": true
+  }
+}

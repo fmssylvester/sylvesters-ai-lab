@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0c12; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+  .card { background: linear-gradient(135deg, #0a0c12, #0f1a2e); padding: 50px; width: 1000px; height: 1000px; border: 1px solid #1e2433; position: relative; display: flex; flex-direction: column; justify-content: center; }
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
+  .header-left { display: flex; align-items: center; gap: 16px; }
+  .logo-dot { width: 14px; height: 14px; background: #a855f7; border-radius: 50%; box-shadow: 0 0 20px rgba(168,85,247,0.4); }
+  .template-name { color: #fff; font-size: 28px; font-weight: 700; }
+  .badge { background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.3); padding: 8px 20px; border-radius: 20px; color: #a855f7; font-size: 18px; font-weight: 600; }
+  .title { text-align: center; margin-bottom: 50px; }
+  .title h2 { color: #fff; font-size: 30px; font-weight: 800; }
+  .title p { color: #64748b; font-size: 16px; margin-top: 6px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 760px; margin: 0 auto; }
+  .feature { background: #11141e; border: 1px solid #1e2433; border-radius: 20px; padding: 30px; text-align: center; transition: border-color 0.2s; }
+  .feature:hover { border-color: #2ecc71; }
+  .feature .icon { font-size: 44px; margin-bottom: 16px; }
+  .feature .f-title { color: #fff; font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .feature .f-desc { color: #64748b; font-size: 14px; line-height: 1.5; }
+  .feature .f-tag { display: inline-block; margin-top: 12px; padding: 4px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; }
+  .feature .f-tag.green { background: rgba(46,204,113,0.12); color: #2ecc71; }
+  .feature .f-tag.cyan { background: rgba(6,182,212,0.12); color: #06b6d4; }
+  .feature .f-tag.purple { background: rgba(168,85,247,0.12); color: #a855f7; }
+  .feature .f-tag.amber { background: rgba(245,158,11,0.12); color: #f59e0b; }
+  .footer-tag { text-align: center; margin-top: 40px; }
+  .footer-tag span { background: rgba(46,204,113,0.1); border: 1px solid rgba(46,204,113,0.25); padding: 10px 28px; border-radius: 20px; color: #2ecc71; font-size: 18px; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <div class="header-left">
+      <div class="logo-dot"></div>
+      <span class="template-name">n8n Workflow</span>
+    </div>
+    <span class="badge">Features</span>
+  </div>
+  <div class="title">
+    <h2>Everything You Get</h2>
+    <p>Complete patient records automation system</p>
+  </div>
+  <div class="grid">
+    <div class="feature">
+      <div class="icon">🔍</div>
+      <div class="f-title">Instant Search</div>
+      <div class="f-desc">Search patients by name or ID. Results in milliseconds from Google Sheets.</div>
+      <div class="f-tag green">✓ Quick Lookup</div>
+    </div>
+    <div class="feature">
+      <div class="icon">🩺</div>
+      <div class="f-title">Medical Summary</div>
+      <div class="f-desc">Allergies, medications, blood type, conditions, visit history — at a glance.</div>
+      <div class="f-tag cyan">✓ Complete View</div>
+    </div>
+    <div class="feature">
+      <div class="icon">📱</div>
+      <div class="f-title">Multi-Device</div>
+      <div class="f-desc">Works on Telegram, WhatsApp, SMS, or web dashboard. No app install needed.</div>
+      <div class="f-tag purple">✓ Any Phone</div>
+    </div>
+    <div class="feature">
+      <div class="icon">⚡</div>
+      <div class="f-title">1-Day Setup</div>
+      <div class="f-desc">Import the JSON, connect Google Sheets, and go live. Zero coding required.</div>
+      <div class="f-tag amber">✓ Quick Deploy</div>
+    </div>
+  </div>
+  <div class="footer-tag">
+    <span>$49 — One-Time Purchase</span>
+  </div>
+</div>
+</body>
+</html>

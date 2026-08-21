@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html><head><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0c12;display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding:20px}
+.card{background:#11141e;border-radius:28px;padding:30px 36px;width:1200px;border:1px solid #1e2433}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+.h-left{display:flex;align-items:center;gap:14px}
+.logo{width:14px;height:14px;background:#a855f7;border-radius:50%;box-shadow:0 0 20px rgba(168,85,247,.5)}
+.title{color:#fff;font-size:24px;font-weight:700}
+.badge{color:#f1f5f9;font-size:17px;background:rgba(255,255,255,.1);padding:6px 18px;border-radius:20px;border:1px solid rgba(255,255,255,.15);font-weight:600}
+.price{color:#2ecc71;font-size:18px;font-weight:700}
+h2{color:#e2e8f0;font-size:22px;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+h2 span{color:#64748b;font-weight:400;font-size:16px}
+
+.param-row{display:flex;align-items:flex-start;margin-bottom:20px;gap:20px}
+.param-label{color:#94a3b8;font-size:17px;font-weight:600;min-width:160px;padding-top:6px}
+.param-value{flex:1}
+.primary-tag{display:inline-block;background:rgba(168,85,247,.15);color:#a855f7;border:1px solid rgba(168,85,247,.35);padding:6px 18px;border-radius:20px;font-size:17px;font-weight:700}
+.opt-tag{display:inline-block;background:rgba(59,130,246,.12);color:#60a5fa;border:1px solid rgba(59,130,246,.25);padding:4px 14px;border-radius:14px;font-size:15px;font-weight:600;margin-right:8px;margin-bottom:4px}
+.opt-tag .opt-val{color:#e2e8f0;font-weight:400}
+
+.terminal{border-radius:16px;overflow:hidden;margin-bottom:0}
+.term-header{background:#1e293b;padding:8px 16px;display:flex;align-items:center;gap:8px}
+.term-dot{width:10px;height:10px;border-radius:50%}
+.d1{background:#ef4444}.d2{background:#f59e0b}.d3{background:#2ecc71}
+.term-title{color:#94a3b8;font-size:13px;margin-left:8px}
+.term-body{background:#0f172a;padding:18px 20px;color:#e2e8f0;font-family:'SF Mono','Fira Code','Courier New',monospace;font-size:15px;line-height:1.65;overflow-x:auto;white-space:pre-wrap}
+
+.footer{display:flex;gap:16px;margin-top:24px;padding-top:20px;border-top:1px solid #1e2433;font-size:15px;color:#64748b;justify-content:center;font-weight:500}
+</style></head>
+<body>
+<div class="card">
+<div class="header">
+<div class="h-left"><div class="logo"></div><span class="title">AI Customer Support Agent</span><span class="badge">CRM Integration</span></div>
+<div class="price">$9 · One-Time</div>
+</div>
+
+<h2>⚙️ Agent Configuration</h2>
+
+<div class="param-row">
+<div class="param-label">Agent Type</div>
+<div class="param-value"><span class="primary-tag">toolsAgent</span></div>
+</div>
+
+<div class="param-row">
+<div class="param-label">System Prompt</div>
+<div class="param-value">
+<div class="terminal">
+<div class="term-header">
+<div class="term-dot d1"></div><div class="term-dot d2"></div><div class="term-dot d3"></div>
+<span class="term-title">system prompt</span>
+</div>
+<div class="term-body">You are SupportAI, a professional customer support agent for a SaaS company.
+Be helpful, concise, and empathetic. Never make up information.
+
+When to Escalate:
+- Account deletion or data privacy requests
+- Billing disputes or refunds
+- Security concerns
+
+Respond with: ESCALATE: [reason]
+
+Keep responses under 150 words.</div>
+</div>
+</div>
+</div>
+
+<div class="param-row">
+<div class="param-label">Options</div>
+<div class="param-value">
+<span class="opt-tag">maxIterations: <span class="opt-val">5</span></span>
+<span class="opt-tag">returnIntermediateSteps: <span class="opt-val">false</span></span>
+</div>
+</div>
+
+<div class="footer">
+<span>🤖 toolsAgent</span><span>·</span><span>⚡ gpt-5-mini</span><span>·</span><span>📋 Escalation ready</span>
+</div>
+</div>
+</body></html>

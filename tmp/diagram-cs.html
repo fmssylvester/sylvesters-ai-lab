@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0f1117;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  .canvas {
+    background: #181b24;
+    border-radius: 24px;
+    padding: 60px 80px;
+    position: relative;
+    width: 1100px;
+    height: 500px;
+  }
+  .node {
+    position: absolute;
+    padding: 18px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: center;
+    min-width: 170px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    color: #fff;
+  }
+  .node-trigger { background: #1a5632; border: 2px solid #2ecc71; top: 200px; left: 40px; }
+  .node-agent { background: #3b1f6e; border: 2px solid #a855f7; top: 200px; left: 300px; }
+  .node-model { background: #1a3a5c; border: 2px solid #3b82f6; top: 50px; left: 350px; }
+  .node-respond { background: #1a5632; border: 2px solid #2ecc71; top: 200px; left: 620px; }
+
+  .node-label {
+    font-size: 11px;
+    opacity: 0.6;
+    margin-top: 4px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+
+  .arrow {
+    position: absolute;
+    color: #4a5568;
+    font-size: 28px;
+  }
+  .arrow-h { top: 228px; }
+  .arrow-v { left: 435px; }
+
+  .badge {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .badge-conn {
+    background: #2d3748;
+    color: #a0aec0;
+    top: 173px;
+    width: 100px;
+    text-align: center;
+    left: 435px;
+  }
+
+  .title {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #e2e8f0;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .line-h {
+    position: absolute;
+    height: 2px;
+    background: #4a5568;
+    top: 227px;
+  }
+  .line-v {
+    position: absolute;
+    width: 2px;
+    background: #4a5568;
+    left: 452px;
+  }
+  .line-1 { width: 88px; left: 210px; }
+  .line-2 { width: 88px; left: 470px; }
+  .line-3 { width: 88px; left: 780px; }
+  .line-v1 { height: 130px; top: 100px; }
+
+  .dot {
+    width: 8px; height: 8px;
+    background: #718096;
+    border-radius: 50%;
+    position: absolute;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="title">AI Customer Support Agent</div>
+
+  <!-- Connection lines -->
+  <div class="line-h line-1"></div>
+  <div class="line-h line-2"></div>
+  <div class="line-h line-3"></div>
+  <div class="line-v line-v1"></div>
+
+  <!-- Arrows -->
+  <div class="arrow arrow-h" style="left: 215px;">▶</div>
+  <div class="arrow arrow-h" style="left: 475px;">▶</div>
+  <div class="arrow arrow-h" style="left: 785px;">▶</div>
+  <div class="arrow arrow-v" style="top: 135px;">▼</div>
+
+  <!-- Nodes -->
+  <div class="node node-trigger">
+    Webhook
+    <div class="node-label">POST /customer-support</div>
+  </div>
+
+  <div class="node node-agent">
+    AI Customer<br>Support Agent
+    <div class="node-label">toolsAgent · gpt-5-mini</div>
+  </div>
+
+  <div class="node node-model">
+    OpenAI<br>Chat Model
+    <div class="node-label">gpt-5-mini · managed</div>
+  </div>
+
+  <div class="node node-respond">
+    Respond to<br>Webhook
+    <div class="node-label">JSON response</div>
+  </div>
+
+  <!-- Connection label -->
+  <div class="badge badge-conn">ai_languageModel</div>
+</div>
+</body>
+</html>

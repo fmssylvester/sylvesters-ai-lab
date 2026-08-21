@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Webhook Node — n8n Style Card</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  display:flex;justify-content:center;align-items:center;min-height:100vh;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,system-ui,sans-serif;
+  background:#0a0e14;
+  padding:24px;
+}
+.card{
+  width:1200px;min-height:650px;background:#11141e;border-radius:28px;
+  border:1px solid #1e2433;padding:40px;display:flex;flex-direction:column;
+}
+.header{
+  display:flex;align-items:center;gap:16px;margin-bottom:32px;
+  flex-wrap:wrap;
+}
+.green-dot{
+  width:14px;height:14px;border-radius:50%;background:#22c55e;
+  flex-shrink:0;box-shadow:0 0 8px rgba(34,197,94,.4);
+}
+.header-title{
+  font-size:24px;font-weight:700;color:#fff;letter-spacing:-.3px;
+  margin-right:auto;
+}
+.badge{
+  font-size:13px;font-weight:600;padding:6px 14px;border-radius:100px;
+  background:rgba(34,197,94,.12);color:#22c55e;border:1px solid rgba(34,197,94,.25);
+  white-space:nowrap;
+}
+.price-tag{
+  font-size:14px;font-weight:600;color:#94a3b8;background:#1a1f2e;
+  padding:6px 16px;border-radius:100px;border:1px solid #252b3d;
+  white-space:nowrap;
+}
+.section-title{
+  font-size:24px;font-weight:700;color:#e2e8f0;margin-bottom:24px;
+  letter-spacing:-.2px;
+}
+.params-grid{
+  display:flex;flex-direction:column;gap:16px;margin-bottom:32px;
+}
+.param-row{
+  display:flex;align-items:center;gap:20px;padding:20px 24px;
+  background:#161b28;border-radius:16px;border:1px solid #1e2433;
+}
+.param-label{
+  font-size:17px;font-weight:600;color:#94a3b8;min-width:160px;
+}
+.param-value{
+  font-size:17px;font-weight:600;color:#e2e8f0;
+}
+.tag-green{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(34,197,56,.12);color:#22c55e;padding:6px 18px;
+  border-radius:100px;font-size:15px;font-weight:700;
+  border:1px solid rgba(34,197,56,.2);
+}
+.tag-blue{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(59,130,246,.12);color:#60a5fa;padding:6px 18px;
+  border-radius:100px;font-size:15px;font-weight:700;
+  border:1px solid rgba(59,130,246,.2);
+}
+.code-text{
+  font-family:'JetBrains Mono','Fira Code','Cascadia Code','SF Mono',monospace;
+  font-size:17px;color:#e2e8f0;letter-spacing:-.2px;
+}
+.quickstart-box{
+  background:#0d111c;border-radius:16px;border:1px solid #1e2433;
+  padding:24px;margin-bottom:32px;
+}
+.quickstart-header{
+  font-size:15px;font-weight:700;color:#e2e8f0;margin-bottom:16px;
+}
+.terminal-box{
+  background:#070a13;border-radius:12px;border:1px solid #1e2433;
+  padding:20px 24px;font-family:'JetBrains Mono','Fira Code','Cascadia Code','SF Mono',monospace;
+  font-size:15px;line-height:1.7;color:#94a3b8;overflow-x:auto;
+}
+.terminal-box .prompt{color:#22c55e;font-weight:600}
+.terminal-box .url{color:#60a5fa}
+.terminal-box .header-t{color:#c084fc}
+.terminal-box .body{color:#e2e8f0}
+.footer{
+  display:flex;align-items:center;gap:20px;padding:16px 20px;
+  background:#161b28;border-radius:14px;border:1px solid #1e2433;
+  margin-top:auto;
+}
+.footer-item{
+  display:flex;align-items:center;gap:8px;
+  font-size:14px;color:#64748b;font-weight:500;
+}
+.footer-item .emoji{font-size:16px}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <div class="green-dot"></div>
+    <span class="header-title">AI Customer Support Agent</span>
+    <span class="badge">CRM Integration</span>
+    <span class="price-tag">$9 · One-Time</span>
+  </div>
+
+  <div class="section-title">⚙️ Webhook Settings</div>
+
+  <div class="params-grid">
+    <div class="param-row">
+      <span class="param-label">HTTP Method</span>
+      <span class="tag-green">POST</span>
+    </div>
+    <div class="param-row">
+      <span class="param-label">Path</span>
+      <span class="code-text">/customer-support</span>
+    </div>
+    <div class="param-row">
+      <span class="param-label">Response Mode</span>
+      <span class="tag-blue">Response Node</span>
+    </div>
+  </div>
+
+  <div class="quickstart-box">
+    <div class="quickstart-header">Quick Start</div>
+    <div class="terminal-box">
+      <span class="prompt">$</span> curl -X POST <span class="url">https://your-n8n/webhook/customer-support</span> \<br>
+      &nbsp;&nbsp;-H <span class="header-t">"Content-Type: application/json"</span> \<br>
+      &nbsp;&nbsp;-d <span class="body">'{"message": "Hello, I need help"}'</span>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-item"><span class="emoji">🔗</span> POST /customer-support</span>
+    <span class="footer-item"><span class="emoji">⚡</span> Webhook trigger</span>
+    <span class="footer-item"><span class="emoji">📤</span> Respond to Webhook</span>
+  </div>
+</div>
+</body>
+</html>

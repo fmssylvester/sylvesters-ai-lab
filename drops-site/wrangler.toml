@@ -1,0 +1,7 @@
+name = "sylvester-drops"
+main = "worker.js"
+compatibility_date = "2025-07-01"
+account_id = "a19ab3d0c4ad04a1111d3d2169f1ea33"
+r2_buckets = [
+  { binding = "BUCKET", bucket_name = "r2-bucket" }
+]

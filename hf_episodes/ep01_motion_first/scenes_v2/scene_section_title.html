@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1920px; height: 1080px; overflow: hidden; background: #080808; font-family: 'Inter', sans-serif; color: #fff; }
+    .section-label { position: absolute; top: 40px; left: 60px; font-size: 14px; font-weight: 700; letter-spacing: 6px; text-transform: uppercase; color: #00d4ff; opacity: 0; z-index: 10; }
+    .title-stamp { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(3) rotate(-8deg); font-size: 96px; font-weight: 900; letter-spacing: -3px; opacity: 0; white-space: nowrap; }
+    .title-stamp .num { color: #00d4ff; }
+    .subtitle { position: absolute; top: 60%; left: 50%; transform: translateX(-50%); font-size: 24px; font-weight: 400; color: #888; opacity: 0; white-space: nowrap; }
+    .glow-line { position: absolute; top: 55%; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #00d4ff, transparent); opacity: 0; transform: scaleX(0); }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="section-title" data-start="0" data-duration="3" data-width="1920" data-height="1080">
+    <div class="section-label" id="label">SECTION 01</div>
+    <div class="glow-line" id="glow-line"></div>
+    <div class="title-stamp" id="title">
+      <span class="num">01</span> — The Problem
+    </div>
+    <div class="subtitle" id="subtitle">Why every tool gives you the same garbage</div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    // Section label fades in
+    tl.to('#label', { opacity: 1, duration: 0.3, ease: 'power2.out' }, 0);
+
+    // Glow line expands
+    tl.to('#glow-line', { opacity: 0.6, scaleX: 1, duration: 0.5, ease: 'power2.out' }, 0.2);
+
+    // Title stamp slams in (scale 3 → 1, rotation -8 → 0)
+    tl.to('#title', { 
+      opacity: 1, scale: 1, rotation: 0, 
+      duration: 0.25, ease: 'back.out(3)' 
+    }, 0.4);
+
+    // Title holds briefly, then starts fading
+
+    // Subtitle fades up
+    tl.fromTo('#subtitle', 
+      { opacity: 0, y: 20 }, 
+      { opacity: 0.7, y: 0, duration: 0.4, ease: 'power2.out' }, 
+      0.7
+    );
+
+    // Everything fades out at the end
+    tl.to(['#label', '#title', '#subtitle', '#glow-line'], 
+      { opacity: 0, duration: 0.3 }, 
+      2.5
+    );
+
+    window.__timelines['section-title'] = tl;
+  </script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0c12;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  .card {
+    background: linear-gradient(145deg, #11141e 0%, #0d0f17 100%);
+    border-radius: 28px;
+    padding: 50px 60px;
+    position: relative;
+    width: 1400px;
+    height: 720px;
+    border: 1px solid rgba(255,255,255,0.06);
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at 20% 30%, rgba(245,158,11,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 70%, rgba(239,68,68,0.04) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 1;
+    padding: 0 10px;
+  }
+  .header-left { display: flex; align-items: center; gap: 18px; }
+  .logo-dot {
+    width: 14px; height: 14px;
+    background: #f59e0b;
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(245,158,11,0.5);
+  }
+  .template-name {
+    color: #f1f5f9;
+    font-size: 27px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .template-category {
+    color: #f8fafc;
+    font-size: 20px;
+    font-weight: 600;
+    background: rgba(255,255,255,0.10);
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .price-tag {
+    background: linear-gradient(135deg, rgba(46,204,113,0.15), rgba(46,204,113,0.05));
+    border: 1px solid rgba(46,204,113,0.25);
+    padding: 8px 22px;
+    border-radius: 24px;
+    color: #2ecc71;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .flow { position: relative; z-index: 1; height: 400px; margin-top: 20px; }
+
+  .node {
+    position: absolute;
+    padding: 26px 32px;
+    border-radius: 18px;
+    font-weight: 700;
+    font-size: 20px;
+    text-align: center;
+    min-width: 200px;
+    color: #fff;
+  }
+
+  .node-trigger {
+    background: linear-gradient(135deg, rgba(26,86,50,0.95), rgba(16,56,30,0.95));
+    border: 2px solid rgba(46,204,113,0.6);
+    top: 200px; left: 10px;
+    box-shadow: 0 0 40px rgba(46,204,113,0.1);
+  }
+  .node-set {
+    background: linear-gradient(135deg, rgba(92,58,26,0.95), rgba(65,40,15,0.95));
+    border: 2px solid rgba(245,158,11,0.6);
+    top: 200px; left: 240px;
+    box-shadow: 0 0 40px rgba(245,158,11,0.1);
+  }
+  .node-agent {
+    background: linear-gradient(135deg, rgba(59,31,110,0.95), rgba(40,18,80,0.95));
+    border: 2px solid rgba(168,85,247,0.6);
+    top: 200px; left: 510px;
+    box-shadow: 0 0 40px rgba(168,85,247,0.1);
+  }
+  .node-model {
+    background: linear-gradient(135deg, rgba(26,58,92,0.95), rgba(16,35,65,0.95));
+    border: 2px solid rgba(59,130,246,0.6);
+    top: 30px; left: 570px;
+    box-shadow: 0 0 40px rgba(59,130,246,0.1);
+  }
+  .node-send {
+    background: linear-gradient(135deg, rgba(61,26,26,0.95), rgba(40,15,15,0.95));
+    border: 2px solid rgba(239,68,68,0.6);
+    top: 200px; left: 790px;
+    box-shadow: 0 0 40px rgba(239,68,68,0.1);
+  }
+  .node-respond {
+    background: linear-gradient(135deg, rgba(26,86,50,0.95), rgba(16,56,30,0.95));
+    border: 2px solid rgba(46,204,113,0.6);
+    top: 200px; left: 1050px;
+    box-shadow: 0 0 40px rgba(46,204,113,0.1);
+  }
+
+  .node .icon { font-size: 28px; margin-bottom: 8px; }
+  .node-label {
+    font-size: 15px;
+    opacity: 0.6;
+    margin-top: 8px;
+    font-weight: 400;
+  }
+  .node-label span { color: #cbd5e1; }
+
+  svg.connector { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+  svg.connector line { stroke: rgba(255,255,255,0.12); stroke-width: 3; }
+  svg.connector polyline { stroke: rgba(255,255,255,0.12); stroke-width: 3; fill: none; }
+
+  .flow-label {
+    position: absolute;
+    z-index: 1;
+    background: rgba(30,41,59,0.95);
+    backdrop-filter: blur(8px);
+    padding: 6px 20px;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #e2e8f0;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .feature-list {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 40px;
+    z-index: 1;
+  }
+  .feature-item {
+    color: #64748b;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+  }
+  .feature-item .dot {
+    width: 6px; height: 6px;
+    background: #f59e0b;
+    border-radius: 50%;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <div class="header-left">
+      <div class="logo-dot"></div>
+      <span class="template-name">Missed Call SMS Text-Back</span>
+      <span class="template-category">Lead Generation</span>
+    </div>
+    <div class="price-tag">$14 · One-Time</div>
+  </div>
+
+  <svg class="connector">
+    <line x1="210" y1="296" x2="235" y2="296"/>
+    <line x1="440" y1="296" x2="505" y2="296"/>
+    <line x1="710" y1="296" x2="785" y2="296"/>
+    <line x1="990" y1="296" x2="1045" y2="296"/>
+    <line x1="685" y1="142" x2="685" y2="195"/>
+    <polyline points="232,290 242,296 232,302"/>
+    <polyline points="502,290 512,296 502,302"/>
+    <polyline points="782,290 792,296 782,302"/>
+    <polyline points="1042,290 1052,296 1042,302"/>
+    <polyline points="680,192 685,202 690,192"/>
+  </svg>
+
+  <div class="flow-label" style="top:196px;left:685px;">ai_languageModel</div>
+
+  <div class="node node-trigger">
+    <div class="icon">⚡</div>Webhook
+    <div class="node-label"><span>POST</span> /missed-call</div>
+  </div>
+  <div class="node node-set">
+    <div class="icon">📋</div>Format Data
+    <div class="node-label">phone · business · time</div>
+  </div>
+  <div class="node node-agent">
+    <div class="icon">🤖</div>SMS Generator Agent
+    <div class="node-label">AI generates <span>SMS reply</span></div>
+  </div>
+  <div class="node node-model">
+    <div class="icon">🧠</div>OpenAI Chat Model
+    <div class="node-label"><span>gpt-4o-mini</span></div>
+  </div>
+  <div class="node node-send">
+    <div class="icon">📱</div>Send SMS via Twilio
+    <div class="node-label"><span>Twilio API</span></div>
+  </div>
+  <div class="node node-respond">
+    <div class="icon">📤</div>Respond to Webhook
+    <div class="node-label"><span>JSON</span> response</div>
+  </div>
+
+  <div class="feature-list">
+    <div class="feature-item"><div class="dot"></div> AI-generated SMS</div>
+    <div class="feature-item"><div class="dot"></div> Missed call detection</div>
+    <div class="feature-item"><div class="dot"></div> Twilio delivery</div>
+    <div class="feature-item"><div class="dot"></div> Appointment ready</div>
+  </div>
+</div>
+</body>
+</html>

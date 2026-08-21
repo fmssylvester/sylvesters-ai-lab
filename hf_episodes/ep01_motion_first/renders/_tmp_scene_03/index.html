@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 1920px; height: 1080px; overflow: hidden;
+      background: #050505;
+      font-family: 'Inter', sans-serif;
+      color: #fff;
+    }
+    .scene-content {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      padding: 80px 120px;
+      position: relative;
+    }
+    .heading {
+      font-size: 72px; font-weight: 900;
+      text-align: center; line-height: 1.1;
+      color: #fff;
+    }
+    .heading.kinetic .char {
+      display: inline-block;
+    }
+    .subheading {
+      font-size: 36px; font-weight: 400;
+      color: #00F0FF;
+      margin-top: 20px; text-align: center;
+      font-family: 'JetBrains Mono', sans-serif;
+    }
+    .stat {
+      font-size: 180px; font-weight: 900;
+      color: #BC00FF;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1;
+    }
+    .label {
+      font-size: 24px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 4px;
+      color: #FFFFFF;
+    }
+    .quote {
+      font-size: 42px; font-style: italic;
+      color: #00F0FF;
+      max-width: 900px; text-align: center;
+      line-height: 1.4;
+    }
+    .step-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; padding: 30px 40px;
+      margin: 10px 0; width: 800px;
+      display: flex; align-items: center; gap: 20px;
+    }
+    .step-number {
+      font-size: 48px; font-weight: 900;
+      color: #BC00FF;
+      min-width: 60px;
+    }
+    .step-text {
+      font-size: 28px; color: #ddd;
+    }
+    .compare-left, .compare-right {
+      flex: 1; padding: 40px;
+      border-radius: 16px; text-align: center;
+    }
+    .compare-left {
+      background: rgba(255,50,50,0.1);
+      border: 2px solid rgba(255,50,50,0.3);
+    }
+    .compare-right {
+      background: rgba(50,255,50,0.1);
+      border: 2px solid rgba(50,255,50,0.3);
+    }
+    .x-mark, .check-mark {
+      font-size: 80px; position: absolute;
+    }
+    .x-mark { color: #ff4444; }
+    .check-mark { color: #44ff44; }
+    .morph-shape {
+      width: 200px; height: 200px;
+      background: linear-gradient(135deg, #BC00FF, #1A1A1A);
+      border-radius: 10%;
+    }
+    .glitch-text {
+      font-size: 96px; font-weight: 900;
+      color: #BC00FF;
+      text-shadow: 3px 0 #BC00FF, -3px 0 #1A1A1A;
+    }
+    .stamp {
+      width: 300px; height: 300px;
+      border: 8px solid #BC00FF;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px; font-weight: 900;
+      color: #BC00FF;
+      text-transform: uppercase;
+      transform: rotate(-15deg);
+    }
+    .diagram-el {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px; padding: 20px 30px;
+      font-size: 24px; color: #eee;
+    }
+    .comparison-row {
+      display: flex; gap: 60px; width: 100%;
+      justify-content: center; align-items: stretch;
+    }
+    .bad-prompt, .good-prompt {
+      flex: 1; padding: 40px;
+      border-radius: 16px; font-size: 22px;
+      line-height: 1.6;
+    }
+    .bad-prompt {
+      background: rgba(255,50,50,0.08);
+      border: 2px solid rgba(255,50,50,0.3);
+    }
+    .good-prompt {
+      background: rgba(50,255,100,0.08);
+      border: 2px solid rgba(50,255,100,0.3);
+    }
+    .section-label {
+      position: absolute; top: 40px; left: 80px;
+      font-size: 18px; text-transform: uppercase;
+      letter-spacing: 6px; color: #FFFFFF;
+    }
+  </style>
+</head>
+<body>
+  <div id="scene-3" class="clip"
+       data-composition-id="scene-3"
+       data-start="0" data-duration="6"
+       data-width="1920" data-height="1080">
+    <div class="scene-content">
+      <div class="section-label">CONCEPT</div>
+      <div class="heading"><span class="char" style="display:inline-block">M</span><span class="char" style="display:inline-block">O</span><span class="char" style="display:inline-block">T</span><span class="char" style="display:inline-block">I</span><span class="char" style="display:inline-block">O</span><span class="char" style="display:inline-block">N</span><span class="char" style="display:inline-block">-</span><span class="char" style="display:inline-block">F</span><span class="char" style="display:inline-block">I</span><span class="char" style="display:inline-block">R</span><span class="char" style="display:inline-block">S</span><span class="char" style="display:inline-block">T</span><span class="char" style="display:inline-block;width:0.3em">&nbsp;</span><span class="char" style="display:inline-block">M</span><span class="char" style="display:inline-block">I</span><span class="char" style="display:inline-block">N</span><span class="char" style="display:inline-block">D</span><span class="char" style="display:inline-block">S</span><span class="char" style="display:inline-block">E</span><span class="char" style="display:inline-block">T</span></div>
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+    const t = 0;
+
+  tl.to(".toggle-switch", {'x': 100, 'backgroundColor': '#00F0FF'}, 0.0);
+  tl.from(".node", {'scale': 0, 'stagger': 0.3, 'ease': 'back.out'}, 1.0);
+
+
+    window.__timelines["scene-3"] = tl;
+  </script>
+</body>
+</html>

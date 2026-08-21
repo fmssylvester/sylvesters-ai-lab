@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0c12; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+  .card { background: linear-gradient(135deg, #0f1a2e, #0a0c12); padding: 50px; width: 1000px; height: 1000px; border: 1px solid #1e2433; position: relative; display: flex; flex-direction: column; justify-content: center; }
+  .bg-icon { position: absolute; right: 40px; bottom: 40px; font-size: 300px; opacity: 0.04; }
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; }
+  .header-left { display: flex; align-items: center; gap: 16px; }
+  .logo-dot { width: 14px; height: 14px; background: #06b6d4; border-radius: 50%; box-shadow: 0 0 20px rgba(6,182,212,0.4); }
+  .template-name { color: #fff; font-size: 30px; font-weight: 700; }
+  .badge { background: rgba(6,182,212,0.12); border: 1px solid rgba(6,182,212,0.3); padding: 8px 20px; border-radius: 20px; color: #06b6d4; font-size: 20px; font-weight: 600; }
+  .center { text-align: center; margin-bottom: 50px; }
+  .center h1 { color: #fff; font-size: 42px; font-weight: 800; letter-spacing: -0.5px; }
+  .center p { color: #64748b; font-size: 20px; margin-top: 12px; }
+  .mockup { display: flex; justify-content: center; align-items: center; margin-bottom: 40px; }
+  .phone { width: 260px; height: 520px; background: linear-gradient(180deg, #11141e, #0a0c12); border: 2px solid #2a2f3e; border-radius: 40px; position: relative; padding: 20px 16px; display: flex; flex-direction: column; }
+  .phone-notch { width: 80px; height: 6px; background: #1e2433; border-radius: 3px; margin: 0 auto 20px; }
+  .phone-header { display: flex; justify-content: space-between; margin-bottom: 16px; }
+  .phone-header .time { color: #94a3b8; font-size: 14px; }
+  .phone-header .icons { color: #94a3b8; font-size: 12px; }
+  .patient-card { background: #161b28; border: 1px solid #1e293b; border-radius: 14px; padding: 16px; flex: 1; }
+  .patient-name { color: #fff; font-size: 18px; font-weight: 700; margin-bottom: 2px; }
+  .patient-id { color: #64748b; font-size: 12px; margin-bottom: 12px; }
+  .p-row { display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .p-label { color: #64748b; font-size: 11px; }
+  .p-val { color: #f1f5f9; font-size: 12px; font-weight: 500; }
+  .p-val.red { color: #ef4444; }
+  .p-val.green { color: #2ecc71; }
+  .divider { height: 1px; background: #1e293b; margin: 10px 0; }
+  .tag-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .tag { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); padding: 8px 20px; border-radius: 16px; color: #94a3b8; font-size: 16px; }
+  .tag.highlight { background: rgba(46,204,113,0.1); border-color: rgba(46,204,113,0.3); color: #2ecc71; font-weight: 700; font-size: 18px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="bg-icon">🏥</div>
+  <div class="header">
+    <div class="header-left">
+      <div class="logo-dot"></div>
+      <span class="template-name">n8n Workflow</span>
+    </div>
+    <span class="badge">Patient Records</span>
+  </div>
+  <div class="center">
+    <h1>Patient Records Lookup</h1>
+    <p>Instant patient records · Webhook · Google Sheets</p>
+  </div>
+  <div class="mockup">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-header"><span class="time">9:41</span><span class="icons">📶 🔋</span></div>
+      <div class="patient-card">
+        <div class="patient-name">John Doe</div>
+        <div class="patient-id">PT-1024 · M · 45 yrs</div>
+        <div class="divider"></div>
+        <div class="p-row"><span class="p-label">⚠ Allergies</span><span class="p-val red">Penicillin</span></div>
+        <div class="p-row"><span class="p-label">💊 Medications</span><span class="p-val">Metformin, Lisinopril</span></div>
+        <div class="p-row"><span class="p-label">🩸 Blood Type</span><span class="p-val">O+</span></div>
+        <div class="divider"></div>
+        <div class="p-row"><span class="p-label">📅 Last Visit</span><span class="p-val">Jun 12, 2026</span></div>
+        <div class="p-row"><span class="p-label">🔜 Next Appt</span><span class="p-val green">Aug 3, 2026</span></div>
+        <div class="p-row"><span class="p-label">🏥 Conditions</span><span class="p-val">Type 2 Diabetes</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="tag-row">
+    <span class="tag">🔍 Patient Search</span>
+    <span class="tag">📋 Medical Records</span>
+    <span class="tag highlight">$49 — One-Time</span>
+  </div>
+</div>
+</body>
+</html>

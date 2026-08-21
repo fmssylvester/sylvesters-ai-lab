@@ -1,37 +1,35 @@
 export const N8N_INTRO_TIMELINE = {
   FPS: 30,
-  TOTAL_FRAMES: 900, // 30 seconds at 30fps
+  TOTAL_FRAMES: 840, // ~28s viral-reel hook piece
 
-  PHASE_1_CHAT: {
+  /* PHASE A — COLD OPEN: the hook question (~0–7.4s) */
+  COLD_OPEN: {
     START: 0,
-    END: 240, // 0 - 8s
-    CHAT_CARD_ENTRY: 10,
-    MESSAGE_ENTRY: 30,
-    CLOCK_SWEEP: 70,
+    END: 220,
+    KINETIC_HOOK: 10, // words start rolling in
+    PHONE_LAND: 30, // phone/3AM card slams in
+    CLOCK_SWEEP: 90, // clock hand sweep accent
   },
 
-  PHASE_2_WORKFLOW: {
-    START: 240,
-    END: 450, // 8 - 15s
-    WEBHOOK_NODE: 250,
-    AI_AGENT_NODE: 280,
-    IF_NODE: 310,
-    GMAIL_NODE: 340,
-    RESPONSE_NODE: 370,
+  /* PHASE B — THE REVEAL: "that's exactly what I built with n8n" (~7.4–10.6s) */
+  REVEAL: {
+    START: 222,
+    END: 320,
+    PULL_BACK: 225, // camera zoom from phone to full canvas
+    LOGO_STAMP: 250, // n8n + logo reveal punch
   },
 
-  PHASE_3_KINETIC: {
-    START: 450,
-    END: 720, // 15 - 24s
-    TEXT_1_ENTER: 460,
-    HIGHLIGHT_SWEEP: 540,
-  },
-
-  PHASE_4_LOGO: {
-    START: 720,
-    END: 900, // 24 - 30s
-    LOGO_ENTER: 730,
-    SUBTITLE_ENTER: 780,
+  /* PHASE C — THE BUILD: node-by-node glass cards + data flow (~11.6–28s) */
+  BUILD: {
+    START: 322,
+    END: 840,
+    WEBHOOK: 340,
+    AI_AGENT: 430,
+    IF_NODE: 530,
+    GMAIL: 620,
+    RESPONSE: 700,
+    DATA_RACE: 400, // "under 3 seconds" data-packet sprint
+    TAGLINE: 780, // closing brand tagline
   },
 };
 

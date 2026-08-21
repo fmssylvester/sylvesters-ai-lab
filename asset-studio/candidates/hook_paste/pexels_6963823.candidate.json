@@ -1,0 +1,41 @@
+{
+  "id": "pexels_6963823",
+  "url": "https://videos.pexels.com/video-files/6963823/6963823-hd_2048_1080_25fps.mp4",
+  "kind": "video",
+  "w": 2048,
+  "h": 1080,
+  "fps": 25,
+  "text": "https://www.pexels.com/video/close-up-video-of-person-typing-on-a-cellphone-6963823/  screen recording typing",
+  "searchTerms": [
+    "screen recording typing",
+    "person using computer AI",
+    "typing keyboard close up",
+    "AI interface screen"
+  ],
+  "beat": "hook_paste",
+  "meta": {
+    "pexelsId": 6963823
+  },
+  "file": "/data/data/com.termux/files/home/ai-lab-internal/asset-studio/candidates/hook_paste/6963823-hd_2048_1080_25fps.mp4",
+  "downloaded": true,
+  "score": {
+    "dimensions": {
+      "resolution": 10,
+      "frameRate": 7,
+      "compression": 8.5,
+      "orientation": 10,
+      "lighting": 1,
+      "camera": 7.5,
+      "colorPalette": 4,
+      "metadataRelevance": 2.5,
+      "subjectRelevance": 2.5,
+      "motionComplexity": 7,
+      "visualCleanliness": 1,
+      "brandSafety": 9,
+      "licensing": 10
+    },
+    "overall": 6.26,
+    "weighted": true,
+    "probe": true
+  }
+}

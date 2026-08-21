@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1920px; height: 1080px; overflow: hidden; background: #0a0a0c; font-family: 'Inter', sans-serif; color: #fff; }
+    .laptop { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%); width: 900px; height: 560px; background: #111; border-radius: 16px 16px 0 0; border: 2px solid #222; opacity: 0; }
+    .laptop-screen { position: absolute; top: 12px; left: 12px; right: 12px; bottom: 50px; background: #1a1a1a; border-radius: 4px; overflow: hidden; }
+    .laptop-base { position: absolute; bottom: -40px; left: -40px; right: -40px; height: 40px; background: linear-gradient(180deg, #1a1a1a, #111); border-radius: 0 0 8px 8px; }
+    .prompt-bar { position: absolute; top: 20px; left: 20px; right: 20px; height: 50px; background: #111; border: 1px solid #333; border-radius: 8px; display: flex; align-items: center; padding: 0 16px; }
+    .prompt-icon { width: 24px; height: 24px; border-radius: 50%; background: #333; margin-right: 12px; flex-shrink: 0; }
+    .prompt-text { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: #ccc; overflow: hidden; white-space: nowrap; width: 0; }
+    .cursor-blink { display: inline-block; width: 2px; height: 20px; background: #fff; margin-left: 2px; opacity: 0; animation: blink 0.6s infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    .result-area { position: absolute; top: 90px; left: 20px; right: 20px; bottom: 20px; display: flex; gap: 12px; }
+    .result-card { flex: 1; background: #111; border: 1px solid #222; border-radius: 8px; overflow: hidden; opacity: 0; }
+    .result-img { width: 100%; height: 70%; object-fit: cover; }
+    .result-label { padding: 8px 12px; font-size: 11px; color: #555; font-family: 'JetBrains Mono', monospace; }
+    .vignette { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(ellipse at center, transparent 30%, rgba(192,57,43,0.15) 100%); opacity: 0; pointer-events: none; z-index: 10; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="midjourney" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+    <div class="vignette" id="vignette"></div>
+    <div class="laptop" id="laptop">
+      <div class="laptop-screen">
+        <div class="prompt-bar">
+          <div class="prompt-icon"></div>
+          <span class="prompt-text" id="prompt-text"></span>
+          <span class="cursor-blink" id="cursor"></span>
+        </div>
+        <div class="result-area">
+          <div class="result-card" id="r1">
+            <div class="result-img" style="background: linear-gradient(135deg, #1a1a2e, #16213e);"></div>
+            <div class="result-label">v6.1 — 4 variations</div>
+          </div>
+          <div class="result-card" id="r2">
+            <div class="result-img" style="background: linear-gradient(135deg, #0f3460, #1a1a2e);"></div>
+            <div class="result-label">U1 U2 U3 U4 V1 V2 V3 V4</div>
+          </div>
+          <div class="result-card" id="r3">
+            <div class="result-img" style="background: linear-gradient(135deg, #162447, #1f4068);"></div>
+            <div class="result-label">--ar 16:9 --style raw</div>
+          </div>
+          <div class="result-card" id="r4">
+            <div class="result-img" style="background: linear-gradient(135deg, #1b1b2f, #162447);"></div>
+            <div class="result-label">Seed: 48291037</div>
+          </div>
+        </div>
+      </div>
+      <div class="laptop-base"></div>
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    // Laptop slides in and opens
+    tl.fromTo('#laptop', 
+      { opacity: 0, y: 60, rotateX: 15 }, 
+      { opacity: 1, y: 0, rotateX: 0, duration: 0.6, ease: 'power3.out' }, 
+      0
+    );
+
+    // Typing animation
+    const prompt = 'cinematic explorer in ancient cave, lantern light,';
+    const textEl = document.getElementById('prompt-text');
+    tl.to('#cursor', { opacity: 1, duration: 0.1 }, 0.7);
+    tl.to(textEl, {
+      duration: 1.5,
+      onStart: () => {
+        let idx = 0;
+        const iv = setInterval(() => {
+          if (idx < prompt.length) {
+            textEl.textContent = prompt.substring(0, idx + 1);
+            idx++;
+          } else {
+            clearInterval(iv);
+          }
+        }, 40);
+      }
+    }, 0.8);
+
+    // Results appear one by one
+    tl.to('#r1', { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 2.3);
+    tl.to('#r2', { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 2.5);
+    tl.to('#r3', { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 2.7);
+    tl.to('#r4', { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 2.9);
+
+    // Red vignette fades in (the problem reveal)
+    tl.to('#vignette', { opacity: 1, duration: 0.8, ease: 'power2.in' }, 3.5);
+
+    // Everything fades
+    tl.to('#laptop', { opacity: 0, duration: 0.3 }, 4.5);
+
+    window.__timelines['midjourney'] = tl;
+  </script>
+</body>
+</html>

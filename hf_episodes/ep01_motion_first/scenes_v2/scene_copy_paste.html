@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1920px; height: 1080px; overflow: hidden; background: #080808; font-family: 'Inter', sans-serif; color: #fff; }
+    .split { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; }
+    .half { flex: 1; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+    .half img { width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+    .divider { position: absolute; top: 0; left: 50%; width: 2px; height: 0; background: #c0392b; z-index: 5; transform: translateX(-50%); }
+    .label-left, .label-right { position: absolute; bottom: 80px; font-size: 20px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; opacity: 0; }
+    .label-left { left: 80px; color: #c0392b; }
+    .label-right { right: 80px; color: #00e5a0; }
+    .arrow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 48px; opacity: 0; z-index: 10; color: #fff; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="copy-paste" data-start="0" data-duration="4" data-width="1920" data-height="1080">
+    <div class="split">
+      <div class="half" id="left-half">
+        <img id="img-left" src="ai_morphing_face.png" alt="" />
+      </div>
+      <div class="half" id="right-half">
+        <img id="img-right" src="clean_still.png" alt="" />
+      </div>
+    </div>
+    <div class="divider" id="divider"></div>
+    <div class="label-left" id="label-left">COPY</div>
+    <div class="label-right" id="label-right">PASTE</div>
+    <div class="arrow" id="arrow">→</div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    // Left image fades in (bad result)
+    tl.to('#img-left', { opacity: 1, duration: 0.4 }, 0);
+
+    // Divider line draws down
+    tl.to('#divider', { height: '100%', duration: 0.5, ease: 'power2.inOut' }, 0.5);
+
+    // Right image fades in (clean result)
+    tl.to('#img-right', { opacity: 1, duration: 0.4 }, 1.0);
+
+    // Labels appear
+    tl.to('#label-left', { opacity: 1, duration: 0.3 }, 1.5);
+    tl.to('#label-right', { opacity: 1, duration: 0.3 }, 1.7);
+
+    // Arrow appears
+    tl.fromTo('#arrow', 
+      { opacity: 0, x: -30 }, 
+      { opacity: 0.7, x: 0, duration: 0.3 }, 
+      2.0
+    );
+
+    // The problem: both are static, both are dead
+    // Flash warning
+    tl.to(['#label-left', '#label-right', '#arrow'], { opacity: 0, duration: 0.2 }, 3.2);
+    tl.to(['#img-left', '#img-right'], { opacity: 0, duration: 0.3 }, 3.5);
+
+    window.__timelines['copy-paste'] = tl;
+  </script>
+</body>
+</html>

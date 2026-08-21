@@ -1,0 +1,25 @@
+{
+  "title": "The Future of AI",
+  "scenes": [
+    {
+      "scene_number": 1,
+      "visual_description": "Introduction to The Future of AI, abstract visualization, bold typography, editorial style",
+      "duration_seconds": 4
+    },
+    {
+      "scene_number": 2,
+      "visual_description": "Key concept of The Future of AI, infographic style, clean design, paper collage aesthetic",
+      "duration_seconds": 4
+    },
+    {
+      "scene_number": 3,
+      "visual_description": "Impact of The Future of AI, data visualization, bold colors, modern editorial",
+      "duration_seconds": 4
+    },
+    {
+      "scene_number": 4,
+      "visual_description": "Future of The Future of AI, minimal design, strong conclusion, Vox style",
+      "duration_seconds": 4
+    }
+  ]
+}

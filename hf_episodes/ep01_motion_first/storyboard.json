@@ -1,0 +1,443 @@
+{
+  "title": "The Motion-First Secret to Perfect AI Video Prompts",
+  "style": {
+    "name": "Dark-Tech Editorial",
+    "description": "High-contrast dark mode aesthetics with electric blue accents and precision-engineered motion graphics.",
+    "background": "#050505",
+    "palette": [
+      "#050505",
+      "#00F0FF",
+      "#BC00FF",
+      "#FFFFFF",
+      "#1A1A1A",
+      "#FF3E3E"
+    ],
+    "primaryFont": "Inter",
+    "accentFont": "JetBrains Mono"
+  },
+  "scenes": [
+    {
+      "scene_number": 1,
+      "type": "hook",
+      "duration_seconds": 6,
+      "narration": "If you are copying and pasting your image prompts into an AI video generator, you are ruining your video before it even starts rendering.",
+      "visual_description": "Large kinetic typography of 'COPY' and 'PASTE' blocks colliding in center screen, then shattering into digital dust as 'RUINING' appears in red glitch text.",
+      "animation_type": "kinetic_type",
+      "gsap_timeline": [
+        {
+          "t": 0.0,
+          "action": "from",
+          "target": ".copy-block",
+          "props": {
+            "x": -500,
+            "opacity": 0,
+            "ease": "power4.out"
+          },
+          "note": "Slide in copy block"
+        },
+        {
+          "t": 0.2,
+          "action": "from",
+          "target": ".paste-block",
+          "props": {
+            "x": 500,
+            "opacity": 0,
+            "ease": "power4.out"
+          },
+          "note": "Slide in paste block"
+        },
+        {
+          "t": 1.5,
+          "action": "to",
+          "target": ".shatter-effect",
+          "props": {
+            "scale": 2,
+            "opacity": 1,
+            "duration": 0.5
+          },
+          "note": "Collision explosion"
+        }
+      ],
+      "text_elements": [
+        {
+          "text": "COPY + PASTE",
+          "role": "heading",
+          "animate": "slide-in"
+        },
+        {
+          "text": "RUINING THE RENDER",
+          "role": "subheading",
+          "animate": "glitch"
+        }
+      ],
+      "video_prompt": "Slow cinematic push-in on dark background. Glowing cyan text blocks labeled COPY and PASTE collide in center screen and shatter into digital particles. Debris floats in slow motion. Red glitch text RUINING appears with distortion. Dark tech aesthetic with neon lighting."
+    },
+    {
+      "scene_number": 2,
+      "type": "concept",
+      "duration_seconds": 7,
+      "narration": "Most people jump into Midjourney or Flux, spend an hour crafting a hyper-detailed prompt, and then copy that exact same wall of text into Runway or Kling. This is the double-prompting trap.",
+      "visual_description": "A scrolling 'wall of text' appears on the left. An arrow points to a video player icon on the right which begins to morph and melt into a chaotic mess.",
+      "animation_type": "glitch",
+      "gsap_timeline": [
+        {
+          "t": 0.0,
+          "action": "from",
+          "target": ".text-wall",
+          "props": {
+            "y": 300,
+            "opacity": 0
+          },
+          "note": "Text wall scrolls up"
+        },
+        {
+          "t": 2.5,
+          "action": "to",
+          "target": ".video-icon",
+          "props": {
+            "skewX": 20,
+            "filter": "blur(5px)",
+            "repeat": 5,
+            "yoyo": true
+          },
+          "note": "Melting effect"
+        }
+      ],
+      "text_elements": [
+        {
+          "text": "THE DOUBLE-PROMPTING TRAP",
+          "role": "heading",
+          "animate": "reveal"
+        }
+      ],
+      "video_prompt": "Scrolling wall of white text on left side moves upward like code. Arrow connects to video play button icon on right which distorts and melts into static noise and chaos. Dark background with glitch artifacts."
+    },
+    {
+      "scene_number": 3,
+      "type": "concept",
+      "duration_seconds": 6,
+      "narration": "To fix this, we have to shift to a motion-first mindset. Your text prompt should only focus on two things: camera work and temporal progression.",
+      "visual_description": "A toggle switch labeled 'STATIC' flips to 'MOTION-FIRST'. Two clean nodes branch out: 'CAMERA WORK' and 'TEMPORAL PROGRESSION'.",
+      "animation_type": "step_reveal",
+      "gsap_timeline": [
+        {
+          "t": 0.0,
+          "action": "to",
+          "target": ".toggle-switch",
+          "props": {
+            "x": 100,
+            "backgroundColor": "#00F0FF"
+          },
+          "note": "Flip toggle"
+        },
+        {
+          "t": 1.0,
+          "action": "from",
+          "target": ".node",
+          "props": {
+            "scale": 0,
+            "stagger": 0.3,
+            "ease": "back.out"
+          },
+          "note": "Pop in nodes"
+        }
+      ],
+      "text_elements": [
+        {
+          "text": "MOTION-FIRST MINDSET",
+          "role": "heading",
+          "animate": "fade"
+        }
+      ],
+      "video_prompt": "Minimalist toggle switch animates from red STATIC label to green MOTION-FIRST label. Two clean nodes branch outward from the toggle showing camera icon and timeline icon. Smooth reveal animation with cyan neon glow."
+    },
+    {
+      "scene_number": 4,
+      "type": "step",
+      "duration_seconds": 5,
+      "narration": "Step one is Camera Movement. Use clear terms like 'slow pan right,' 'cinematic zoom in,' or 'low-angle crane shot.'",
+      "visual_description": "An animated camera lens icon in the center. Radial lines expand outward as text labels orbit the lens.",
+      "animation_type": "diagram",
+      "gsap_timeline": [
+        {
+          "t": 0.0,
+          "action": "from",
+          "target": ".camera-lens",
+          "props": {
+            "rotation": -180,
+            "scale": 0
+          },
+          "note": "Lens entry"
+        },
+        {
+          "t": 0.5,
+          "action": "to",
+          "target": ".orbit-text",
+          "props": {
+            "rotation": 360,
+            "duration": 10,
+            "repeat": -1,
+            "ease": "none"
+          },
+          "note": "Rotating labels"
+        }
+      ],
+      "text_elements": [
+        {
+          "text": "1. CAMERA MOVEMENT",
+          "role": "label",
+          "animate": "typewriter"
+        }
+      ],
+      "video_prompt": "Camera lens diagram in center with radial lines expanding outward like a burst. Text labels slowly orbit around the lens. Technical illustration style with cyan outlines on dark background."
+    },
+    {
+      "scene_number": 5,
+      "type": "step",
+      "duration_seconds": 5,
+      "narration": "Step two is Subject Action. Keep this minimal. Instead of 'man runs furiously,' try 'the man slowly turns his head toward the camera.'",
+      "visual_description": "A 'BAD' red box with the running text is swiped away by a 'GOOD' green box with the turning head text.",
+      "animation_type": "comparison",
+      "gsap_timeline": [
+        {
+          "t": 0.0,
+          "action": "from",
+          "target": ".bad-prompt",
+          "props": {
+            "x": 0
+          },
+          "note": "Initial state"
+        },
+        {
+          "t": 1.5,
+          "action": "to",
+          "target": ".bad-prompt",
+          "props": {
+            "x": -1000,
+            "ease": "power2.in"
+          },
+          "note": "Swipe out bad"
+        },
+        {
+          "t": 1.7,
+          "action": "from",
+          "target": ".good-prompt",
+          "props": {
+            "x": 1000,
+            "ease": "power2.out"
+          },
+          "note": "Swipe in good"
+        }
+      ],
+      "text_elements": [
+        {
+          "text": "2. SUBJECT ACTION",
+          "role": "label",
+          "animate": "fade"
+        }
+      ],
+      "video_prompt": "Red box labeled BAD with chaotic text slides left out of frame. Green box labeled GOOD with clean text slides in from right. Smooth swiping transition on dark background."
+    },
+    {
+      "scene_number": 6,
+      "type": "step",
+      "duration_seconds": 5,
+      "narration": "Step three is Environmental Physics. This describes subtle, secondary motion like 'leaves rustling' or 'smoke drifting.'",
+      "visual_description": "Abstract particles (leaves and smoke) drift across the screen in a stylized, slow-motion flow field.",
+      "animation_type": "diagram",
+      "gsap_timeline": [
+        {
+          "t": 0.0,
+          "action": "to",
+          "target": ".particles",
+          "props": {
+            "physics2D": {
+              "velocity": 100,
+              "angle": 0,
+              "gravity": 10
+            }
+          },
+          "note": "Drift animation"
+        }
+      ],
+      "text_elements": [
+        {
+          "text": "3. ENVIRONMENTAL PHYSICS",
+          "role": "label",
+          "animate": "float"
+        }
+      ],
+      "video_prompt": "Abstract particles drift slowly across frame in slow motion. Leaves and smoke wisps flow through volumetric light rays on dark background. Ethereal atmospheric motion."
+    },
+    {
+      "scene_number": 7,
+      "type": "comparison",
+      "duration_seconds": 8,
+      "narration": "A standard bad prompt lists every visual detail. Our formula skips the description and focuses only on the movement: 'Slow push-in. Explorer raises lantern. Dust motes float.'",
+      "visual_description": "Split screen. Left side: 'Visual Clutter' (red text). Right side: 'Motion Tokens' (blue text). The right side glows brighter.",
+      "animation_type": "comparison",
+      "gsap_timeline": [
+        {
+          "t": 0.0,
+          "action": "from",
+          "target": ".split-divider",
+          "props": {
+            "scaleY": 0
+          },
+          "note": "Divide screen"
+        },
+        {
+          "t": 2.0,
+          "action": "to",
+          "target": ".right-panel",
+          "props": {
+            "boxShadow": "0 0 50px #00F0FF"
+          },
+          "note": "Highlight right"
+        }
+      ],
+      "text_elements": [
+        {
+          "text": "DITCH THE DETAILS",
+          "role": "heading",
+          "animate": "reveal"
+        },
+        {
+          "text": "EMBRACE THE MOTION",
+          "role": "heading",
+          "animate": "reveal"
+        }
+      ],
+      "video_prompt": "Split screen divider appears vertically. Left panel shows cluttered red-tinted text. Right panel shows clean blue-tinted motion tokens that glows brighter with cyan light. Dark background."
+    },
+    {
+      "scene_number": 8,
+      "type": "warning",
+      "duration_seconds": 6,
+      "narration": "Now, keep it real. This method has limits. AI video still struggles with complex, high-velocity physical interactions like tying shoelaces.",
+      "visual_description": "A yellow 'WARNING' hazard stripe pattern scrolls diagonally in the background. A 'STABILITY LIMIT' meter hits the red zone.",
+      "animation_type": "counter",
+      "gsap_timeline": [
+        {
+          "t": 0.0,
+          "action": "to",
+          "target": ".hazard-bg",
+          "props": {
+            "backgroundPosition": "100px 0",
+            "repeat": -1,
+            "ease": "none"
+          },
+          "note": "Scrolling hazard stripes"
+        },
+        {
+          "t": 1.0,
+          "action": "to",
+          "target": ".meter-needle",
+          "props": {
+            "rotation": 160,
+            "duration": 2,
+            "ease": "elastic.out"
+          },
+          "note": "Meter spikes"
+        }
+      ],
+      "text_elements": [
+        {
+          "text": "LIMITATIONS",
+          "role": "heading",
+          "animate": "stamp"
+        }
+      ],
+      "video_prompt": "Yellow hazard warning stripes scroll diagonally across background. Stability meter needle swings from green to red zone with elastic bounce. Dark technical warning interface."
+    },
+    {
+      "scene_number": 9,
+      "type": "verdict",
+      "duration_seconds": 6,
+      "narration": "So, what is the final verdict? I highly recommend adopting the motion-first methodology immediately for all your image-to-video projects.",
+      "visual_description": "A large circular seal with 'SYLVESTER'S VERDICT' slams onto the screen, causing a camera shake effect.",
+      "animation_type": "stamp",
+      "gsap_timeline": [
+        {
+          "t": 0.0,
+          "action": "fromTo",
+          "target": ".verdict-seal",
+          "props": {
+            "scale": 10,
+            "opacity": 0
+          },
+          "props2": {
+            "scale": 1,
+            "opacity": 1,
+            "ease": "bounce.out"
+          },
+          "note": "Slamming seal"
+        },
+        {
+          "t": 0.3,
+          "action": "to",
+          "target": "body",
+          "props": {
+            "x": 10,
+            "repeat": 5,
+            "yoyo": true,
+            "duration": 0.05
+          },
+          "note": "Camera shake"
+        }
+      ],
+      "text_elements": [
+        {
+          "text": "MOTION-FIRST: APPROVED",
+          "role": "heading",
+          "animate": "scale-up"
+        }
+      ],
+      "video_prompt": "Large circular seal stamp with laurel wreath slams onto screen from above with bounce impact. Camera shake effect on landing. Golden and cyan accents on dark background."
+    },
+    {
+      "scene_number": 10,
+      "type": "cta",
+      "duration_seconds": 6,
+      "narration": "Subscribe to Sylvester's AI Lab for straightforward, hype-free AI tutorials, and I'll see you in the next video.",
+      "visual_description": "The lab logo (a stylized beaker with a digital pulse) centers. Social icons and a 'SUBSCRIBE' button pulse in sync with the pulse line.",
+      "animation_type": "kinetic_type",
+      "gsap_timeline": [
+        {
+          "t": 0.0,
+          "action": "from",
+          "target": ".logo",
+          "props": {
+            "y": 50,
+            "opacity": 0
+          },
+          "note": "Logo entry"
+        },
+        {
+          "t": 0.5,
+          "action": "to",
+          "target": ".subscribe-btn",
+          "props": {
+            "scale": 1.1,
+            "repeat": -1,
+            "yoyo": true
+          },
+          "note": "Pulsing button"
+        }
+      ],
+      "text_elements": [
+        {
+          "text": "SYLVESTER'S AI LAB",
+          "role": "heading",
+          "animate": "fade"
+        },
+        {
+          "text": "SUBSCRIBE",
+          "role": "label",
+          "animate": "pulse"
+        }
+      ],
+      "video_prompt": "Stylized laboratory beaker with digital pulse wave inside fades in. Social media icons float around it. Subscribe button pulses rhythmically. Dark tech background with neon glow."
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0c12; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+  .card { background: linear-gradient(135deg, #0f1a2e, #11141e); padding: 50px; width: 1000px; height: 1000px; border: 1px solid #1e2433; position: relative; display: flex; flex-direction: column; justify-content: center; }
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+  .header-left { display: flex; align-items: center; gap: 16px; }
+  .logo-dot { width: 14px; height: 14px; background: #2ecc71; border-radius: 50%; box-shadow: 0 0 20px rgba(46,204,113,0.4); }
+  .template-name { color: #fff; font-size: 28px; font-weight: 700; }
+  .badge { background: rgba(46,204,113,0.12); border: 1px solid rgba(46,204,113,0.3); padding: 8px 20px; border-radius: 20px; color: #2ecc71; font-size: 18px; font-weight: 600; }
+  .center { text-align: center; margin-bottom: 30px; }
+  .center h2 { color: #fff; font-size: 26px; font-weight: 700; }
+  .center p { color: #64748b; font-size: 15px; margin-top: 4px; }
+  .mockup { display: flex; justify-content: center; }
+  .browser { width: 700px; background: #0a0c12; border: 1px solid #1e293b; border-radius: 16px; overflow: hidden; }
+  .browser-bar { background: #11141e; padding: 12px 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #1e293b; }
+  .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .browser-dot.r { background: #ef4444; }
+  .browser-dot.y { background: #eab308; }
+  .browser-dot.g { background: #2ecc71; }
+  .browser-url { background: #1e2433; padding: 6px 14px; border-radius: 8px; color: #64748b; font-size: 13px; flex: 1; }
+  .browser-content { padding: 24px; }
+  .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .top-bar .dr { color: #64748b; font-size: 14px; }
+  .top-bar .logout { color: #ef4444; font-size: 13px; cursor: pointer; }
+  .search-bar { display: flex; gap: 8px; margin-bottom: 20px; }
+  .search-bar input { flex: 1; padding: 12px 16px; background: #0a0c12; border: 1px solid #1e293b; border-radius: 10px; color: #fff; font-size: 14px; }
+  .search-bar .btn { padding: 12px 24px; background: #2ecc71; color: #0a0c12; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; }
+  .record { background: #0a0c12; border: 1px solid #1e293b; border-radius: 14px; padding: 20px; }
+  .r-name { font-size: 20px; font-weight: 700; color: #fff; }
+  .r-id { color: #64748b; font-size: 13px; margin-bottom: 12px; }
+  .divider { height: 1px; background: #1e293b; margin: 12px 0; }
+  .r-row { display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .r-label { color: #64748b; font-size: 13px; }
+  .r-val { color: #f1f5f9; font-size: 14px; font-weight: 500; }
+  .r-val.red { color: #ef4444; }
+  .r-val.green { color: #2ecc71; }
+  .status-badge { display: inline-block; padding: 4px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; background: rgba(46,204,113,0.15); color: #2ecc71; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="header">
+    <div class="header-left">
+      <div class="logo-dot"></div>
+      <span class="template-name">Pulse</span>
+    </div>
+    <span class="badge">Patient Dashboard</span>
+  </div>
+  <div class="center">
+    <h2>Patient Search Dashboard</h2>
+    <p>Type a name or ID · Get instant records</p>
+  </div>
+  <div class="mockup">
+    <div class="browser">
+      <div class="browser-bar">
+        <div style="display:flex;gap:6px"><div class="browser-dot r"></div><div class="browser-dot y"></div><div class="browser-dot g"></div></div>
+        <div class="browser-url">🔒 pulse.patient-records.local</div>
+      </div>
+      <div class="browser-content">
+        <div class="top-bar">
+          <div class="dr">👨‍⚕️ Dr. Sylvester</div>
+          <div class="logout">Log out</div>
+        </div>
+        <div class="search-bar">
+          <input type="text" value="John Doe">
+          <div class="btn">Search</div>
+        </div>
+        <div class="record">
+          <div class="r-name">John Doe</div>
+          <div class="r-id">PT-1024 · Male · 45 yrs</div>
+          <div class="divider"></div>
+          <div class="r-row"><span class="r-label">⚠ Allergies</span><span class="r-val red">Penicillin</span></div>
+          <div class="r-row"><span class="r-label">💊 Medications</span><span class="r-val">Metformin 500mg, Lisinopril 10mg</span></div>
+          <div class="r-row"><span class="r-label">🩸 Blood Type</span><span class="r-val">O+</span></div>
+          <div class="divider"></div>
+          <div class="r-row"><span class="r-label">📅 Last Visit</span><span class="r-val">June 12, 2026</span></div>
+          <div class="r-row"><span class="r-label">🔜 Next Appt</span><span class="r-val green">Aug 3, 2026</span></div>
+          <div class="r-row"><span class="r-label">🏥 Conditions</span><span class="r-val">Type 2 Diabetes, Hypertension</span></div>
+          <div class="divider"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="color:#64748b;font-size:13px">Status</span>
+            <span class="status-badge">Stable</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

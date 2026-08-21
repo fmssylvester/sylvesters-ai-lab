@@ -1,0 +1,38 @@
+{
+  "id": "pexels_8888432",
+  "bankedAt": "2026-07-19T17:00:50.278Z",
+  "sourceRel": "asset-studio/library/Technology/pexels_8888432.mp4",
+  "original": "https://videos.pexels.com/video-files/8888432/8888432-hd_1366_720_25fps.mp4",
+  "kind": "video",
+  "category": "Technology",
+  "tags": [
+    "typing",
+    "keyboard",
+    "dark",
+    "cinematic",
+    "screen-recording"
+  ],
+  "whyApproved": [
+    "moody ambient typing shot",
+    "cinematic lighting",
+    "clean composition for browser-overlay background"
+  ],
+  "beat": "hook_paste",
+  "score": 8.17,
+  "scoreBreakdown": {
+    "resolution": 8,
+    "frameRate": 7,
+    "compression": 8.5,
+    "orientation": 10,
+    "lighting": 7.098890857142857,
+    "camera": 7.5,
+    "colorPalette": 9,
+    "metadataRelevance": 2.5,
+    "subjectRelevance": 2.5,
+    "motionComplexity": 7,
+    "visualCleanliness": 10,
+    "brandSafety": 9,
+    "licensing": 10
+  },
+  "license": "Pexels License (free commercial, no attribution)"
+}

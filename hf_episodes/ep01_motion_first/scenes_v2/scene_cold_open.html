@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1920px; height: 1080px; overflow: hidden; background: #000; font-family: 'Inter', sans-serif; color: #fff; }
+    .scanline { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: #fff; opacity: 0; z-index: 20; }
+    .fail-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+    .fail-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(192,57,43,0.4); opacity: 0; z-index: 5; }
+    .title-slam { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 30; }
+    .title-slam h1 { font-size: 72px; font-weight: 900; letter-spacing: -2px; opacity: 0; transform: scale(1.5); }
+    .pixel-grid { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 15; display: none; }
+    .pixel { position: absolute; background-size: cover; background-position: center; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="cold-open" data-start="0" data-duration="6" data-width="1920" data-height="1080">
+    <!-- Scanline -->
+    <div class="scanline" id="scanline"></div>
+    
+    <!-- Fail images (4 AI fail frames) -->
+    <img class="fail-img" id="fail1" src="ai_morphing_face.png" alt="" />
+    <img class="fail-img" id="fail2" src="ai_morphing_hands.png" alt="" />
+    <img class="fail-img" id="fail3" src="ai_morphing_face.png" alt="" />
+    <img class="fail-img" id="fail4" src="ai_morphing_hands.png" alt="" />
+    <div class="fail-overlay" id="fail-overlay"></div>
+    
+    <!-- Pixel shatter grid -->
+    <div class="pixel-grid" id="pixel-grid"></div>
+    
+    <!-- Title slam -->
+    <div class="title-slam">
+      <h1 id="title">You're prompting AI video wrong.</h1>
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    // Generate pixel grid for shatter effect
+    const pixelGrid = document.getElementById('pixel-grid');
+    const COLS = 24, ROWS = 14;
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const div = document.createElement('div');
+        div.className = 'pixel';
+        div.style.width = (100/COLS) + '%';
+        div.style.height = (100/ROWS) + '%';
+        div.style.left = (c * 100/COLS) + '%';
+        div.style.top = (r * 100/ROWS) + '%';
+        div.style.backgroundImage = 'url(ai_morphing_face.png)';
+        div.style.backgroundSize = (COLS*100) + '% ' + (ROWS*100) + '%';
+        div.style.backgroundPosition = (c*100/(COLS-1)) + '% ' + (r*100/(ROWS-1)) + '%';
+        pixelGrid.appendChild(div);
+      }
+    }
+
+    // 0:00 - Scanline sweeps (CRT power on)
+    tl.set('#scanline', { opacity: 1, y: -2 });
+    tl.to('#scanline', { y: 1080, duration: 0.6, ease: 'power1.inOut' }, 0);
+    tl.to('#scanline', { opacity: 0, duration: 0.1 }, 0.55);
+
+    // 0:00.6 - Rapid fail montage (4 images, ~0.35s each)
+    tl.to('#fail1', { opacity: 1, duration: 0.05 }, 0.7);
+    tl.to('#fail-overlay', { opacity: 1, duration: 0.05 }, 0.7);
+    tl.to('#fail1', { opacity: 0, duration: 0.05 }, 1.0);
+    tl.to('#fail2', { opacity: 1, duration: 0.05 }, 1.0);
+    tl.to('#fail2', { opacity: 0, duration: 0.05 }, 1.35);
+    tl.to('#fail3', { opacity: 1, duration: 0.05 }, 1.35);
+    tl.to('#fail3', { opacity: 0, duration: 0.05 }, 1.7);
+    tl.to('#fail4', { opacity: 1, duration: 0.05 }, 1.7);
+
+    // 1.7s - Freeze on last fail, show pixel grid
+    tl.set('#pixel-grid', { display: 'block', opacity: 1 }, 2.0);
+    tl.to('#fail4', { opacity: 0, duration: 0.01 }, 2.0);
+    tl.to('#fail-overlay', { opacity: 0, duration: 0.01 }, 2.0);
+
+    // 2.0s - Pixel shatter (each pixel flies out with random spring)
+    const pixels = document.querySelectorAll('.pixel');
+    pixels.forEach((p, i) => {
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 200 + Math.random() * 800;
+      const rot = (Math.random() - 0.5) * 720;
+      const dx = Math.cos(angle) * dist;
+      const dy = Math.sin(angle) * dist;
+      tl.to(p, {
+        x: dx, y: dy, rotation: rot, opacity: 0,
+        duration: 0.5 + Math.random() * 0.3,
+        ease: 'power2.out'
+      }, 2.0 + Math.random() * 0.1);
+    });
+
+    // 2.6s - Black pause (6 frames = 0.25s)
+    
+    // 2.85s - Title slam
+    tl.fromTo('#title', 
+      { opacity: 0, scale: 1.5 }, 
+      { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2)' }, 
+      2.85
+    );
+
+    // 3.1s - Hold title
+    // 3.35s - Cut to black
+    tl.to('#title', { opacity: 0, duration: 0.05 }, 3.35);
+    tl.set('#pixel-grid', { display: 'none' }, 3.35);
+
+    window.__timelines['cold-open'] = tl;
+  </script>
+</body>
+</html>

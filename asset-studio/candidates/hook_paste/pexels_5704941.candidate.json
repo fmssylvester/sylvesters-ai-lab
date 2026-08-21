@@ -1,0 +1,41 @@
+{
+  "id": "pexels_5704941",
+  "url": "https://videos.pexels.com/video-files/5704941/5704941-hd_2048_1080_24fps.mp4",
+  "kind": "video",
+  "w": 2048,
+  "h": 1080,
+  "fps": 24,
+  "text": "https://www.pexels.com/video/person-typing-on-a-laptop-5704941/  screen recording typing",
+  "searchTerms": [
+    "screen recording typing",
+    "person using computer AI",
+    "typing keyboard close up",
+    "AI interface screen"
+  ],
+  "beat": "hook_paste",
+  "meta": {
+    "pexelsId": 5704941
+  },
+  "file": "/data/data/com.termux/files/home/ai-lab-internal/asset-studio/candidates/hook_paste/5704941-hd_2048_1080_24fps.mp4",
+  "downloaded": true,
+  "score": {
+    "dimensions": {
+      "resolution": 8,
+      "frameRate": 7,
+      "compression": 8.5,
+      "orientation": 10,
+      "lighting": 9.225725714285712,
+      "camera": 7.5,
+      "colorPalette": 9,
+      "metadataRelevance": 2.5,
+      "subjectRelevance": 2.5,
+      "motionComplexity": 7,
+      "visualCleanliness": 10,
+      "brandSafety": 9,
+      "licensing": 10
+    },
+    "overall": 7.83,
+    "weighted": true,
+    "probe": true
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "cloud": "lightning-public-prod",
+  "machine": "g7e.12xlarge",
+  "spot": true,
+  "runtime": 3600,
+  "studio": "teammate-2-deploy-model-aws",
+  "accounts": [
+    {
+      "name": "acct1",
+      "api_key": "e2e3373b-7e30-4579-94ff-ee200b2a254d",
+      "user": "ekokosylvester1",
+      "teamspace": "deploy-model-project",
+      "balance": 6.42
+    },
+    {
+      "name": "acct_ugurujuliet7",
+      "api_key": "cddcf109-777f-4681-a765-dac226653b2e",
+      "user": "ugurujuliet7",
+      "teamspace": "deploy-model-project",
+      "balance": 14.99
+    },
+    {
+      "name": "acct_starlionstudio001",
+      "api_key": "64bfe5c5-b5f2-4d82-a9cd-40bbf69ac434",
+      "user": "starlionstudio001",
+      "teamspace": "interaction-management-project",
+      "balance": 14.99
+    },
+    {
+      "name": "acct_talesbychijuliet",
+      "api_key": "ffec60d3-7b4b-4610-85c9-6d8292842c1a",
+      "user": "talesbychijuliet",
+      "teamspace": "deploy-model-project",
+      "balance": 14.99
+    },
+    {
+      "name": "acct_sylvestersailab",
+      "api_key": "2b7de856-29a1-4568-bb0c-52384cb4761c",
+      "user": "sylvestersailab",
+      "teamspace": "default-project",
+      "balance": 13.83
+    },
+    {
+      "name": "acct_chijuliet167",
+      "api_key": "ae377da9-c16f-48ce-9527-724c48503ef4",
+      "user": "chijuliet167",
+      "teamspace": "deploy-model-project",
+      "balance": 5.32
+    },
+    {
+      "name": "acct_droidclinics",
+      "api_key": "9dde9a31-dc85-4574-8ed2-4fc271ab3da7",
+      "user": "droidclinics",
+      "teamspace": "general",
+      "balance": 5.317793825555544
+    },
+    {
+      "name": "acct_fmssylvester",
+      "api_key": "c40a1b97-2846-4170-9641-69569d9b43ac",
+      "user": "fmssylvester",
+      "teamspace": "deploy-model-project",
+      "balance": 0.0
+    }
+  ]
+}

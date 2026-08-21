@@ -1,0 +1,21 @@
+{
+  "jsonrpc": "2.0",
+  "id": 33,
+  "method": "tools/call",
+  "params": {
+    "name": "test_workflow",
+    "arguments": {
+      "workflowId": "hkqpTtOgVYQTmbSE",
+      "pinData": {
+        "Webhook": [{
+          "headers": {"content-type": "application/json"},
+          "body": {
+            "phone": "+15551234567",
+            "business": "City Dental Clinic",
+            "timestamp": "2026-07-25T17:30:00Z"
+          }
+        }]
+      }
+    }
+  }
+}

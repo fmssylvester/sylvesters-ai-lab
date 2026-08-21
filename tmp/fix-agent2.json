@@ -1,0 +1,34 @@
+{
+  "jsonrpc": "2.0",
+  "id": 17,
+  "method": "tools/call",
+  "params": {
+    "name": "update_workflow",
+    "arguments": {
+      "workflowId": "yVUGzK8Z6k2IC8q5",
+      "operations": [
+        {
+          "type": "setNodeParameter",
+          "nodeName": "AI Customer Support Agent",
+          "path": "/agent",
+          "value": "toolsAgent"
+        },
+        {
+          "type": "setNodeParameter",
+          "nodeName": "AI Customer Support Agent",
+          "path": "/systemMessage",
+          "value": "You are SupportAI, a professional customer support agent for a SaaS company. Be helpful, concise, and empathetic. Never make up information. If a customer is frustrated, acknowledge their frustration first.\n\nWhen to Escalate:\n- Account deletion or data privacy requests\n- Billing disputes or refunds\n- Security concerns\n\nRespond with: ESCALATE: [reason]\n\nKeep responses under 150 words."
+        },
+        {
+          "type": "setNodeParameter",
+          "nodeName": "AI Customer Support Agent",
+          "path": "/options",
+          "value": {
+            "maxIterations": 5,
+            "returnIntermediateSteps": false
+          }
+        }
+      ]
+    }
+  }
+}

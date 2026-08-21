@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 1920px; height: 1080px; overflow: hidden;
+      background: #050505;
+      font-family: 'Inter', sans-serif;
+      color: #fff;
+    }
+
+    /* Background image layer */
+    .bg-image {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+      filter: saturate(0.7) contrast(1.1);
+    }
+
+    /* Dark overlay gradient */
+    .overlay {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(
+        135deg,
+        rgba(5,5,5,0.85) 0%,
+        rgba(5,5,5,0.6) 50%,
+        rgba(5,5,5,0.85) 100%
+      );
+    }
+
+    /* Content layer */
+    .content {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      padding: 80px 120px;
+      z-index: 10;
+    }
+
+    /* Typography */
+    .scene-heading {
+      font-size: 80px; font-weight: 900;
+      text-align: center; line-height: 1.05;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.8);
+      letter-spacing: -2px;
+    }
+    .scene-subheading {
+      font-size: 36px; font-weight: 400;
+      color: #00F0FF;
+      margin-top: 24px; text-align: center;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+    }
+    .scene-stat {
+      font-size: 200px; font-weight: 900;
+      color: #BC00FF;
+      font-family: 'JetBrains Mono', monospace;
+      text-shadow: 0 0 60px #BC00FF40;
+    }
+    .scene-label {
+      font-size: 20px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 6px;
+      color: #FFFFFF; opacity: 0.7;
+    }
+
+    /* Accent lines */
+    .accent-line {
+      position: absolute;
+      background: #00F0FF;
+      opacity: 0.3;
+    }
+    .accent-line.horizontal {
+      width: 0; height: 2px;
+      top: 50%; left: 10%;
+    }
+    .accent-line.vertical {
+      width: 2px; height: 0;
+      left: 50%; top: 20%;
+    }
+
+    /* Glow effects */
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+    }
+
+    /* Scene-type specific */
+    .comparison-container {
+      display: flex; gap: 60px; width: 100%;
+      justify-content: center;
+    }
+    .compare-side {
+      flex: 1; padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      opacity: 0;
+    }
+    .compare-bad {
+      background: rgba(255,62,62,0.15);
+      border: 2px solid rgba(255,62,62,0.3);
+    }
+    .compare-good {
+      background: rgba(0,240,255,0.15);
+      border: 2px solid rgba(0,240,255,0.3);
+    }
+
+    .step-cards {
+      display: flex; flex-direction: column;
+      gap: 20px; width: 800px;
+    }
+    .step-card {
+      display: flex; align-items: center; gap: 24px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; padding: 24px 32px;
+      opacity: 0; transform: translateX(60px);
+    }
+    .step-num {
+      font-size: 48px; font-weight: 900;
+      color: #BC00FF; min-width: 60px;
+    }
+    .step-text {
+      font-size: 28px; color: #eee;
+    }
+
+    .stamp {
+      width: 280px; height: 280px;
+      border: 6px solid #BC00FF;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px; font-weight: 900;
+      color: #BC00FF;
+      text-transform: uppercase;
+      transform: rotate(-15deg) scale(3);
+      opacity: 0;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    /* Noise texture */
+    .noise {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+  <img class="bg-image" src="scene_01.png" alt="" />
+  <div class="overlay"></div>
+  <div class="noise"></div>
+
+  <!-- Accent lines -->
+  <div class="accent-line horizontal"></div>
+  <div class="accent-line vertical"></div>
+
+  <!-- Glow orbs -->
+  <div class="glow-orb" style="width:400px;height:400px;background:#00F0FF;top:-100px;right:-100px;"></div>
+  <div class="glow-orb" style="width:300px;height:300px;background:#BC00FF;bottom:-80px;left:-80px;"></div>
+
+  <div class="content">
+    <h1 class="scene-heading">COPY + PASTE</h1>
+<p class="scene-subheading">RUINING THE RENDER</p>
+
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+  // Ken Burns on background
+  tl.from('[data-composition-id='scene-1'] .bg-image', { scale: 1.2, duration: 8, ease: 'none' }, 0);
+  tl.to('[data-composition-id='scene-1'] .bg-image', { scale: 1.0, duration: 8, ease: 'none' }, 0);
+  // Glow orbs
+  tl.from('[data-composition-id='scene-1'] .glow-orb', { opacity: 0, scale: 0.5, duration: 2, stagger: 0.3, ease: 'power2.out' }, 0.5);
+  // Accent lines
+  tl.to('[data-composition-id='scene-1'] .accent-line.horizontal', { width: '80%', duration: 1.5, ease: 'power3.out' }, 0.3);
+  tl.to('[data-composition-id='scene-1'] .accent-line.vertical', { height: '60%', duration: 1.5, ease: 'power3.out' }, 0.5);
+  // Hook — dramatic text reveal
+  tl.from('[data-composition-id='scene-1'] .scene-heading', { y: 80, opacity: 0, duration: 0.8, ease: 'power4.out' }, 0.5);
+  tl.from('[data-composition-id='scene-1'] .scene-subheading', { y: 40, opacity: 0, duration: 0.6, ease: 'power3.out' }, 1.0);
+  // Fade out
+  tl.to('[data-composition-id='scene-1'] .content', { opacity: 0, duration: 0.5 }, -0.5);
+
+    window.__timelines["scene-1"] = tl;
+  </script>
+</body>
+</html>

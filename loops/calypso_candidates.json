@@ -1,0 +1,66 @@
+{
+  "source": "/sdcard/Download/New Calypso Loop (BPM 93)- Loopsgospel - Loopsgospel (youtube).mp3",
+  "source_duration": 1804.564875,
+  "candidates": [
+    {
+      "end_time": 1802.578277,
+      "start_time": 1804.564898,
+      "loop_length": 1806.551496,
+      "quality": 0.9207374499997059
+    },
+    {
+      "end_time": 1803.228277,
+      "start_time": 1804.564898,
+      "loop_length": 1805.9014960000002,
+      "quality": 0.9205787499995495
+    },
+    {
+      "end_time": 1804.564898,
+      "start_time": 1804.564898,
+      "loop_length": 1804.564875,
+      "quality": 0.848816199999419
+    },
+    {
+      "end_time": 1802.028277,
+      "start_time": 1804.564898,
+      "loop_length": 1807.1014960000002,
+      "quality": 0.7805787499996768
+    },
+    {
+      "end_time": 1802.478277,
+      "start_time": 1804.564898,
+      "loop_length": 1806.6514960000002,
+      "quality": 0.7657374499995058
+    },
+    {
+      "end_time": 1803.328277,
+      "start_time": 1804.564898,
+      "loop_length": 1805.801496,
+      "quality": 0.7655787499993494
+    },
+    {
+      "end_time": 1803.078277,
+      "start_time": 1804.564898,
+      "loop_length": 1806.051496,
+      "quality": 0.6957374499997968
+    },
+    {
+      "end_time": 1802.728277,
+      "start_time": 1804.564898,
+      "loop_length": 1806.4014960000002,
+      "quality": 0.6955787499996404
+    },
+    {
+      "end_time": 1802.128277,
+      "start_time": 1804.564898,
+      "loop_length": 1807.001496,
+      "quality": 0.6255787499994767
+    },
+    {
+      "end_time": 1802.978277,
+      "start_time": 1804.564898,
+      "loop_length": 1806.1514960000002,
+      "quality": 0.5407374499995967
+    }
+  ]
+}

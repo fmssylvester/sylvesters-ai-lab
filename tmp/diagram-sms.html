@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0f1117;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  .canvas {
+    background: #181b24;
+    border-radius: 24px;
+    padding: 60px 40px;
+    position: relative;
+    width: 1200px;
+    height: 500px;
+  }
+  .node {
+    position: absolute;
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    min-width: 155px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    color: #fff;
+  }
+  .node-trigger { background: #1a5632; border: 2px solid #2ecc71; top: 200px; left: 20px; }
+  .node-set { background: #5c3a1a; border: 2px solid #f59e0b; top: 200px; left: 230px; }
+  .node-agent { background: #3b1f6e; border: 2px solid #a855f7; top: 200px; left: 480px; }
+  .node-model { background: #1a3a5c; border: 2px solid #3b82f6; top: 50px; left: 530px; }
+  .node-send { background: #3d1a1a; border: 2px solid #ef4444; top: 200px; left: 730px; }
+  .node-respond { background: #1a5632; border: 2px solid #2ecc71; top: 200px; left: 940px; }
+
+  .node-label {
+    font-size: 10px;
+    opacity: 0.6;
+    margin-top: 4px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+
+  .title {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #e2e8f0;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .line-h {
+    position: absolute;
+    height: 2px;
+    background: #4a5568;
+    top: 227px;
+  }
+  .line-v {
+    position: absolute;
+    width: 2px;
+    background: #4a5568;
+  }
+
+  .l1 { width: 80px; left: 175px; }
+  .l2 { width: 80px; left: 388px; }
+  .l3 { width: 80px; left: 638px; }
+  .l4 { width: 80px; left: 888px; }
+  .lv { height: 130px; left: 617px; top: 100px; }
+
+  .arrow {
+    position: absolute;
+    color: #4a5568;
+    font-size: 26px;
+    z-index: 2;
+  }
+  .ah1 { top: 225px; left: 180px; }
+  .ah2 { top: 225px; left: 393px; }
+  .ah3 { top: 225px; left: 643px; }
+  .ah4 { top: 225px; left: 893px; }
+  .av { top: 135px; left: 610px; }
+
+  .badge {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: #2d3748;
+    color: #a0aec0;
+    top: 172px;
+    width: 120px;
+    text-align: center;
+    left: 580px;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="title">Missed Call SMS Text-Back</div>
+
+  <div class="line-h l1"></div><div class="line-h l2"></div>
+  <div class="line-h l3"></div><div class="line-h l4"></div>
+  <div class="line-v lv"></div>
+
+  <div class="arrow ah1">▶</div><div class="arrow ah2">▶</div>
+  <div class="arrow ah3">▶</div><div class="arrow ah4">▶</div>
+  <div class="arrow av">▼</div>
+
+  <div class="badge">ai_languageModel</div>
+
+  <div class="node node-trigger">
+    Webhook
+    <div class="node-label">POST /missed-call</div>
+  </div>
+  <div class="node node-set">
+    Format Data
+    <div class="node-label">phone · business · time</div>
+  </div>
+  <div class="node node-agent">
+    SMS Generator<br>Agent
+    <div class="node-label">toolsAgent · AI SMS</div>
+  </div>
+  <div class="node node-model">
+    OpenAI<br>Chat Model
+    <div class="node-label">gpt-4o-mini</div>
+  </div>
+  <div class="node node-send">
+    Send SMS<br>via Twilio
+    <div class="node-label">Twilio API</div>
+  </div>
+  <div class="node node-respond">
+    Respond to<br>Webhook
+    <div class="node-label">JSON response</div>
+  </div>
+</div>
+</body>
+</html>

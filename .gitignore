@@ -55,3 +55,8 @@ pipeline/youtube_token.json
 client_secrets.json
 pipeline/workspace/
 secrets.txt
+CONTEXT.md
+.aider*
+.visual_qa
+loops/
+*.mp3

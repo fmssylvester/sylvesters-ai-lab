@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html><head><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0c12;display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding:20px}
+.card{background:#11141e;border-radius:28px;padding:30px;width:1200px;border:1px solid #1e2433;min-height:650px}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
+.h-left{display:flex;align-items:center;gap:14px}
+.logo{width:14px;height:14px;background:#2ecc71;border-radius:50%;box-shadow:0 0 20px rgba(46,204,113,.5)}
+.title{color:#fff;font-size:26px;font-weight:700}
+.badge{color:#f1f5f9;font-size:17px;background:rgba(255,255,255,.1);padding:6px 18px;border-radius:20px;border:1px solid rgba(255,255,255,.15);font-weight:600}
+.price{color:#2ecc71;font-size:18px;font-weight:700}
+h2{color:#e2e8f0;font-size:22px;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+h2 span{color:#64748b;font-weight:400;font-size:16px}
+.terminal{border-radius:16px;overflow:hidden;margin-bottom:20px}
+.term-header{background:#1e293b;padding:10px 16px;display:flex;align-items:center;gap:8px}
+.term-dot{width:10px;height:10px;border-radius:50%}
+.d1{background:#ef4444}.d2{background:#f59e0b}.d3{background:#2ecc71}
+.term-title{color:#94a3b8;font-size:13px;margin-left:8px}
+.term-body{background:#0f172a;padding:20px;color:#e2e8f0;font-family:'SF Mono','Fira Code','Courier New',monospace;font-size:16px;line-height:1.7;overflow-x:auto}
+.k{color:#a78bfa}.s{color:#fbbf24}.v{color:#34d399}.c{color:#64748b}.p{color:#f472b6}.n{color:#e2e8f0}
+.resp-card{background:#0d1b2a;border:1px solid #1e3a5f;border-radius:16px;padding:20px}
+.resp-row{display:flex;gap:8px;margin-bottom:8px;font-family:'SF Mono','Fira Code',monospace;font-size:16px}
+.resp-key{color:#a78bfa;font-weight:600;min-width:100px}
+.resp-val{color:#e2e8f0}
+.resp-val.str{color:#fbbf24}
+.tag{display:inline-block;background:rgba(46,204,113,.12);color:#2ecc71;border:1px solid rgba(46,204,113,.25);padding:3px 12px;border-radius:12px;font-size:12px;font-weight:600;margin:2px}
+</style></head>
+<body>
+<div class="card">
+<div class="header">
+<div class="h-left"><div class="logo"></div><span class="title">AI Customer Support Agent</span><span class="badge">CRM Integration</span></div>
+<div class="price">$9 · One-Time</div>
+</div>
+
+<h2>⚡ Sample Request & Response <span>Test the workflow with a single POST request</span></h2>
+
+<div class="terminal">
+<div class="term-header">
+<div class="term-dot d1"></div><div class="term-dot d2"></div><div class="term-dot d3"></div>
+<span class="term-title">terminal — curl POST</span>
+</div>
+<div class="term-body">
+<span class="k">curl</span> -X POST https://your-n8n.webhook/customer-support \<br>
+&nbsp;&nbsp;-H <span class="s">"Content-Type: application/json"</span> \<br>
+&nbsp;&nbsp;-d <span class="s">'{"message":</span> <span class="s">"Hi, I'm trying to export my data but I can't find the export button"</span><span class="s">}'</span>
+</div>
+</div>
+
+<div class="resp-card">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+<span style="color:#e2e8f0;font-weight:700;font-size:18px">📥 Response</span>
+<span style="display:flex;gap:6px"><span class="tag">status: 200</span><span class="tag">~3s response</span></span>
+</div>
+<div class="resp-row"><span class="resp-key">success:</span><span class="resp-val v">true</span></div>
+<div class="resp-row"><span class="resp-key">response:</span><span class="resp-val str">"I can help with that! Export buttons are usually in the top menu under File &gt; Export, or in the three-dot menu near the data. Which app are you using?"</span></div>
+<div class="resp-row"><span class="resp-key">conversationId:</span><span class="resp-val str">"conv_a1b2c3d4"</span></div>
+<div class="resp-row"><span class="resp-key">timestamp:</span><span class="resp-val str">"2026-07-26T15:30:00Z"</span></div>
+</div>
+
+<div style="display:flex;gap:12px;margin-top:24px;padding-top:20px;border-top:1px solid #1e2433;font-size:14px;color:#64748b;justify-content:center">
+<span>⚡ Webhook integration</span><span>·</span><span>🤖 AI-generated reply</span><span>·</span><span>📤 JSON response</span>
+</div>
+</div>
+</body></html>

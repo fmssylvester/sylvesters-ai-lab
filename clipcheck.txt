@@ -1,0 +1,17 @@
+import os,sys,json,time
+sys.path.insert(0,"/data/data/com.termux/files/home/lightning-ai")
+import sdk_patch
+from lightning_sdk import Studio
+HERE="/data/data/com.termux/files/home/lightning-ai"
+ACC=json.load(open(HERE+"/accounts.json"))
+A=next(a for a in ACC["accounts"] if a["name"]=="acct_ugurujuliet7")
+CLOUD=A.get("cloud") or ACC.get("cloud","lightning-public-prod")
+os.environ["LIGHTNING_API_KEY"]=A["api_key"]; os.environ["LIGHTNING_USER_ID"]=A["user"]
+s=Studio(name="teammate-2-deploy-model-aws",teamspace=A["teamspace"],user=A["user"],cloud=CLOUD)
+def sdk(fn,n=8):
+    last=None
+    for _ in range(n):
+        try: return fn()
+        except Exception as e: last=e; time.sleep(3)
+    raise last
+print(sdk(lambda: s.run("if [ -f /teamspace/studios/this_studio/clip_done.marker ]; then echo CLIP_DONE; fi; ls -la ComfyUI/models/clip/; echo '--- flux wf ---'; ls -la flux_dev.json")))

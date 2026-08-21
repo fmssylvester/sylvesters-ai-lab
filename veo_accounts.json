@@ -1,0 +1,9 @@
+{
+  "accounts": [
+    {
+      "name": "account-1",
+      "api_key": "",
+      "note": "Paste your Gemini API key here. Get one free at https://aistudio.google.com/apikey"
+    }
+  ]
+}

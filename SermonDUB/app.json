@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "SermonDUB",
+    "slug": "sermondub",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "backgroundColor": "#0a0a1a"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0a0a1a"
+      },
+      "package": "com.sermondub.app"
+    }
+  }
+}

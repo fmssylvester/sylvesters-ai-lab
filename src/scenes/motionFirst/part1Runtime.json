@@ -1,0 +1,53 @@
+{
+  "title": "The Motion-First Secret to Perfect AI Video Prompts",
+  "hook": "If you are copying and pasting your image prompts into an AI video generator, you are ruining your video before it even starts rendering. Today, I'll show you the counterintuitive motion-first secret that fixes this instantly.",
+  "cta": "Thanks for watching! Subscribe to Sylvester's AI Lab for straightforward, hype-free AI tutorials, and I'll see you in the next video.",
+  "sections": [
+    {
+      "id": "trap",
+      "heading": "The Double-Prompting Trap",
+      "voiceover": "Welcome back to Sylvester's AI Lab. Let's start with a hard truth: text-to-video and image-to-video are completely different jobs. Most people jump into Midjourney or Flux, spend an hour crafting the perfect, hyper-detailed prompt to get a stunning still image, and then copy that exact same wall of text into an image-to-video generator like Runway or Kling. But when they hit generate, the result is a chaotic, morphing mess. The AI is trying to re-interpret the pixels you already gave it.",
+      "treatment": "trap",
+      "promptExample": "A rugged explorer with a dirty face holds a glowing lantern inside a dark, wet stone cave, cinematic lighting, volumetric fog, detailed leather jacket, rain-slicked streets, 8k, octane render",
+      "asset": { "still": "footage/desk-200.jpg" }
+    },
+    {
+      "id": "shift",
+      "heading": "The Motion-First Paradigm Shift",
+      "voiceover": "To fix this, we have to shift to a motion-first mindset. When you upload a reference image to your video tool of choice, that image already carries one hundred percent of the composition, color, character details, and style. Your text prompt should only focus on two things: camera work and temporal progression.",
+      "treatment": "shift",
+      "asset": { "still": "footage/desk-200.jpg" }
+    },
+    {
+      "id": "formula",
+      "heading": "The Three-Step Prompting Formula",
+      "voiceover": "So, how do we write a motion-first prompt? We use a simple, three-step formula. Step one is Camera Movement. Step two is Subject Action. Step three is Environmental Physics. When you combine these three, you get a clean, direct instruction set that guides the AI's temporal layers without messing up the spatial details already present in your source image.",
+      "treatment": "formula",
+      "pillars": [
+        { "key": "CAMERA", "label": "Camera Movement", "note": "establish the cinematic frame" },
+        { "key": "ACTION", "label": "Subject Action", "note": "minimal, physically plausible" },
+        { "key": "PHYSICS", "label": "Environmental Physics", "note": "subtle secondary motion" }
+      ]
+    },
+    {
+      "id": "demo",
+      "heading": "A Live Demonstration",
+      "voiceover": "Let's look at a quick comparison. A standard, bad prompt would describe every detail of the explorer and the cave. The video model tries to regenerate the face, causing a weird morphing effect. Now apply our motion-first formula instead: slow push-in, the explorer raises the lantern, dust motes float in warm light. The result is night and day.",
+      "treatment": "demo",
+      "asset": { "still": "footage/desk-200.jpg" }
+    },
+    {
+      "id": "limits",
+      "heading": "Real Limitations and Edge Cases",
+      "voiceover": "This motion-first method is powerful, but it has limits. AI video still struggles with complex, high-velocity physical interactions — intricate hand movements almost always fail. And if your input image is low resolution, no clever prompting saves it. For complex moves, the industry is moving toward motion-transfer from real footage.",
+      "treatment": "limits",
+      "asset": { "still": "footage/desk-200.jpg", "hands": "footage/desk-120.jpg", "transfer": "footage/code-200.jpg" }
+    },
+    {
+      "id": "verdict",
+      "heading": "Sylvester's Verdict",
+      "voiceover": "Adopt the motion-first methodology immediately. Skip the generic prompt-engineering guides. Focus on the physical mechanics of the camera and the environment. If this helped, hit subscribe, drop a like, and tell me which tool you use. Let's keep building.",
+      "treatment": "verdict"
+    }
+  ]
+}

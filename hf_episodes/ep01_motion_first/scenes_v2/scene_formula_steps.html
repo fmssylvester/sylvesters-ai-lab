@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1920px; height: 1080px; overflow: hidden; background: #080808; font-family: 'Inter', sans-serif; color: #fff; }
+    .grid { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: grid; grid-template-columns: repeat(3, 280px); gap: 20px; }
+    .step-card { background: #0d0d0d; border: 1px solid #1a1a1a; border-radius: 12px; padding: 30px; opacity: 0; transform: translateY(40px); }
+    .step-num { font-size: 14px; font-weight: 700; color: #00d4ff; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px; }
+    .step-title { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+    .step-desc { font-size: 14px; color: #888; line-height: 1.5; }
+    .step-example { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #00e5a0; margin-top: 12px; padding: 10px; background: rgba(0,229,160,0.05); border-radius: 6px; border: 1px solid rgba(0,229,160,0.15); }
+    .section-label { position: absolute; top: 60px; left: 50%; transform: translateX(-50%); font-size: 14px; font-weight: 700; letter-spacing: 6px; text-transform: uppercase; color: #00d4ff; opacity: 0; }
+    .glow-line { position: absolute; top: 100px; left: 50%; transform: translateX(-50%); width: 200px; height: 2px; background: linear-gradient(90deg, transparent, #00d4ff, transparent); opacity: 0; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="formula-steps" data-start="0" data-duration="4" data-width="1920" data-height="1080">
+    <div class="section-label" id="label">SECTION 03</div>
+    <div class="glow-line" id="glow-line"></div>
+    <div class="grid">
+      <div class="step-card" id="step1">
+        <div class="step-num">Step 01</div>
+        <div class="step-title">Define the Subject</div>
+        <div class="step-desc">Who or what is in the frame. Be specific about age, appearance, clothing, expression.</div>
+        <div class="step-example">"Weathered male explorer, 40s, dirt-streaked face"</div>
+      </div>
+      <div class="step-card" id="step2">
+        <div class="step-num">Step 02</div>
+        <div class="step-title">Set the Action</div>
+        <div class="step-desc">What is the subject doing? Use verbs that imply motion the AI can animate.</div>
+        <div class="step-example">"slowly raising a brass lantern, scanning the darkness"</div>
+      </div>
+      <div class="step-card" id="step3">
+        <div class="step-num">Step 03</div>
+        <div class="step-title">Add Environment + Light</div>
+        <div class="step-desc">Where are they? What's the lighting? This grounds the AI in physical space.</div>
+        <div class="step-example">"ancient stone cave, chiaroscuro, lantern as only light source"</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    // Section label
+    tl.to('#label', { opacity: 1, duration: 0.3 }, 0);
+    tl.to('#glow-line', { opacity: 0.5, duration: 0.3 }, 0.2);
+
+    // Step cards animate in sequentially
+    const steps = [
+      { id: '#step1', delay: 0.5 },
+      { id: '#step2', delay: 0.9 },
+      { id: '#step3', delay: 1.3 }
+    ];
+
+    steps.forEach(s => {
+      tl.to(s.id, { opacity: 1, y: 0, duration: 0.4, ease: 'back.out(1.5)' }, s.delay);
+    });
+
+    // Hold for reading
+
+    // Fade out
+    tl.to('.step-card, #label, #glow-line', { opacity: 0, duration: 0.3 }, 3.5);
+
+    window.__timelines['formula-steps'] = tl;
+  </script>
+</body>
+</html>

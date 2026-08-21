@@ -1,0 +1,67 @@
+{
+  "scene": "MotionFirst",
+  "project": "ai_video_motion_first_secret",
+  "scope": "Part 1 vertical slice: hook (paste still-image prompt -> broken render) + double-prompting trap (STILL vs MORPH)",
+  "beats": [
+    {
+      "id": "hook_paste",
+      "emotion": "anticipation turning to unease",
+      "story": "a creator copies a still-image prompt into an AI video tool, expecting magic; it breaks",
+      "metaphor": "pouring a photograph into a river that refuses to move",
+      "pacing": "deliberate, then a stutter / break",
+      "palette": "cool cyan-teal low-key, red error accent at the break",
+      "camera": "close on screen + cursor, slight handheld",
+      "heroOrSupport": "supporting ambience behind the browser chrome (footage = the AI canvas)",
+      "searchTerms": [
+        "screen recording typing",
+        "person using computer AI",
+        "typing keyboard close up",
+        "AI interface screen"
+      ],
+      "categories": [
+        "AI",
+        "Browsers",
+        "UI",
+        "Technology"
+      ],
+      "assetKind": "video",
+      "minScore": 7
+    },
+    {
+      "id": "trap_split",
+      "emotion": "realization / contrast",
+      "story": "two paths — copy the image (dead) vs describe the motion (alive)",
+      "metaphor": "a frozen photo versus a living scene",
+      "pacing": "split-screen, comparative",
+      "palette": "cyan (alive) vs red (dead) split",
+      "camera": "static split, slight push",
+      "heroOrSupport": "supporting",
+      "searchTerms": [
+        "abstract light trails",
+        "cinematic particles motion",
+        "flowing abstract background",
+        "time lapse light"
+      ],
+      "categories": [
+        "Abstract",
+        "AI",
+        "Technology"
+      ],
+      "assetKind": "video",
+      "minScore": 7
+    }
+  ],
+  "globalPalette": [
+    "#07090D",
+    "#00D9FF",
+    "#E7B84B",
+    "#FF5A5A"
+  ],
+  "forbid": [
+    "cartoon",
+    "flat illustration only",
+    "overly saturated",
+    "busy text overlays in source",
+    "stocky happy people pointing at screens"
+  ]
+}

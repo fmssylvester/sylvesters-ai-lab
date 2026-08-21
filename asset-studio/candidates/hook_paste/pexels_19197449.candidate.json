@@ -1,0 +1,41 @@
+{
+  "id": "pexels_19197449",
+  "url": "https://videos.pexels.com/video-files/19197449/19197449-hd_1280_720_30fps.mp4",
+  "kind": "video",
+  "w": 1280,
+  "h": 720,
+  "fps": 29.97,
+  "text": "https://www.pexels.com/video/a-person-is-working-on-a-computer-screen-19197449/  screen recording typing",
+  "searchTerms": [
+    "screen recording typing",
+    "person using computer AI",
+    "typing keyboard close up",
+    "AI interface screen"
+  ],
+  "beat": "hook_paste",
+  "meta": {
+    "pexelsId": 19197449
+  },
+  "file": "/data/data/com.termux/files/home/ai-lab-internal/asset-studio/candidates/hook_paste/19197449-hd_1280_720_30fps.mp4",
+  "downloaded": true,
+  "score": {
+    "dimensions": {
+      "resolution": 8,
+      "frameRate": 9,
+      "compression": 8.5,
+      "orientation": 10,
+      "lighting": 7.157298761904761,
+      "camera": 7.5,
+      "colorPalette": 9,
+      "metadataRelevance": 2.5,
+      "subjectRelevance": 2.5,
+      "motionComplexity": 7,
+      "visualCleanliness": 10,
+      "brandSafety": 9,
+      "licensing": 10
+    },
+    "overall": 8,
+    "weighted": true,
+    "probe": true
+  }
+}

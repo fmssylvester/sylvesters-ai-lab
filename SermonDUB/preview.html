@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>SermonDUB</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a1a; color: #fff; min-height: 100vh; overflow-x: hidden; }
+
+.screen { display: none; min-height: 100vh; padding: 20px; padding-top: 60px; }
+.screen.active { display: block; }
+
+/* Navigation */
+.nav { position: fixed; bottom: 0; left: 0; right: 0; background: #111; border-top: 1px solid #222; display: flex; z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
+.nav-item { flex: 1; padding: 12px 0; text-align: center; cursor: pointer; transition: all 0.2s; }
+.nav-item.active { color: #00D9FF; }
+.nav-item:not(.active) { color: #666; }
+.nav-icon { font-size: 22px; }
+.nav-label { font-size: 10px; margin-top: 2px; }
+
+/* Header */
+.header { text-align: center; margin-bottom: 30px; }
+.logo { font-size: 36px; font-weight: 800; background: linear-gradient(135deg, #00D9FF, #00ff88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.subtitle { color: #888; font-size: 14px; margin-top: 5px; }
+
+/* Cards */
+.card { background: #1a1a2e; border-radius: 16px; padding: 20px; margin-bottom: 16px; }
+.card-title { font-size: 16px; font-weight: 600; }
+.card-desc { color: #888; font-size: 13px; margin-top: 4px; }
+
+/* Stats */
+.stats-bar { display: flex; gap: 6px; margin-top: 12px; }
+.dot { width: 100%; height: 8px; border-radius: 4px; }
+.dot-used { background: #00D9FF; }
+.dot-empty { background: #333; }
+.stats-text { color: #888; font-size: 12px; margin-top: 8px; }
+
+/* Buttons */
+.btn-primary { background: #00D9FF; color: #0a0a1a; border: none; border-radius: 12px; padding: 16px; width: 100%; font-size: 18px; font-weight: 700; cursor: pointer; margin-bottom: 16px; }
+.btn-secondary { background: #1a1a2e; color: #fff; border: 1px solid #333; border-radius: 12px; padding: 20px; width: 100%; font-size: 16px; cursor: pointer; margin-bottom: 16px; text-align: left; }
+.btn-upgrade { background: none; border: none; color: #00D9FF; font-size: 14px; cursor: pointer; margin-top: 12px; }
+.btn-subscribe { background: none; border: 1px solid #00D9FF; border-radius: 8px; padding: 12px; width: 100%; color: #00D9FF; font-size: 14px; cursor: pointer; margin-top: 8px; }
+.btn-share { background: #00D9FF; color: #0a0a1a; border: none; border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+
+/* Section titles */
+.section-title { font-size: 18px; font-weight: 600; margin-bottom: 12px; }
+
+/* Clips grid */
+.clips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+.clip-card { background: #1a1a2e; border-radius: 12px; padding: 12px; cursor: pointer; }
+.clip-thumb { background: #333; height: 80px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #00D9FF; }
+.clip-title { font-size: 12px; margin-top: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.clip-date { color: #888; font-size: 10px; margin-top: 4px; }
+
+/* Clip list */
+.clip-list-item { display: flex; align-items: center; gap: 12px; background: #1a1a2e; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+.clip-list-thumb { width: 80px; height: 80px; background: #333; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #00D9FF; flex-shrink: 0; position: relative; }
+.clip-duration { position: absolute; bottom: 4px; right: 4px; background: rgba(0,0,0,0.7); padding: 2px 4px; border-radius: 4px; font-size: 10px; }
+.clip-list-info { flex: 1; min-width: 0; }
+.clip-list-text { font-size: 14px; line-height: 1.3; }
+.clip-score { color: #00D9FF; font-size: 12px; margin-top: 4px; }
+.clip-time { color: #888; font-size: 12px; margin-top: 2px; }
+
+/* Language picker */
+.lang-section { margin-top: 20px; }
+.lang-label { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+.lang-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.lang-btn { padding: 10px 16px; border-radius: 20px; background: #1a1a2e; border: 1px solid #333; color: #888; font-size: 14px; cursor: pointer; }
+.lang-btn.active { background: #00D9FF; border-color: #00D9FF; color: #0a0a1a; font-weight: 700; }
+
+/* Processing screen */
+.processing { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; }
+.spinner { width: 50px; height: 50px; border: 4px solid #333; border-top: 4px solid #00D9FF; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+.processing-stage { font-size: 18px; font-weight: 600; margin-bottom: 20px; }
+.progress-bar { width: 80%; height: 8px; background: #333; border-radius: 4px; overflow: hidden; margin-bottom: 12px; }
+.progress-fill { height: 100%; background: #00D9FF; border-radius: 4px; transition: width 0.3s; }
+.progress-text { color: #00D9FF; font-size: 16px; font-weight: 700; }
+.processing-eta { color: #888; font-size: 14px; margin-top: 8px; }
+
+/* Settings */
+.settings-section { margin-bottom: 24px; }
+.settings-label { color: #00D9FF; font-size: 14px; font-weight: 600; text-transform: uppercase; margin-bottom: 8px; }
+.model-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #333; }
+.model-name { flex: 1; font-size: 14px; }
+.model-size { color: #888; font-size: 12px; width: 60px; text-align: right; }
+.model-status { color: #00ff88; font-size: 12px; width: 60px; text-align: right; }
+.model-status.pending { color: #00D9FF; }
+.lang-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333; }
+.lang-row-name { font-size: 14px; }
+.lang-row-check { color: #00ff88; }
+
+/* Hero icon */
+.hero-icon { font-size: 48px; margin-bottom: 8px; }
+.hero-sub { color: #888; font-size: 14px; margin-top: 4px; }
+
+/* Toast notification */
+.toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #00D9FF; color: #0a0a1a; padding: 12px 24px; border-radius: 12px; font-weight: 700; z-index: 200; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+.toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast">Saved to gallery!</div>
+
+<!-- HOME SCREEN -->
+<div class="screen active" id="screen-home">
+  <div class="header">
+    <div class="logo">SermonDUB</div>
+    <div class="subtitle">AI sermon clips for African churches</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Clips this month</div>
+    <div class="stats-bar">
+      <div class="dot dot-used"></div>
+      <div class="dot dot-used"></div>
+      <div class="dot dot-empty"></div>
+      <div class="dot dot-empty"></div>
+      <div class="dot dot-empty"></div>
+      <div class="dot dot-empty"></div>
+      <div class="dot dot-empty"></div>
+      <div class="dot dot-empty"></div>
+      <div class="dot dot-empty"></div>
+      <div class="dot dot-empty"></div>
+    </div>
+    <div class="stats-text">2 of 10 used</div>
+    <button class="btn-upgrade">Upgrade to Unlimited →</button>
+  </div>
+
+  <button class="btn-primary" onclick="showScreen('screen-record')">+ New Sermon Clip</button>
+
+  <div class="section-title">Recent Clips</div>
+  <div class="clips-grid">
+    <div class="clip-card" onclick="showScreen('screen-clips')">
+      <div class="clip-thumb">▶</div>
+      <div class="clip-title">The Lord is my shepherd...</div>
+      <div class="clip-date">Mar 14</div>
+    </div>
+    <div class="clip-card" onclick="showScreen('screen-clips')">
+      <div class="clip-thumb">▶</div>
+      <div class="clip-title">Hallelujah breakthrough...</div>
+      <div class="clip-date">Mar 7</div>
+    </div>
+  </div>
+
+  <button class="btn-secondary" onclick="showScreen('screen-settings')" style="text-align:center; color:#888;">⚙ Settings</button>
+</div>
+
+<!-- RECORD SCREEN -->
+<div class="screen" id="screen-record">
+  <div style="margin-top:20px">
+    <div style="font-size:24px; font-weight:bold; margin-bottom:30px">Select Sermon Source</div>
+
+    <button class="btn-secondary" onclick="showProcessing()" style="text-align:center;">
+      <div class="hero-icon">🎥</div>
+      <div style="font-size:20px; font-weight:600; margin-top:8px">Record New</div>
+      <div class="hero-sub">Open camera to record</div>
+    </button>
+
+    <button class="btn-secondary" onclick="showProcessing()" style="text-align:center;">
+      <div class="hero-icon">📁</div>
+      <div style="font-size:20px; font-weight:600; margin-top:8px">Import from Gallery</div>
+      <div class="hero-sub">Select existing sermon video</div>
+    </button>
+
+    <div class="lang-section">
+      <div class="lang-label">Source Language</div>
+      <div class="lang-options">
+        <button class="lang-btn active" onclick="selectLang(this)">English</button>
+        <button class="lang-btn" onclick="selectLang(this)">Pidgin</button>
+        <button class="lang-btn" onclick="selectLang(this)">Yoruba</button>
+        <button class="lang-btn" onclick="selectLang(this)">Igbo</button>
+        <button class="lang-btn" onclick="selectLang(this)">Hausa</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROCESSING SCREEN -->
+<div class="screen" id="screen-processing">
+  <div class="processing">
+    <div class="spinner"></div>
+    <div class="processing-stage" id="proc-stage">Extracting audio...</div>
+    <div class="progress-bar"><div class="progress-fill" id="proc-fill" style="width:0%"></div></div>
+    <div class="progress-text" id="proc-pct">0%</div>
+    <div class="processing-eta" id="proc-eta">Estimated time: 40s</div>
+  </div>
+</div>
+
+<!-- CLIPS SCREEN -->
+<div class="screen" id="screen-clips">
+  <div style="margin-top:20px">
+    <div class="section-title">Your Clips (3)</div>
+
+    <div class="clip-list-item">
+      <div class="clip-list-thumb">▶<div class="clip-duration">15s</div></div>
+      <div class="clip-list-info">
+        <div class="clip-list-text">The Word of God together. Open your Bibles to Psalm 23.</div>
+        <div class="clip-score">Score: 3.5</div>
+        <div class="clip-time">4s - 19s</div>
+      </div>
+      <button class="btn-share" onclick="showToast('📱 Shared to WhatsApp!')">📱 Share</button>
+    </div>
+
+    <div class="clip-list-item">
+      <div class="clip-list-thumb">▶<div class="clip-duration">15s</div></div>
+      <div class="clip-list-info">
+        <div class="clip-list-text">The Lord is my shepherd. Come on, lift your hands if you believe!</div>
+        <div class="clip-score">Score: 6.0 ⭐</div>
+        <div class="clip-time">29s - 44s</div>
+      </div>
+      <button class="btn-share" onclick="showToast('📱 Shared to WhatsApp!')">📱 Share</button>
+    </div>
+
+    <div class="clip-list-item">
+      <div class="clip-list-thumb">▶<div class="clip-duration">15s</div></div>
+      <div class="clip-list-info">
+        <div class="clip-list-text">Shout hallelujah if you receive that Word today! Open your mouth!</div>
+        <div class="clip-score">Score: 6.0 ⭐</div>
+        <div class="clip-time">48s - 63s</div>
+      </div>
+      <button class="btn-share" onclick="showToast('📱 Shared to WhatsApp!')">📱 Share</button>
+    </div>
+
+    <button class="btn-secondary" onclick="showScreen('screen-home')" style="text-align:center; color:#00D9FF;">← Back to Home</button>
+  </div>
+</div>
+
+<!-- SETTINGS SCREEN -->
+<div class="screen" id="screen-settings">
+  <div style="margin-top:20px">
+    <div class="settings-section">
+      <div class="settings-label">Account</div>
+      <div class="card">
+        <div class="card-title">Free Plan</div>
+        <div class="card-desc">3 clips/month • Watermark • 720p</div>
+        <button class="btn-primary" style="margin-top:12px; font-size:16px;">Upgrade — $10 Lifetime</button>
+        <button class="btn-subscribe">Or $3/month for Premium</button>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-label">Models</div>
+      <div class="card">
+        <div class="model-row">
+          <div class="model-name">Whisper Tiny</div>
+          <div class="model-size">75 MB</div>
+          <div class="model-status">✓ Ready</div>
+        </div>
+        <div class="model-row">
+          <div class="model-name">NLLB-200 (Translation)</div>
+          <div class="model-size">472 MB</div>
+          <div class="model-status pending" onclick="showToast('Downloading...')" style="cursor:pointer">Download</div>
+        </div>
+        <div class="model-row">
+          <div class="model-name">Kokoro TTS</div>
+          <div class="model-size">82 MB</div>
+          <div class="model-status pending" onclick="showToast('Downloading...')" style="cursor:pointer">Download</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-label">Dubbing Languages</div>
+      <div class="card">
+        <div class="lang-row"><div class="lang-row-name">English</div><div class="lang-row-check">✓</div></div>
+        <div class="lang-row"><div class="lang-row-name">French</div><div class="lang-row-check">✓</div></div>
+        <div class="lang-row"><div class="lang-row-name">Spanish</div><div class="lang-row-check">✓</div></div>
+        <div class="lang-row"><div class="lang-row-name">Portuguese</div><div class="lang-row-check">✓</div></div>
+        <div class="lang-row"><div class="lang-row-name">Arabic</div><div class="lang-row-check">✓</div></div>
+        <div class="lang-row"><div class="lang-row-name">Swahili</div><div class="lang-row-check">✓</div></div>
+        <div class="lang-row"><div class="lang-row-name">Yoruba</div><div class="lang-row-check">✓</div></div>
+        <div class="lang-row"><div class="lang-row-name">Igbo</div><div class="lang-row-check">✓</div></div>
+        <div class="lang-row"><div class="lang-row-name">Hausa</div><div class="lang-row-check">✓</div></div>
+        <div class="lang-row"><div class="lang-row-name">Twi</div><div class="lang-row-check">✓</div></div>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-label">About</div>
+      <div class="card">
+        <div class="card-desc">SermonDUB v1.0.0</div>
+        <div class="card-desc">AI sermon clips for African churches</div>
+        <div class="card-desc">100% offline • No cloud • No subscription</div>
+      </div>
+    </div>
+
+    <button class="btn-secondary" onclick="showScreen('screen-home')" style="text-align:center; color:#00D9FF;">← Back to Home</button>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="nav">
+  <div class="nav-item active" onclick="showScreen('screen-home')" id="nav-home">
+    <div class="nav-icon">🏠</div>
+    <div class="nav-label">Home</div>
+  </div>
+  <div class="nav-item" onclick="showScreen('screen-record')" id="nav-record">
+    <div class="nav-icon">🎙</div>
+    <div class="nav-label">New</div>
+  </div>
+  <div class="nav-item" onclick="showScreen('screen-clips')" id="nav-clips">
+    <div class="nav-icon">✂️</div>
+    <div class="nav-label">Clips</div>
+  </div>
+  <div class="nav-item" onclick="showScreen('screen-settings')" id="nav-settings">
+    <div class="nav-icon">⚙️</div>
+    <div class="nav-label">Settings</div>
+  </div>
+</div>
+
+<script>
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const navMap = {'screen-home':'nav-home','screen-record':'nav-record','screen-clips':'nav-clips','screen-settings':'nav-settings'};
+  if (navMap[id]) document.getElementById(navMap[id]).classList.add('active');
+  
+  window.scrollTo(0, 0);
+}
+
+function selectLang(btn) {
+  btn.parentElement.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+const stages = [
+  { label: 'Extracting audio...', dur: 3000 },
+  { label: 'Transcribing sermon...', dur: 8000 },
+  { label: 'Finding highlight moments...', dur: 2000 },
+  { label: 'Generating clips...', dur: 6000 },
+  { label: 'Adding captions...', dur: 4000 },
+];
+
+function showProcessing() {
+  showScreen('screen-processing');
+  let stage = 0, progress = 0;
+  
+  function tick() {
+    if (stage >= stages.length) {
+      showToast('3 clips generated!');
+      setTimeout(() => showScreen('screen-clips'), 500);
+      return;
+    }
+    
+    progress += 5;
+    if (progress > 100) { stage++; progress = 0; }
+    
+    const pct = Math.round((stage / stages.length + progress / stages.length / 100) * 100);
+    document.getElementById('proc-stage').textContent = stages[Math.min(stage, stages.length-1)].label;
+    document.getElementById('proc-fill').style.width = pct + '%';
+    document.getElementById('proc-pct').textContent = pct + '%';
+    document.getElementById('proc-eta').textContent = 'Estimated time: ' + Math.max(1, Math.round((stages.length - stage) * 3)) + 's';
+    
+    setTimeout(tick, stages[Math.min(stage, stages.length-1)].dur / 20);
+  }
+  tick();
+}
+</script>
+</body>
+</html>

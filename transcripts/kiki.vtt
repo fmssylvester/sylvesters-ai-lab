@@ -1,0 +1,53 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.560
+ What if every customer message your business received got an instant intelligent reply,
+
+00:00:04.560 --> 00:00:10.560
+ even at 3 am, without you lifting a finger? That's exactly what I built with N-8N.
+
+00:00:11.520 --> 00:00:15.680
+ In this video I'm going to show you step by step how I built it from scratch,
+
+00:00:15.680 --> 00:00:22.080
+ every node, every configuration, every mistake I made along the way. My name is Sylvester.
+
+00:00:23.040 --> 00:00:28.480
+ Welcome to Sylvester's AI Lab, where we build real AI automations with not theory.
+
+00:00:29.440 --> 00:00:33.440
+ Most small businesses lose customers simply because they reply too slow.
+
+00:00:34.480 --> 00:00:38.640
+ Someone sends a message at 11 pm and gets a reply the next morning,
+
+00:00:38.640 --> 00:00:42.160
+ by then they've already gone to a competitor who responded faster.
+
+00:00:43.040 --> 00:00:47.760
+ The solution isn't hiring more staff. The solution is automation.
+
+00:00:48.720 --> 00:00:54.480
+ An AI agent that never sleeps, never misses a message, and knows when to escalate to a human.
+
+00:00:55.440 --> 00:01:00.240
+ Today we're building an AI customer support agent using N-8N and OpenAI.
+
+00:01:01.200 --> 00:01:06.240
+ It receives customer messages through a webhook, processes them through an AI agent,
+
+00:01:06.240 --> 00:01:09.840
+ detects sensitive requests like billing disputes or deletions,
+
+00:01:09.840 --> 00:01:15.680
+ sends an escalation alert to your email, and returns a clean response, all in under three seconds.
+
+00:01:15.680 --> 00:01:20.080
+ Before I show you how to build this let me show you what the finished product looks like in action.
+
+00:01:21.040 --> 00:01:25.040
+ I'm switching to my screen now to show you a live demo on my landing page.
+
+00:01:26.000 --> 00:01:30.080
+ Watch carefully. This is the exact workflow we're about to build together.
+

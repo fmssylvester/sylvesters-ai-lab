@@ -1,0 +1,24 @@
+{
+  "jsonrpc": "2.0",
+  "id": 28,
+  "method": "tools/call",
+  "params": {
+    "name": "update_workflow",
+    "arguments": {
+      "workflowId": "yVUGzK8Z6k2IC8q5",
+      "operations": [
+        {
+          "type": "updateNodeParameters",
+          "nodeName": "Window Buffer Memory",
+          "parameters": {
+            "memoryType": "windowBuffer",
+            "contextWindowLength": 10,
+            "sessionIdType": "default",
+            "sessionId": "={{ $json.conversationId || $json.customerId || $executionId }}",
+            "sessionIdKey": "sessionId"
+          }
+        }
+      ]
+    }
+  }
+}

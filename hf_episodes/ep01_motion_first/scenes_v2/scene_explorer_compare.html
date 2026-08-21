@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1920px; height: 1080px; overflow: hidden; background: #080808; font-family: 'Inter', sans-serif; color: #fff; }
+    .container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; gap: 40px; padding: 60px; }
+    .card { position: relative; width: 500px; height: 700px; border-radius: 12px; overflow: hidden; opacity: 0; }
+    .card img { width: 100%; height: 100%; object-fit: cover; }
+    .card-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+    .card-bad .card-overlay { background: linear-gradient(180deg, transparent 50%, rgba(192,57,43,0.8) 100%); }
+    .card-good .card-overlay { background: linear-gradient(180deg, transparent 50%, rgba(0,229,160,0.6) 100%); }
+    .card-label { position: absolute; bottom: 30px; left: 30px; right: 30px; }
+    .card-label h3 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+    .card-label p { font-size: 14px; color: #aaa; line-height: 1.5; }
+    .card-bad .card-label h3 { color: #c0392b; }
+    .card-good .card-label h3 { color: #00e5a0; }
+    .vs { font-size: 48px; font-weight: 900; color: #333; opacity: 0; }
+    .red-x { position: absolute; top: 30px; right: 30px; font-size: 60px; color: #c0392b; opacity: 0; }
+    .green-check { position: absolute; top: 30px; right: 30px; font-size: 60px; color: #00e5a0; opacity: 0; }
+    .prompt-text { position: absolute; top: 30px; left: 30px; right: 80px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: rgba(255,255,255,0.8); background: rgba(0,0,0,0.6); padding: 10px 14px; border-radius: 6px; opacity: 0; line-height: 1.4; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="explorer-compare" data-start="0" data-duration="8" data-width="1920" data-height="1080">
+    <div class="container">
+      <!-- Bad prompt side -->
+      <div class="card card-bad" id="card-bad">
+        <img src="runner_chaotic.png" alt="" />
+        <div class="card-overlay"></div>
+        <div class="prompt-text" id="prompt-bad">"An explorer in a cave with a lantern"</div>
+        <div class="card-label">
+          <h3>Static. Dead.</h3>
+          <p>Generic prompt → Generic image → No motion story</p>
+        </div>
+        <div class="red-x" id="x-mark">✕</div>
+      </div>
+
+      <div class="vs" id="vs">VS</div>
+
+      <!-- Good prompt side -->
+      <div class="card card-good" id="card-good">
+        <img src="explorer_cave.png" alt="" />
+        <div class="card-overlay"></div>
+        <div class="prompt-text" id="prompt-good">"Weathered male explorer 40s, dirt-streaked face, brass lantern at chest, ancient stone cave, chiaroscuro, lantern only light source"</div>
+        <div class="card-label">
+          <h3>Alive. Cinematic.</h3>
+          <p>Specific prompt → Character with story → Built for motion</p>
+        </div>
+        <div class="green-check" id="check-mark">✓</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    // Bad card slides in from left
+    tl.fromTo('#card-bad', 
+      { opacity: 0, x: -100 }, 
+      { opacity: 1, x: 0, duration: 0.6, ease: 'power3.out' }, 
+      0
+    );
+
+    // VS appears
+    tl.to('#vs', { opacity: 1, duration: 0.3 }, 0.5);
+
+    // Good card slides in from right
+    tl.fromTo('#card-good', 
+      { opacity: 0, x: 100 }, 
+      { opacity: 1, x: 0, duration: 0.6, ease: 'power3.out' }, 
+      0.7
+    );
+
+    // Prompt texts appear
+    tl.to('#prompt-bad', { opacity: 1, duration: 0.3 }, 1.5);
+    tl.to('#prompt-good', { opacity: 1, duration: 0.3 }, 2.0);
+
+    // Marks appear
+    tl.fromTo('#x-mark', 
+      { opacity: 0, scale: 3 }, 
+      { opacity: 1, scale: 1, duration: 0.25, ease: 'back.out(3)' }, 
+      3.0
+    );
+    tl.fromTo('#check-mark', 
+      { opacity: 0, scale: 3 }, 
+      { opacity: 1, scale: 1, duration: 0.25, ease: 'back.out(3)' }, 
+      3.5
+    );
+
+    // Hold for 4 seconds to let viewer read
+
+    // Fade out
+    tl.to(['#card-bad', '#card-good', '#vs', '#x-mark', '#check-mark', '#prompt-bad', '#prompt-good'], 
+      { opacity: 0, duration: 0.4 }, 
+      7.5
+    );
+
+    window.__timelines['explorer-compare'] = tl;
+  </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+{
+  "default_machine": {
+    "machine": "g7e.12xlarge",
+    "spot": true,
+    "runtime": 3600
+  },
+  "active_lab_account": "acct_ugurujuliet7",
+  "last_account": "acct1",
+  "per_account": {
+    "acct1": {
+      "machine": "g7e.4xlarge",
+      "spot": true,
+      "runtime": 3600,
+      "studio": "teammate-2-deploy-model-aws",
+      "last_used": "2026-07-18T06:19:58Z"
+    },
+    "acct_sylvestersailab": {
+      "machine": "g7e.4xlarge",
+      "spot": true,
+      "runtime": 3600,
+      "studio": "gracious-beaver-251",
+      "last_used": "2026-07-18T06:15:00Z",
+      "note": "user bought this GPU and runs it on studio gracious-beaver-251 (default-project)"
+    },
+    "acct_chijuliet167": {
+      "machine": "RTXP_6000",
+      "spot": true,
+      "runtime": 3600,
+      "studio": "teammate-2-deploy-model-aws",
+      "last_used": "2026-07-18T06:19:58Z"
+    },
+    "acct_ugurujuliet7": {
+      "machine": "g7e.4xlarge",
+      "spot": true,
+      "runtime": 3600,
+      "studio": "teammate-2-deploy-model-aws",
+      "last_used": "2026-07-18T06:19:58Z"
+    },
+    "acct_starlionstudio001": {
+      "machine": "g7e.4xlarge",
+      "spot": true,
+      "runtime": 3600,
+      "studio": "teammate-2-deploy-model-aws",
+      "last_used": "2026-07-18T06:19:58Z"
+    },
+    "acct_talesbychijuliet": {
+      "machine": "g7e.4xlarge",
+      "spot": true,
+      "runtime": 3600,
+      "studio": "teammate-2-deploy-model-aws",
+      "last_used": "2026-07-18T06:19:58Z"
+    },
+    "acct_droidclinics": {
+      "machine": "g7e.4xlarge",
+      "spot": true,
+      "runtime": 3600,
+      "studio": "teammate-2-deploy-model-aws",
+      "last_used": ""
+    },
+    "acct_fmssylvester": {
+      "machine": "g7e.4xlarge",
+      "spot": true,
+      "runtime": 3600,
+      "studio": "teammate-2-deploy-model-aws",
+      "balance": 0,
+      "last_used": ""
+    }
+  },
+  "note": "Remembered machine spec + control studio per Lightning account so restarts/failover stay consistent. studio = the cloudspace the control bot wakes/pauses."
+}

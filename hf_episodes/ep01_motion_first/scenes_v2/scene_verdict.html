@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1920px; height: 1080px; overflow: hidden; background: #080808; font-family: 'Inter', sans-serif; color: #fff; }
+    .title { position: absolute; top: 100px; left: 50%; transform: translateX(-50%); font-size: 40px; font-weight: 900; opacity: 0; text-align: center; }
+    .verdict-box { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 700px; background: #0d0d0d; border: 1px solid #1a1a1a; border-radius: 16px; padding: 50px; text-align: center; opacity: 0; }
+    .verdict-text { font-size: 32px; font-weight: 800; line-height: 1.4; margin-bottom: 20px; }
+    .verdict-text .hl { color: #00e5a0; }
+    .verdict-sub { font-size: 18px; color: #888; line-height: 1.5; }
+    .verdict-cta { display: inline-block; margin-top: 24px; padding: 12px 32px; background: #00d4ff; color: #080808; font-weight: 800; font-size: 16px; border-radius: 8px; opacity: 0; }
+    .divider { width: 60px; height: 2px; background: #00d4ff; margin: 0 auto 20px; opacity: 0; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="verdict" data-start="0" data-duration="4" data-width="1920" data-height="1080">
+    <div class="title" id="title">Episode 1 — The Verdict</div>
+    <div class="verdict-box" id="box">
+      <div class="verdict-text" id="vtext">
+        Prompting AI video is <span class="hl">not about magic words</span>.<br>
+        It's about <span class="hl">physical direction</span>.
+      </div>
+      <div class="divider" id="divider"></div>
+      <div class="verdict-sub" id="vsub">
+        Define your subject. Give them an action. Set the scene.<br>
+        Then let the AI find the motion.
+      </div>
+      <div class="verdict-cta" id="cta">Next: The Visual Grammar →</div>
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    tl.to('#title', { opacity: 1, duration: 0.4 }, 0);
+
+    tl.fromTo('#box', 
+      { opacity: 0, y: 40 }, 
+      { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, 
+      0.5
+    );
+
+    tl.to('#divider', { opacity: 1, scaleX: 1, duration: 0.3 }, 1.0);
+    tl.to('#vsub', { opacity: 1, duration: 0.3 }, 1.3);
+    tl.to('#cta', { opacity: 1, duration: 0.3 }, 1.8);
+
+    tl.to('#title, #box', { opacity: 0, duration: 0.3 }, 3.5);
+
+    window.__timelines['verdict'] = tl;
+  </script>
+</body>
+</html>

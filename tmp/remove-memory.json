@@ -1,0 +1,14 @@
+{
+  "jsonrpc": "2.0",
+  "id": 30,
+  "method": "tools/call",
+  "params": {
+    "name": "update_workflow",
+    "arguments": {
+      "workflowId": "yVUGzK8Z6k2IC8q5",
+      "operations": [
+        {"type": "removeNode", "nodeName": "Window Buffer Memory"}
+      ]
+    }
+  }
+}

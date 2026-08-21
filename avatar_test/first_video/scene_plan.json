@@ -1,0 +1,132 @@
+{
+  "title": "AI Customer Support Agent in n8n (no-code)",
+  "aspect": "16:9",
+  "fps": 25,
+  "voice": "CLONED-sylvester",
+  "voice_ref": "sylvester_voice_ref.wav",
+  "avatar_image": "sylvester_avatar_3x4.png",
+  "logo": "logo.png",
+  "segments": [
+    {
+      "id": 1,
+      "name": "Hook",
+      "type": "AVATAR",
+      "vo": "What if every customer message your business received got an instant intelligent reply — even at 3am — without you lifting a finger? That's exactly what I built with n8n. In this video I'm going to show you step by step how I built it from scratch — every node, every configuration, every mistake I made along the way. My name is Sylvester. Welcome to Sylvester's AI Lab — where we build real AI automations, not theory.",
+      "est_sec": 27
+    },
+    {
+      "id": 2,
+      "name": "Problem setup",
+      "type": "B-ROLL",
+      "vo": "Most small businesses lose customers simply because they reply too slow. Someone sends a message at 11pm and gets a reply the next morning. By then they've already gone to a competitor who responded faster. The solution isn't hiring more staff. The solution is automation. An AI agent that never sleeps, never misses a message, and knows when to escalate to a human.",
+      "broll_prompts": [
+        "cinematic close-up of a smartphone on a desk glowing with an incoming message at night, 11:00 PM on the screen, dark room, shallow depth of field, moody blue lighting",
+        "slow push-in on an empty office desk at sunrise, first light through window blinds, coffee cup, muted warm tones, atmosphere of lost opportunity",
+        "abstract visual of two business icons racing toward a finish line, one clearly faster, motion blur, dramatic rim light",
+        "a glowing server room with streams of light flowing between racks at night, symbolizing an AI that never sleeps, dutch angle, cinematic"
+      ],
+      "words": 58,
+      "visible_time": 24
+    },
+    {
+      "id": 3,
+      "name": "Blueprint",
+      "type": "AVATAR",
+      "vo": "Today we're building an AI Customer Support Agent using n8n and OpenAI. It receives customer messages through a webhook, processes them through an AI agent, detects sensitive requests like billing disputes or deletions, sends an escalation alert to your email, and returns a clean response — all in under 3 seconds.",
+      "words": 48,
+      "overlay": "NODE_FLOW"
+    },
+    {
+      "id": 4,
+      "name": "Demo transition",
+      "type": "AVATAR",
+      "vo": "Before I show you how to build this, let me show you what the finished product looks like in action. I'm switching to my screen now to show you a live demo on my landing page. Watch carefully — this is the exact workflow we're about to build together.",
+      "words": 46
+    },
+    {
+      "id": 5,
+      "name": "Landing page demo",
+      "type": "SCREEN-FULL",
+      "source": "user_recording_landing_demo",
+      "vo": null,
+      "words": 0
+    },
+    {
+      "id": 6,
+      "name": "n8n intro",
+      "type": "SCREEN-FULL",
+      "vo": "This is n8n. If you haven't used it before, it's a free open source automation tool. Think of it like Zapier, but significantly more powerful and flexible. You can use n8n Cloud, which has a free tier, or self-host it on your own server. The link is in the description. Let me walk you through each node, one by one.",
+      "words": 60
+    },
+    {
+      "id": 7,
+      "name": "Webhook node",
+      "type": "SCREEN-FULL",
+      "vo": "This first node is the Webhook node — our entry point, the door that receives every incoming message. When someone sends a POST request to this URL from a website, a mobile app, a contact form, anything — this workflow instantly wakes up and starts processing. I've set the path to customer-support, and configured it to only accept POST requests.",
+      "words": 62
+    },
+    {
+      "id": 8,
+      "name": "AI Agent node",
+      "type": "SCREEN-FULL",
+      "vo": "This is the AI Agent node — the brain of the entire workflow. It's connected to OpenAI's GPT model, and this is where all the intelligence lives. Inside here is the system prompt, the instructions I gave the AI about how to behave. I told it to be a professional customer support agent, keep all responses under 100 words, be warm and concise, and never attempt to handle billing disputes, security issues, or account deletion requests itself. This system prompt is what separates a smart agent from a generic chatbot. You can customize it for any business just by changing the instructions.",
+      "words": 92
+    },
+    {
+      "id": 9,
+      "name": "IF node",
+      "type": "SCREEN-FULL",
+      "vo": "After the AI generates its response, I added an IF node — the escalation detector. It checks the original customer message for sensitive keywords — delete, billing, security, refund, cancel, hack. If any of those words appear, the TRUE branch fires. If it's a normal message, the FALSE branch fires, and the customer just receives the AI response directly. This is what makes the workflow intelligent, rather than just automated.",
+      "words": 70
+    },
+    {
+      "id": 10,
+      "name": "Gmail node",
+      "type": "SCREEN-FULL",
+      "vo": "When the TRUE branch fires, this Gmail node activates. It sends an immediate alert email to the business owner, containing the customer's original message, the timestamp, and a note to follow up within 24 hours. The business owner only gets notified when something actually needs their attention. Everything else runs automatically.",
+      "words": 57
+    },
+    {
+      "id": 11,
+      "name": "Response node",
+      "type": "SCREEN-FULL",
+      "vo": "And finally, this last node sends the response back to whoever called the webhook. It returns clean JSON — success true, the AI response, a conversation ID, and a timestamp. Ready to plug into any front end or messaging platform.",
+      "words": 43
+    },
+    {
+      "id": 12,
+      "name": "Live test Hoppscotch",
+      "type": "SCREEN-FULL",
+      "vo": "I'm going to send a normal message first. Hi, what are your business hours. Status 200 — instant response. Clean professional reply under 100 words. Now the escalation test — I want to cancel my subscription immediately. Status 200 again, but this time, the escalation message. And if I check Gmail right now, the alert email arrived automatically, with the full customer message inside. All green nodes on the canvas. Everything working exactly as designed.",
+      "words": 72
+    },
+    {
+      "id": 13,
+      "name": "Recap",
+      "type": "AVATAR",
+      "vo": "So let's recap what we just built together. A webhook that receives customer messages from any platform. An AI agent that processes them intelligently, with a custom system prompt. An IF node that detects sensitive requests automatically. A Gmail alert that notifies the business owner instantly. And a webhook response that returns the answer in clean JSON. Five nodes. Built from scratch. Works 24 hours a day, seven days a week, without any human involvement.",
+      "words": 70
+    },
+    {
+      "id": 14,
+      "name": "Template CTA",
+      "type": "AVATAR",
+      "vo": "If you want to skip the build and just import the ready-made version directly into your n8n account, I've packaged this as a complete template. The link is in the description below. You can have this running in your business in under 5 minutes.",
+      "words": 46
+    },
+    {
+      "id": 15,
+      "name": "Subscribe + next",
+      "type": "AVATAR",
+      "vo": "If you found this video useful, please subscribe — I'm dropping new automation tutorials every week. Next video, I'm building a Smart Booking Bot for music artists, that automatically checks availability and replies to promoters with open dates. That one is going to be very interesting.",
+      "words": 46
+    },
+    {
+      "id": 16,
+      "name": "Outro",
+      "type": "AVATAR",
+      "vo": "If you have questions about this workflow, drop a comment below, or reach out through the link in the description. See you in the next one.",
+      "words": 29
+    }
+  ]
+}

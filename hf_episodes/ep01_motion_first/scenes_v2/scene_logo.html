@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1920px; height: 1080px; overflow: hidden; background: #080808; font-family: 'Inter', sans-serif; color: #fff; }
+    .logo-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .logo-piece { position: absolute; opacity: 0; }
+    .logo-text { position: absolute; top: 140px; left: 50%; transform: translateX(-50%); font-size: 28px; font-weight: 800; letter-spacing: 8px; text-transform: uppercase; opacity: 0; white-space: nowrap; }
+    .cursor { display: inline-block; width: 3px; height: 28px; background: #00d4ff; margin-left: 4px; opacity: 0; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="logo" data-start="0" data-duration="2" data-width="1920" data-height="1080">
+    <div class="logo-container" id="logo">
+      <!-- Beaker icon made of geometric pieces -->
+      <svg width="120" height="120" viewBox="0 0 120 120">
+        <rect class="logo-piece" id="p1" x="35" y="10" width="50" height="8" rx="2" fill="#00d4ff" />
+        <rect class="logo-piece" id="p2" x="40" y="18" width="40" height="6" fill="#00d4ff" opacity="0.7" />
+        <path class="logo-piece" id="p3" d="M40 24 L30 90 Q30 100 40 100 L80 100 Q90 100 90 90 L80 24 Z" fill="none" stroke="#00d4ff" stroke-width="3" />
+        <circle class="logo-piece" id="p4" cx="55" cy="70" r="8" fill="#00e5a0" opacity="0.8" />
+        <circle class="logo-piece" id="p5" cx="68" cy="60" r="5" fill="#e8a020" opacity="0.6" />
+        <!-- Pulse line through beaker -->
+        <path class="logo-piece" id="p6" d="M35 75 L50 75 L55 55 L60 85 L65 65 L70 75 L85 75" fill="none" stroke="#00d4ff" stroke-width="2" />
+      </svg>
+      <div class="logo-text" id="logo-text">
+        SYLVESTER'S AI LAB<span class="cursor" id="cursor"></span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    // Logo pieces assemble from different directions
+    const pieces = [
+      { id: '#p1', fromX: 0, fromY: -200, fromRotation: 15 },
+      { id: '#p2', fromX: -150, fromY: -100, fromRotation: -10 },
+      { id: '#p3', fromX: 200, fromY: 50, fromRotation: 20 },
+      { id: '#p4', fromX: -100, fromY: 150, fromRotation: -30 },
+      { id: '#p5', fromX: 150, fromY: -150, fromRotation: 25 },
+      { id: '#p6', fromX: -200, fromY: 100, fromRotation: -15 },
+    ];
+
+    pieces.forEach((p, i) => {
+      tl.fromTo(p.id, 
+        { opacity: 0, x: p.fromX, y: p.fromY, rotation: p.fromRotation, scale: 0.5 },
+        { opacity: 1, x: 0, y: 0, rotation: 0, scale: 1, duration: 0.4, ease: 'back.out(1.5)' },
+        i * 0.08
+      );
+    });
+
+    // Glow pulse on final snap
+    tl.fromTo('#logo', 
+      { filter: 'drop-shadow(0 0 0px #00d4ff)' },
+      { filter: 'drop-shadow(0 0 30px #00d4ff)', duration: 0.15 },
+      0.6
+    );
+    tl.to('#logo', { filter: 'drop-shadow(0 0 8px #00d4ff)', duration: 0.3 }, 0.75);
+
+    // Text types on letter by letter
+    tl.set('#logo-text', { opacity: 1 }, 0.9);
+    tl.set('#cursor', { opacity: 1 }, 0.9);
+
+    const text = "SYLVESTER'S AI LAB";
+    const logoText = document.getElementById('logo-text');
+    // We'll animate via character reveal
+    tl.to('#logo-text', { 
+      clipPath: 'inset(0 0 0 0)', 
+      duration: 0.8,
+      onStart: () => {
+        logoText.innerHTML = '';
+        let idx = 0;
+        const interval = setInterval(() => {
+          if (idx < text.length) {
+            logoText.innerHTML = text.substring(0, idx + 1) + '<span class="cursor" id="cursor"></span>';
+            idx++;
+          } else {
+            clearInterval(interval);
+            // Cursor blinks 3 times then disappears
+            setTimeout(() => {
+              const c = document.getElementById('cursor');
+              if (c) c.style.opacity = '0';
+            }, 600);
+          }
+        }, 60);
+      }
+    }, 0.9);
+
+    window.__timelines['logo'] = tl;
+  </script>
+</body>
+</html>

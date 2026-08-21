@@ -1,0 +1,19 @@
+{
+  "jsonrpc": "2.0",
+  "id": 34,
+  "method": "tools/call",
+  "params": {
+    "name": "update_workflow",
+    "arguments": {
+      "workflowId": "yVUGzK8Z6k2IC8q5",
+      "operations": [
+        {
+          "type": "setNodeParameter",
+          "nodeName": "AI Customer Support Agent",
+          "path": "/promptType",
+          "value": "auto"
+        }
+      ]
+    }
+  }
+}

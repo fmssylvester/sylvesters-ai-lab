@@ -1,0 +1,38 @@
+[
+  {
+    "prompt": "cinematic portrait of an elderly sailor with weathered skin and a knitted cap, dramatic rim light, shallow depth of field, highly detailed, 35mm film photography, 8k",
+    "cat": "portrait",
+    "file": "/teamspace/studios/this_studio/gen_pool/portrait_00.png",
+    "featured": true
+  },
+  {
+    "prompt": "majestic frost dragon coiled atop a glacier, intricate ice scales, epic lighting, volumetric blizzard, fantasy concept art, highly detailed",
+    "cat": "creature",
+    "file": "/teamspace/studios/this_studio/gen_pool/creature_01.png",
+    "featured": true
+  },
+  {
+    "prompt": "floating chrome wristwatch product shot, dramatic studio lighting, reflections, ultra clean background, photorealistic, 8k",
+    "cat": "product",
+    "file": "/teamspace/studios/this_studio/gen_pool/product_02.png",
+    "featured": false
+  },
+  {
+    "prompt": "brutalist concrete cathedral at golden hour, long shadows, minimal composition, architectural photography, highly detailed",
+    "cat": "architecture",
+    "file": "/teamspace/studios/this_studio/gen_pool/architecture_03.png",
+    "featured": false
+  },
+  {
+    "prompt": "futuristic neon city street at night, rain-slicked pavement, cyberpunk signage, bokeh, cinematic, highly detailed",
+    "cat": "neon",
+    "file": "/teamspace/studios/this_studio/gen_pool/neon_04.png",
+    "featured": false
+  },
+  {
+    "prompt": "serene misty mountain lake at dawn, soft pastel sky, mirror reflection, meditative landscape, cinematic, 8k",
+    "cat": "landscape",
+    "file": "/teamspace/studios/this_studio/gen_pool/landscape_05.png",
+    "featured": false
+  }
+]

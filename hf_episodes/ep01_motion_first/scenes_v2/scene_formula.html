@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1920px; height: 1080px; overflow: hidden; background: #080808; font-family: 'Inter', sans-serif; color: #fff; }
+    .formula { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 24px; }
+    .formula-word { font-size: 42px; font-weight: 800; opacity: 0; transform: translateY(30px); }
+    .formula-word.subject { color: #00e5a0; }
+    .formula-word.action { color: #fff; }
+    .formula-word.detail { color: #00d4ff; }
+    .formula-word.result { color: #e8a020; }
+    .formula-op { font-size: 36px; font-weight: 400; color: #555; opacity: 0; }
+    .bracket-left, .bracket-right { position: absolute; top: 50%; transform: translateY(-50%); font-size: 120px; font-weight: 200; color: #1a1a1a; opacity: 0; }
+    .bracket-left { left: 25%; }
+    .bracket-right { right: 25%; }
+    .caption { position: absolute; bottom: 200px; left: 50%; transform: translateX(-50%); font-size: 16px; color: #666; letter-spacing: 4px; text-transform: uppercase; opacity: 0; }
+    .glow-bg { position: absolute; top: 50%; left: 50%; width: 600px; height: 200px; transform: translate(-50%, -50%); background: radial-gradient(ellipse, rgba(0,212,255,0.05) 0%, transparent 70%); opacity: 0; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="formula" data-start="0" data-duration="3.5" data-width="1920" data-height="1080">
+    <div class="glow-bg" id="glow"></div>
+    <div class="bracket-left" id="bl">[</div>
+    <div class="bracket-right" id="br">]</div>
+    <div class="formula" id="formula">
+      <div class="formula-word subject" id="w-subject">Subject</div>
+      <div class="formula-op" id="op1">+</div>
+      <div class="formula-word action" id="w-action">Action</div>
+      <div class="formula-op" id="op2">+</div>
+      <div class="formula-word detail" id="w-detail">Detail</div>
+      <div class="formula-op" id="op3">=</div>
+      <div class="formula-word result" id="w-result">Result</div>
+    </div>
+    <div class="caption" id="caption">The prompt formula that actually works</div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    // Glow background
+    tl.to('#glow', { opacity: 1, duration: 0.5 }, 0);
+
+    // Brackets draw in
+    tl.to('#bl', { opacity: 0.3, duration: 0.3, ease: 'power2.out' }, 0.2);
+    tl.to('#br', { opacity: 0.3, duration: 0.3, ease: 'power2.out' }, 0.2);
+
+    // Words assemble one by one
+    const words = [
+      { id: '#w-subject', delay: 0.4 },
+      { id: '#op1', delay: 0.6 },
+      { id: '#w-action', delay: 0.8 },
+      { id: '#op2', delay: 1.0 },
+      { id: '#w-detail', delay: 1.2 },
+      { id: '#op3', delay: 1.4 },
+      { id: '#w-result', delay: 1.6 }
+    ];
+
+    words.forEach(w => {
+      tl.to(w.id, { opacity: 1, y: 0, duration: 0.35, ease: 'back.out(1.5)' }, w.delay);
+    });
+
+    // Final glow pulse
+    tl.to('#glow', { 
+      background: 'radial-gradient(ellipse, rgba(0,212,255,0.15) 0%, transparent 70%)', 
+      duration: 0.3 
+    }, 2.0);
+
+    // Caption
+    tl.to('#caption', { opacity: 0.6, duration: 0.4 }, 2.2);
+
+    // Fade out
+    tl.to('#formula, #bl, #br, #glow, #caption', { opacity: 0, duration: 0.3 }, 3.0);
+
+    window.__timelines['formula'] = tl;
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "jsonrpc": "2.0",
+  "id": 20,
+  "method": "tools/call",
+  "params": {
+    "name": "test_workflow",
+    "arguments": {
+      "workflowId": "yVUGzK8Z6k2IC8q5",
+      "pinData": {
+        "Webhook": [
+          {
+            "headers": {"content-type": "application/json"},
+            "body": {
+              "message": "Hi, I'm trying to export my data but I can't find the export button. Where is it?"
+            },
+            "query": {},
+            "params": {}
+          }
+        ]
+      }
+    }
+  }
+}

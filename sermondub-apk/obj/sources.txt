@@ -1,0 +1,2 @@
+/data/data/com.termux/files/home/ai-lab-internal/sermondub-apk/src/com/sermondub/app/MainActivity.java
+/data/data/com.termux/files/home/ai-lab-internal/sermondub-apk/gen/com/sermondub/app/R.java

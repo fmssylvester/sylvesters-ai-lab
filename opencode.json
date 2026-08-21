@@ -1,0 +1,40 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "skills": {
+    "paths": [".opencode/skills", ".agents/skills"]
+  },
+  "provider": {
+    "agentrouter": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "AgentRouter",
+      "options": {
+        "baseURL": "https://agentrouter.org/v1",
+        "apiKey": "sk-S9yvOgGdhjAhPqfmSVT73pRkt55fuXqkWeg7BgYw5W3239yW"
+      },
+      "models": {
+        "claude-opus-4-8": {
+          "name": "Claude Opus 4.8",
+          "headers": {
+            "X-Stainless-OS": "Linux",
+            "X-Stainless-Arch": "x64",
+            "X-Stainless-Lang": "js",
+            "X-Stainless-Runtime": "node",
+            "X-Stainless-Runtime-Version": "v22.22.1",
+            "HTTP-Referer": "https://github.com/RooVetGit/Roo-Cline",
+            "X-Title": "Roo Code",
+            "User-Agent": "RooCode/3.53.0"
+          },
+          "limit": {
+            "context": 200000,
+            "output": 16000
+          }
+        }
+      }
+    }
+  },
+  "model": "agentrouter/claude-opus-4-8",
+  "plugin": [
+    "opencode-nanobanana",
+    "opencode-grok-imagine-plugin"
+  ]
+}

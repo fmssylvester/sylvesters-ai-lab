@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1920px; height: 1080px; overflow: hidden; background: #080808; font-family: 'Inter', sans-serif; color: #fff; }
+    .title { position: absolute; top: 100px; left: 50%; transform: translateX(-50%); font-size: 40px; font-weight: 900; opacity: 0; text-align: center; }
+    .title .hl { color: #e8a020; }
+    .limit-grid { position: absolute; top: 220px; left: 200px; right: 200px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .limit-card { background: #0d0d0d; border: 1px solid #1a1a1a; border-radius: 12px; padding: 28px; opacity: 0; transform: translateY(30px); }
+    .limit-icon { font-size: 36px; margin-bottom: 12px; }
+    .limit-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .limit-desc { font-size: 14px; color: #888; line-height: 1.5; }
+    .limit-card:nth-child(1) .limit-title { color: #e8a020; }
+    .limit-card:nth-child(2) .limit-title { color: #c0392b; }
+    .limit-card:nth-child(3) .limit-title { color: #888; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="limitations" data-start="0" data-duration="4" data-width="1920" data-height="1080">
+    <div class="title" id="title">The <span class="hl">limitations</span> are real</div>
+    <div class="limit-grid">
+      <div class="limit-card" id="l1">
+        <div class="limit-icon">⏱</div>
+        <div class="limit-title">Duration</div>
+        <div class="limit-desc">5-8 seconds per clip. Plan your shots like a filmmaker — every frame counts.</div>
+      </div>
+      <div class="limit-card" id="l2">
+        <div class="limit-icon">🧠</div>
+        <div class="limit-title">Coherence</div>
+        <div class="limit-desc">Faces morph, hands melt. Keep subjects consistent with detailed descriptions.</div>
+      </div>
+      <div class="limit-card" id="l3">
+        <div class="limit-icon">🎛</div>
+        <div class="limit-title">Control</div>
+        <div class="limit-desc">No keyframes, no timeline. You're directing with words, not sliders.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    tl.to('#title', { opacity: 1, duration: 0.4 }, 0);
+
+    const cards = ['#l1', '#l2', '#l3'];
+    cards.forEach((c, i) => {
+      tl.to(c, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, 0.5 + i * 0.2);
+    });
+
+    tl.to('#title, .limit-card', { opacity: 0, duration: 0.3 }, 3.5);
+
+    window.__timelines['limitations'] = tl;
+  </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1920px; height: 1080px; overflow: hidden; background: #080808; font-family: 'Inter', sans-serif; color: #fff; }
+    .container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+    .formula-line { font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 400; display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 16px; opacity: 0; }
+    .word { padding: 6px 16px; border-radius: 6px; }
+    .word.subject { background: rgba(0,229,160,0.15); color: #00e5a0; border: 1px solid rgba(0,229,160,0.3); }
+    .word.action { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.15); }
+    .word.detail { background: rgba(0,212,255,0.12); color: #00d4ff; border: 1px solid rgba(0,212,255,0.25); }
+    .word.result { background: rgba(232,160,32,0.15); color: #e8a020; border: 1px solid rgba(232,160,32,0.3); }
+    .op { color: #444; font-size: 24px; }
+    .equals { color: #666; font-size: 24px; }
+    .section-label { position: absolute; top: 120px; left: 50%; transform: translateX(-50%); font-size: 14px; font-weight: 700; letter-spacing: 6px; text-transform: uppercase; color: #00d4ff; opacity: 0; }
+    .glow-line { position: absolute; top: 160px; left: 50%; transform: translateX(-50%); width: 200px; height: 2px; background: linear-gradient(90deg, transparent, #00d4ff, transparent); opacity: 0; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="formula-assembly" data-start="0" data-duration="5" data-width="1920" data-height="1080">
+    <div class="section-label" id="label">SECTION 03</div>
+    <div class="glow-line" id="glow-line"></div>
+    <div class="container" id="formula">
+      <div class="formula-line" id="line1">
+        <span class="word subject">weathered explorer</span>
+        <span class="op">+</span>
+        <span class="word action">raising lantern</span>
+        <span class="op">+</span>
+        <span class="word detail">ancient cave, chiaroscuro</span>
+      </div>
+      <div class="formula-line" id="line2">
+        <span class="word subject">rain-soaked woman</span>
+        <span class="op">+</span>
+        <span class="word action">turning slowly</span>
+        <span class="op">+</span>
+        <span class="word detail">neon streets, wet reflections</span>
+      </div>
+      <div class="formula-line" id="line3">
+        <span class="word subject">weathered hands</span>
+        <span class="op">+</span>
+        <span class="word action">dealing cards</span>
+        <span class="op">+</span>
+        <span class="word detail">green felt, overhead light</span>
+      </div>
+      <div class="formula-line" id="line4" style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #1a1a1a;">
+        <span class="op equals">=</span>
+        <span class="word result" style="font-size: 24px; padding: 10px 24px;">prompt formula that works</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    // Section label
+    tl.to('#label', { opacity: 1, duration: 0.3 }, 0);
+    tl.to('#glow-line', { opacity: 0.5, duration: 0.3 }, 0.2);
+
+    // Lines assemble one by one
+    tl.to('#line1', { opacity: 1, duration: 0.4, ease: 'power2.out' }, 0.5);
+    tl.to('#line2', { opacity: 1, duration: 0.4, ease: 'power2.out' }, 1.0);
+    tl.to('#line3', { opacity: 1, duration: 0.4, ease: 'power2.out' }, 1.5);
+    tl.to('#line4', { opacity: 1, duration: 0.4, ease: 'power2.out' }, 2.2);
+
+    // Final glow pulse
+    tl.to('#line4 .word.result', { 
+      boxShadow: '0 0 20px rgba(232,160,32,0.3)', 
+      duration: 0.3 
+    }, 2.6);
+
+    // Hold for reading
+
+    // Fade out
+    tl.to('#formula, #label, #glow-line', { opacity: 0, duration: 0.4 }, 4.5);
+
+    window.__timelines['formula-assembly'] = tl;
+  </script>
+</body>
+</html>

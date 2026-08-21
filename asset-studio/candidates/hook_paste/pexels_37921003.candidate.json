@@ -1,0 +1,41 @@
+{
+  "id": "pexels_37921003",
+  "url": "https://videos.pexels.com/video-files/37921003/16091212_640_360_25fps.mp4",
+  "kind": "video",
+  "w": 640,
+  "h": 360,
+  "fps": 25,
+  "text": "https://www.pexels.com/video/professional-audio-setup-with-smartphone-interface-37921003/  screen recording typing",
+  "searchTerms": [
+    "screen recording typing",
+    "person using computer AI",
+    "typing keyboard close up",
+    "AI interface screen"
+  ],
+  "beat": "hook_paste",
+  "meta": {
+    "pexelsId": 37921003
+  },
+  "file": "/data/data/com.termux/files/home/ai-lab-internal/asset-studio/candidates/hook_paste/16091212_640_360_25fps.mp4",
+  "downloaded": true,
+  "score": {
+    "dimensions": {
+      "resolution": 4,
+      "frameRate": 7,
+      "compression": 8.5,
+      "orientation": 10,
+      "lighting": 9.575560666666666,
+      "camera": 7.5,
+      "colorPalette": 9,
+      "metadataRelevance": 2.5,
+      "subjectRelevance": 2.5,
+      "motionComplexity": 7,
+      "visualCleanliness": 10,
+      "brandSafety": 9,
+      "licensing": 10
+    },
+    "overall": 7.39,
+    "weighted": true,
+    "probe": true
+  }
+}

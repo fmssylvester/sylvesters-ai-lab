@@ -1,0 +1,67 @@
+{
+  "title": "The Motion-First Secret",
+  "durationInFrames": 1260,
+  "hook": "If you are copying and pasting your image prompts into an AI video generator, you are ruining your video before it even starts rendering. Today I'll show you the counterintuitive motion-first secret that fixes this instantly.",
+  "cta": "Thanks for watching! Subscribe to Sylvester's AI Lab for straightforward, hype-free AI tutorials, and I'll see you in the next video.",
+  "sections": [
+    {
+      "heading": "The Double-Prompting Trap",
+      "voiceover": "Most people craft a stunning still image in Midjourney or Flux, then copy that wall of text into Runway or Kling. The result is a chaotic, morphing mess — the AI re-interprets pixels it was already given. This is the double-prompting trap.",
+      "visualTreatment": "mf_trap",
+      "mood": "urgent",
+      "suggestedComponents": ["Reference Image", "Runway Output"],
+      "assets": [
+        { "name": "Flux portrait", "path": "03_UI_ELEMENTS/claude_ai.jpg" },
+        { "name": "Runway", "path": "01_LOGOS/AI/openai.svg" }
+      ],
+      "broll": "Still reference vs broken render"
+    },
+    {
+      "heading": "The Motion-First Shift",
+      "voiceover": "Shift to a motion-first mindset. Your text prompt has only two jobs: describe the camera work, and describe how the world behaves. The image already carries the subject.",
+      "visualTreatment": "mf_shift",
+      "mood": "calm",
+      "suggestedComponents": ["Camera Work", "Temporal Progression"],
+      "assets": [],
+      "broll": ""
+    },
+    {
+      "heading": "The Three-Step Formula",
+      "voiceover": "Step one is Camera Movement — slow pan right, cinematic zoom. Step two is Subject Action — minimal, physically plausible motion. Step three is Environmental Physics — leaves rustle, smoke drifts, dust floats.",
+      "visualTreatment": "mf_formula",
+      "mood": "calm",
+      "suggestedComponents": ["Camera Movement", "Subject Action", "Environmental Physics"],
+      "assets": [],
+      "broll": ""
+    },
+    {
+      "heading": "A Live Demonstration",
+      "voiceover": "A bad prompt lists every visual detail and the video model morphs it. The motion-first prompt names only the camera push, the arm raise, and the floating dust — and the result is smooth and consistent.",
+      "visualTreatment": "mf_demo",
+      "mood": "dramatic",
+      "suggestedComponents": ["Bad Prompt", "Motion-First Prompt"],
+      "assets": [
+        { "name": "Flux portrait", "path": "03_UI_ELEMENTS/claude_ai.jpg" }
+      ],
+      "broll": "Bad prompt vs motion-first"
+    },
+    {
+      "heading": "Real Limitations",
+      "voiceover": "Be honest: motion-first prompting still struggles with complex high-velocity motion like tying laces or shuffling cards. For that, the industry is moving to motion-transfer from real footage. But for ninety percent of cinematic shots, it is your fastest path to success.",
+      "visualTreatment": "mf_caveat",
+      "mood": "calm",
+      "suggestedComponents": [],
+      "assets": [],
+      "broll": ""
+    },
+    {
+      "heading": "Sylvester's Verdict",
+      "voiceover": "Adopt the motion-first methodology now for all your image-to-video projects. Skip the generic prompt-engineering guides and focus on the physical mechanics of the camera and the environment.",
+      "visualTreatment": "mf_verdict",
+      "mood": "energetic",
+      "suggestedComponents": [],
+      "assets": [],
+      "broll": ""
+    }
+  ]
+}
